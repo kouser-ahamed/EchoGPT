@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useApp } from '../../context/AppContext';
 import { AI_MODELS } from '../../data/models';
+import { MarkdownRenderer } from '../common/MarkdownRenderer';
 import {
   Columns2,
   Play,
@@ -131,7 +132,7 @@ export const SplitCompareView: React.FC = () => {
               )}
             </div>
 
-            <div className="pt-3 text-sm text-slate-200 leading-relaxed font-sans whitespace-pre-wrap">
+            <div className="pt-3 min-h-[140px]">
               {isGenerating ? (
                 <div className="space-y-3 py-6">
                   <div className="h-4 bg-slate-800/80 rounded animate-pulse w-3/4" />
@@ -139,7 +140,7 @@ export const SplitCompareView: React.FC = () => {
                   <div className="h-4 bg-slate-800/80 rounded animate-pulse w-5/6" />
                 </div>
               ) : compareResults ? (
-                compareResults.modelA.response
+                <MarkdownRenderer content={compareResults.modelA.response} />
               ) : (
                 <div className="py-12 text-center text-slate-500 space-y-2">
                   <Sparkles className="w-8 h-8 mx-auto text-slate-600 opacity-60" />
@@ -175,7 +176,7 @@ export const SplitCompareView: React.FC = () => {
               )}
             </div>
 
-            <div className="pt-3 text-sm text-slate-200 leading-relaxed font-sans whitespace-pre-wrap">
+            <div className="pt-3 min-h-[140px]">
               {isGenerating ? (
                 <div className="space-y-3 py-6">
                   <div className="h-4 bg-slate-800/80 rounded animate-pulse w-4/5" />
@@ -183,7 +184,7 @@ export const SplitCompareView: React.FC = () => {
                   <div className="h-4 bg-slate-800/80 rounded animate-pulse w-2/3" />
                 </div>
               ) : compareResults ? (
-                compareResults.modelB.response
+                <MarkdownRenderer content={compareResults.modelB.response} />
               ) : (
                 <div className="py-12 text-center text-slate-500 space-y-2">
                   <Sparkles className="w-8 h-8 mx-auto text-slate-600 opacity-60" />

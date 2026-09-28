@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useApp } from '../../context/AppContext';
 import { AI_MODELS } from '../../data/models';
 import { STARTER_PROMPTS, StarterPrompt } from '../../data/quickActions';
+import { MarkdownRenderer } from '../common/MarkdownRenderer';
 import {
   Copy,
   Check,
@@ -11,8 +12,7 @@ import {
   Volume2,
   VolumeX,
   Sparkles,
-  FileText,
-  Code2
+  FileText
 } from 'lucide-react';
 
 interface ChatAreaProps {
@@ -80,78 +80,6 @@ export const ChatArea: React.FC<ChatAreaProps> = () => {
   const handleStarterPrompt = (item: StarterPrompt) => {
     if (item.modelId) setSelectedModelId(item.modelId);
     sendMessage(item.prompt);
-  };
-
-  // Helper to render markdown-like content cleanly with code block syntax styling
-  const renderMessageContent = (content: string) => {
-    const parts = content.split(/(```[\s\S]*?```)/g);
-
-    return parts.map((part, index) => {
-      if (part.startsWith('```')) {
-        // Extract language and code
-        const firstLineEnd = part.indexOf('\n');
-        const lang = part.slice(3, firstLineEnd).trim() || 'code';
-        const code = part.slice(firstLineEnd + 1, -3);
-
-        return (
-          <div key={index} className="my-3 rounded-xl overflow-hidden border border-slate-800 bg-slate-950 font-mono text-xs shadow-md">
-            <div className="flex items-center justify-between px-4 py-2 bg-slate-900 border-b border-slate-800 text-slate-400">
-              <span className="text-[11px] font-semibold text-cyan-400 uppercase tracking-wider flex items-center gap-1.5">
-                <Code2 className="w-3.5 h-3.5" />
-                {lang}
-              </span>
-              <button
-                onClick={() => {
-                  navigator.clipboard.writeText(code);
-                  showToast('Code copied to clipboard', 'success');
-                }}
-                className="hover:text-white flex items-center gap-1 text-[11px] transition-colors"
-              >
-                <Copy className="w-3 h-3" />
-                <span>Copy</span>
-              </button>
-            </div>
-            <pre className="p-4 overflow-x-auto text-slate-200 leading-relaxed">
-              <code>{code}</code>
-            </pre>
-          </div>
-        );
-      }
-
-      // Format basic markdown elements (bold, tables, blockquotes, lists)
-      const lines = part.split('\n');
-      return (
-        <div key={index} className="space-y-2">
-          {lines.map((line, lIdx) => {
-            if (line.startsWith('### ')) {
-              return <h3 key={lIdx} className="text-base font-bold text-white mt-3 mb-1">{line.replace('### ', '')}</h3>;
-            }
-            if (line.startsWith('#### ')) {
-              return <h4 key={lIdx} className="text-sm font-bold text-indigo-300 mt-2 mb-1">{line.replace('#### ', '')}</h4>;
-            }
-            if (line.startsWith('> ')) {
-              return (
-                <div key={lIdx} className="p-3 my-2 rounded-lg bg-indigo-500/10 border-l-4 border-indigo-500 text-indigo-200 text-xs sm:text-sm">
-                  {line.replace('> ', '')}
-                </div>
-              );
-            }
-            if (line.startsWith('• ') || line.startsWith('- ')) {
-              return (
-                <div key={lIdx} className="flex items-start gap-2 pl-2 text-slate-200">
-                  <span className="text-indigo-400 mt-1">•</span>
-                  <span>{line.replace(/^[•-]\s*/, '')}</span>
-                </div>
-              );
-            }
-            if (line.trim() === '') {
-              return <div key={lIdx} className="h-1" />;
-            }
-            return <p key={lIdx} className="leading-relaxed">{line}</p>;
-          })}
-        </div>
-      );
-    });
   };
 
   const messages = activeConversation?.messages || [];
@@ -246,7 +174,7 @@ export const ChatArea: React.FC<ChatAreaProps> = () => {
 
                   {/* Render content */}
                   <div>
-                    {isUser ? <p className="whitespace-pre-wrap">{msg.content}</p> : renderMessageContent(msg.content)}
+                    {isUser ? <p className="whitespace-pre-wrap">{msg.content}</p> : <MarkdownRenderer content={msg.content} />}
                   </div>
 
                   {/* Assistant Action Bar */}

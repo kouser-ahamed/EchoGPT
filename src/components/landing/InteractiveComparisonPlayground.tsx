@@ -8,6 +8,7 @@ import {
   Check,
   Copy
 } from 'lucide-react';
+import { MarkdownRenderer } from '../common/MarkdownRenderer';
 
 export const InteractiveComparisonPlayground: React.FC = () => {
   const { navigateTo, setSelectedModelId, setCompareModelId, setAppMode } = useApp();
@@ -210,7 +211,7 @@ Comparing **CSR vs. SSR** through latency and developer ergonomical lenses:
                   </button>
                 </div>
 
-                <div className="pt-3 text-xs sm:text-sm text-slate-300 leading-relaxed font-sans whitespace-pre-wrap">
+                <div className="pt-3 min-h-[140px]">
                   {isRunning ? (
                     <div className="space-y-2 py-4">
                       <div className="h-4 bg-slate-800 rounded animate-pulse w-3/4" />
@@ -218,7 +219,7 @@ Comparing **CSR vs. SSR** through latency and developer ergonomical lenses:
                       <div className="h-4 bg-slate-800 rounded animate-pulse w-5/6" />
                     </div>
                   ) : (
-                    responseA
+                    <MarkdownRenderer content={responseA} />
                   )}
                 </div>
               </div>
@@ -250,7 +251,7 @@ Comparing **CSR vs. SSR** through latency and developer ergonomical lenses:
                   </button>
                 </div>
 
-                <div className="pt-3 text-xs sm:text-sm text-slate-300 leading-relaxed font-sans whitespace-pre-wrap">
+                <div className="pt-3 min-h-[140px]">
                   {isRunning ? (
                     <div className="space-y-2 py-4">
                       <div className="h-4 bg-slate-800 rounded animate-pulse w-4/5" />
@@ -258,7 +259,7 @@ Comparing **CSR vs. SSR** through latency and developer ergonomical lenses:
                       <div className="h-4 bg-slate-800 rounded animate-pulse w-2/3" />
                     </div>
                   ) : (
-                    responseB
+                    <MarkdownRenderer content={responseB} />
                   )}
                 </div>
               </div>
