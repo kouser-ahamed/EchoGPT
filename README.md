@@ -40,7 +40,14 @@ Faithfully matching the official EchoGPT reference layout:
      - *Batch Count*: `1x`, `2x`, `3x`, `4x`.
      - *Choose a Model Modal*: Categorized directory with Google Tier (`Nano Banana 2 Lite` [Default], `Nano Banana 2`, `Nano Banana Pro`, `Nano Banana`), OpenAI Tier (`ChatGPT Image Latest`, `GPT Image 1`, `GPT Image 1 Mini`, `GPT Image 1.5`, `GPT Image 2`), and Extended Diffusion Tier (`Midjourney v6.1 Turbo`, `FLUX.1 Schnell`, `Stable Diffusion 3.5 Large`).
      - *Your Creations Gallery*: Persistent gallery (LocalStorage) with hover overlays, prompt copier, aspect ratio badges, full-resolution inspection modal, and one-click download.
-  2. **Video Studio**: [PRO badge] Aspect ratios (`16:9`, `9:16`, `1:1`), video diffusion models (`Veo 3.1 fast`, `Sora v2 Turbo`, `Runway Gen-3`, `Kling 1.5 HD`), prompt composer, video cards with play preview, duration markers, and LocalStorage persistence.
+  2. **Video Studio**: [PRO badge] Complete motion video generation suite matching Image Studio's layout:
+     - *Header*: `VIDEO STUDIO PRO` badge with active engines indicator, subtitle, and `Upgrade for 4K Renders` CTA.
+     - *Generation Control Card*: Prompt textarea with cinematic camera presets, AI Enhance prompt button, drag-and-drop First Frame (PNG/JPG) or Reference Video (MP4/WebM) uploader with preview and Motion Bucket slider (`1-127`).
+     - *Aspect Ratio Selector*: `16:9` (Cinema), `9:16` (Story/Reels), `1:1` (Square), `auto` (Smart).
+     - *Duration & Resolution*: `4s`, `6s`, `8s`, `12s` with `1080p 60fps` and `4K Pro` toggles.
+     - *Choose a Video Model Modal*: 6 motion engines (`Veo 3.1 Fast` [Default], `Veo 3.1 Pro`, `Sora v2 Turbo`, `Runway Gen-3 Alpha`, `Kling 1.5 HD`, `Luma Dream Machine 2.0`) with search and tier filters.
+     - *Static Button*: Always displays static label `Generate Video` with animated rendering state.
+     - *Generated Videos Gallery*: Responsive card grid with video poster preview, play overlay, duration & resolution badges, hover prompt preview, fullscreen Lightbox Video Player modal with progress scrubber, and `Export MP4` download button (persisted to LocalStorage).
   3. **Compare (Multi-Model Workspace)**: Multi-model parallel chat workspace with `Compare` vs `Focus` mode toggles and side-by-side benchmarking.
   4. **Connectors (MCP)**: Model Context Protocol server configuration, capacity meter (`0 of 1 connected - upgrade for unlimited`), and custom HTTPS connector modal (Server HTTPS address, name, optional authorization header).
   5. **History**: Filterable history table/list with search bar and filter dropdown (`All`, `Chat`, `Tasks`, `Analysis`).

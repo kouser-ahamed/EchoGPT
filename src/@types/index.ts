@@ -62,6 +62,10 @@ export interface VideoStudioModel {
   provider: string;
   description: string;
   badge: string;
+  speed?: string;
+  quality?: string;
+  avatar?: string;
+  tier?: 'GOOGLE' | 'OPENAI' | 'FRONTIER';
 }
 
 export interface MessageAttachment {
@@ -153,10 +157,17 @@ export interface CreatedVideo {
   title: string;
   prompt: string;
   model: string;
+  provider?: string;
   aspectRatio: string;
   duration: string;
   thumbnail: string;
   timestamp: string;
+  resolution?: string;
+  fps?: string;
+  motionStrength?: number;
+  hasReference?: boolean;
+  referenceName?: string;
+  videoUrl?: string;
 }
 
 export interface ToastMessage {

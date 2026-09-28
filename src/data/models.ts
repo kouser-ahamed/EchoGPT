@@ -430,10 +430,72 @@ export const IMAGE_STUDIO_MODELS: ImageStudioModel[] = [
 ];
 
 export const VIDEO_STUDIO_MODELS: VideoStudioModel[] = [
-  { id: 'veo-3-1-fast', name: 'Veo 3.1 Fast', provider: 'Google DeepMind', description: 'Google DeepMind 1080p high-coherence motion synthesis', badge: '1080p Fast' },
-  { id: 'sora-v2-turbo', name: 'Sora v2 Turbo', provider: 'OpenAI', description: 'Complex physics, cinematic lighting, and photorealistic temporal continuity', badge: 'Flagship' },
-  { id: 'runway-gen3', name: 'Runway Gen-3 Alpha', provider: 'Runway ML', description: 'Cinematic camera controls and hyper-detailed visual VFX', badge: 'Director Mode' },
-  { id: 'kling-1-5', name: 'Kling 1.5 HD', provider: 'Kuaishou', description: 'High-frame-rate realistic camera pan and object manipulation', badge: 'Fluid Motion' }
+  {
+    id: 'veo-3-1-fast',
+    name: 'Veo 3.1 Fast',
+    provider: 'Google DeepMind',
+    description: 'Fast 1080p high-coherence motion synthesis with rapid turnaround.',
+    badge: '1080p Fast',
+    speed: 'Instant (1.5s/f)',
+    quality: 'Cinematic 1080p',
+    avatar: '⚡',
+    tier: 'GOOGLE'
+  },
+  {
+    id: 'veo-3-1-pro',
+    name: 'Veo 3.1 Pro',
+    provider: 'Google DeepMind',
+    description: 'High cinematic coherence, studio-grade volumetric lighting & complex camera dynamics.',
+    badge: 'Cinema 4K',
+    speed: 'Standard (3.2s/f)',
+    quality: '4K Ultra HD',
+    avatar: '🎬',
+    tier: 'GOOGLE'
+  },
+  {
+    id: 'sora-v2-turbo',
+    name: 'Sora v2 Turbo',
+    provider: 'OpenAI',
+    description: 'Realistic motion physics, complex multi-character scenes & temporal consistency.',
+    badge: 'Real Physics',
+    speed: 'Fast (2.0s/f)',
+    quality: '1080p HDR',
+    avatar: '🌪️',
+    tier: 'OPENAI'
+  },
+  {
+    id: 'runway-gen3',
+    name: 'Runway Gen-3 Alpha',
+    provider: 'Runway ML',
+    description: 'Ultra-fast cinematic generation with fine-grained camera trajectories and VFX.',
+    badge: 'Director Mode',
+    speed: 'Blazing (1.1s/f)',
+    quality: 'Director Grade',
+    avatar: '🚀',
+    tier: 'FRONTIER'
+  },
+  {
+    id: 'kling-1-5',
+    name: 'Kling 1.5 HD',
+    provider: 'Kuaishou',
+    description: 'Detailed temporal consistency, high-speed action & realistic physics rendering.',
+    badge: 'Fluid Motion',
+    speed: 'Standard (2.5s/f)',
+    quality: '1080p 60fps',
+    avatar: '🎯',
+    tier: 'FRONTIER'
+  },
+  {
+    id: 'luma-dream-2',
+    name: 'Luma Dream Machine 2.0',
+    provider: 'Luma AI',
+    description: 'Camera path navigation, dynamic angles, and fluid 3D scene reconstruction.',
+    badge: 'Dynamic Angles',
+    speed: 'Fast (1.8s/f)',
+    quality: 'Cinematic 3D',
+    avatar: '🎥',
+    tier: 'FRONTIER'
+  }
 ];
 
 export const DEFAULT_MODEL_ID = 'deepseek-v4-flash';
