@@ -240,3 +240,23 @@ export interface QuickActionItem {
   icon: string;
   category?: string;
 }
+
+export interface JobAnalysisResult {
+  matchScore: string;
+  atsRating: string;
+  keyStrengths: string[];
+  suggestedImprovements: string[];
+  tailoredSummary: string;
+  recommendedInterviewPrep: string[];
+}
+
+export interface JobAnalysisItem {
+  id: string;
+  jobTitle: string;
+  company: string;
+  date: string;
+  jobDescription: string;
+  resumeSnippet: string;
+  result: JobAnalysisResult;
+}
+
