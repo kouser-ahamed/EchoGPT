@@ -125,18 +125,39 @@ export interface SOPTemplate {
   id: string;
   title: string;
   description: string;
-  tag: string;
+  tag?: string;
+  tags: string[];
   badgeColor: string;
+  icon?: string;
 }
 
 export interface SOPCountry {
   id: string;
   name: string;
   flag: string;
+  visaType: string;
+  visaCriteria?: string;
   wordLimit: string;
-  visaCriteria: string;
+  processingTime: string;
   keyAspects: string;
-  rules: string[];
+  rules?: string[];
+  requirements: string[];
+}
+
+export interface SavedSOPItem {
+  id: string;
+  fullName: string;
+  degreeLevel: string;
+  fieldOfStudy: string;
+  targetUniversity: string;
+  templateId: string;
+  templateTitle: string;
+  countryId: string;
+  countryName: string;
+  countryFlag: string;
+  generatedText: string;
+  createdAt: string;
+  wordCount: number;
 }
 
 export type AspectRatio = '1:1' | '3:2' | '2:3' | 'auto' | '16:9' | '9:16';
