@@ -3,13 +3,13 @@ import { TaskCategory, TaskItem } from '../@types';
 export const TASK_CATEGORIES: TaskCategory[] = ['Ideas', 'Work', 'Fun', 'Online Content'];
 
 export const AI_TASKS: TaskItem[] = [
-  // IDEAS
+  // ===================== IDEAS (5 Cards) =====================
   {
     id: 'task-ideas-1',
     category: 'Ideas',
     title: 'Think Outside the Box',
-    description: 'Break free from conventional thinking with lateral brainstorm exercises and disruptive perspectives.',
-    promptTemplate: 'Challenge traditional assumptions about this problem and propose 5 radical, lateral, high-upside solutions:',
+    description: 'Breakthrough ideas await your discovery',
+    promptTemplate: 'Challenge traditional assumptions about this domain and propose 5 radical, lateral, high-upside breakthrough ideas:',
     icon: 'Lightbulb',
     color: 'from-amber-500 to-orange-500',
     popular: true
@@ -17,125 +17,155 @@ export const AI_TASKS: TaskItem[] = [
   {
     id: 'task-ideas-2',
     category: 'Ideas',
-    title: 'Startup Validation & Moat',
-    description: 'Stress-test value proposition, target ICP, unit economics, and defensibility moats against incumbents.',
-    promptTemplate: 'Evaluate this startup concept using Y-Combinator framework (Problem, Solution, Unfair Advantage, Go-to-Market):',
+    title: 'Startup',
+    description: 'Get a list of ambitious startup ideas based on your area of interest',
+    promptTemplate: 'Generate a curated list of ambitious, venture-scalable startup ideas based on this target area of interest with defensible moats:',
     icon: 'Rocket',
-    color: 'from-indigo-500 to-purple-500',
+    color: 'from-indigo-500 to-purple-600',
     popular: true
   },
   {
     id: 'task-ideas-3',
     category: 'Ideas',
     title: 'Innovate and Elevate',
-    description: 'Transform an existing product or service into a modern AI-first experience with exponential leverage.',
-    promptTemplate: 'How can we redesign this legacy workflow using modern autonomous agentic AI and real-time streaming interfaces?',
+    description: 'Your guide to unique and fresh ideas',
+    promptTemplate: 'Provide fresh, innovative perspectives to reimagine and elevate this existing concept into a market-leading product:',
     icon: 'Sparkles',
-    color: 'from-cyan-500 to-blue-500',
+    color: 'from-cyan-500 to-blue-600',
     popular: false
   },
   {
     id: 'task-ideas-4',
     category: 'Ideas',
+    title: 'Unleashing Creativity',
+    description: 'Explore a world of brilliant ideas',
+    promptTemplate: 'Unlock high-yield creative exploration by identifying unseen angles, analogies, and unexpected connections for:',
+    icon: 'Compass',
+    color: 'from-fuchsia-500 to-pink-600',
+    popular: false
+  },
+  {
+    id: 'task-ideas-5',
+    category: 'Ideas',
     title: 'Idea Sparks',
-    description: 'Rapid-fire brainstorming generator producing 10 distinct creative concepts in seconds.',
-    promptTemplate: 'Generate 10 divergent and compelling concept ideas for the following domain, ranked by feasibility and novelty:',
+    description: 'Ignite your creativity for innovative solutions',
+    promptTemplate: 'Ignite creative momentum with 10 divergent, rapid-fire concept sparks and practical execution experiments for:',
     icon: 'Zap',
     color: 'from-yellow-400 to-amber-500',
     popular: false
   },
 
-  // WORK
+  // ===================== WORK (5 Cards) =====================
   {
     id: 'task-work-1',
     category: 'Work',
-    title: 'Executive Briefing Memo',
-    description: 'Synthesize complex technical proposals into a crisp 1-page memo suitable for VP / C-Suite leadership.',
-    promptTemplate: 'Draft a crisp, persuasive 1-page executive memo summarizing the business impact, risks, and ROI of:',
-    icon: 'Briefcase',
+    title: 'Max Productivity',
+    description: 'Max productivity, achieve more, stress less',
+    promptTemplate: 'Design an optimized time-blocking protocol, high-leverage prioritization matrix, and distraction-elimination plan for:',
+    icon: 'CheckSquare',
     color: 'from-blue-600 to-indigo-600',
     popular: true
   },
   {
     id: 'task-work-2',
     category: 'Work',
-    title: 'Meeting Transcript Summarizer',
-    description: 'Extract decisions, action item owners, and hard deadlines from chaotic meeting notes.',
-    promptTemplate: 'Extract key decisions, unresolved debates, and an action items table (Owner, Task, Deadline) from this meeting:',
-    icon: 'CheckSquare',
+    title: 'Recruiting',
+    description: 'Define the qualifications for any position',
+    promptTemplate: 'Draft a comprehensive job specification, core competencies, scorecard rubrics, and technical interview questions for this role:',
+    icon: 'Users',
     color: 'from-emerald-500 to-teal-600',
     popular: true
   },
   {
     id: 'task-work-3',
     category: 'Work',
-    title: 'Code Review & Security Auditor',
-    description: 'Identify potential vulnerabilities, performance bottlenecks, and architectural anti-patterns.',
-    promptTemplate: 'Perform an exhaustive senior staff code review on this snippet, focusing on security, memory leaks, and concurrency:',
-    icon: 'Shield',
-    color: 'from-rose-500 to-red-600',
-    popular: false
+    title: 'CV Builder',
+    description: 'Generate a creative resume',
+    promptTemplate: 'Build an executive, high-impact resume summary, metric-driven bullet points, and skills hierarchy based on this background:',
+    icon: 'FileText',
+    color: 'from-purple-600 to-pink-600',
+    popular: true
   },
   {
     id: 'task-work-4',
     category: 'Work',
-    title: 'Bug Triager & Root Cause Analysis',
-    description: 'Diagnose stack traces, deduce root cause, and write step-by-step reproduction instructions.',
-    promptTemplate: 'Analyze this error log and stack trace. Deduce the exact root cause and provide the minimal patch to resolve it:',
-    icon: 'FileCode',
-    color: 'from-purple-600 to-pink-600',
+    title: 'Email',
+    description: 'Get help to craft a compelling email',
+    promptTemplate: 'Craft a compelling, clear, and action-oriented executive email that commands attention and drives a prompt response for:',
+    icon: 'Mail',
+    color: 'from-sky-500 to-cyan-600',
+    popular: false
+  },
+  {
+    id: 'task-work-5',
+    category: 'Work',
+    title: 'Interview Tips',
+    description: 'Receive helpful tips for your interview',
+    promptTemplate: 'Provide tactical interview preparation tips, STAR-method storytelling frameworks, and answers to challenging questions for:',
+    icon: 'HelpCircle',
+    color: 'from-rose-500 to-red-600',
     popular: false
   },
 
-  // FUN
+  // ===================== FUN (5 Cards) =====================
   {
     id: 'task-fun-1',
     category: 'Fun',
-    title: 'Trivia Master Showdown',
-    description: 'Host an engaging, fast-paced trivia round tailored to any topic with tiered difficulty levels.',
-    promptTemplate: 'Act as a lively trivia host. Give me 5 fascinating questions with multiple choice options about:',
+    title: 'Gaming',
+    description: 'Level up your gaming skills and conquer challenges',
+    promptTemplate: 'Provide advanced strategy guides, build optimizations, and boss battle counter-tactics for this gaming challenge:',
     icon: 'Gamepad2',
-    color: 'from-pink-500 to-rose-500',
+    color: 'from-pink-500 to-rose-600',
     popular: true
   },
   {
     id: 'task-fun-2',
     category: 'Fun',
-    title: 'Creative Sci-Fi Storyteller',
-    description: 'Generate immersive cinematic narratives with vivid imagery, suspense, and unexpected plot twists.',
-    promptTemplate: 'Write an atmospheric hard sci-fi short story exploring the philosophical implications of:',
-    icon: 'BookOpen',
-    color: 'from-violet-500 to-purple-600',
-    popular: false
+    title: 'Movie Time',
+    description: 'Cinematic delight, enjoy the latest blockbuster',
+    promptTemplate: 'Recommend an unforgettable personalized movie watchlist with plot hooks, thematic depth, and where to stream based on:',
+    icon: 'Film',
+    color: 'from-violet-600 to-indigo-600',
+    popular: true
   },
   {
     id: 'task-fun-3',
     category: 'Fun',
-    title: 'RPG Dungeon Master',
-    description: 'Run an interactive text-based role-playing quest with inventory management and choices.',
-    promptTemplate: 'You are the Dungeon Master. Set up an immersive dark-fantasy quest opening and offer me 3 initial actions:',
-    icon: 'Compass',
-    color: 'from-amber-600 to-orange-700',
+    title: 'Cycling Day',
+    description: 'Pedal through scenic routes, relish the ride',
+    promptTemplate: 'Plan an invigorating cycling itinerary including scenic route checkpoints, pacing strategies, and gear checklists for:',
+    icon: 'Bike',
+    color: 'from-emerald-500 to-green-600',
     popular: false
   },
   {
     id: 'task-fun-4',
     category: 'Fun',
-    title: 'Philosophical Debate Challenger',
-    description: 'Engage in rigorous Socratic debate defending counter-intuitive ethical positions.',
-    promptTemplate: 'Take the opposing stance on this thesis and present 3 rigorous philosophical arguments against it:',
-    icon: 'MessageCircle',
-    color: 'from-cyan-600 to-teal-700',
+    title: 'Outdoor Activities',
+    description: 'Embrace nature, engage in thrilling outdoor adventures',
+    promptTemplate: 'Curate a thrilling outdoor excursion plan, trail safety guidelines, and nature exploration activities for:',
+    icon: 'Mountain',
+    color: 'from-amber-600 to-orange-700',
+    popular: false
+  },
+  {
+    id: 'task-fun-5',
+    category: 'Fun',
+    title: 'Fun with buddies',
+    description: 'Create memories with friends, have endless fun',
+    promptTemplate: 'Suggest unforgettable group activities, party games, and interactive challenges to create lasting memories with friends:',
+    icon: 'Smile',
+    color: 'from-cyan-500 to-teal-600',
     popular: false
   },
 
-  // ONLINE CONTENT
+  // ===================== ONLINE CONTENT (10 Cards) =====================
   {
     id: 'task-content-1',
     category: 'Online Content',
-    title: 'Viral X / Twitter Threads',
-    description: 'Turn deep technical knowledge into high-retention, punchy thread hooks with strong engagement.',
-    promptTemplate: 'Write a high-retention 5-tweet thread explaining this concept. Include a curiosity hook, bulleted insights, and conclusion:',
+    title: 'X Posts',
+    description: 'Craft viral, high-engagement tweets and threaded insights for X',
+    promptTemplate: 'Write a high-converting, punchy 5-tweet thread with curiosity hook, bulleted takeaways, and viral engagement formatting for:',
     icon: 'Share2',
     color: 'from-sky-500 to-blue-600',
     popular: true
@@ -143,9 +173,9 @@ export const AI_TASKS: TaskItem[] = [
   {
     id: 'task-content-2',
     category: 'Online Content',
-    title: 'YouTube Video Scripts',
-    description: 'Engaging video scripts with 5-second hook, retention loops, visual cue descriptions, and clear CTA.',
-    promptTemplate: 'Draft an engaging 8-minute YouTube video script with timestamped sections, B-roll directions, and voiceover text on:',
+    title: 'YouTube Scripts',
+    description: 'Script structured videos with retention loops, visual cues, and strong CTAs',
+    promptTemplate: 'Write a retention-optimized YouTube video script with 5-second hook, pacing cues, B-roll callouts, and call to action on:',
     icon: 'Video',
     color: 'from-red-500 to-rose-600',
     popular: true
@@ -153,19 +183,19 @@ export const AI_TASKS: TaskItem[] = [
   {
     id: 'task-content-3',
     category: 'Online Content',
-    title: 'TikTok Posts & Concept',
-    description: 'Fast-paced, entertaining short-form concepts built for the 9:16 smartphone vertical format.',
-    promptTemplate: 'Create 3 viral 30-second TikTok concepts with visual hooks, text overlays, and audio suggestions for:',
+    title: 'TikTok Posts',
+    description: 'Produce high-tempo 9:16 short-form video concepts with visual hooks',
+    promptTemplate: 'Generate 3 high-tempo TikTok video concepts with 3-second pattern interrupts, text overlays, and trending sound ideas on:',
     icon: 'Smartphone',
     color: 'from-purple-500 to-indigo-600',
-    popular: false
+    popular: true
   },
   {
     id: 'task-content-4',
     category: 'Online Content',
-    title: 'TikTok Captions & Hashtags',
-    description: 'Optimized short-form captions with trending keywords, emoji rhythm, and high-search tags.',
-    promptTemplate: 'Write 5 compelling TikTok captions with emoji formatting and high-reach algorithmic hashtags for:',
+    title: 'TikTok Captions',
+    description: 'Write search-optimized captions with trending hashtags and emoji cadence',
+    promptTemplate: 'Write 5 punchy TikTok captions with search-optimized keywords, emoji spacing, and high-visibility hashtags for:',
     icon: 'Tag',
     color: 'from-fuchsia-500 to-pink-600',
     popular: false
@@ -173,19 +203,19 @@ export const AI_TASKS: TaskItem[] = [
   {
     id: 'task-content-5',
     category: 'Online Content',
-    title: 'Instagram Carousel Content',
-    description: 'Educational slide-by-slide carousel copy formatted for high save-rate and shares.',
-    promptTemplate: 'Create an 8-slide educational Instagram carousel outline with punchy headers, body copy, and CTA slide on:',
+    title: 'Insta Content',
+    description: 'Design educational multi-slide carousel outlines with high save rates',
+    promptTemplate: 'Outline an 8-slide educational Instagram carousel with compelling cover headline, value slides, and final save prompt on:',
     icon: 'Layers',
-    color: 'from-amber-500 to-pink-500',
+    color: 'from-pink-500 to-amber-500',
     popular: true
   },
   {
     id: 'task-content-6',
     category: 'Online Content',
-    title: 'Instagram Reels Script',
-    description: '15-second to 60-second micro-scripts with visual transitions and audio trend guidance.',
-    promptTemplate: 'Write a 30-second Instagram Reel script with exact speaking pace, text on screen, and visual direction on:',
+    title: 'Insta Reels',
+    description: 'Create fast-paced visual reel concepts with on-screen text and voiceover',
+    promptTemplate: 'Script a 30-second Instagram Reel with scene-by-scene audio narration, on-screen text, and quick camera cuts for:',
     icon: 'Play',
     color: 'from-rose-500 to-orange-500',
     popular: false
@@ -193,21 +223,41 @@ export const AI_TASKS: TaskItem[] = [
   {
     id: 'task-content-7',
     category: 'Online Content',
-    title: 'LinkedIn Thought Leadership',
-    description: 'Professional, authentic career stories and industry analysis formatted with clean whitespace.',
-    promptTemplate: 'Write an authentic, narrative-driven LinkedIn thought leadership post sharing lessons learned regarding:',
-    icon: 'Linkedin',
-    color: 'from-blue-600 to-indigo-700',
-    popular: true
+    title: 'Insta Captions',
+    description: 'Write aesthetic, storytelling captions with question hooks and formatting',
+    promptTemplate: 'Write 3 aesthetic Instagram captions with compelling opening hooks, conversational micro-stories, and comments prompt for:',
+    icon: 'MessageCircle',
+    color: 'from-indigo-500 to-purple-600',
+    popular: false
   },
   {
     id: 'task-content-8',
     category: 'Online Content',
-    title: 'LinkedIn Job Search Outreach',
-    description: 'High-converting personalized networking messages to recruiters and engineering managers.',
-    promptTemplate: 'Draft a respectful, personalized 75-word LinkedIn DM to an engineering hiring manager expressing interest in:',
+    title: 'LinkedIn Hiring',
+    description: 'Author inspiring hiring posts to attract top-tier engineering talent',
+    promptTemplate: 'Draft an authentic, inspiring LinkedIn hiring post highlighting our mission, team culture, growth opportunities, and open role for:',
+    icon: 'Briefcase',
+    color: 'from-blue-600 to-indigo-700',
+    popular: true
+  },
+  {
+    id: 'task-content-9',
+    category: 'Online Content',
+    title: 'LinkedIn Job Search',
+    description: 'Personalize outreach messages to hiring managers and talent recruiters',
+    promptTemplate: 'Draft a respectful, high-converting 80-word direct message to a hiring manager expressing passion and relevant achievements for:',
     icon: 'Send',
     color: 'from-cyan-600 to-blue-700',
     popular: false
+  },
+  {
+    id: 'task-content-10',
+    category: 'Online Content',
+    title: 'LinkedIn Profile',
+    description: 'Create memorable posts on LinkedIn',
+    promptTemplate: 'Craft an authoritative, memorable thought-leadership post for LinkedIn with clear takeaways and clean whitespace on:',
+    icon: 'Linkedin',
+    color: 'from-blue-500 to-cyan-600',
+    popular: true
   }
 ];

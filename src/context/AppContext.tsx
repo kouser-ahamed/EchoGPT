@@ -57,6 +57,8 @@ export interface AppContextType {
   toasts: ToastMessage[];
   showToast: (message: string, type?: 'info' | 'success' | 'warning' | 'error', duration?: number) => void;
   removeToast: (id: string) => void;
+  pendingPrompt: string | null;
+  setPendingPrompt: (prompt: string | null) => void;
 }
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
@@ -86,6 +88,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
 
   // Pro Upgrade Modal state
   const [isProModalOpen, setIsProModalOpen] = useState<boolean>(false);
+  const [pendingPrompt, setPendingPrompt] = useState<string | null>(null);
 
   const setActiveView = (view: WebAppSubView) => {
     setActiveViewState(view);
@@ -412,7 +415,9 @@ export function AppProvider({ children }: { children: ReactNode }) {
         sendComparePrompt,
         toasts,
         showToast,
-        removeToast
+        removeToast,
+        pendingPrompt,
+        setPendingPrompt
       }}
     >
       {children}

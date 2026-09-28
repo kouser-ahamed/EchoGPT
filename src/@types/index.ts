@@ -40,6 +40,7 @@ export interface AIModel {
   strengths: string[];
   samplePrompt: string;
   sampleResponse: string;
+  tier?: 'Default / Free' | 'Limited / Advanced' | 'Pro Tier' | string;
 }
 
 export type ImageModelTier = 'GOOGLE' | 'OPENAI' | 'FRONTIER';

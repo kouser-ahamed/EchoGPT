@@ -27,6 +27,9 @@ export const StoreView: React.FC<StoreViewProps> = ({ onSelectModel }) => {
 
   const tags: string[] = [
     'All',
+    'Default / Free',
+    'Limited / Advanced',
+    'Pro Tier',
     'Deep Reasoning',
     'Code & Nuance',
     'General & Vision',
@@ -59,6 +62,7 @@ export const StoreView: React.FC<StoreViewProps> = ({ onSelectModel }) => {
 
     const matchesTag =
       selectedTag === 'All' ||
+      m.tier === selectedTag ||
       m.category.toLowerCase() === selectedTag.toLowerCase() ||
       m.badge.toLowerCase().includes(selectedTag.toLowerCase());
 
@@ -193,6 +197,11 @@ export const StoreView: React.FC<StoreViewProps> = ({ onSelectModel }) => {
                   </div>
 
                   <div className="flex items-center gap-1.5 flex-wrap">
+                    {model.tier && (
+                      <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-indigo-500/10 text-indigo-300 border border-indigo-500/20">
+                        {model.tier.replace(' / ', '/')}
+                      </span>
+                    )}
                     <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-slate-950 text-cyan-300 border border-slate-800">
                       {model.badge}
                     </span>

@@ -43,7 +43,9 @@ export const ChatWorkspaceView: React.FC<ChatWorkspaceViewProps> = ({
     sendMessage,
     isGenerating,
     selectedModelId,
-    showToast
+    showToast,
+    pendingPrompt,
+    setPendingPrompt
   } = useApp();
 
   const [inputText, setInputText] = useState<string>('');
@@ -71,6 +73,19 @@ export const ChatWorkspaceView: React.FC<ChatWorkspaceViewProps> = ({
       textareaRef.current.style.height = Math.min(textareaRef.current.scrollHeight, 180) + 'px';
     }
   }, [inputText]);
+
+  // Pre-fill input when redirected from AI Tasks or blueprints
+  useEffect(() => {
+    if (pendingPrompt) {
+      const promptToSet = pendingPrompt;
+      setPendingPrompt(null);
+      const timer = setTimeout(() => {
+        setInputText(promptToSet);
+        textareaRef.current?.focus();
+      }, 0);
+      return () => clearTimeout(timer);
+    }
+  }, [pendingPrompt, setPendingPrompt]);
 
   const starterCards: StarterCard[] = [
     {

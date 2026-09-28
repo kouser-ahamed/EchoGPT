@@ -18,27 +18,8 @@ import {
 
 const HISTORY_FILTER_MODELS = [
   'All',
-  'EchoGPT',
-  'Nemotron 3 Ultra',
-  'DeepSeek V4 Pro',
-  'DeepSeek V4 Flash',
-  'GPT-5.4',
-  'GPT-5.5',
-  'GPT-5.6 Sol',
-  'GPT-5.6 Luna',
-  'Claude 3.5 Sonnet',
-  'Gemini 3.8 Flash',
-  'Qwen 3.8 27B',
-  'Qwen 3.7 Plus',
-  'Qwen 3.7 Max',
-  'MiMo V2.5 Pro',
-  'MiMo V2.5',
-  'GLM-5.2',
-  'GLM-5.3 Flash',
-  'Kimi K2.7 Code',
-  'MiniMax M3',
-  'Tencent Hy3'
-] as const;
+  ...AI_MODELS.map((m) => m.name)
+];
 
 interface HistoryViewProps {
   onSelectConversation?: (id: string) => void;
