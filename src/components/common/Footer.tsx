@@ -21,6 +21,7 @@ export const Footer: React.FC = () => {
                 Echo<span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-cyan-400">GPT</span>
               </span>
             </div>
+            // Description
 
             <p className="text-sm text-slate-400 max-w-sm leading-relaxed">
               The unified multi-AI workspace and Chrome extension sidebar by <strong>AppifyDevs</strong>. Chat with GPT-4o, Claude 3.5 Sonnet, Gemini 1.5 Pro, and DeepSeek in one frictionless workflow.
