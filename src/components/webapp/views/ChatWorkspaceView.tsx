@@ -259,10 +259,10 @@ export const ChatWorkspaceView: React.FC<ChatWorkspaceViewProps> = ({
             <ChevronDown className="w-3.5 h-3.5 text-slate-400 group-hover:text-slate-900 dark:group-hover:text-white transition-colors" />
           </button>
 
-          <div className="hidden md:flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-850/60 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 text-[11px] font-mono">
+          <div className="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-200 text-xs shadow-none">
             <Zap className="w-3 h-3 text-amber-500 dark:text-amber-400 shrink-0" />
-            <span>Speed:</span>
-            <span className="text-slate-900 dark:text-slate-200 font-semibold">{currentModel.speed}</span>
+            <span className="text-slate-500 dark:text-slate-400 font-medium">Speed:</span>
+            <span className="text-slate-900 dark:text-slate-200 font-mono font-semibold">{currentModel.speed}</span>
           </div>
 
           <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-700 dark:text-emerald-400 text-[11px]">
@@ -314,19 +314,19 @@ export const ChatWorkspaceView: React.FC<ChatWorkspaceViewProps> = ({
                   <button
                     key={idx}
                     onClick={() => handleStarterClick(starter)}
-                    className="p-4 rounded-2xl bg-white/90 hover:bg-white dark:bg-slate-900/70 dark:hover:bg-slate-900 border border-slate-200/90 hover:border-violet-300 dark:border-slate-800/80 dark:hover:border-slate-700 transition-all text-left group shadow-sm shadow-slate-200/50 dark:shadow-lg flex flex-col justify-between"
+                    className="p-5 rounded-2xl bg-white border border-slate-200/90 shadow-sm hover:border-violet-500/50 hover:shadow-md transition-all dark:bg-slate-900/60 dark:border-slate-800/80 dark:hover:border-violet-500/40 dark:shadow-none text-left group flex flex-col justify-between"
                   >
                     <div>
                       <div className="flex items-center justify-between mb-2">
                         <span className="text-xl">{starter.icon}</span>
-                        <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 group-hover:text-violet-600 dark:group-hover:text-indigo-400 transition-colors flex items-center gap-1">
+                        <span className="text-[11px] font-mono font-medium text-violet-600 dark:text-violet-400 group-hover:translate-x-0.5 transition-transform flex items-center gap-1">
                           <span>Prompt</span> →
                         </span>
                       </div>
-                      <h4 className="text-sm font-bold text-slate-900 dark:text-white group-hover:text-violet-700 dark:group-hover:text-indigo-200 transition-colors">
+                      <h4 className="text-slate-900 dark:text-slate-100 font-semibold text-sm">
                         {starter.title}
                       </h4>
-                      <p className="mt-1 text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                      <p className="text-slate-600 dark:text-slate-400 text-xs leading-relaxed mt-1">
                         {starter.subtitle}
                       </p>
                     </div>
