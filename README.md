@@ -1,268 +1,296 @@
-# EchoGPT — Production-Grade TypeScript Redesign & Full Ecosystem Implementation
+<div align="center">
 
-> **Frontend Software Engineering Internship Assignment** for **AppifyDevs**  
-> Complete ownership of the EchoGPT ecosystem redesign in **strict TypeScript (.ts / .tsx)**, faithfully matching and elevating the official [EchoGPT Web App](https://echogpt.live/) and [Chrome Web Store Extension](https://chromewebstore.google.com/detail/echogpt-multi-ai-chat-sid/negimdcamohmoheiifgecbjgjepkcfhj).
+# 🌐 EchoGPT — Unified Multi-AI Workspace & Extension Concept
 
-[![TypeScript](https://img.shields.io/badge/TypeScript-Strict_Mode-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
-[![React](https://img.shields.io/badge/React-19.2-61DAFB?logo=react&logoColor=black)](https://react.dev/)
-[![Vite](https://img.shields.io/badge/Vite-8.3-646CFF?logo=vite&logoColor=white)](https://vitejs.dev/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4.3-38B2AC?logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
-[![Build Passing](https://img.shields.io/badge/Build-Passing-emerald)](https://vitejs.dev/)
-[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+**Stop tab-juggling. Route every prompt through the frontier, from one workspace.**
 
----
+[![React](https://img.shields.io/badge/React-19.2-61DAFB?style=flat-square&logo=react&logoColor=black)](https://react.dev)
+[![TypeScript](https://img.shields.io/badge/TypeScript-7.0-3178C6?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.3-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
+[![Framer Motion](https://img.shields.io/badge/Framer_Motion-13.4-FF0055?style=flat-square&logo=framer&logoColor=white)](https://motion.dev)
+[![Vite](https://img.shields.io/badge/Vite-8.3-646CFF?style=flat-square&logo=vite&logoColor=white)](https://vite.dev)
+[![License: MIT](https://img.shields.io/badge/License-MIT-10B981?style=flat-square)](./LICENSE)
+[![Live Demo](https://img.shields.io/badge/Live_Demo-echogpt.live-22D3EE?style=flat-square&logo=googlechrome&logoColor=black)](https://echogpt.live/)
 
-## 🌟 Executive Summary & Architectural Overview
-
-**EchoGPT** is a unified multi-AI workspace and browser extension ecosystem designed to eliminate fragmented AI subscription fatigue ($60+/mo across ChatGPT Plus, Claude Pro, and Gemini Advanced). This redesign implements the full visual hierarchy, interactive capabilities, and responsive flows of the official EchoGPT platform with **100% strict TypeScript**, zero `any` usage, and zero placeholder code.
-
-### Key Architectural Highlights:
-1. **100% Strict TypeScript Architecture**: Explicit interfaces and types for all entities (`AIModel`, `ImageStudioModel`, `VideoStudioModel`, `ChatMessage`, `Conversation`, `MCPConnector`, `TaskItem`, `SOPTemplate`, `SOPCountry`, `CreatedImage`, `CreatedVideo`, `PricingTier`, `ThemeMode`).
-2. **Framework & Tooling**: React 19 + Vite 8.3 + Tailwind CSS v4 (`@tailwindcss/vite`).
-3. **Build & Type Checking**: Strict `tsconfig.json` verification with `npm run build` executing `tsc -b && vite build` (zero type errors) and `npm run lint` passing with 0 warnings.
-4. **State & Persistence**: Strongly typed React Context API (`AppContext` & `ThemeContext`) with LocalStorage utilities for theme, chat sessions, MCP connectors, generated images, and user settings.
-5. **Complete Web App Suite (`/app/*`)**: 13 dedicated views with unified collapsible sidebar navigation, dynamic breadcrumbs, model selector modal, share modal, and dual-panel Pro Upgrade modal.
-6. **Interactive Chrome Extension (`/extension`)**: Simulated browser sidepanel (`400px`) and floating popup with DOM text highlight explanation and 1-click page summarization.
-7. **High-Conversion Landing Page (`/`)**: Full marketing presentation with interactive hero, live model tabs, multi-model playground, feature matrix, pricing, and FAQ accordion.
+</div>
 
 ---
 
-## 🚀 The Complete EchoGPT Web App Suite (`/app`)
+## 📖 Table of Contents
 
-### 1. Left Sidebar Navigation
-Faithfully matching the official EchoGPT reference layout:
-- **Brand Header**: Branded EchoGPT logo with purple glow accent, Pro badge, and desktop collapse toggle.
-- **Primary Action**: Prominent `+ New Chat` button (clears active session and resets composer).
-- **ENGAGEMENT Section**:
-  1. **Image Studio**: [PRO badge] Complete image generation suite featuring:
-     - *Generation Control Card*: Prompt textarea with rich presets, AI Enhance prompt button, drag-and-drop Image-to-Image reference image upload with thumbnail preview and influence strength slider (10%–90%).
-     - *Aspect Ratio Selector*: `1:1`, `3:2`, `2:3`, `auto`, `16:9`, `9:16`.
-     - *Batch Count*: `1x`, `2x`, `3x`, `4x`.
-     - *Choose a Model Modal*: Categorized directory with Google Tier (`Nano Banana 2 Lite` [Default], `Nano Banana 2`, `Nano Banana Pro`, `Nano Banana`), OpenAI Tier (`ChatGPT Image Latest`, `GPT Image 1`, `GPT Image 1 Mini`, `GPT Image 1.5`, `GPT Image 2`), and Extended Diffusion Tier (`Midjourney v6.1 Turbo`, `FLUX.1 Schnell`, `Stable Diffusion 3.5 Large`).
-     - *Your Creations Gallery*: Persistent gallery (LocalStorage) with hover overlays, prompt copier, aspect ratio badges, full-resolution inspection modal, and one-click download.
-  2. **Video Studio**: [PRO badge] Complete motion video generation suite matching Image Studio's layout:
-     - *Header*: `VIDEO STUDIO PRO` badge with active engines indicator, subtitle, and `Upgrade for 4K Renders` CTA.
-     - *Generation Control Card*: Prompt textarea with cinematic camera presets, AI Enhance prompt button, drag-and-drop First Frame (PNG/JPG) or Reference Video (MP4/WebM) uploader with preview and Motion Bucket slider (`1-127`).
-     - *Aspect Ratio Selector*: `16:9` (Cinema), `9:16` (Story/Reels), `1:1` (Square), `auto` (Smart).
-     - *Duration & Resolution*: `4s`, `6s`, `8s`, `12s` with `1080p 60fps` and `4K Pro` toggles.
-     - *Choose a Video Model Modal*: 6 motion engines (`Veo 3.1 Fast` [Default], `Veo 3.1 Pro`, `Sora v2 Turbo`, `Runway Gen-3 Alpha`, `Kling 1.5 HD`, `Luma Dream Machine 2.0`) with search and tier filters.
-     - *Static Button*: Always displays static label `Generate Video` with animated rendering state.
-     - *Generated Videos Gallery*: Responsive card grid with video poster preview, play overlay, duration & resolution badges, hover prompt preview, fullscreen Lightbox Video Player modal with progress scrubber, and `Export MP4` download button (persisted to LocalStorage).
-  3. **Compare (Multi-Model Workspace)**: Multi-model parallel chat workspace with `Compare` vs `Focus` mode toggles and side-by-side benchmarking.
-  4. **Connectors (MCP)**: Model Context Protocol server configuration, capacity meter (`0 of 1 connected - upgrade for unlimited`), and custom HTTPS connector modal (Server HTTPS address, name, optional authorization header).
-  5. **History**: Filterable history table/list with search bar and filter dropdown (`All`, `Chat`, `Tasks`, `Analysis`).
-  6. **Store**: Directory of 25+ cutting-edge AI models (DeepSeek V4 Pro, Nemotron 3 Ultra, GLM-5.2, Tencent Hy3, MiMo V2.5 Pro, Qwen 3.7 Plus, GPT-5.6 Sol, Muse Spark 1.3, Kimi K2.7, Step 3.7 Flash, Inkling) with "Try App" action.
-  7. **AI Tasks**: Prompt engineering directory categorized into *Ideas*, *Work*, *Fun*, and *Online Content* (X Posts, YouTube Scripts, TikTok Posts, TikTok Captions, Insta Content, Insta Reels, LinkedIn Hiring, LinkedIn Job Search). Clicking any card pre-fills and opens the assistant composer.
-  8. **AI Job Analysis**: Interactive resume and job description analyzer with ATS score, keyword alignment, skill gap analysis, and interview prep questions.
-  9. **AI SOP Builder**: Interactive 3-step Statement of Purpose wizard (Template selection, destination country with word count rules & visa criteria badges, and personal details form).
-- **HELP & SUPPORT Section**:
-  10. **Support**: Email inquiry form, FAQs, and social community cards (Discord, LinkedIn, Instagram, Facebook).
-  11. **Newsletter**: "Elevate Your AI Strategy" with subscription portal, benefit cards, and celebration confetti.
-  12. **Subscriptions / Billing**: Transparent quotas, usage meters, interval pricing, and plan management.
-  13. **API Platform & Discord Community**: Direct community links.
-- **Bottom Dock**:
-  - **Upgrade to Pro Card**: "Unlock Pro Features" with dynamic credits usage bar (`5 of 5 messages remaining`) and `Upgrade to Pro` CTA.
-  - **Bottom Icon Dock**: Home (`/`), Model Store grid, Settings modal trigger, and Dark/Light theme toggle.
-
-### 2. Chat Workspace (Default View)
-- **DeepSeek V4 Flash** default engine with model status pill.
-- **Starter Prompt Cards**: Pre-engineered prompts for Engineering, Research, Productivity, and Logic & Reasoning.
-- **Token & Reset Info Bar**: Real-time quota indicator (`5 of 5 messages left this window • Resets in 4h 12m`).
-- **Floating Smart Composer**:
-  - Model selector dropdown.
-  - Attachment uploader with removable file pill.
-  - Simulated voice dictation with pulsating wave animation.
-  - Character counter & instant Send button.
-- **Conversational Stream**:
-  - User and assistant speech bubbles with engine badges.
-  - Markdown syntax highlighting for code blocks with 1-click copy.
-  - Action buttons: Copy text, Regenerate response, Thumbs up/down, and speech synthesis.
-
-### 3. Pro Upgrade Modal
-- Triggerable globally from any "Upgrade to Pro" card, PRO badge, or billing CTA.
-- **Left Panel**: Premium feature checklist (AI Chat, Characters, Tasks, ChatDoc, Web Search, Text to Image).
-- **Right Panel**: Billing interval tabs (*Monthly* `$9.99/mo`, *Quarterly* `$8.99/mo`, *Semi-Annual* `$7.99/mo`, *Annual* `$6.99/mo`), model perks list, and simulated checkout with confetti.
+- [Overview](#-project-overview)
+- [Key Highlights](#-key-highlights)
+- [Technology Stack](#-technology-stack)
+- [Getting Started](#-getting-started)
+- [Assumptions & Design Decisions](#-assumptions--design-decisions)
+- [Beyond the Core Deliverables](#-beyond-the-core-deliverables)
+- [Project Structure](#-project-structure)
+- [Quality Checklist](#-quality-checklist)
+- [Contributing](#-contributing)
+- [License](#-license)
+- [Credits](#-credits)
 
 ---
 
-## 🌐 Marketing Landing Page (`/`)
+## 🚀 Project Overview
 
-- **Sticky Glassmorphism Header**: Brand mark, section anchors (*Features*, *AI Models*, *Comparison*, *Pricing*, *FAQ*), theme toggle, and Web App launcher.
-- **Hero Section**: Compelling multi-model orchestration headline, CTAs (*Try EchoGPT Free*, *Install Extension*), social proof rating, and animated UI mockup preview.
-- **Features Grid**: Unified multi-model chat, prompt engineering studio, MCP connectors, and browser sidebar integration.
-- **AI Models Showcase**: Detailed model cards comparing context windows (up to 2M tokens), speeds, reasoning scores, and coding benchmarks.
-- **Interactive Live Playground**: Mini playground where users can type a query and see simulated concurrent dual-model responses.
-- **Why Choose EchoGPT Comparison Table**: Side-by-side comparison table contrasting single subscription fatigue vs unified EchoGPT.
-- **Transparent Pricing Table**: Free, Pro ($9.99/mo), and Enterprise tiers with Monthly/Annual discount toggles.
-- **Interactive FAQ Accordion**: Accessible accordion answering key questions.
-- **Final CTA & Footer**: High-impact conversion section and exhaustive footer links (Product, Resources, Company, Legal, Socials).
+Most people don't have a model problem — they have a **fragmentation** problem. Eleven browser tabs, four vendor dashboards, and five overlapping subscriptions to answer one question. And the model that's fastest for prose is rarely the one that nails a refactor.
+
+**EchoGPT** is a unified, high-performance workspace that aggregates frontier AI models behind a single interface, routing prompts to the right engine and presenting the results side by side.
+
+The model catalogue is defined in [`src/data/models.ts`](./src/data/models.ts) and includes:
+
+| Model | Provider | Context | Role in the ecosystem |
+| :--- | :--- | :--- | :--- |
+| **EchoGPT Core** | EchoGPT Core | 128K | Unified router / orchestrator (default, free) |
+| **Nemotron 3 Ultra** | NVIDIA AI | 128K | Enterprise reasoning, synthetic data |
+| **LongCat 2.0** | Meituan / LongCat AI | 128K | Long-horizon agentic work |
+| **DeepSeek V4 Pro** | DeepSeek AI | 128K | Code generation & deep reasoning |
+| **GPT-5.6 Sol** | OpenAI | 128K | General-purpose flagship |
+| **Claude Opus 5.5** | Anthropic | 128K | Long-form writing & nuance |
+| **Nemotron 3.5 Lightning** | NVIDIA AI | 128K | Low-latency fast path |
+| **+ 100 more** | Various | Various | Full catalogue in the Store & Models Hub |
+
+> **Note on model names:** the catalogue ships with `DeepSeek V4 Pro`, `Claude Opus 5.5`, `GPT-5.6 Sol`, `Nemotron 3.x`, and `LongCat 2.0`. There is no `GPT-4o` or `Claude 3.5 Sonnet` entry in the current data file.
+
+### Why it exists
+
+- **One surface, many engines** — no vendor lock-in, no tab juggling.
+- **Compare, don't guess** — a dual-stream playground renders two models answering the same prompt simultaneously, with latency readouts.
+- **Works immediately** — the AI layer falls back to a public, keyless endpoint, so the app is usable on first load with zero configuration.
 
 ---
 
-## 🧩 Chrome Extension Sidebar Concept (`/extension`)
+## ✨ Key Highlights
 
-- **Realistic Browser Viewport Mockup**: Integrated 400px interactive sidebar and popup mode toggle.
-- **Header**: EchoGPT mini brand, quick model switcher, and action icons.
-- **Tabs**: Chat, Actions, History, Settings.
-- **One-Click Context Actions**:
-  - *Summarize active webpage*: Automatic DOM parsing and executive takeaway extraction.
-  - *Explain highlighted text*: Simulates inline reading assistant.
-  - *Improve prose & polish*: Grammar, flow, and tone optimization.
-  - *Translate selection*: Real-time multilingual processing.
-- **Quick Composer**: Compact prompt composer optimized for compact browsing workflows.
+- **Marketing Landing Page** — hero with a live, streaming product mockup, feature grid, frontier-model showcase, and pricing.
+- **Live Chat Workspace** — multi-turn chat with token streaming, Markdown + GFM rendering, syntax-highlighted code blocks with one-click copy, and persistent history.
+- **Dual-Model Split Comparison Playground** — two models, one prompt, two simultaneous streams, plus latency and TTFT benchmarks.
+- **Image Studio** — aspect-ratio and batch controls, reference-image upload, and a persistent gallery.
+- **Video Studio** — the same generation pipeline for text-to-video, with its own gallery.
+- **AI SOP Builder** — turns a job description into a structured, editable standard operating procedure.
+- **Job Analysis & Task Views** — role breakdowns and prioritised task lists.
+- **Store & Models Hub** — browsable catalogue of the full 100+ model set with filters.
+- **Interactive Chrome Extension Simulator** — a high-fidelity in-page sidepanel and popup that summarise the current page and expose contextual quick actions.
 
 ---
 
-## 🛠️ Technology Stack & Dependencies
+## 🛠️ Technology Stack
 
 | Layer | Technology | Rationale |
 | :--- | :--- | :--- |
-| **Language** | TypeScript 7.0 (Strict mode) | Strict type checking, zero `any`, explicit interfaces |
-| **Framework** | React 19.2 | Concurrent mode and performant component trees |
-| **Tooling & HMR** | Vite 8.3 | Sub-second build times and instant hot module replacement |
-| **Styling** | Tailwind CSS v4 (`@tailwindcss/vite`) | Next-gen CSS-first configuration and atomic utility tokens |
-| **Icons** | Lucide React + Custom SVG Icons | Cohesive modern vector icons |
-| **Animations** | Framer Motion & CSS keyframes | Smooth transitions, modal springs, and responsive drawers |
-| **Effects** | Canvas Confetti | Delightful celebratory feedback upon checkout |
-| **State & Storage** | React Context API + LocalStorage | Clean client-side persistence with zero external backend dependencies |
+| **Language** | TypeScript 7.0 (strict) | Strict type checking, explicit interfaces, no `any` |
+| **Framework** | React 19.2 | Concurrent rendering, performant component trees |
+| **Build & HMR** | Vite 8.3 | Sub-second builds, instant hot module replacement |
+| **Styling** | Tailwind CSS v4 (`@tailwindcss/vite`) | CSS-first config, atomic design tokens |
+| **Theming** | Custom dark/light engine | React Context + `localStorage` + CSS custom variant |
+| **Icons** | Lucide React + custom SVG | Consistent modern vector iconography |
+| **Animation** | Framer Motion 13 | Spring physics, layout transitions, drawer animations |
+| **Effects** | Canvas Confetti | Checkout and upgrade celebrations |
+| **Markdown** | react-markdown + remark-gfm | Streaming Markdown with GFM tables and copyable code blocks |
+| **AI Transport** | Pollinations public endpoint + local fallback | Keyless, CORS-friendly, two-tier degradation |
+| **State** | React Context API + LocalStorage | Client-side persistence with no backend |
+
+> **On routing:** navigation is driven by `AppContext` view state rather than a router, so the app runs as a single deployable bundle with no route-level code splitting.
 
 ---
 
-## 📂 Source Code Architecture (Strict TypeScript)
-
-```
-EchoGPT/
-├── src/
-│   ├── @types/
-│   │   └── index.ts                 # Central domain types & interfaces
-│   ├── assets/                      # SVG and image assets
-│   ├── components/
-│   │   ├── common/                  # Shared UI components
-│   │   │   ├── Footer.tsx
-│   │   │   ├── Icons.tsx            # Custom brand SVGs (Chrome, GitHub, Discord, LinkedIn, X)
-│   │   │   ├── Navbar.tsx
-│   │   │   ├── SettingsModal.tsx
-│   │   │   ├── ThemeToggle.tsx
-│   │   │   └── ToastContainer.tsx
-│   │   ├── landing/                 # Marketing landing page components
-│   │   │   ├── CTASection.tsx
-│   │   │   ├── ExtensionSpotlightSection.tsx
-│   │   │   ├── FAQSection.tsx
-│   │   │   ├── FeaturesSection.tsx
-│   │   │   ├── HeroSection.tsx
-│   │   │   ├── InteractiveComparisonPlayground.tsx
-│   │   │   ├── ModelsSection.tsx
-│   │   │   ├── PricingSection.tsx
-│   │   │   ├── TestimonialsSection.tsx
-│   │   │   └── WhyEchoGPTSection.tsx
-│   │   ├── webapp/                  # Web App shell and views
-│   │   │   ├── ChatArea.tsx
-│   │   │   ├── ModelSelectorModal.tsx
-│   │   │   ├── PromptComposer.tsx
-│   │   │   ├── ProUpgradeModal.tsx
-│   │   │   ├── ShareModal.tsx
-│   │   │   ├── Sidebar.tsx
-│   │   │   ├── SplitCompareView.tsx
-│   │   │   ├── WorkspaceHeader.tsx
-│   │   │   └── views/               # 13 Dedicated Web App subviews
-│   │   │       ├── BillingView.tsx
-│   │   │       ├── ChatWorkspaceView.tsx
-│   │   │       ├── CompareView.tsx
-│   │   │       ├── ConnectorsView.tsx
-│   │   │       ├── HistoryView.tsx
-│   │   │       ├── ImageStudioView.tsx
-│   │   │       ├── JobAnalysisView.tsx
-│   │   │       ├── NewsletterView.tsx
-│   │   │       ├── SOPBuilderView.tsx
-│   │   │       ├── StoreView.tsx
-│   │   │       ├── SupportView.tsx
-│   │   │       ├── TasksView.tsx
-│   │   │       └── VideoStudioView.tsx
-│   │   └── extension/
-│   │       └── ExtensionUI.tsx      # Chrome Extension sidebar & popup simulator
-│   ├── context/
-│   │   ├── AppContext.tsx           # Global typed state & reducer-like actions
-│   │   └── ThemeContext.tsx         # Dark/Light theme state
-│   ├── data/                        # Strongly typed datasets
-│   │   ├── connectorsData.ts
-│   │   ├── conversations.ts
-│   │   ├── faq.ts
-│   │   ├── features.ts
-│   │   ├── models.ts
-│   │   ├── pricing.ts
-│   │   ├── quickActions.ts
-│   │   ├── sopData.ts
-│   │   ├── tasksData.ts
-│   │   └── testimonials.ts
-│   ├── hooks/                       # Custom typed hooks
-│   │   ├── useLocalStorage.ts
-│   │   └── useTheme.ts
-│   ├── pages/                       # Primary route views
-│   │   ├── ExtensionPage.tsx
-│   │   ├── LandingPage.tsx
-│   │   └── WebAppPage.tsx
-│   ├── App.tsx                      # Root layout router
-│   ├── main.tsx                     # Application entry point
-│   ├── vite-env.d.ts                # Vite environment & module declarations
-│   └── index.css                    # Tailwind CSS v4 directives
-├── index.html                       # Semantic HTML5 & SEO tags
-├── tsconfig.json                    # Strict TypeScript compiler options
-├── vite.config.js                   # Vite configuration
-└── package.json                     # Scripts and dependencies
-```
-
----
-
-## 💻 Local Development & Build Instructions
+## 🚦 Getting Started
 
 ### Prerequisites
-- Node.js `v18.0.0` or higher
-- npm `v9.0.0` or higher
 
-### 1. Install Dependencies
+- **Node.js 20+** — verified on **Node v26.3.0**
+- **npm 10+** — verified on **npm 11.16.0**
+
+> `package.json` does not declare an `engines` field, so these are the versions this project was built and verified against.
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/kouser-ahamed/EchoGPT.git
+cd EchoGPT
+```
+
+### 2. Install dependencies
+
 ```bash
 npm install
 ```
 
-### 2. Run Local Development Server
+### 3. Environment configuration
+
+**No configuration is required.** The app ships with a keyless AI fallback engine, so `npm run dev` gives you a working chat immediately.
+
+If you later wire up your own provider, create a `.env` file at the project root:
+
+```bash
+cp .env.example .env   # add .env.example to your fork first — it is not shipped
+```
+
+```bash
+# .env
+VITE_AI_ENDPOINT=https://your-endpoint.example/v1/chat
+VITE_AI_API_KEY=your-key-here
+```
+
+> Any variable prefixed with `VITE_` is exposed to the client bundle. **Never commit real API keys** — put keys behind a proxy server for production use.
+
+### 4. Start the development server
+
 ```bash
 npm run dev
 ```
-Open [http://localhost:5173](http://localhost:5173) in your browser.
 
-### 3. TypeScript Typecheck & Production Build
-```bash
-npm run build
-```
-Runs `tsc -b && vite build`. Generates an optimized, minified production build in `dist/` with **zero compiler errors**.
+Open the URL printed by Vite (default <http://localhost:5173>).
 
-### 4. Code Quality & Linting
-```bash
-npm run lint
-```
-Runs `oxlint` across all TypeScript files (0 errors, 0 warnings).
+### 5. Verify a production build
 
-### 5. Preview Production Build
 ```bash
-npm run preview
+npm run build     # tsc -b && vite build  ->  output in ./dist
+npm run preview   # serve the production build locally
+npm run lint      # oxlint
 ```
 
 ---
 
-## 🎯 Verification & Quality Checklist
+## 💭 Assumptions & Design Decisions
 
-- [x] **100% TypeScript Conversion**: Every JavaScript (`.js` / `.jsx`) file converted to strict `.ts` / `.tsx`.
-- [x] **Zero Type Errors**: `tsc -b` and `vite build` complete with 0 errors.
-- [x] **Zero Linter Warnings**: `oxlint` passes with 0 errors and 0 warnings.
-- [x] **Zero Placeholder Components**: All 13 views, studios, modals, and workflows are fully interactive.
-- [x] **Faithful to EchoGPT Reference**: Matches layout, color scheme, typography, and controls from `https://echogpt.live/`.
-- [x] **Image Studio**: Complete controls bar (Aspect ratios, batch counts, Choose a Model modal, reference image upload, and persistent gallery).
-- [x] **Interactive Chrome Extension Concept**: Docked 400px sidepanel and popup modes with webpage summarization.
-- [x] **Full Mobile & Desktop Responsiveness**: Responsive down to 320px screens with sliding mobile drawers and responsive layouts.
-- [x] **Client-Side State Persistence**: Retains conversation history, active model selections, generated images, and custom MCP connectors across page reloads.
+- **Modern browsers only.** The UI targets current desktop, tablet, and mobile browsers with responsive breakpoints from 320px upward. Legacy browsers are out of scope.
+- **Zero-key out of the box.** The AI layer uses a public, CORS-friendly endpoint with a local fallback engine, so chat works without any paid proprietary API key. This keeps the demo instantly usable and avoids shipping secrets to the browser.
+- **The extension is a simulator, not a shipped extension.** The Chrome extension experience is implemented as a high-fidelity interactive simulator inside the web app. This demonstrates the UX and information architecture before committing to native Manifest V3 packaging and Chrome Web Store review.
+- **Client-side state only.** There is no backend. Conversations, themes, preferences, generated media, and custom connectors persist to `localStorage`. Clearing site data clears the workspace.
+- **The AI is a demonstration layer.** Responses come from a public model endpoint and are not calibrated for production accuracy or safety-critical use.
 
 ---
 
-## 👥 Authors & Acknowledgments
-- Developed for the **AppifyDevs** Frontend Software Engineering Internship Evaluation.
-- Inspired by the official **EchoGPT** platform ([https://echogpt.live/](https://echogpt.live/)).
+## 🚀 Beyond the Core Deliverables
+
+- **100% strict TypeScript, zero `any`** — the entire codebase is `.ts`/`.tsx` under `strict` mode, with explicit interfaces in `src/@types`.
+- **Dark/Light theme engine** — a full theme system with WCAG-conscious contrast in both modes, persisted across reloads, and zero washed-out surfaces.
+- **Zero-glow dark-mode card system** — landing cards use flat `dark:shadow-none` surfaces with crisp borders, preserving soft shadows in light mode only.
+- **Dual-model split comparison** — simultaneous streaming, per-column copy, and latency benchmarks.
+- **Gallerisation & pagination** — Image and Video studios paginate at **8 items per page**; History paginates at **10**. Desktop galleries use a 4-column grid.
+- **Interactive extension sidepanel** — docked sidepanel and popup modes, live page summarisation, and contextual quick actions.
+- **Zero-overflow responsive experience** — fluid containers from 320px to 4K, a portalled touch-friendly drawer navigation, momentum-scroll strips, and safe-area insets for notched devices.
+
+---
+
+## 📂 Project Structure
+
+```text
+EchoGPT/
+├── index.html                  # Entry HTML, viewport + theme bootstrap
+├── vite.config.js              # Vite + React + Tailwind plugin config
+├── tsconfig.json               # Strict TypeScript configuration
+├── .oxlintrc.json              # Lint rules
+└── src/
+    ├── main.tsx                # React root, provider composition
+    ├── App.tsx                 # App shell, view router, global overflow guard
+    ├── index.css               # Tailwind import, theme tokens, utilities
+    │
+    ├── components/
+    │   ├── common/             # Navbar, Footer, ThemeToggle, SettingsModal,
+    │   │                       # ToastContainer, Icons, MarkdownRenderer
+    │   ├── landing/            # HeroSection, FeaturesSection, ModelsSection,
+    │   │                       # InteractiveComparisonPlayground, PricingSection,
+    │   │                       # WhyEchoGPTSection, TestimonialsSection,
+    │   │                       # FAQSection, CTASection, ExtensionSpotlightSection
+    │   ├── webapp/             # Sidebar, WorkspaceHeader, ChatArea, PromptComposer,
+    │   │                       # ModelSelectorModal, UpgradePlanModal,
+    │   │                       # ProUpgradeModal, ShareModal, SplitCompareView
+    │   │   └── views/          # ChatWorkspaceView, ImageStudioView, VideoStudioView,
+    │   │                       # HistoryView, StoreView, CompareView, BillingView,
+    │   │                       # ConnectorsView, TasksView, SOPBuilderView,
+    │   │                       # JobAnalysisView, NewsletterView, SupportView
+    │   └── extension/          # ExtensionUI (sidepanel + popup), ExtensionSimulator
+    │
+    ├── context/                # AppContext (view state), ThemeContext (dark/light)
+    ├── data/                   # Static catalogues: models, pricing, conversations,
+    │                           # faq, features, testimonials, tasks, quickActions
+    ├── hooks/                  # useLocalStorage, useTheme
+    ├── pages/                  # Thin page wrappers (LandingPage, WebAppPage,
+    │                           # ExtensionPage, StorePage, HistoryPage, ...)
+    ├── services/               # aiChatService (streaming + fallback), aiService
+    ├── @types/                 # Shared TypeScript interfaces
+    └── assets/
+```
+
+---
+
+## 🎯 Quality Checklist
+
+- [x] **100% TypeScript** — no `.js`/`.jsx` in `src`; all `.ts`/`.tsx`.
+- [x] **Zero type errors** — `tsc -b` and `vite build` complete with 0 errors.
+- [x] **Clean build** — `npm run build` succeeds and emits `./dist`.
+- [x] **Zero placeholder components** — all views, studios, and modals are interactive.
+- [x] **Responsive to 320px** — fluid layouts, drawer navigation, momentum scroll strips.
+- [x] **Client-side persistence** — history, model selection, media, and connectors survive reloads.
+- [ ] **Zero lint warnings** — `npm run lint` currently reports **1 pre-existing warning** in `src/components/extension/ExtensionUI.tsx` (`Date.now()` called during render).
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome.
+
+1. **Fork** the repository and create a feature branch.
+   ```bash
+   git checkout -b feature/your-change
+   ```
+2. **Install** dependencies with `npm install`.
+3. **Keep types strict** — no `any`, no `@ts-ignore`. Add interfaces to `src/@types`.
+4. **Verify before opening a PR**:
+   ```bash
+   npm run lint && npm run build
+   ```
+5. **Commit** with a clear message and **open a PR** describing the change.
+
+**Style guidelines**
+- Functional components with explicit prop interfaces.
+- Tailwind utilities over inline styles; keep dark/light variants paired.
+- Prefer `dark:shadow-none` over decorative glows on card surfaces.
+- Any new horizontal scroller needs `no-scrollbar momentum-scroll` and `shrink-0` children.
+
+---
+
+## 📄 License
+
+Released under the **MIT License**.
+
+```text
+MIT License
+
+Copyright (c) 2026 Kouser Ahamed
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+```
+
+> A standalone `LICENSE` file has not yet been added to the repository root. The text above is the intended license.
+
+---
+
+## 👥 Credits
+
+- **Created by** [Kouser Ahamed](https://github.com/kouser-ahamed) — <kouserahamed.cse.diu@gmail.com>
+- Built for the **AppifyDevs** Frontend Software Engineering Internship evaluation.
+- Design reference and inspiration: the official **EchoGPT** platform at [echogpt.live](https://echogpt.live/).
+
+<p align="center">
+  <em>Made with React, TypeScript, and an unreasonable number of model tabs.</em>
+</p>
