@@ -82,7 +82,7 @@ export const WebAppPage: React.FC = () => {
   };
 
   return (
-    <div className="flex h-screen overflow-hidden bg-[#F8FAFC] dark:bg-slate-950 text-slate-900 dark:text-slate-100 font-sans antialiased selection:bg-indigo-500/30 selection:text-white">
+    <div className="flex h-[100dvh] w-full max-w-full overflow-hidden bg-[#F8FAFC] dark:bg-slate-950 text-slate-900 dark:text-slate-100 font-sans antialiased selection:bg-indigo-500/30 selection:text-white">
       
       {/* Collapsible Left Navigation Sidebar */}
       <Sidebar
@@ -93,8 +93,8 @@ export const WebAppPage: React.FC = () => {
         onCloseMobile={() => setMobileSidebarOpen(false)}
       />
 
-      {/* Main Content Workspace Column */}
-      <main className="flex-1 flex flex-col min-w-0 h-full overflow-hidden relative">
+      {/* Main Content Workspace Column (bottom padding reserves the mobile dock) */}
+      <main className="flex-1 flex flex-col min-w-0 h-full overflow-hidden relative pb-16 lg:pb-0">
         <WorkspaceHeader
           onOpenMobileSidebar={() => setMobileSidebarOpen(true)}
           onOpenModelSelector={() => setModelSelectorOpen(true)}

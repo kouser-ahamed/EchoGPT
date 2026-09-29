@@ -244,8 +244,8 @@ export const ChatWorkspaceView: React.FC<ChatWorkspaceViewProps> = ({
   return (
     <div className="flex-1 flex flex-col h-full overflow-hidden bg-[#F8FAFC] dark:bg-slate-950 relative">
       {/* Top Workspace Header Bar: Selected Model Pill, Token Speed Counter, Live Status, Clear Chat */}
-      <div className="px-4 py-2.5 sm:px-6 border-b border-slate-200 dark:border-slate-800/80 bg-white/80 dark:bg-slate-900/60 backdrop-blur-md flex items-center justify-between text-xs shrink-0 z-10">
-        <div className="flex items-center gap-2 sm:gap-2.5">
+      <div className="px-4 py-2.5 sm:px-6 border-b border-slate-200 dark:border-slate-800/80 bg-white/80 dark:bg-slate-900/60 backdrop-blur-md flex items-center justify-between gap-2 text-xs shrink-0 z-10 overflow-x-auto no-scrollbar momentum-scroll">
+        <div className="flex items-center gap-2 sm:gap-2.5 shrink-0">
           <button
             onClick={onOpenModelSelector}
             className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white dark:bg-slate-800/90 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-700/60 hover:border-slate-300 dark:hover:border-slate-600 text-slate-900 dark:text-white font-medium transition-all group shadow-sm"
@@ -286,7 +286,7 @@ export const ChatWorkspaceView: React.FC<ChatWorkspaceViewProps> = ({
       </div>
 
       {/* Messages / Welcome Container */}
-      <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-6">
+      <div className="flex-1 overflow-y-auto overflow-x-hidden p-4 sm:p-6 space-y-6 momentum-scroll overscroll-contain">
         <div className="max-w-4xl mx-auto space-y-6">
           {/* Welcome Screen when conversation has 0 messages */}
           {messages.length === 0 ? (
@@ -369,7 +369,7 @@ export const ChatWorkspaceView: React.FC<ChatWorkspaceViewProps> = ({
                   )}
 
                   <div
-                    className={`max-w-2xl sm:max-w-3xl rounded-2xl p-4 sm:p-5 text-xs sm:text-sm leading-relaxed ${
+                    className={`max-w-[92%] sm:max-w-2xl lg:max-w-3xl rounded-2xl p-4 sm:p-5 text-xs sm:text-sm leading-relaxed ${
                       isUser
                         ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-tr-sm ml-8 shadow-md shadow-indigo-600/20'
                         : 'bg-white dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 text-slate-800 dark:text-slate-200 rounded-tl-sm w-full shadow-sm shadow-slate-200/50 dark:shadow-md'
@@ -525,8 +525,8 @@ export const ChatWorkspaceView: React.FC<ChatWorkspaceViewProps> = ({
       </div>
 
       {/* Floating Prompt Composer Bar */}
-      <div className="p-3 sm:p-5 border-t border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-slate-950/95 backdrop-blur-md">
-        <div className="max-w-4xl mx-auto space-y-2.5">
+      <div className="p-3 sm:p-5 pb-3 sm:pb-5 pb-safe border-t border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-slate-950/95 backdrop-blur-md shrink-0">
+        <div className="max-w-4xl mx-auto space-y-2.5 w-full min-w-0">
           {/* Attachment Preview Chip */}
           {attachedFile && (
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-indigo-500/10 border border-indigo-500/30 text-xs text-indigo-700 dark:text-indigo-300">
@@ -557,7 +557,7 @@ export const ChatWorkspaceView: React.FC<ChatWorkspaceViewProps> = ({
 
             {/* Bottom Controls Bar */}
             <div className="px-3 pb-2.5 pt-1 flex items-center justify-between gap-2 border-t border-slate-100 dark:border-slate-800/40">
-              <div className="flex items-center gap-1.5">
+              <div className="flex items-center gap-1.5 min-w-0 flex-1 overflow-x-auto no-scrollbar momentum-scroll overscroll-x-contain py-0.5">
                 {/* Model Selector Pill */}
                 <button
                   type="button"
@@ -625,7 +625,7 @@ export const ChatWorkspaceView: React.FC<ChatWorkspaceViewProps> = ({
               </div>
 
               {/* Character count & Send */}
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-3 shrink-0 pl-2">
                 <span className="text-[11px] text-slate-400 font-mono hidden sm:inline">
                   {inputText.length} chars
                 </span>
@@ -643,9 +643,9 @@ export const ChatWorkspaceView: React.FC<ChatWorkspaceViewProps> = ({
             </div>
           </div>
 
-          <div className="flex items-center justify-between text-[11px] text-slate-500 dark:text-slate-400 px-1">
-            <span>Model: <strong className="text-slate-700 dark:text-slate-300">{currentModel.name}</strong> ({currentModel.speed})</span>
-            <span className="hidden sm:inline">Press <kbd className="px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 font-mono text-[10px]">Enter</kbd> to send</span>
+          <div className="flex items-center justify-between gap-3 text-[11px] text-slate-500 dark:text-slate-400 px-1 min-w-0">
+            <span className="truncate min-w-0">Model: <strong className="text-slate-700 dark:text-slate-300">{currentModel.name}</strong> ({currentModel.speed})</span>
+            <span className="hidden sm:inline shrink-0">Press <kbd className="px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 font-mono text-[10px]">Enter</kbd> to send</span>
           </div>
         </div>
       </div>

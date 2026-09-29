@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useApp } from '../../context/AppContext';
 import { useTheme } from '../../context/ThemeContext';
 import { ThemeToggle } from '../common/ThemeToggle';
@@ -83,6 +83,24 @@ export const Sidebar: React.FC<SidebarProps> = ({
   } = useApp();
 
   const { isDark: isDarkMode } = useTheme();
+
+  // Lock body scroll + close on Escape while the mobile off-canvas drawer is open
+  useEffect(() => {
+    if (!isMobileOpen) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onCloseMobile();
+    };
+    document.addEventListener('keydown', handleKeyDown);
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [isMobileOpen, onCloseMobile]);
 
   const handleNavClick = (viewId: WebAppSubView) => {
     setActiveView(viewId);
@@ -273,7 +291,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
         </div>
 
         {/* Navigation Menus (Scrollable Body) */}
-        <div className="flex-1 overflow-y-auto px-2.5 py-1 space-y-5 custom-scrollbar">
+        <div className="flex-1 overflow-y-auto px-2.5 py-1 space-y-5 custom-scrollbar momentum-scroll overscroll-contain">
           {/* Section: ENGAGEMENT */}
           <div>
             {!isCollapsed ? (
@@ -523,6 +541,57 @@ export const Sidebar: React.FC<SidebarProps> = ({
           </div>
         </div>
       </aside>
+
+      {/* Mobile Bottom Navigation Dock (one-thumb quick access, < 1024px only) */}
+      <nav
+        className="lg:hidden fixed bottom-0 inset-x-0 z-40 flex items-stretch justify-around gap-1 px-2 pt-1.5 pb-safe bg-white/95 dark:bg-slate-950/95 backdrop-blur-xl border-t border-slate-200 dark:border-slate-800/80"
+        aria-label="Mobile quick navigation"
+      >
+        <button
+          onClick={() => navigateTo('landing')}
+          className="flex-1 min-w-0 flex flex-col items-center justify-center gap-0.5 py-1.5 rounded-xl text-slate-500 dark:text-slate-400 active:scale-95 transition-transform"
+          aria-label="Home"
+        >
+          <Home className="w-5 h-5" />
+          <span className="text-[10px] font-medium leading-none">Home</span>
+        </button>
+
+        <button
+          onClick={handleNewChat}
+          className="flex-1 min-w-0 flex flex-col items-center justify-center gap-0.5 py-1.5 rounded-xl text-indigo-600 dark:text-indigo-400 active:scale-95 transition-transform"
+          aria-label="New chat workspace"
+        >
+          <MessageSquare className="w-5 h-5" />
+          <span className="text-[10px] font-medium leading-none">Workspace</span>
+        </button>
+
+        <button
+          onClick={() => handleNavClick('store')}
+          className={`flex-1 min-w-0 flex flex-col items-center justify-center gap-0.5 py-1.5 rounded-xl active:scale-95 transition-transform ${
+            activeView === 'store'
+              ? 'text-violet-500 dark:text-violet-400'
+              : 'text-slate-500 dark:text-slate-400'
+          }`}
+          aria-label="Models store"
+          aria-current={activeView === 'store' ? 'page' : undefined}
+        >
+          <LayoutGrid className="w-5 h-5" />
+          <span className="text-[10px] font-medium leading-none">Models</span>
+        </button>
+
+        <button
+          onClick={onOpenSettings}
+          className="flex-1 min-w-0 flex flex-col items-center justify-center gap-0.5 py-1.5 rounded-xl text-slate-500 dark:text-slate-400 active:scale-95 transition-transform"
+          aria-label="Workspace settings"
+        >
+          <Settings className="w-5 h-5" />
+          <span className="text-[10px] font-medium leading-none">Settings</span>
+        </button>
+
+        <div className="flex-1 min-w-0 flex flex-col items-center justify-center gap-0.5 py-1.5">
+          <ThemeToggle />
+        </div>
+      </nav>
     </>
   );
 };

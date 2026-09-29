@@ -533,11 +533,11 @@ export const SubscriptionsPage: React.FC = () => {
         </div>
 
         {/* 2. The 4 Accurate Plan Cards (grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6) */}
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 items-stretch">
+        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 sm:gap-6 items-stretch">
           {plans.map((plan) => (
             <div
               key={plan.id}
-              className={`rounded-2xl border p-6 backdrop-blur-md transition-all duration-300 flex flex-col justify-between relative group ${
+              className={`rounded-2xl border p-5 sm:p-6 backdrop-blur-md transition-all duration-300 flex flex-col justify-between relative group min-w-0 ${
                 plan.isRecommended
                   ? 'bg-white/95 dark:bg-slate-900/60 border-violet-600 dark:border-violet-500/60 shadow-lg shadow-violet-500/10 ring-1 ring-violet-600/30 dark:ring-violet-500/30'
                   : 'bg-white/90 dark:bg-slate-900/60 border-slate-200/90 dark:border-slate-800/80 hover:border-violet-500/40 shadow-sm shadow-slate-200/50 dark:shadow-xl'
@@ -546,15 +546,15 @@ export const SubscriptionsPage: React.FC = () => {
               {/* Top Card Content */}
               <div className="space-y-4">
                 
-                {/* 2. Card Header: Natural flex layout preventing badge/title overlap */}
-                <div className="flex items-center justify-between gap-2 min-h-[32px]">
-                  <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white tracking-tight truncate">
+                {/* 2. Card Header: stacks on narrow viewports so title + badge never clip */}
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-3 min-h-[32px]">
+                  <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white tracking-tight break-words min-w-0">
                     {plan.name}
                   </h3>
 
                   {/* Keep RECOMMENDED badge strictly on the Quarterly Plan */}
                   {plan.isRecommended && (
-                    <span className="text-[11px] font-semibold tracking-wider px-2.5 py-0.5 rounded-full bg-violet-50 dark:bg-violet-600/20 text-violet-700 dark:text-violet-300 border border-violet-300 dark:border-violet-500/30 shrink-0 shadow-xs">
+                    <span className="self-start sm:self-auto text-[11px] font-semibold tracking-wider px-2.5 py-0.5 rounded-full bg-violet-50 dark:bg-violet-600/20 text-violet-700 dark:text-violet-300 border border-violet-300 dark:border-violet-500/30 shrink-0 shadow-xs">
                       RECOMMENDED
                     </span>
                   )}
@@ -594,7 +594,7 @@ export const SubscriptionsPage: React.FC = () => {
                       <span>Access to basic models</span>
                     </div>
 
-                    <div className="max-h-56 overflow-y-auto space-y-1.5 pr-2 custom-scrollbar rounded-xl bg-slate-50 dark:bg-slate-950/70 p-2 border border-slate-200/90 dark:border-slate-800/80">
+                    <div className="max-h-52 sm:max-h-56 overflow-y-auto overscroll-contain momentum-scroll space-y-1.5 pr-2 custom-scrollbar rounded-xl bg-slate-50 dark:bg-slate-950/70 p-2 border border-slate-200/90 dark:border-slate-800/80">
                       {BASIC_MODELS.map((model, idx) => (
                         <React.Fragment key={idx}>
                           {renderModelItem(model, 'Free')}
@@ -610,7 +610,7 @@ export const SubscriptionsPage: React.FC = () => {
                       <span>Access to advanced models</span>
                     </div>
 
-                    <div className="max-h-56 overflow-y-auto space-y-1.5 pr-2 custom-scrollbar rounded-xl bg-slate-50 dark:bg-slate-950/70 p-2 border border-slate-200/90 dark:border-slate-800/80">
+                    <div className="max-h-52 sm:max-h-56 overflow-y-auto overscroll-contain momentum-scroll space-y-1.5 pr-2 custom-scrollbar rounded-xl bg-slate-50 dark:bg-slate-950/70 p-2 border border-slate-200/90 dark:border-slate-800/80">
                       {ADVANCED_MODELS.map((model, idx) => (
                         <React.Fragment key={idx}>
                           {renderModelItem(model, 'Pro')}

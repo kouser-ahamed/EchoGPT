@@ -157,7 +157,7 @@ export const UpgradePlanModal: React.FC<UpgradePlanModalProps> = ({ isOpen, onCl
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.95 }}
           transition={{ duration: 0.2, ease: 'easeOut' }}
-          className="relative w-full max-w-4xl bg-white dark:bg-[#0E131F] border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-slate-100 rounded-3xl shadow-2xl overflow-hidden p-5 sm:p-7 md:p-8 space-y-6 max-h-[92vh] flex flex-col my-auto custom-scrollbar"
+          className="relative w-full max-w-4xl max-h-[90vh] sm:max-h-[92vh] bg-white dark:bg-[#0E131F] border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-slate-100 rounded-3xl shadow-2xl overflow-hidden p-4 sm:p-7 md:p-8 space-y-5 sm:space-y-6 flex flex-col my-auto custom-scrollbar"
         >
           {/* Top Right Close Button */}
           <button
@@ -182,7 +182,7 @@ export const UpgradePlanModal: React.FC<UpgradePlanModalProps> = ({ isOpen, onCl
           </div>
 
           {/* 2-Column Content Grid: Left Box & Right Box */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6 items-stretch flex-1 overflow-y-auto pr-0.5 custom-scrollbar">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6 items-stretch flex-1 min-h-0 overflow-y-auto overscroll-contain momentum-scroll pr-0.5 custom-scrollbar">
             {/* Left Box: Unlock all premium features */}
             <div className="rounded-2xl border border-slate-200 dark:border-slate-800 p-5 bg-slate-50/80 dark:bg-slate-950/80 flex flex-col justify-between space-y-4">
               <div className="space-y-4">
@@ -193,7 +193,7 @@ export const UpgradePlanModal: React.FC<UpgradePlanModalProps> = ({ isOpen, onCl
                   </h3>
                 </div>
 
-                <div className="space-y-4 max-h-[360px] overflow-y-auto pr-1.5 custom-scrollbar text-xs">
+                <div className="space-y-4 max-h-[360px] overflow-y-auto overscroll-contain momentum-scroll pr-1.5 custom-scrollbar text-xs">
                   {/* Chat Category */}
                   <div className="space-y-2.5">
                     <span className="text-[10px] font-bold uppercase tracking-wider text-purple-600 dark:text-purple-400/90 font-mono">
@@ -274,13 +274,13 @@ export const UpgradePlanModal: React.FC<UpgradePlanModalProps> = ({ isOpen, onCl
             <div className="rounded-2xl border border-slate-200 dark:border-slate-800 p-5 bg-slate-50/80 dark:bg-slate-950/80 flex flex-col justify-between space-y-4">
               <div className="space-y-4">
                 {/* Top Tabs: Monthly, Quarterly, Semi-Annual, Annual */}
-                <div className="grid grid-cols-4 gap-1.5 p-1 bg-slate-200/80 dark:bg-slate-900 border border-slate-300 dark:border-slate-800 rounded-xl">
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-1.5 p-1 bg-slate-200/80 dark:bg-slate-900 border border-slate-300 dark:border-slate-800 rounded-xl">
                   {PLANS.map((plan) => (
                     <button
                       key={plan.id}
                       type="button"
                       onClick={() => setSelectedTab(plan.id)}
-                      className={`py-2 px-1 rounded-lg font-bold text-xs transition-all text-center relative ${
+                      className={`py-2 px-1 rounded-lg font-bold text-xs transition-all text-center relative min-w-0 break-words ${
                         selectedTab === plan.id
                           ? 'bg-purple-600 text-white shadow-md shadow-purple-600/30'
                           : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100 dark:text-slate-400 dark:hover:text-white dark:hover:bg-slate-800/50'

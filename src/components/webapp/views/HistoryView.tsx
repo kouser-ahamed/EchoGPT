@@ -183,7 +183,7 @@ export const HistoryView: React.FC<HistoryViewProps> = ({ onSelectConversation }
   return (
     <div className="flex-1 flex flex-col h-full overflow-y-auto bg-[#F8FAFC] dark:bg-slate-950 text-slate-900 dark:text-slate-100 p-3 sm:p-6 lg:p-8 space-y-8 custom-scrollbar">
       {/* Main Container Aligned with Image Studio (max-w-6xl mx-auto w-full) */}
-      <div className="max-w-6xl mx-auto w-full space-y-6">
+      <div className="max-w-6xl mx-auto w-full min-w-0 space-y-6">
         
         {/* Header Section */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
@@ -250,7 +250,7 @@ export const HistoryView: React.FC<HistoryViewProps> = ({ onSelectConversation }
                     className="fixed inset-0 z-[998]"
                     onClick={() => setIsModelDropdownOpen(false)}
                   />
-                  <div className="absolute top-full right-0 mt-2 w-full sm:w-64 max-h-64 overflow-y-auto rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700/60 shadow-2xl p-1.5 z-[999] custom-scrollbar animate-in fade-in">
+                  <div className="absolute top-full right-0 mt-2 w-full sm:w-64 max-h-64 overflow-y-auto overscroll-contain momentum-scroll rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700/60 shadow-2xl p-1.5 z-[999] custom-scrollbar animate-in fade-in">
                     <div className="px-3 py-1.5 text-[10px] uppercase font-bold text-slate-500 dark:text-slate-400 tracking-wider border-b border-slate-100 dark:border-slate-800/80 mb-1 flex items-center justify-between">
                       <span>All Platform Models</span>
                       <Filter className="w-3 h-3 text-indigo-600 dark:text-indigo-400" />
@@ -279,7 +279,7 @@ export const HistoryView: React.FC<HistoryViewProps> = ({ onSelectConversation }
             </div>
 
             {/* Category Selector Chips */}
-            <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5">
+            <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar momentum-scroll overscroll-x-contain py-0.5">
               {['All', 'Engineering', 'Research', 'Finance', 'Writing'].map((cat) => (
                 <button
                   key={cat}

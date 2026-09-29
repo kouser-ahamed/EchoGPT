@@ -25,7 +25,7 @@ const sectionVariants: Variants = {
 
 export const LandingPage: React.FC = () => {
   return (
-    <div className="relative flex flex-col min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors duration-200 overflow-x-hidden">
+    <div className="relative flex flex-col w-full max-w-full min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors duration-200 overflow-x-hidden">
       {/* 1. Ambient Background Glow Motion (Continuous subtle soft floating loops) */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
         <motion.div
