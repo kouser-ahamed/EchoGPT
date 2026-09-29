@@ -33,7 +33,7 @@ export const WorkspaceHeader: React.FC<WorkspaceHeaderProps> = ({
     setActiveView,
     activeConversation,
     selectedModelId,
-    setIsProModalOpen,
+    setIsUpgradeModalOpen,
     showToast
   } = useApp();
 
@@ -121,11 +121,11 @@ export const WorkspaceHeader: React.FC<WorkspaceHeaderProps> = ({
 
         {/* Upgrade to Pro Button */}
         <button
-          onClick={() => setIsProModalOpen(true)}
+          onClick={() => setIsUpgradeModalOpen(true)}
           className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:brightness-110 text-white text-xs font-bold shadow-md shadow-purple-600/25 active:scale-95 transition-all"
         >
           <Crown className="w-3.5 h-3.5 text-amber-300" />
-          <span>Upgrade</span>
+          <span>Upgrade to Pro</span>
         </button>
 
         {/* Notifications Popover */}

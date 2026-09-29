@@ -32,6 +32,8 @@ export interface AppContextType {
   setActiveView: (view: WebAppSubView) => void;
   isProModalOpen: boolean;
   setIsProModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  isUpgradeModalOpen: boolean;
+  setIsUpgradeModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
   conversations: Conversation[];
   setConversations: React.Dispatch<React.SetStateAction<Conversation[]>>;
   activeConversationId: string;
@@ -462,6 +464,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
         setActiveView,
         isProModalOpen,
         setIsProModalOpen,
+        isUpgradeModalOpen: isProModalOpen,
+        setIsUpgradeModalOpen: setIsProModalOpen,
         conversations,
         setConversations,
         activeConversationId,

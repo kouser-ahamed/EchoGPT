@@ -5,7 +5,7 @@ import { WorkspaceHeader } from '../components/webapp/WorkspaceHeader';
 import { ModelSelectorModal } from '../components/webapp/ModelSelectorModal';
 import { ShareModal } from '../components/webapp/ShareModal';
 import { SettingsModal } from '../components/common/SettingsModal';
-import { ProUpgradeModal } from '../components/webapp/ProUpgradeModal';
+import { UpgradePlanModal } from '../components/webapp/UpgradePlanModal';
 
 // Dedicated Views
 import { ChatWorkspaceView } from '../components/webapp/views/ChatWorkspaceView';
@@ -23,7 +23,13 @@ import { NewsletterView } from '../components/webapp/views/NewsletterView';
 import { BillingView } from '../components/webapp/views/BillingView';
 
 export const WebAppPage: React.FC = () => {
-  const { activeView, isProModalOpen, setIsProModalOpen } = useApp();
+  const {
+    activeView,
+    isProModalOpen,
+    setIsProModalOpen,
+    isUpgradeModalOpen,
+    setIsUpgradeModalOpen
+  } = useApp();
   
   const [sidebarCollapsed, setSidebarCollapsed] = useState<boolean>(false);
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState<boolean>(false);
@@ -38,7 +44,7 @@ export const WebAppPage: React.FC = () => {
         return (
           <ChatWorkspaceView
             onOpenModelSelector={() => setModelSelectorOpen(true)}
-            onOpenUpgradeModal={() => setIsProModalOpen(true)}
+            onOpenUpgradeModal={() => setIsUpgradeModalOpen(true)}
           />
         );
       case 'image-studio':
@@ -69,7 +75,7 @@ export const WebAppPage: React.FC = () => {
         return (
           <ChatWorkspaceView
             onOpenModelSelector={() => setModelSelectorOpen(true)}
-            onOpenUpgradeModal={() => setIsProModalOpen(true)}
+            onOpenUpgradeModal={() => setIsUpgradeModalOpen(true)}
           />
         );
     }
@@ -117,9 +123,12 @@ export const WebAppPage: React.FC = () => {
         onClose={() => setSettingsModalOpen(false)}
       />
 
-      <ProUpgradeModal
-        isOpen={isProModalOpen}
-        onClose={() => setIsProModalOpen(false)}
+      <UpgradePlanModal
+        isOpen={isUpgradeModalOpen || isProModalOpen}
+        onClose={() => {
+          setIsUpgradeModalOpen(false);
+          setIsProModalOpen(false);
+        }}
       />
 
     </div>

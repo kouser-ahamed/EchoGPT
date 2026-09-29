@@ -58,7 +58,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
     setActiveView,
     navigateTo,
     createNewConversation,
-    setIsProModalOpen
+    setIsUpgradeModalOpen
   } = useApp();
 
   const handleNavClick = (viewId: WebAppSubView) => {
@@ -402,16 +402,16 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 Get unlimited access to DeepSeek V4 Pro, Image & Video Studios, and custom MCP connectors.
               </p>
               <button
-                onClick={() => setIsProModalOpen(true)}
+                onClick={() => setIsUpgradeModalOpen(true)}
                 className="w-full py-1.5 px-3 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:brightness-110 text-white font-bold text-xs flex items-center justify-center gap-1.5 shadow-md shadow-purple-600/30 active:scale-95 transition-all"
               >
                 <Crown className="w-3 h-3 text-amber-300" />
-                <span>Upgrade to Pro — $9.99</span>
+                <span>Upgrade to Pro</span>
               </button>
             </div>
           ) : (
             <button
-              onClick={() => setIsProModalOpen(true)}
+              onClick={() => setIsUpgradeModalOpen(true)}
               className="w-10 h-10 mx-auto rounded-xl bg-gradient-to-tr from-purple-600 to-indigo-600 flex items-center justify-center text-white shadow-md hover:scale-105 transition-transform"
               title="Upgrade to Pro"
             >
