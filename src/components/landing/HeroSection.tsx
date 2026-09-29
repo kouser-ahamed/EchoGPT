@@ -66,7 +66,7 @@ export async function submitEchoPrompt(prevState: any, formData: FormData) {
       {/* Background Ambient Glows */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-gradient-to-tr from-indigo-600/20 via-purple-600/15 to-cyan-500/15 blur-[120px] pointer-events-none rounded-full" />
       <div className="absolute -top-32 right-10 w-96 h-96 bg-cyan-500/10 blur-[100px] pointer-events-none rounded-full" />
-      
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Top Badges & Announcement */}
         <div className="flex flex-col items-center text-center space-y-4">
@@ -162,11 +162,10 @@ export async function submitEchoPrompt(prevState: any, formData: FormData) {
                       setActivePreviewModel(model.id);
                       setSelectedModelId(model.id);
                     }}
-                    className={`px-2.5 py-1 rounded-lg font-medium transition-all ${
-                      activePreviewModel === model.id
+                    className={`px-2.5 py-1 rounded-lg font-medium transition-all ${activePreviewModel === model.id
                         ? `${model.bgLight} font-semibold shadow-sm border ${model.borderColor}`
                         : 'text-slate-400 hover:text-slate-200'
-                    }`}
+                      }`}
                   >
                     <span className="mr-1.5">{model.avatar}</span>
                     <span>{model.shortName}</span>
@@ -188,11 +187,10 @@ export async function submitEchoPrompt(prevState: any, formData: FormData) {
                 <button
                   key={idx}
                   onClick={() => setActivePromptIndex(idx)}
-                  className={`px-3 py-1 rounded-lg text-xs font-medium transition-all shrink-0 ${
-                    activePromptIndex === idx
+                  className={`px-3 py-1 rounded-lg text-xs font-medium transition-all shrink-0 ${activePromptIndex === idx
                       ? 'bg-indigo-600/30 text-indigo-300 border border-indigo-500/40'
                       : 'bg-slate-900/60 text-slate-400 hover:text-slate-200 border border-slate-800'
-                  }`}
+                    }`}
                 >
                   {item.title}
                 </button>

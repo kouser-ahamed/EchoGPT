@@ -43,11 +43,10 @@ export const Navbar: React.FC<NavbarProps> = () => {
 
   return (
     <header
-      className={`sticky top-0 z-40 w-full transition-all duration-300 ${
-        scrolled
-          ? 'bg-slate-950/85 dark:bg-slate-950/90 backdrop-blur-md border-b border-slate-800/80 shadow-lg shadow-black/20'
-          : 'bg-slate-950/60 dark:bg-slate-950/70 backdrop-blur-sm border-b border-slate-800/40'
-      }`}
+      className={`sticky top-0 z-40 w-full transition-all duration-300 ${scrolled
+        ? 'bg-slate-950/85 dark:bg-slate-950/90 backdrop-blur-md border-b border-slate-800/80 shadow-lg shadow-black/20'
+        : 'bg-slate-950/60 dark:bg-slate-950/70 backdrop-blur-sm border-b border-slate-800/40'
+        }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 sm:h-20">
@@ -81,32 +80,29 @@ export const Navbar: React.FC<NavbarProps> = () => {
             <div className="hidden lg:flex items-center p-1 ml-6 rounded-xl bg-slate-900/80 border border-slate-800">
               <button
                 onClick={() => handleNavClick('landing')}
-                className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all duration-200 ${
-                  currentView === 'landing'
-                    ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-sm'
-                    : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/50'
-                }`}
+                className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all duration-200 ${currentView === 'landing'
+                  ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-sm'
+                  : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/50'
+                  }`}
               >
                 Overview
               </button>
               <button
                 onClick={() => handleNavClick('webapp')}
-                className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all duration-200 ${
-                  currentView === 'webapp'
-                    ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-sm'
-                    : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/50'
-                }`}
+                className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all duration-200 ${currentView === 'webapp'
+                  ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-sm'
+                  : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/50'
+                  }`}
               >
                 <Bot className="w-3.5 h-3.5" />
                 Web App
               </button>
               <button
                 onClick={() => handleNavClick('extension')}
-                className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all duration-200 ${
-                  currentView === 'extension'
-                    ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-sm'
-                    : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/50'
-                }`}
+                className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all duration-200 ${currentView === 'extension'
+                  ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-sm'
+                  : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/50'
+                  }`}
               >
                 <ChromeIcon className="w-3.5 h-3.5 text-cyan-400" />
                 Chrome Extension
@@ -200,26 +196,23 @@ export const Navbar: React.FC<NavbarProps> = () => {
           <div className="p-1 rounded-xl bg-slate-900 border border-slate-800 grid grid-cols-3 gap-1">
             <button
               onClick={() => handleNavClick('landing')}
-              className={`py-2 text-xs font-semibold rounded-lg ${
-                currentView === 'landing' ? 'bg-indigo-600 text-white' : 'text-slate-400'
-              }`}
+              className={`py-2 text-xs font-semibold rounded-lg ${currentView === 'landing' ? 'bg-indigo-600 text-white' : 'text-slate-400'
+                }`}
             >
               Overview
             </button>
             <button
               onClick={() => handleNavClick('webapp')}
-              className={`py-2 text-xs font-semibold rounded-lg flex items-center justify-center gap-1 ${
-                currentView === 'webapp' ? 'bg-indigo-600 text-white' : 'text-slate-400'
-              }`}
+              className={`py-2 text-xs font-semibold rounded-lg flex items-center justify-center gap-1 ${currentView === 'webapp' ? 'bg-indigo-600 text-white' : 'text-slate-400'
+                }`}
             >
               <Bot className="w-3.5 h-3.5" />
               Web App
             </button>
             <button
               onClick={() => handleNavClick('extension')}
-              className={`py-2 text-xs font-semibold rounded-lg flex items-center justify-center gap-1 ${
-                currentView === 'extension' ? 'bg-indigo-600 text-white' : 'text-slate-400'
-              }`}
+              className={`py-2 text-xs font-semibold rounded-lg flex items-center justify-center gap-1 ${currentView === 'extension' ? 'bg-indigo-600 text-white' : 'text-slate-400'
+                }`}
             >
               <ChromeIcon className="w-3.5 h-3.5 text-cyan-400" />
               Extension

@@ -375,10 +375,10 @@ export function AppProvider({ children }: { children: ReactNode }) {
               messages: c.messages.map((m) =>
                 m.id === assistantId
                   ? {
-                      ...m,
-                      error: false,
-                      content: fallbackText
-                    }
+                    ...m,
+                    error: false,
+                    content: fallbackText
+                  }
                   : m
               )
             };

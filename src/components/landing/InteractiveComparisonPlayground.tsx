@@ -83,7 +83,7 @@ Comparing **CSR vs. SSR** through latency and developer ergonomical lenses:
   return (
     <section id="compare" className="py-20 bg-slate-950/80 border-t border-slate-900 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto space-y-4 mb-12">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-400 text-xs font-semibold uppercase tracking-wider">
@@ -102,10 +102,10 @@ Comparing **CSR vs. SSR** through latency and developer ergonomical lenses:
 
         {/* Playground Container */}
         <div className="max-w-5xl mx-auto rounded-2xl bg-slate-900/90 border border-slate-800 shadow-2xl overflow-hidden backdrop-blur-xl">
-          
+
           {/* Controls Bar */}
           <div className="p-4 sm:p-6 border-b border-slate-800/80 bg-slate-950/60 space-y-4">
-            
+
             {/* Model Selectors */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
@@ -189,7 +189,7 @@ Comparing **CSR vs. SSR** through latency and developer ergonomical lenses:
 
           {/* Dual Stream Split View */}
           <div className="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-slate-800 bg-slate-950/40 min-h-[300px]">
-            
+
             {/* Column A */}
             <div className="p-5 space-y-3 flex flex-col justify-between">
               <div>

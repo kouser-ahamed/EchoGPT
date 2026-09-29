@@ -16,13 +16,13 @@ export const ExtensionSpotlightSection: React.FC = () => {
 
   return (
     <section id="extension" className="py-20 bg-gradient-to-b from-slate-950 to-slate-900 border-t border-slate-900 relative overflow-hidden">
-      
+
       {/* Background glow */}
       <div className="absolute right-0 top-1/2 -translate-y-1/2 w-96 h-96 bg-cyan-500/10 blur-[120px] pointer-events-none rounded-full" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          
+
           {/* Left Text Column */}
           <div className="lg:col-span-6 space-y-6">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-xs font-semibold uppercase tracking-wider">
@@ -100,7 +100,7 @@ export const ExtensionSpotlightSection: React.FC = () => {
           {/* Right Visual: Mock Browser Window with Docked Sidebar */}
           <div className="lg:col-span-6">
             <div className="relative rounded-2xl bg-slate-950 border border-slate-800 shadow-2xl overflow-hidden ring-1 ring-white/10">
-              
+
               {/* Chrome Browser Frame Bar */}
               <div className="p-3 bg-slate-900/90 border-b border-slate-800 flex items-center justify-between gap-3">
                 <div className="flex items-center gap-1.5">
@@ -122,7 +122,7 @@ export const ExtensionSpotlightSection: React.FC = () => {
 
               {/* Browser Body with Split: Left web page + Right EchoGPT Sidepanel */}
               <div className="grid grid-cols-12 min-h-[380px]">
-                
+
                 {/* Left: Web Content (Article) */}
                 <div className="col-span-7 p-4 sm:p-5 bg-slate-950 border-r border-slate-800 space-y-3 opacity-90">
                   <div className="text-[10px] font-bold uppercase tracking-wider text-cyan-400">

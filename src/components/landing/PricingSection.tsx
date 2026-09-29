@@ -16,7 +16,7 @@ export const PricingSection: React.FC = () => {
   return (
     <section id="pricing" className="py-20 bg-slate-950/80 border-t border-slate-900 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto space-y-4 mb-12">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-semibold uppercase tracking-wider">
@@ -37,7 +37,7 @@ export const PricingSection: React.FC = () => {
             <span className={`text-xs sm:text-sm font-semibold ${!isAnnual ? 'text-white' : 'text-slate-400'}`}>
               Monthly Billing
             </span>
-            
+
             <button
               type="button"
               onClick={() => setIsAnnual(!isAnnual)}
@@ -45,9 +45,8 @@ export const PricingSection: React.FC = () => {
               aria-label="Toggle annual billing discount"
             >
               <span
-                className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-indigo-500 shadow-lg ring-0 transition duration-200 ease-in-out ${
-                  isAnnual ? 'translate-x-7 bg-cyan-400' : 'translate-x-1'
-                }`}
+                className={`pointer-events-none inline-block h-5 w-5 transform rounded-full bg-indigo-500 shadow-lg ring-0 transition duration-200 ease-in-out ${isAnnual ? 'translate-x-7 bg-cyan-400' : 'translate-x-1'
+                  }`}
               />
             </button>
 
@@ -70,11 +69,10 @@ export const PricingSection: React.FC = () => {
             return (
               <div
                 key={tier.id}
-                className={`relative rounded-3xl p-7 sm:p-8 flex flex-col justify-between transition-all duration-300 ${
-                  tier.isPopular
+                className={`relative rounded-3xl p-7 sm:p-8 flex flex-col justify-between transition-all duration-300 ${tier.isPopular
                     ? 'bg-slate-900 border-2 border-indigo-500 shadow-2xl shadow-indigo-500/15 ring-1 ring-indigo-500/50 scale-100 lg:-translate-y-2'
                     : 'bg-slate-900/60 border border-slate-800 hover:border-slate-700 shadow-xl'
-                }`}
+                  }`}
               >
                 {/* Popular Pill */}
                 {tier.isPopular && (
@@ -109,11 +107,10 @@ export const PricingSection: React.FC = () => {
                   {/* CTA button */}
                   <button
                     onClick={() => handleSelectPlan(tier)}
-                    className={`mt-6 w-full py-3 px-4 rounded-xl text-xs sm:text-sm font-bold flex items-center justify-center gap-2 transition-all active:scale-95 shadow-md ${
-                      tier.isPopular
+                    className={`mt-6 w-full py-3 px-4 rounded-xl text-xs sm:text-sm font-bold flex items-center justify-center gap-2 transition-all active:scale-95 shadow-md ${tier.isPopular
                         ? 'bg-gradient-to-r from-indigo-600 via-purple-600 to-cyan-600 hover:brightness-110 text-white shadow-indigo-600/25'
                         : 'bg-slate-800 hover:bg-slate-700 text-white border border-slate-700'
-                    }`}
+                      }`}
                   >
                     <span>{tier.ctaText}</span>
                     <ArrowRight className="w-4 h-4" />
