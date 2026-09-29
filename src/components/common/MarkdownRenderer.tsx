@@ -18,52 +18,52 @@ export const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ content, cla
   };
 
   return (
-    <div className={`prose-dark font-sans text-xs sm:text-sm text-slate-200 leading-relaxed ${className}`}>
+    <div className={`font-sans text-xs sm:text-sm text-slate-800 dark:text-slate-200 leading-relaxed ${className}`}>
       <ReactMarkdown
         remarkPlugins={[remarkGfm]}
         components={{
           h1: ({ children }) => (
-            <h1 className="text-xl sm:text-2xl font-extrabold text-white mt-4 mb-2 tracking-tight">
+            <h1 className="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white mt-4 mb-2 tracking-tight">
               {children}
             </h1>
           ),
           h2: ({ children }) => (
-            <h2 className="text-lg sm:text-xl font-bold text-white mt-3.5 mb-2 tracking-tight">
+            <h2 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white mt-3.5 mb-2 tracking-tight">
               {children}
             </h2>
           ),
           h3: ({ children }) => (
-            <h3 className="text-sm sm:text-base font-bold text-white mt-3 mb-1.5 flex items-center gap-1.5">
+            <h3 className="text-sm sm:text-base font-bold text-slate-900 dark:text-white mt-3 mb-1.5 flex items-center gap-1.5">
               {children}
             </h3>
           ),
           h4: ({ children }) => (
-            <h4 className="text-xs sm:text-sm font-bold text-indigo-300 mt-2.5 mb-1">
+            <h4 className="text-xs sm:text-sm font-bold text-indigo-600 dark:text-indigo-400 mt-2.5 mb-1">
               {children}
             </h4>
           ),
           p: ({ children }) => (
-            <p className="leading-relaxed mb-2.5 last:mb-0 text-slate-200">
+            <p className="leading-relaxed mb-2.5 last:mb-0 text-slate-700 dark:text-slate-200">
               {children}
             </p>
           ),
           strong: ({ children }) => (
-            <strong className="font-bold text-white">
+            <strong className="font-bold text-slate-900 dark:text-white">
               {children}
             </strong>
           ),
           em: ({ children }) => (
-            <em className="italic text-slate-300">
+            <em className="italic text-slate-600 dark:text-slate-300">
               {children}
             </em>
           ),
           ul: ({ children }) => (
-            <ul className="my-2 space-y-1.5 list-disc list-outside pl-4 text-slate-300 marker:text-indigo-400">
+            <ul className="my-2 space-y-1.5 list-disc list-outside pl-4 text-slate-700 dark:text-slate-300 marker:text-indigo-600 dark:marker:text-indigo-400">
               {children}
             </ul>
           ),
           ol: ({ children }) => (
-            <ol className="my-2 space-y-1.5 list-decimal list-outside pl-4 text-slate-300 marker:text-indigo-400 marker:font-bold">
+            <ol className="my-2 space-y-1.5 list-decimal list-outside pl-4 text-slate-700 dark:text-slate-300 marker:text-indigo-600 dark:marker:text-indigo-400 marker:font-bold">
               {children}
             </ol>
           ),
@@ -73,39 +73,39 @@ export const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ content, cla
             </li>
           ),
           blockquote: ({ children }) => (
-            <blockquote className="my-3 p-3.5 rounded-xl bg-indigo-500/10 border-l-4 border-indigo-500 text-indigo-200 text-xs sm:text-sm shadow-sm space-y-1">
+            <blockquote className="my-3 p-3.5 rounded-xl bg-indigo-50 border-l-4 border-indigo-500 text-indigo-900 dark:bg-indigo-500/10 dark:text-indigo-200 text-xs sm:text-sm shadow-sm space-y-1">
               {children}
             </blockquote>
           ),
           table: ({ children }) => (
-            <div className="my-3.5 overflow-x-auto rounded-xl border border-slate-800 bg-slate-950/70 shadow-md">
+            <div className="my-3.5 overflow-x-auto rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950/70 shadow-sm">
               <table className="w-full text-left border-collapse text-xs">
                 {children}
               </table>
             </div>
           ),
           thead: ({ children }) => (
-            <thead className="bg-slate-900 border-b border-slate-800 text-slate-200 uppercase tracking-wider font-bold text-[11px]">
+            <thead className="bg-slate-100 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 text-slate-800 dark:text-slate-200 uppercase tracking-wider font-bold text-[11px]">
               {children}
             </thead>
           ),
           tbody: ({ children }) => (
-            <tbody className="divide-y divide-slate-800/70">
+            <tbody className="divide-y divide-slate-200 dark:divide-slate-800/70">
               {children}
             </tbody>
           ),
           tr: ({ children }) => (
-            <tr className="even:bg-slate-900/50 odd:bg-slate-950/40 hover:bg-slate-850 hover:bg-slate-800/40 transition-colors">
+            <tr className="even:bg-slate-50/70 odd:bg-white hover:bg-slate-100/80 dark:even:bg-slate-900/50 dark:odd:bg-slate-950/40 dark:hover:bg-slate-800/40 transition-colors">
               {children}
             </tr>
           ),
           th: ({ children }) => (
-            <th className="p-3 font-bold text-white text-left border-r border-slate-800/60 last:border-r-0 whitespace-nowrap">
+            <th className="p-3 font-bold text-slate-900 dark:text-white text-left border-r border-slate-200 dark:border-slate-800/60 last:border-r-0 whitespace-nowrap">
               {children}
             </th>
           ),
           td: ({ children }) => (
-            <td className="p-3 text-slate-300 border-r border-slate-800/40 last:border-r-0 align-top">
+            <td className="p-3 text-slate-700 dark:text-slate-300 border-r border-slate-200 dark:border-slate-800/40 last:border-r-0 align-top">
               {children}
             </td>
           ),
@@ -116,7 +116,7 @@ export const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ content, cla
             if (isInline) {
               return (
                 <code
-                  className="px-1.5 py-0.5 rounded-md bg-slate-850 bg-slate-800/90 text-cyan-300 font-mono text-[11px] sm:text-xs border border-slate-700/60"
+                  className="px-1.5 py-0.5 rounded-md bg-slate-100 text-violet-700 border border-slate-200 dark:bg-slate-800/90 dark:text-cyan-300 dark:border-slate-700/60 font-mono text-[11px] sm:text-xs"
                   {...props}
                 >
                   {children}
@@ -159,7 +159,7 @@ export const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ content, cla
               </div>
             );
           },
-          hr: () => <hr className="my-4 border-slate-800" />
+          hr: () => <hr className="my-4 border-slate-200 dark:border-slate-800" />
         }}
       >
         {content}

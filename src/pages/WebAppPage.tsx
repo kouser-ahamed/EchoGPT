@@ -82,7 +82,7 @@ export const WebAppPage: React.FC = () => {
   };
 
   return (
-    <div className="flex h-screen overflow-hidden bg-slate-950 text-slate-100 font-sans antialiased selection:bg-indigo-500/30 selection:text-white">
+    <div className="flex h-screen overflow-hidden bg-[#F8FAFC] dark:bg-slate-950 text-slate-900 dark:text-slate-100 font-sans antialiased selection:bg-indigo-500/30 selection:text-white">
       
       {/* Collapsible Left Navigation Sidebar */}
       <Sidebar
@@ -102,7 +102,7 @@ export const WebAppPage: React.FC = () => {
         />
 
         {/* Dynamic Content View Container */}
-        <div className="flex-1 flex flex-col min-h-0 overflow-hidden relative bg-slate-950">
+        <div className="flex-1 flex flex-col min-h-0 overflow-hidden relative bg-[#F8FAFC] dark:bg-slate-950">
           {renderCurrentView()}
         </div>
       </main>

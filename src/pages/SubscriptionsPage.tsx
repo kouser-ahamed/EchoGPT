@@ -491,16 +491,16 @@ export const SubscriptionsPage: React.FC = () => {
     const tag = isFree ? 'Free' : defaultTag;
 
     return (
-      <div className="flex items-center justify-between gap-2 py-1 px-1.5 rounded-lg hover:bg-slate-800/60 transition-colors">
+      <div className="flex items-center justify-between gap-2 py-1 px-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-colors">
         <div className="flex items-center gap-2 min-w-0">
-          <Check className="w-3.5 h-3.5 text-violet-400 shrink-0" />
-          <span className="text-xs text-slate-300 truncate">{cleanName}</span>
+          <Check className="w-3.5 h-3.5 text-violet-600 dark:text-violet-400 shrink-0" />
+          <span className="text-xs text-slate-700 dark:text-slate-300 truncate">{cleanName}</span>
         </div>
         <span
           className={`text-[10px] font-semibold px-1.5 py-0.5 rounded shrink-0 border ${
             isFree
-              ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20'
-              : 'bg-violet-500/10 text-violet-300 border-violet-500/20'
+              ? 'bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border-emerald-500/20'
+              : 'bg-violet-500/10 text-violet-700 dark:text-violet-300 border-violet-500/20'
           }`}
         >
           {tag}
@@ -510,24 +510,24 @@ export const SubscriptionsPage: React.FC = () => {
   };
 
   return (
-    <div className="flex-1 flex flex-col h-full overflow-y-auto bg-[#0B0F19] text-slate-100 custom-scrollbar selection:bg-violet-500/30 selection:text-white">
+    <div className="flex-1 flex flex-col h-full overflow-y-auto bg-[#F8FAFC] dark:bg-[#0B0F19] text-slate-900 dark:text-slate-100 custom-scrollbar selection:bg-violet-500/30 selection:text-white">
       {/* Layout & Container Width matching ImageStudio.tsx (max-w-7xl mx-auto px-4 sm:px-6 py-8) */}
       <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 py-8 space-y-10">
         
         {/* 1. Header Section */}
         <div className="text-center space-y-3 max-w-2xl mx-auto">
           {/* Top pill badge */}
-          <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-violet-500/10 text-violet-400 border border-violet-500/20 text-xs font-semibold uppercase tracking-wider shadow-sm">
+          <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-violet-500/10 text-violet-700 dark:text-violet-400 border border-violet-500/20 text-xs font-semibold uppercase tracking-wider shadow-xs">
             <span>Pricing</span>
           </div>
 
           {/* Title */}
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-tight">
             Affordable plans for every need
           </h1>
 
           {/* Subtitle */}
-          <p className="text-sm sm:text-base text-slate-400 max-w-xl mx-auto leading-relaxed">
+          <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400 max-w-xl mx-auto leading-relaxed">
             Want to get more out of EchoGPT Plus? Subscribe to one of our professional plans.
           </p>
         </div>
@@ -537,10 +537,10 @@ export const SubscriptionsPage: React.FC = () => {
           {plans.map((plan) => (
             <div
               key={plan.id}
-              className={`rounded-2xl border bg-slate-900/60 p-6 backdrop-blur-md shadow-xl transition-all duration-300 flex flex-col justify-between relative group ${
+              className={`rounded-2xl border p-6 backdrop-blur-md transition-all duration-300 flex flex-col justify-between relative group ${
                 plan.isRecommended
-                  ? 'border-violet-500/60 shadow-violet-950/20 ring-1 ring-violet-500/30'
-                  : 'border-slate-800/80 hover:border-violet-500/40'
+                  ? 'bg-white/95 dark:bg-slate-900/60 border-violet-600 dark:border-violet-500/60 shadow-lg shadow-violet-500/10 ring-1 ring-violet-600/30 dark:ring-violet-500/30'
+                  : 'bg-white/90 dark:bg-slate-900/60 border-slate-200/90 dark:border-slate-800/80 hover:border-violet-500/40 shadow-sm shadow-slate-200/50 dark:shadow-xl'
               }`}
             >
               {/* Top Card Content */}
@@ -548,13 +548,13 @@ export const SubscriptionsPage: React.FC = () => {
                 
                 {/* 2. Card Header: Natural flex layout preventing badge/title overlap */}
                 <div className="flex items-center justify-between gap-2 min-h-[32px]">
-                  <h3 className="text-base sm:text-lg font-bold text-white tracking-tight truncate">
+                  <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white tracking-tight truncate">
                     {plan.name}
                   </h3>
 
                   {/* Keep RECOMMENDED badge strictly on the Quarterly Plan */}
                   {plan.isRecommended && (
-                    <span className="text-[11px] font-semibold tracking-wider px-2.5 py-0.5 rounded-full bg-violet-600/20 text-violet-300 border border-violet-500/30 shrink-0 shadow-sm">
+                    <span className="text-[11px] font-semibold tracking-wider px-2.5 py-0.5 rounded-full bg-violet-50 dark:bg-violet-600/20 text-violet-700 dark:text-violet-300 border border-violet-300 dark:border-violet-500/30 shrink-0 shadow-xs">
                       RECOMMENDED
                     </span>
                   )}
@@ -562,10 +562,10 @@ export const SubscriptionsPage: React.FC = () => {
 
                 {/* 3. Pricing Display */}
                 <div>
-                  <div className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+                  <div className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
                     {plan.price}
                   </div>
-                  <div className="text-xs text-slate-400 mt-0.5 font-medium">
+                  <div className="text-xs text-slate-500 dark:text-slate-400 mt-0.5 font-medium">
                     {plan.cycle}
                   </div>
                 </div>
@@ -580,7 +580,7 @@ export const SubscriptionsPage: React.FC = () => {
                 </button>
 
                 {/* Benefit note */}
-                <p className="text-[11px] text-slate-400 leading-relaxed border-t border-slate-800/80 pt-3">
+                <p className="text-[11px] text-slate-600 dark:text-slate-400 leading-relaxed border-t border-slate-200 dark:border-slate-800/80 pt-3">
                   {plan.benefit}
                 </p>
 
@@ -589,12 +589,12 @@ export const SubscriptionsPage: React.FC = () => {
                   
                   {/* A. "Access to basic models" */}
                   <div className="space-y-2">
-                    <div className="flex items-center gap-1.5 text-xs font-bold text-slate-200">
-                      <CheckCircle2 className="w-4 h-4 text-violet-400 shrink-0" />
+                    <div className="flex items-center gap-1.5 text-xs font-bold text-slate-900 dark:text-slate-200">
+                      <CheckCircle2 className="w-4 h-4 text-violet-600 dark:text-violet-400 shrink-0" />
                       <span>Access to basic models</span>
                     </div>
 
-                    <div className="max-h-56 overflow-y-auto space-y-1.5 pr-2 custom-scrollbar rounded-xl bg-slate-950/70 p-2 border border-slate-800/80">
+                    <div className="max-h-56 overflow-y-auto space-y-1.5 pr-2 custom-scrollbar rounded-xl bg-slate-50 dark:bg-slate-950/70 p-2 border border-slate-200/90 dark:border-slate-800/80">
                       {BASIC_MODELS.map((model, idx) => (
                         <React.Fragment key={idx}>
                           {renderModelItem(model, 'Free')}
@@ -605,12 +605,12 @@ export const SubscriptionsPage: React.FC = () => {
 
                   {/* B. "Access to advanced models" */}
                   <div className="space-y-2">
-                    <div className="flex items-center gap-1.5 text-xs font-bold text-slate-200">
-                      <Sparkles className="w-4 h-4 text-violet-400 shrink-0" />
+                    <div className="flex items-center gap-1.5 text-xs font-bold text-slate-900 dark:text-slate-200">
+                      <Sparkles className="w-4 h-4 text-violet-600 dark:text-violet-400 shrink-0" />
                       <span>Access to advanced models</span>
                     </div>
 
-                    <div className="max-h-56 overflow-y-auto space-y-1.5 pr-2 custom-scrollbar rounded-xl bg-slate-950/70 p-2 border border-slate-800/80">
+                    <div className="max-h-56 overflow-y-auto space-y-1.5 pr-2 custom-scrollbar rounded-xl bg-slate-50 dark:bg-slate-950/70 p-2 border border-slate-200/90 dark:border-slate-800/80">
                       {ADVANCED_MODELS.map((model, idx) => (
                         <React.Fragment key={idx}>
                           {renderModelItem(model, 'Pro')}
@@ -625,21 +625,21 @@ export const SubscriptionsPage: React.FC = () => {
           ))}
         </div>
 
-        {/* 5. Frequently Asked Questions (Matching Dark Cards) */}
-        <div className="rounded-2xl border border-slate-800/80 bg-slate-900/60 p-6 sm:p-8 space-y-6 shadow-xl backdrop-blur-md">
+        {/* 5. Frequently Asked Questions (Matching Contrast Cards) */}
+        <div className="rounded-2xl border border-slate-200 dark:border-slate-800/80 bg-white/95 dark:bg-slate-900/60 p-6 sm:p-8 space-y-6 shadow-sm shadow-slate-200/50 dark:shadow-xl backdrop-blur-md">
           {/* FAQ Header */}
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-800/80">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-200 dark:border-slate-800/80">
             <div>
-              <h2 className="text-xl sm:text-2xl font-extrabold text-white tracking-tight">
+              <h2 className="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white tracking-tight">
                 Frequently Asked Questions
               </h2>
-              <p className="text-xs sm:text-sm text-slate-400 mt-1">
+              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-1">
                 Cannot find the answer you are looking for? Reach out to our customer support team
               </p>
             </div>
             <a
               href="mailto:appifydevs@gmail.com"
-              className="inline-flex items-center gap-1.5 text-xs font-semibold text-violet-400 hover:text-violet-300 transition-colors shrink-0"
+              className="inline-flex items-center gap-1.5 text-xs font-semibold text-violet-600 dark:text-violet-400 hover:text-violet-700 dark:hover:text-violet-300 transition-colors shrink-0"
             >
               <Mail className="w-4 h-4" />
               <span>Contact Support</span>
@@ -653,20 +653,20 @@ export const SubscriptionsPage: React.FC = () => {
               return (
                 <div
                   key={idx}
-                  className="rounded-xl border border-slate-800/60 bg-slate-900/50 overflow-hidden transition-all duration-200"
+                  className="rounded-xl border border-slate-200 dark:border-slate-800/60 bg-slate-50/70 dark:bg-slate-900/50 overflow-hidden transition-all duration-200"
                 >
                   <button
                     type="button"
                     onClick={() => toggleFaq(idx)}
-                    className="w-full px-5 py-4 flex items-center justify-between text-left text-xs sm:text-sm font-semibold text-white hover:text-violet-300 transition-colors cursor-pointer"
+                    className="w-full px-5 py-4 flex items-center justify-between text-left text-xs sm:text-sm font-semibold text-slate-900 dark:text-white hover:text-violet-700 dark:hover:text-violet-300 transition-colors cursor-pointer"
                   >
                     <span className="flex items-center gap-2.5 min-w-0 pr-2">
-                      <HelpCircle className="w-4 h-4 text-violet-400 shrink-0" />
+                      <HelpCircle className="w-4 h-4 text-violet-600 dark:text-violet-400 shrink-0" />
                       <span>{faq.question}</span>
                     </span>
-                    <span className="ml-3 shrink-0 text-slate-400 transition-transform duration-200">
+                    <span className="ml-3 shrink-0 text-slate-500 dark:text-slate-400 transition-transform duration-200">
                       {isOpen ? (
-                        <ChevronUp className="w-4 h-4 text-violet-400" />
+                        <ChevronUp className="w-4 h-4 text-violet-600 dark:text-violet-400" />
                       ) : (
                         <ChevronDown className="w-4 h-4" />
                       )}
@@ -674,7 +674,7 @@ export const SubscriptionsPage: React.FC = () => {
                   </button>
 
                   {isOpen && (
-                    <div className="px-5 pb-4 pt-1 text-xs text-slate-400 leading-relaxed border-t border-slate-800/60 animate-fadeIn">
+                    <div className="px-5 pb-4 pt-1 text-xs text-slate-600 dark:text-slate-400 leading-relaxed border-t border-slate-200 dark:border-slate-800/60 animate-fadeIn">
                       {faq.answer}
                     </div>
                   )}
@@ -685,9 +685,9 @@ export const SubscriptionsPage: React.FC = () => {
         </div>
 
         {/* Security & Guarantee Footer */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 p-4 rounded-xl bg-slate-900/40 border border-slate-800/60 text-xs text-slate-400">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 p-4 rounded-xl bg-slate-100/70 dark:bg-slate-900/40 border border-slate-200 dark:border-slate-800/60 text-xs text-slate-600 dark:text-slate-400">
           <div className="flex items-center gap-2">
-            <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
+            <ShieldCheck className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0" />
             <span>Encrypted Stripe checkout · 2000 monthly advance credits · Instant activation</span>
           </div>
           <div className="flex items-center gap-1.5 text-slate-500">
@@ -700,12 +700,12 @@ export const SubscriptionsPage: React.FC = () => {
 
       {/* Simulated Checkout Modal */}
       {checkoutModalPlan && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-md animate-fadeIn">
-          <div className="relative w-full max-w-md rounded-2xl bg-slate-900 border border-slate-800 shadow-2xl p-6 space-y-5 text-slate-100">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 dark:bg-black/75 backdrop-blur-md animate-fadeIn">
+          <div className="relative w-full max-w-md rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-2xl p-6 space-y-5 text-slate-900 dark:text-slate-100">
             {/* Modal Close */}
             <button
               onClick={() => setCheckoutModalPlan(null)}
-              className="absolute top-4 right-4 p-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800/80 transition-colors"
+              className="absolute top-4 right-4 p-2 rounded-xl text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/80 transition-colors"
               aria-label="Close checkout modal"
             >
               <X className="w-5 h-5" />
@@ -713,30 +713,30 @@ export const SubscriptionsPage: React.FC = () => {
 
             {/* Modal Header */}
             <div className="space-y-1">
-              <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-violet-600/20 text-violet-300 border border-violet-500/30">
+              <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-violet-50 dark:bg-violet-600/20 text-violet-700 dark:text-violet-300 border border-violet-200 dark:border-violet-500/30">
                 Checkout Confirmation
               </span>
-              <h3 className="text-xl font-extrabold text-white pt-1">
+              <h3 className="text-xl font-extrabold text-slate-900 dark:text-white pt-1">
                 {checkoutModalPlan.name}
               </h3>
-              <p className="text-xs text-slate-400">
+              <p className="text-xs text-slate-600 dark:text-slate-400">
                 Unlock 70+ frontier models, 2,000 monthly Advance Credits, and unlimited basic queries.
               </p>
             </div>
 
             {/* Plan Summary Box */}
-            <div className="p-4 rounded-xl bg-slate-950/70 border border-slate-800 space-y-2 text-xs">
+            <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-950/70 border border-slate-200 dark:border-slate-800 space-y-2 text-xs">
               <div className="flex items-center justify-between">
-                <span className="text-slate-400">Total Due Today:</span>
-                <span className="text-lg font-bold text-white">{checkoutModalPlan.price}</span>
+                <span className="text-slate-600 dark:text-slate-400">Total Due Today:</span>
+                <span className="text-lg font-bold text-slate-900 dark:text-white">{checkoutModalPlan.price}</span>
               </div>
-              <div className="flex items-center justify-between text-slate-400">
+              <div className="flex items-center justify-between text-slate-600 dark:text-slate-400">
                 <span>Billing Interval:</span>
-                <span className="font-medium text-slate-300">{checkoutModalPlan.cycle}</span>
+                <span className="font-medium text-slate-800 dark:text-slate-300">{checkoutModalPlan.cycle}</span>
               </div>
-              <div className="flex items-center justify-between text-slate-400">
+              <div className="flex items-center justify-between text-slate-600 dark:text-slate-400">
                 <span>Monthly Credits:</span>
-                <span className="font-semibold text-emerald-400">2,000 Advance Credits</span>
+                <span className="font-semibold text-emerald-600 dark:text-emerald-400">2,000 Advance Credits</span>
               </div>
             </div>
 
@@ -761,7 +761,7 @@ export const SubscriptionsPage: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setCheckoutModalPlan(null)}
-                className="w-full py-2 text-xs text-slate-400 hover:text-slate-200 transition-colors"
+                className="w-full py-2 text-xs text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200 transition-colors"
               >
                 Cancel and return
               </button>

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion, type Variants } from 'framer-motion';
 import { AI_MODELS } from '../../data/models';
 import { useApp } from '../../context/AppContext';
 import {
@@ -10,6 +11,28 @@ import {
   Cpu,
   Gauge
 } from 'lucide-react';
+
+const containerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1
+    }
+  }
+};
+
+const cardVariants: Variants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+      ease: [0.22, 1, 0.36, 1]
+    }
+  }
+};
 
 export const ModelsSection: React.FC = () => {
   const { navigateTo, setSelectedModelId } = useApp();
@@ -37,21 +60,21 @@ export const ModelsSection: React.FC = () => {
   };
 
   return (
-    <section id="models" className="py-20 bg-slate-950 relative border-t border-slate-900">
+    <section id="models" className="py-20 bg-slate-50/50 dark:bg-slate-950 relative border-t border-slate-200 dark:border-slate-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
 
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto space-y-4 mb-12">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-xs font-semibold uppercase tracking-wider">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-600 dark:text-cyan-400 text-xs font-semibold uppercase tracking-wider">
             Frontier AI Aggregation
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight">
             Supported Frontier{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-indigo-400 to-purple-400">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 via-indigo-600 to-purple-600 dark:from-cyan-400 dark:via-indigo-400 dark:to-purple-400">
               AI Models
             </span>
           </h2>
-          <p className="text-base sm:text-lg text-slate-400 leading-relaxed">
+          <p className="text-base sm:text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
             Access the optimal intelligence engine for every task. Never compromise between coding precision, long-context recall, or blazing generation speed.
           </p>
         </div>
@@ -65,7 +88,7 @@ export const ModelsSection: React.FC = () => {
               className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all whitespace-nowrap ${
                 selectedCategory === cat
                   ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-md shadow-indigo-600/25'
-                  : 'bg-slate-900 text-slate-400 hover:text-white hover:bg-slate-800 border border-slate-800'
+                  : 'bg-white text-slate-700 hover:text-slate-900 hover:bg-slate-100 border border-slate-200 dark:bg-slate-900 dark:text-slate-400 dark:hover:text-white dark:hover:bg-slate-800 dark:border-slate-800'
               }`}
             >
               {cat}
@@ -73,25 +96,34 @@ export const ModelsSection: React.FC = () => {
           ))}
         </div>
 
-        {/* Models Grid (Strictly 6 Cards) */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* Models Grid (Strictly 6 Cards with Stagger & Hover Physics) */}
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+        >
           {displayedModels.map((model) => (
-            <div
+            <motion.div
               key={model.id}
-              className={`relative rounded-2xl bg-slate-900/70 border ${model.borderColor} p-6 flex flex-col justify-between hover:bg-slate-900 transition-all duration-300 shadow-xl group backdrop-blur-sm`}
+              variants={cardVariants}
+              whileHover={{ y: -6, scale: 1.015, transition: { duration: 0.25 } }}
+              whileTap={{ scale: 0.98 }}
+              className={`relative rounded-2xl bg-white/95 dark:bg-slate-900/70 border border-slate-200/90 dark:border-slate-800 p-6 flex flex-col justify-between hover:border-indigo-400/60 dark:hover:border-slate-700 transition-all duration-300 shadow-sm shadow-slate-200/50 dark:shadow-xl group backdrop-blur-sm`}
             >
               <div>
                 {/* Header: Avatar, Name, Provider, Badge */}
                 <div className="flex items-start justify-between gap-3">
                   <div className="flex items-center gap-3">
-                    <div className="w-12 h-12 rounded-xl bg-slate-950 flex items-center justify-center text-2xl border border-slate-800 shadow-inner group-hover:scale-105 transition-transform duration-200">
+                    <div className="w-12 h-12 rounded-xl bg-slate-100 dark:bg-slate-950 flex items-center justify-center text-2xl border border-slate-200 dark:border-slate-800 shadow-inner group-hover:scale-105 transition-transform duration-200">
                       {model.avatar}
                     </div>
                     <div>
-                      <h3 className="text-lg font-bold text-white group-hover:text-indigo-200 transition-colors flex items-center gap-2">
+                      <h3 className="text-lg font-bold text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-200 transition-colors flex items-center gap-2">
                         <span>{model.name}</span>
                       </h3>
-                      <p className="text-xs text-slate-400 font-medium">{model.provider}</p>
+                      <p className="text-xs text-slate-500 dark:text-slate-400 font-medium">{model.provider}</p>
                     </div>
                   </div>
 
@@ -101,42 +133,42 @@ export const ModelsSection: React.FC = () => {
                 </div>
 
                 {/* Description */}
-                <p className="mt-4 text-xs sm:text-sm text-slate-300 leading-relaxed min-h-[44px]">
+                <p className="mt-4 text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed min-h-[44px]">
                   {model.description}
                 </p>
 
                 {/* Benchmark Metrics Bar */}
-                <div className="mt-5 grid grid-cols-2 gap-2 p-3 rounded-xl bg-slate-950/60 border border-slate-800/80 text-xs">
+                <div className="mt-5 grid grid-cols-2 gap-2 p-3 rounded-xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800/80 text-xs">
                   <div>
-                    <span className="text-[10px] uppercase font-semibold text-slate-400 flex items-center gap-1 mb-0.5">
-                      <Layers className="w-3 h-3 text-indigo-400" />
+                    <span className="text-[10px] uppercase font-semibold text-slate-500 dark:text-slate-400 flex items-center gap-1 mb-0.5">
+                      <Layers className="w-3 h-3 text-indigo-500 dark:text-indigo-400" />
                       Context Window
                     </span>
-                    <span className="font-bold text-white font-mono text-xs">{model.contextWindow}</span>
+                    <span className="font-bold text-slate-900 dark:text-white font-mono text-xs">{model.contextWindow}</span>
                   </div>
                   <div>
-                    <span className="text-[10px] uppercase font-semibold text-slate-400 flex items-center gap-1 mb-0.5">
-                      <Gauge className="w-3 h-3 text-emerald-400" />
+                    <span className="text-[10px] uppercase font-semibold text-slate-500 dark:text-slate-400 flex items-center gap-1 mb-0.5">
+                      <Gauge className="w-3 h-3 text-emerald-500 dark:text-emerald-400" />
                       Speed Rating
                     </span>
-                    <span className="font-bold text-emerald-400 font-mono text-xs flex items-center gap-1">
+                    <span className="font-bold text-emerald-600 dark:text-emerald-400 font-mono text-xs flex items-center gap-1">
                       <Zap className="w-3 h-3" />
                       {model.speed.split(' ')[0]}
                     </span>
                   </div>
-                  <div className="pt-2 border-t border-slate-800/60">
-                    <span className="text-[10px] uppercase font-semibold text-slate-400 flex items-center gap-1 mb-0.5">
-                      <Cpu className="w-3 h-3 text-indigo-400" />
+                  <div className="pt-2 border-t border-slate-200 dark:border-slate-800/60">
+                    <span className="text-[10px] uppercase font-semibold text-slate-500 dark:text-slate-400 flex items-center gap-1 mb-0.5">
+                      <Cpu className="w-3 h-3 text-indigo-500 dark:text-indigo-400" />
                       Reasoning Benchmark
                     </span>
-                    <span className="font-bold text-indigo-300 font-mono text-xs">{model.reasoningScore}</span>
+                    <span className="font-bold text-indigo-600 dark:text-indigo-300 font-mono text-xs">{model.reasoningScore}</span>
                   </div>
-                  <div className="pt-2 border-t border-slate-800/60">
-                    <span className="text-[10px] uppercase font-semibold text-slate-400 flex items-center gap-1 mb-0.5">
-                      <Cpu className="w-3 h-3 text-cyan-400" />
+                  <div className="pt-2 border-t border-slate-200 dark:border-slate-800/60">
+                    <span className="text-[10px] uppercase font-semibold text-slate-500 dark:text-slate-400 flex items-center gap-1 mb-0.5">
+                      <Cpu className="w-3 h-3 text-cyan-600 dark:text-cyan-400" />
                       Coding Benchmark
                     </span>
-                    <span className="font-bold text-cyan-300 font-mono text-xs">{model.codeScore}</span>
+                    <span className="font-bold text-cyan-600 dark:text-cyan-300 font-mono text-xs">{model.codeScore}</span>
                   </div>
                 </div>
 
@@ -145,9 +177,9 @@ export const ModelsSection: React.FC = () => {
                   {model.strengths.slice(0, 3).map((str, idx) => (
                     <span
                       key={idx}
-                      className="text-[11px] px-2 py-0.5 rounded-md bg-slate-800/60 text-slate-300 border border-slate-700/60 flex items-center gap-1"
+                      className="text-[11px] px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800/60 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700/60 flex items-center gap-1"
                     >
-                      <span className="w-1 h-1 rounded-full bg-indigo-400" />
+                      <span className="w-1 h-1 rounded-full bg-indigo-500 dark:bg-indigo-400" />
                       <span>{str}</span>
                     </span>
                   ))}
@@ -155,7 +187,7 @@ export const ModelsSection: React.FC = () => {
               </div>
 
               {/* Action Button */}
-              <div className="mt-6 pt-4 border-t border-slate-800/80 flex items-center gap-3">
+              <div className="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800/80 flex items-center gap-3">
                 <button
                   onClick={() => handleLaunchModel(model.id)}
                   className="flex-1 flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold transition-all shadow-md active:scale-95 group/btn"
@@ -165,19 +197,19 @@ export const ModelsSection: React.FC = () => {
                 </button>
               </div>
 
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
         {/* View All Models Hub Button */}
         <div className="mt-12 flex justify-center">
           <button
             onClick={handleExploreStore}
-            className="group relative inline-flex items-center gap-3 px-8 py-4 rounded-2xl bg-gradient-to-r from-slate-900 via-indigo-950/80 to-slate-900 border border-indigo-500/40 hover:border-indigo-400 text-white font-bold text-sm sm:text-base shadow-xl shadow-indigo-950/60 hover:shadow-indigo-500/20 hover:scale-[1.02] active:scale-98 transition-all duration-200"
+            className="group relative inline-flex items-center gap-3 px-8 py-4 rounded-2xl bg-white hover:bg-slate-50 dark:bg-gradient-to-r dark:from-slate-900 dark:via-indigo-950/80 dark:to-slate-900 border border-slate-300 dark:border-indigo-500/40 hover:border-indigo-400 text-slate-900 dark:text-white font-bold text-sm sm:text-base shadow-lg shadow-slate-200/50 dark:shadow-xl dark:shadow-indigo-950/60 hover:shadow-indigo-500/20 hover:scale-[1.02] active:scale-98 transition-all duration-200"
           >
-            <Sparkles className="w-4 h-4 text-indigo-400 group-hover:rotate-12 transition-transform" />
+            <Sparkles className="w-4 h-4 text-indigo-600 dark:text-indigo-400 group-hover:rotate-12 transition-transform" />
             <span>Explore All 100+ Models in Store &amp; Models Hub</span>
-            <ArrowRight className="w-4 h-4 text-cyan-400 group-hover:translate-x-1 transition-transform" />
+            <ArrowRight className="w-4 h-4 text-cyan-600 dark:text-cyan-400 group-hover:translate-x-1 transition-transform" />
           </button>
         </div>
 

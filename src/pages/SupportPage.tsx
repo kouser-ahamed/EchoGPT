@@ -70,20 +70,20 @@ export const SupportPage: React.FC = () => {
   ];
 
   return (
-    <div className="flex-1 flex flex-col h-full overflow-y-auto bg-slate-950 custom-scrollbar">
+    <div className="flex-1 flex flex-col h-full overflow-y-auto bg-[#F8FAFC] dark:bg-slate-950 custom-scrollbar">
       {/* 1. Outer Container & Padding matching ImageStudio.tsx (max-w-6xl mx-auto w-full px-4 sm:px-6 py-6) */}
       <div className="max-w-6xl mx-auto w-full px-4 sm:px-6 py-6 space-y-6">
         
         {/* Top Header cleanly aligned with the left edge of this container */}
         <div className="space-y-2 text-left">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-300 text-xs font-semibold uppercase tracking-wider">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-700 dark:text-cyan-300 text-xs font-semibold uppercase tracking-wider">
             <LifeBuoy className="w-3.5 h-3.5" />
             <span>HELP & COMMUNITY</span>
           </div>
-          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white tracking-tight">
+          <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
             Support & Community Hub
           </h1>
-          <p className="text-xs sm:text-sm md:text-base text-slate-400 max-w-3xl leading-relaxed">
+          <p className="text-xs sm:text-sm md:text-base text-slate-600 dark:text-slate-400 max-w-3xl leading-relaxed">
             Need assistance with model keys, extension sidepanel setup, or MCP connectors? Our engineering team is here to help.
           </p>
         </div>
@@ -92,24 +92,24 @@ export const SupportPage: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start w-full">
           
           {/* Left Column (Direct Support Ticket): col-span-7 */}
-          <div className="lg:col-span-7 rounded-2xl bg-slate-900 border border-slate-800 p-6 space-y-5 shadow-xl hover:border-slate-700/80 transition-all">
-            <div className="flex items-center gap-3 pb-3 border-b border-slate-800">
-              <div className="w-10 h-10 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 flex items-center justify-center shrink-0">
+          <div className="lg:col-span-7 rounded-2xl bg-white/90 dark:bg-slate-900 border border-slate-200/90 dark:border-slate-800 p-6 space-y-5 shadow-sm shadow-slate-200/50 dark:shadow-xl hover:border-slate-300 dark:hover:border-slate-700/80 transition-all">
+            <div className="flex items-center gap-3 pb-3 border-b border-slate-100 dark:border-slate-800">
+              <div className="w-10 h-10 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-600 dark:text-indigo-400 flex items-center justify-center shrink-0">
                 <Mail className="w-5 h-5" />
               </div>
               <div>
-                <h3 className="text-base font-bold text-white">Email Us Directly</h3>
-                <p className="text-xs text-slate-400">Direct escalation to AppifyDevs product engineers</p>
+                <h3 className="text-base font-bold text-slate-900 dark:text-white">Email Us Directly</h3>
+                <p className="text-xs text-slate-500 dark:text-slate-400">Direct escalation to AppifyDevs product engineers</p>
               </div>
             </div>
 
             {submitted ? (
               <div className="py-12 text-center space-y-3">
-                <div className="w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 mx-auto flex items-center justify-center">
+                <div className="w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-500 dark:text-emerald-400 mx-auto flex items-center justify-center">
                   <CheckCircle2 className="w-6 h-6" />
                 </div>
-                <h4 className="text-base font-bold text-white">Ticket Submitted Successfully!</h4>
-                <p className="text-xs text-slate-400 max-w-sm mx-auto leading-relaxed">
+                <h4 className="text-base font-bold text-slate-900 dark:text-white">Ticket Submitted Successfully!</h4>
+                <p className="text-xs text-slate-600 dark:text-slate-400 max-w-sm mx-auto leading-relaxed">
                   We have logged your ticket. A technical representative will respond to your registered email address within 2-4 hours.
                 </p>
                 <button
@@ -118,7 +118,7 @@ export const SupportPage: React.FC = () => {
                     setSubject('');
                     setMessage('');
                   }}
-                  className="mt-2 text-xs text-indigo-400 hover:underline font-semibold"
+                  className="mt-2 text-xs text-violet-600 dark:text-indigo-400 hover:underline font-semibold"
                 >
                   Send another message
                 </button>
@@ -126,7 +126,7 @@ export const SupportPage: React.FC = () => {
             ) : (
               <form onSubmit={handleSubmit} className="space-y-4 text-xs">
                 <div className="space-y-1.5">
-                  <label className="font-semibold text-slate-300 block">
+                  <label className="font-semibold text-slate-700 dark:text-slate-300 block">
                     Subject / Issue Category
                   </label>
                   <input
@@ -135,12 +135,12 @@ export const SupportPage: React.FC = () => {
                     placeholder="e.g. Model routing latency or Extension question"
                     value={subject}
                     onChange={(e) => setSubject(e.target.value)}
-                    className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:ring-1 focus:ring-cyan-500 placeholder:text-slate-500 transition-all"
+                    className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-800 rounded-xl px-3.5 py-2.5 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-1 focus:ring-violet-600 placeholder:text-slate-400 dark:placeholder:text-slate-500 transition-all shadow-inner"
                   />
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="font-semibold text-slate-300 block">
+                  <label className="font-semibold text-slate-700 dark:text-slate-300 block">
                     Message Details
                   </label>
                   <textarea
@@ -149,7 +149,7 @@ export const SupportPage: React.FC = () => {
                     placeholder="Please describe your question or issue in detail..."
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
-                    className="w-full bg-slate-950 border border-slate-800 rounded-xl p-3.5 text-sm text-white focus:outline-none focus:ring-1 focus:ring-cyan-500 resize-none leading-relaxed placeholder:text-slate-500 transition-all"
+                    className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-300 dark:border-slate-800 rounded-xl p-3.5 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-1 focus:ring-violet-600 resize-none leading-relaxed placeholder:text-slate-400 dark:placeholder:text-slate-500 transition-all shadow-inner"
                   />
                 </div>
 
@@ -176,7 +176,7 @@ export const SupportPage: React.FC = () => {
 
           {/* Right Column (Community Channels & Links): col-span-5 */}
           <div className="lg:col-span-5 space-y-4">
-            <h3 className="text-xs font-semibold uppercase tracking-wider text-slate-400 px-1">
+            <h3 className="text-xs font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 px-1">
               COMMUNITY CHANNELS
             </h3>
 
@@ -188,10 +188,10 @@ export const SupportPage: React.FC = () => {
                   href={s.link}
                   target="_blank"
                   rel="noreferrer"
-                  className="p-4 rounded-2xl bg-slate-900/70 hover:bg-slate-900 border border-slate-800 hover:border-slate-700 block transition-all group shadow-md"
+                  className="p-4 rounded-2xl bg-white/90 dark:bg-slate-900/70 hover:bg-white dark:hover:bg-slate-900 border border-slate-200/90 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700 block transition-all group shadow-sm shadow-slate-200/50 dark:shadow-md"
                 >
                   <div className="flex items-center justify-between mb-1">
-                    <h4 className="text-sm font-bold text-white group-hover:text-cyan-300 transition-colors">
+                    <h4 className="text-sm font-bold text-slate-900 dark:text-white group-hover:text-violet-600 dark:group-hover:text-cyan-300 transition-colors">
                       {s.name}
                     </h4>
                     <div className="flex items-center gap-1.5">
@@ -200,10 +200,10 @@ export const SupportPage: React.FC = () => {
                       >
                         {s.badge}
                       </span>
-                      <ChevronRight className="w-3.5 h-3.5 text-slate-500 group-hover:text-cyan-300 group-hover:translate-x-0.5 transition-all" />
+                      <ChevronRight className="w-3.5 h-3.5 text-slate-400 group-hover:text-violet-600 dark:group-hover:text-cyan-300 group-hover:translate-x-0.5 transition-all" />
                     </div>
                   </div>
-                  <p className="text-xs text-slate-400 leading-relaxed">
+                  <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
                     {s.desc}
                   </p>
                 </a>
@@ -211,14 +211,14 @@ export const SupportPage: React.FC = () => {
             </div>
 
             {/* Bottom "Official Resources" box with external links */}
-            <div className="p-4 rounded-2xl bg-slate-900/40 border border-slate-800/80 space-y-2 text-xs">
-              <span className="font-bold text-white block">Official Resources:</span>
-              <div className="space-y-1 text-slate-400">
+            <div className="p-4 rounded-2xl bg-white/90 dark:bg-slate-900/40 border border-slate-200 dark:border-slate-800/80 space-y-2 text-xs shadow-sm shadow-slate-200/50">
+              <span className="font-bold text-slate-900 dark:text-white block">Official Resources:</span>
+              <div className="space-y-1 text-slate-600 dark:text-slate-400">
                 <a
                   href="https://echogpt.live/"
                   target="_blank"
                   rel="noreferrer"
-                  className="flex items-center justify-between hover:text-white py-1 transition-colors group"
+                  className="flex items-center justify-between hover:text-slate-900 dark:hover:text-white py-1 transition-colors group"
                 >
                   <span>Official echogpt.live</span>
                   <ExternalLink className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
@@ -227,7 +227,7 @@ export const SupportPage: React.FC = () => {
                   href="https://chromewebstore.google.com/detail/echogpt-multi-ai-chat-sid/negimdcamohmoheiifgecbjgjepkcfhj"
                   target="_blank"
                   rel="noreferrer"
-                  className="flex items-center justify-between hover:text-white py-1 transition-colors group"
+                  className="flex items-center justify-between hover:text-slate-900 dark:hover:text-white py-1 transition-colors group"
                 >
                   <span>Chrome Extension Store Listing</span>
                   <ExternalLink className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />

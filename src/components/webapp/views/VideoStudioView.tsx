@@ -486,21 +486,21 @@ export const VideoStudioView: React.FC<VideoStudioViewProps> = ({ onOpenUpgradeM
   );
 
   return (
-    <div className="flex-1 flex flex-col h-full overflow-y-auto bg-slate-950 p-3 sm:p-6 lg:p-8 space-y-8 custom-scrollbar">
+    <div className="flex-1 flex flex-col h-full overflow-y-auto bg-[#F8FAFC] dark:bg-slate-950 text-slate-900 dark:text-slate-100 p-3 sm:p-6 lg:p-8 space-y-8 custom-scrollbar">
       {/* Top Banner (Identical layout to Image Studio) */}
       <div className="max-w-6xl mx-auto w-full space-y-5">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div className="space-y-1">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-300 text-xs font-semibold uppercase tracking-wider">
-              <Film className="w-3.5 h-3.5 text-cyan-400" />
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-700 dark:text-cyan-300 text-xs font-semibold uppercase tracking-wider">
+              <Film className="w-3.5 h-3.5 text-cyan-600 dark:text-cyan-400" />
               <span>VIDEO STUDIO PRO</span>
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse ml-1" />
-              <span className="text-[10px] text-emerald-400 font-bold">6 Motion Engines Ready</span>
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse ml-1" />
+              <span className="text-[10px] text-emerald-600 dark:text-emerald-400 font-bold">6 Motion Engines Ready</span>
             </div>
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+            <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
               AI Video Studio
             </h1>
-            <p className="text-xs sm:text-sm text-slate-400">
+            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400">
               Generate cinematic high-coherence motion videos with DeepMind Veo 3.1, Sora Turbo, and Runway Gen-3.
             </p>
           </div>
@@ -518,38 +518,38 @@ export const VideoStudioView: React.FC<VideoStudioViewProps> = ({ onOpenUpgradeM
         </div>
 
         {/* Generation Control Card */}
-        <div className="rounded-3xl bg-slate-900/90 border border-slate-800 shadow-2xl p-4 sm:p-6 space-y-5 backdrop-blur-xl relative overflow-hidden">
+        <div className="rounded-3xl bg-white/90 dark:bg-slate-900/90 border border-slate-200/90 dark:border-slate-800 shadow-xl dark:shadow-2xl p-4 sm:p-6 space-y-5 backdrop-blur-xl relative overflow-hidden">
           {/* Subtle Ambient Glow */}
           <div className="absolute -top-24 -right-24 w-96 h-96 bg-cyan-600/10 rounded-full blur-3xl pointer-events-none" />
           <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-indigo-600/10 rounded-full blur-3xl pointer-events-none" />
 
           {/* Model Selector Bar (Top of control card) */}
-          <div className="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-slate-800/80">
+          <div className="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-slate-200 dark:border-slate-800/80">
             <div className="flex items-center gap-2.5">
-              <span className="text-xs font-bold uppercase tracking-wider text-slate-400">Active Motion Engine:</span>
+              <span className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Active Motion Engine:</span>
               <button
                 onClick={() => setIsModelModalOpen(true)}
-                className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-950/80 hover:bg-slate-800 border border-slate-700/80 text-white text-xs font-bold transition-all shadow-sm group"
+                className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-950/80 dark:hover:bg-slate-800 border border-slate-300 dark:border-slate-700/80 text-slate-800 dark:text-white text-xs font-bold transition-all shadow-sm group"
                 title="Click to Choose a Video Model"
               >
                 <span className="text-base">{activeModel.avatar || '🎬'}</span>
-                <span className="font-semibold text-cyan-300 group-hover:text-white transition-colors">
+                <span className="font-semibold text-cyan-600 dark:text-cyan-300 group-hover:text-cyan-800 dark:group-hover:text-white transition-colors">
                   {activeModel.name}
                 </span>
-                <span className="text-[10px] uppercase font-bold px-1.5 py-0.5 rounded bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">
+                <span className="text-[10px] uppercase font-bold px-1.5 py-0.5 rounded bg-cyan-50 dark:bg-cyan-500/20 text-cyan-700 dark:text-cyan-300 border border-cyan-200 dark:border-cyan-500/30">
                   {activeModel.badge}
                 </span>
-                <ChevronDown className="w-3.5 h-3.5 text-slate-400 group-hover:text-white transition-transform" />
+                <ChevronDown className="w-3.5 h-3.5 text-slate-500 dark:text-slate-400 group-hover:text-slate-800 dark:group-hover:text-white transition-transform" />
               </button>
             </div>
 
             <div className="flex items-center gap-2">
-              <span className="text-[11px] text-slate-400 hidden sm:inline">
-                Speed: <span className="text-emerald-400 font-semibold">{activeModel.speed || 'Fast'}</span> • Quality: <span className="text-cyan-400 font-semibold">{activeModel.quality || '1080p'}</span>
+              <span className="text-[11px] text-slate-500 dark:text-slate-400 hidden sm:inline">
+                Speed: <span className="text-emerald-600 dark:text-emerald-400 font-semibold">{activeModel.speed || 'Fast'}</span> • Quality: <span className="text-cyan-600 dark:text-cyan-400 font-semibold">{activeModel.quality || '1080p'}</span>
               </span>
               <button
                 onClick={() => setIsModelModalOpen(true)}
-                className="text-xs text-cyan-400 hover:text-cyan-300 font-semibold underline underline-offset-4"
+                className="text-xs text-cyan-600 dark:text-cyan-400 hover:text-cyan-700 dark:hover:text-cyan-300 font-semibold underline underline-offset-4"
               >
                 Browse All Models
               </button>
@@ -559,12 +559,12 @@ export const VideoStudioView: React.FC<VideoStudioViewProps> = ({ onOpenUpgradeM
           {/* Prompt Textarea */}
           <div className="space-y-2">
             <div className="flex items-center justify-between">
-              <label className="text-xs font-bold text-slate-300 uppercase tracking-wider">
+              <label className="text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider">
                 Video Scene Prompt & Camera Direction
               </label>
               <button
                 onClick={handleEnhancePrompt}
-                className="flex items-center gap-1.5 text-xs text-cyan-400 hover:text-cyan-300 font-semibold transition-colors group"
+                className="flex items-center gap-1.5 text-xs text-cyan-600 dark:text-cyan-400 hover:text-cyan-700 dark:hover:text-cyan-300 font-semibold transition-colors group"
                 title="Enhance prompt with cinematic camera movement and lighting directives"
               >
                 <Wand2 className="w-3.5 h-3.5 group-hover:rotate-12 transition-transform" />
@@ -578,21 +578,21 @@ export const VideoStudioView: React.FC<VideoStudioViewProps> = ({ onOpenUpgradeM
                 onChange={(e) => setPrompt(e.target.value)}
                 rows={3}
                 placeholder="Describe scene action and camera movement... (e.g., A hyper-lapse drone shot soaring through a cyberpunk neon metropolis at dusk, cinematic volumetric fog, ray-traced reflections, 8k)"
-                className="w-full p-4 rounded-2xl bg-slate-950/80 border border-slate-800 text-sm text-slate-100 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 resize-none transition-all leading-relaxed"
+                className="w-full p-4 rounded-2xl bg-slate-50 dark:bg-slate-950/80 border border-slate-300 dark:border-slate-800 text-sm text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-cyan-500/40 resize-none transition-all leading-relaxed shadow-inner"
               />
-              <div className="absolute right-3 bottom-3 text-[11px] text-slate-500 pointer-events-none">
+              <div className="absolute right-3 bottom-3 text-[11px] text-slate-400 dark:text-slate-500 pointer-events-none">
                 {prompt.length} chars
               </div>
             </div>
 
             {/* Prompt Preset Chips */}
             <div className="flex items-center gap-1.5 overflow-x-auto pb-1 no-scrollbar pt-1">
-              <span className="text-[11px] text-slate-400 whitespace-nowrap mr-1 font-medium">Quick Presets:</span>
+              <span className="text-[11px] text-slate-500 dark:text-slate-400 whitespace-nowrap mr-1 font-medium">Quick Presets:</span>
               {videoPresets.map((preset) => (
                 <button
                   key={preset}
                   onClick={() => setPrompt((prev) => (prev ? `${prev}, ${preset}` : preset))}
-                  className="px-2.5 py-1 rounded-lg bg-slate-800/80 hover:bg-slate-700 text-slate-300 hover:text-white text-xs whitespace-nowrap border border-slate-700/60 transition-colors"
+                  className="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-slate-800/80 dark:hover:bg-slate-700 text-slate-700 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white text-xs whitespace-nowrap border border-slate-200 dark:border-slate-700/60 transition-colors shadow-xs"
                 >
                   {preset}
                 </button>
@@ -604,17 +604,17 @@ export const VideoStudioView: React.FC<VideoStudioViewProps> = ({ onOpenUpgradeM
           <div className="space-y-3 pt-2">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <label className="text-xs font-bold text-slate-300 uppercase tracking-wider">
+                <label className="text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider">
                   First Frame / Reference Video (Optional)
                 </label>
-                <span className="text-[10px] text-slate-400 bg-slate-800 px-2 py-0.5 rounded-full border border-slate-700">
+                <span className="text-[10px] text-slate-600 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded-full border border-slate-200 dark:border-slate-700 font-medium">
                   Image-to-Video & Video-to-Video
                 </span>
               </div>
               {referenceMedia && (
                 <button
                   onClick={handleRemoveReferenceMedia}
-                  className="text-xs text-rose-400 hover:text-rose-300 font-semibold flex items-center gap-1"
+                  className="text-xs text-rose-500 hover:text-rose-600 dark:text-rose-400 dark:hover:text-rose-300 font-semibold flex items-center gap-1"
                 >
                   <X className="w-3.5 h-3.5" />
                   <span>Remove Media</span>
@@ -639,15 +639,15 @@ export const VideoStudioView: React.FC<VideoStudioViewProps> = ({ onOpenUpgradeM
                 className={`border-2 border-dashed rounded-2xl p-4 sm:p-5 flex flex-col items-center justify-center gap-2 cursor-pointer transition-all ${
                   isDragging
                     ? 'border-cyan-500 bg-cyan-500/10'
-                    : 'border-slate-800 hover:border-slate-700 bg-slate-950/40 hover:bg-slate-950/70'
+                    : 'border-slate-300 dark:border-slate-800 hover:border-slate-400 dark:hover:border-slate-700 bg-slate-50/80 dark:bg-slate-950/40 hover:bg-slate-100 dark:hover:bg-slate-950/70'
                 }`}
               >
-                <div className="p-2.5 rounded-xl bg-slate-800 text-cyan-400 shadow-sm">
+                <div className="p-2.5 rounded-xl bg-white dark:bg-slate-800 text-cyan-600 dark:text-cyan-400 shadow-sm border border-slate-200 dark:border-transparent">
                   <Upload className="w-5 h-5" />
                 </div>
                 <div className="text-center space-y-0.5">
-                  <p className="text-xs sm:text-sm font-semibold text-slate-200">
-                    Drop your first frame image or reference video here, or <span className="text-cyan-400 underline">browse files</span>
+                  <p className="text-xs sm:text-sm font-semibold text-slate-700 dark:text-slate-200">
+                    Drop your first frame image or reference video here, or <span className="text-cyan-600 dark:text-cyan-400 underline">browse files</span>
                   </p>
                   <p className="text-[11px] text-slate-500">
                     Supports PNG, JPG, MP4, WebM (Max 100MB). Starts synthesis from the uploaded visual anchor.
@@ -655,8 +655,8 @@ export const VideoStudioView: React.FC<VideoStudioViewProps> = ({ onOpenUpgradeM
                 </div>
               </div>
             ) : (
-              <div className="p-4 rounded-2xl bg-slate-950/80 border border-slate-800 flex flex-col sm:flex-row items-center gap-4">
-                <div className="relative w-28 h-20 rounded-xl overflow-hidden bg-slate-900 border border-slate-700 shrink-0 flex items-center justify-center">
+              <div className="p-4 rounded-2xl bg-slate-50 dark:bg-slate-950/80 border border-slate-200 dark:border-slate-800 flex flex-col sm:flex-row items-center gap-4">
+                <div className="relative w-28 h-20 rounded-xl overflow-hidden bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 shrink-0 flex items-center justify-center shadow-xs">
                   {referenceMediaType === 'image' ? (
                     <img
                       src={referenceMedia}
@@ -664,14 +664,14 @@ export const VideoStudioView: React.FC<VideoStudioViewProps> = ({ onOpenUpgradeM
                       className="w-full h-full object-cover"
                     />
                   ) : (
-                    <div className="flex flex-col items-center justify-center text-cyan-400 gap-1">
+                    <div className="flex flex-col items-center justify-center text-cyan-600 dark:text-cyan-400 gap-1">
                       <Film className="w-6 h-6" />
-                      <span className="text-[9px] font-mono uppercase text-slate-400">Video Ref</span>
+                      <span className="text-[9px] font-mono uppercase text-slate-500 dark:text-slate-400">Video Ref</span>
                     </div>
                   )}
                   <button
                     onClick={handleRemoveReferenceMedia}
-                    className="absolute top-1 right-1 p-1 rounded-full bg-slate-950/80 text-white hover:text-rose-400 transition-colors"
+                    className="absolute top-1 right-1 p-1 rounded-full bg-black/70 text-white hover:text-rose-400 transition-colors"
                     title="Remove"
                   >
                     <X className="w-3.5 h-3.5" />
@@ -681,26 +681,26 @@ export const VideoStudioView: React.FC<VideoStudioViewProps> = ({ onOpenUpgradeM
                 <div className="flex-1 w-full space-y-2">
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="text-xs font-bold text-white truncate max-w-xs">
+                      <p className="text-xs font-bold text-slate-800 dark:text-white truncate max-w-xs">
                         {referenceMediaName}
                       </p>
-                      <p className="text-[11px] text-cyan-400 font-medium">
+                      <p className="text-[11px] text-cyan-600 dark:text-cyan-400 font-medium">
                         {referenceMediaType === 'image' ? 'First Frame Anchor Image' : 'Reference Video-to-Video Track'}
                       </p>
                     </div>
-                    <span className="text-xs font-mono font-bold text-cyan-400 bg-cyan-500/10 px-2 py-0.5 rounded border border-cyan-500/20">
+                    <span className="text-xs font-mono font-bold text-cyan-700 dark:text-cyan-400 bg-cyan-50 dark:bg-cyan-500/10 px-2 py-0.5 rounded border border-cyan-200 dark:border-cyan-500/20">
                       Motion Bucket: {motionStrength}
                     </span>
                   </div>
 
                   {/* Motion Bucket Slider (1 to 127) */}
                   <div className="space-y-1">
-                    <div className="flex items-center justify-between text-[11px] text-slate-400">
+                    <div className="flex items-center justify-between text-[11px] text-slate-500 dark:text-slate-400">
                       <span className="flex items-center gap-1">
-                        <Sliders className="w-3 h-3 text-cyan-400" />
+                        <Sliders className="w-3 h-3 text-cyan-600 dark:text-cyan-400" />
                         <span>Motion Bucket Intensity (1-127):</span>
                       </span>
-                      <span className="text-slate-300 font-medium">
+                      <span className="text-slate-700 dark:text-slate-300 font-medium">
                         {motionStrength < 40 ? 'Subtle Drifts' : motionStrength < 86 ? 'Balanced Motion' : 'High Dynamic Action'}
                       </span>
                     </div>
@@ -710,7 +710,7 @@ export const VideoStudioView: React.FC<VideoStudioViewProps> = ({ onOpenUpgradeM
                       max="127"
                       value={motionStrength}
                       onChange={(e) => setMotionStrength(Number(e.target.value))}
-                      className="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-cyan-400"
+                      className="w-full h-1.5 bg-slate-200 dark:bg-slate-800 rounded-lg appearance-none cursor-pointer accent-cyan-500"
                     />
                   </div>
                 </div>
@@ -719,13 +719,13 @@ export const VideoStudioView: React.FC<VideoStudioViewProps> = ({ onOpenUpgradeM
           </div>
 
           {/* Controls Bar (Aspect Ratio, Duration, Resolution, Generate CTA) */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 pt-3 border-t border-slate-800/80 items-end">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 pt-3 border-t border-slate-200 dark:border-slate-800/80 items-end">
             {/* Aspect Ratio Selector */}
             <div className="lg:col-span-5 space-y-1.5">
-              <label className="text-xs font-bold text-slate-400 uppercase tracking-wider block">
+              <label className="text-xs font-bold text-slate-700 dark:text-slate-400 uppercase tracking-wider block">
                 Camera Aspect Ratio
               </label>
-              <div className="grid grid-cols-4 gap-1.5 p-1 rounded-2xl bg-slate-950 border border-slate-800">
+              <div className="grid grid-cols-4 gap-1.5 p-1 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800">
                 {aspectRatios.map((ratio) => (
                   <button
                     key={ratio.id}
@@ -733,11 +733,11 @@ export const VideoStudioView: React.FC<VideoStudioViewProps> = ({ onOpenUpgradeM
                     className={`py-1.5 px-1 rounded-xl text-center transition-all ${
                       aspectRatio === ratio.id
                         ? 'bg-cyan-600 text-white font-bold shadow-md shadow-cyan-600/20'
-                        : 'text-slate-400 hover:text-white hover:bg-slate-800/60'
+                        : 'text-slate-600 hover:text-slate-900 hover:bg-slate-200/70 dark:text-slate-400 dark:hover:text-white dark:hover:bg-slate-800/60'
                     }`}
                   >
                     <span className="text-xs font-bold block">{ratio.label}</span>
-                    <span className="text-[9px] block text-slate-400 opacity-90">{ratio.subtitle}</span>
+                    <span className="text-[9px] block text-slate-500 dark:text-slate-400 opacity-90">{ratio.subtitle}</span>
                   </button>
                 ))}
               </div>
@@ -746,7 +746,7 @@ export const VideoStudioView: React.FC<VideoStudioViewProps> = ({ onOpenUpgradeM
             {/* Duration & Resolution */}
             <div className="lg:col-span-3 space-y-1.5">
               <div className="flex items-center justify-between">
-                <label className="text-xs font-bold text-slate-400 uppercase tracking-wider">
+                <label className="text-xs font-bold text-slate-700 dark:text-slate-400 uppercase tracking-wider">
                   Duration
                 </label>
                 <div className="flex items-center gap-1">
@@ -754,8 +754,8 @@ export const VideoStudioView: React.FC<VideoStudioViewProps> = ({ onOpenUpgradeM
                     onClick={() => setSelectedResolution('1080p')}
                     className={`px-1.5 py-0.5 rounded text-[10px] font-bold ${
                       selectedResolution === '1080p'
-                        ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/30'
-                        : 'text-slate-500 hover:text-slate-300'
+                        ? 'bg-cyan-50 dark:bg-cyan-500/20 text-cyan-700 dark:text-cyan-300 border border-cyan-200 dark:border-cyan-500/30'
+                        : 'text-slate-400 hover:text-slate-700 dark:text-slate-500 dark:hover:text-slate-300'
                     }`}
                   >
                     1080p
@@ -764,23 +764,23 @@ export const VideoStudioView: React.FC<VideoStudioViewProps> = ({ onOpenUpgradeM
                     onClick={() => setSelectedResolution('4K')}
                     className={`px-1.5 py-0.5 rounded text-[10px] font-bold ${
                       selectedResolution === '4K'
-                        ? 'bg-amber-500/20 text-amber-300 border border-amber-500/30'
-                        : 'text-slate-500 hover:text-slate-300'
+                        ? 'bg-amber-50 dark:bg-amber-500/20 text-amber-700 dark:text-amber-300 border border-amber-200 dark:border-amber-500/30'
+                        : 'text-slate-400 hover:text-slate-700 dark:text-slate-500 dark:hover:text-slate-300'
                     }`}
                   >
                     4K Pro
                   </button>
                 </div>
               </div>
-              <div className="grid grid-cols-4 gap-1 p-1 rounded-2xl bg-slate-950 border border-slate-800 text-center">
+              <div className="grid grid-cols-4 gap-1 p-1 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-center">
                 {['4s', '6s', '8s', '12s'].map((d) => (
                   <button
                     key={d}
                     onClick={() => setSelectedDuration(d)}
                     className={`py-2 rounded-xl text-xs font-bold transition-all ${
                       selectedDuration === d
-                        ? 'bg-slate-800 text-cyan-300 border border-cyan-500/40'
-                        : 'text-slate-400 hover:text-white'
+                        ? 'bg-white dark:bg-slate-800 text-cyan-600 dark:text-cyan-300 border border-cyan-300 dark:border-cyan-500/40 shadow-xs'
+                        : 'text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white'
                     }`}
                   >
                     {d}
@@ -794,16 +794,16 @@ export const VideoStudioView: React.FC<VideoStudioViewProps> = ({ onOpenUpgradeM
               <button
                 onClick={handleGenerate}
                 disabled={!prompt.trim() || isGenerating}
-                className="w-full py-3.5 px-6 rounded-2xl bg-gradient-to-r from-cyan-600 via-blue-600 to-indigo-600 hover:brightness-110 disabled:opacity-50 text-white font-extrabold text-sm flex items-center justify-center gap-2 shadow-xl shadow-cyan-600/25 active:scale-95 transition-all"
+                className="w-full py-3.5 px-6 rounded-2xl bg-gradient-to-r from-cyan-600 via-blue-600 to-indigo-600 hover:brightness-110 disabled:opacity-50 disabled:cursor-not-allowed text-white font-extrabold text-sm flex items-center justify-center gap-2 shadow-xl shadow-cyan-600/25 active:scale-95 transition-all"
               >
                 {isGenerating ? (
                   <span className="flex items-center gap-2">
-                    <Loader2 className="w-4 h-4 animate-spin" />
+                    <Loader2 className="w-4 h-4 animate-spin text-cyan-200" />
                     <span>Rendering Frames ({activeModel.name})...</span>
                   </span>
                 ) : (
                   <span className="flex items-center gap-2">
-                    <Film className="w-4 h-4 text-cyan-300" />
+                    <Film className="w-4 h-4 text-cyan-200" />
                     <span>Generate Video</span>
                   </span>
                 )}
@@ -812,31 +812,31 @@ export const VideoStudioView: React.FC<VideoStudioViewProps> = ({ onOpenUpgradeM
           </div>
 
           {/* Quick Capability Footer */}
-          <div className="flex flex-col sm:flex-row items-center justify-between text-[11px] text-slate-500 pt-2 border-t border-slate-800/80 gap-2">
+          <div className="flex flex-col sm:flex-row items-center justify-between text-[11px] text-slate-500 dark:text-slate-500 pt-2 border-t border-slate-200 dark:border-slate-800/80 gap-2">
             <span>60fps motion interpolation • Zero temporal flickering • Audio-reactive ready</span>
-            <span className="text-cyan-400 font-medium">Standard Generation: ~6-8s per scene</span>
+            <span className="text-cyan-600 dark:text-cyan-400 font-medium">Standard Generation: ~6-8s per scene</span>
           </div>
         </div>
 
         {/* Generated Videos Gallery (Responsive 4-column Grid matching Image Studio) */}
         <div className="space-y-4 pt-4">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-800/80">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-200 dark:border-slate-800/80">
             <div>
-              <h3 className="text-lg font-bold text-white flex items-center gap-2">
-                <Video className="w-5 h-5 text-cyan-400" />
+              <h3 className="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                <Video className="w-5 h-5 text-cyan-600 dark:text-cyan-400" />
                 <span>Generated Videos</span>
-                <span className="text-xs px-2 py-0.5 rounded-full bg-slate-800 text-cyan-300 border border-slate-700 font-mono">
+                <span className="text-xs px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-cyan-700 dark:text-cyan-300 border border-slate-200 dark:border-slate-700 font-mono">
                   {filteredVideos.length} {filteredVideos.length === 1 ? 'item' : 'items'}
                 </span>
               </h3>
-              <p className="text-xs text-slate-400">
+              <p className="text-xs text-slate-600 dark:text-slate-400">
                 Click any render to play in fullscreen, remix prompt directives, or export lossless MP4.
               </p>
             </div>
 
             <div className="flex items-center gap-2 flex-wrap">
               {/* Aspect Ratio Filter Tabs */}
-              <div className="flex items-center gap-1 p-1 bg-slate-900/90 border border-slate-800 rounded-xl text-xs">
+              <div className="flex items-center gap-1 p-1 bg-white/90 dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 rounded-xl text-xs shadow-sm">
                 {(['ALL', '16:9', '9:16', '1:1'] as const).map((ratio) => (
                   <button
                     key={ratio}
@@ -845,7 +845,7 @@ export const VideoStudioView: React.FC<VideoStudioViewProps> = ({ onOpenUpgradeM
                     className={`px-2.5 py-1 rounded-lg font-semibold transition-all ${
                       galleryFilter === ratio
                         ? 'bg-cyan-600 text-white shadow-sm'
-                        : 'text-slate-400 hover:text-white'
+                        : 'text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white'
                     }`}
                   >
                     {ratio === 'ALL' ? 'All' : ratio}
@@ -860,7 +860,7 @@ export const VideoStudioView: React.FC<VideoStudioViewProps> = ({ onOpenUpgradeM
                   setGalleryFilter('ALL');
                   showToast('Restored demo video creations', 'info');
                 }}
-                className="text-xs text-slate-400 hover:text-white px-2.5 py-1.5 rounded-lg bg-slate-900 border border-slate-800 flex items-center gap-1.5 transition-colors"
+                className="text-xs text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white px-2.5 py-1.5 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-center gap-1.5 transition-colors shadow-xs"
                 title="Restore default gallery items"
               >
                 <RotateCcw className="w-3.5 h-3.5" />
@@ -871,15 +871,15 @@ export const VideoStudioView: React.FC<VideoStudioViewProps> = ({ onOpenUpgradeM
 
           {/* Cards Grid or Empty State */}
           {filteredVideos.length === 0 ? (
-            <div className="p-12 text-center rounded-3xl bg-slate-900/40 border border-slate-800/80 space-y-3">
-              <Film className="w-12 h-12 text-slate-700 mx-auto stroke-1" />
-              <h3 className="text-base font-bold text-slate-300">No videos match filter</h3>
+            <div className="p-12 text-center rounded-3xl bg-white/60 dark:bg-slate-900/40 border border-slate-200 dark:border-slate-800/80 space-y-3 shadow-xs">
+              <Film className="w-12 h-12 text-slate-400 dark:text-slate-700 mx-auto stroke-1" />
+              <h3 className="text-base font-bold text-slate-800 dark:text-slate-300">No videos match filter</h3>
               <p className="text-xs text-slate-500 max-w-sm mx-auto">
                 No generated clips found for aspect ratio "{galleryFilter}". Switch to "All" or generate a new motion clip above.
               </p>
               <button
                 onClick={() => handleGalleryFilter('ALL')}
-                className="mt-2 px-4 py-2 rounded-xl bg-cyan-600/20 hover:bg-cyan-600/30 border border-cyan-500/30 text-xs font-semibold text-cyan-300 transition-colors"
+                className="mt-2 px-4 py-2 rounded-xl bg-cyan-50 hover:bg-cyan-100 dark:bg-cyan-600/20 dark:hover:bg-cyan-600/30 border border-cyan-200 dark:border-cyan-500/30 text-xs font-semibold text-cyan-700 dark:text-cyan-300 transition-colors"
               >
                 Show All Videos
               </button>
@@ -891,7 +891,7 @@ export const VideoStudioView: React.FC<VideoStudioViewProps> = ({ onOpenUpgradeM
                 {paginatedVideos.map((item) => (
                   <div
                     key={item.id}
-                    className="group relative rounded-2xl bg-slate-900/90 border border-slate-800 hover:border-cyan-500/50 overflow-hidden shadow-xl hover:shadow-2xl hover:shadow-cyan-500/10 transition-all duration-300 flex flex-col justify-between"
+                    className="group relative rounded-2xl bg-white dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 hover:border-cyan-400 dark:hover:border-cyan-500/50 overflow-hidden shadow-sm hover:shadow-md dark:shadow-xl dark:hover:shadow-2xl dark:hover:shadow-cyan-500/10 transition-all duration-300 flex flex-col justify-between"
                   >
                     {/* Visual Video Poster / Player Container */}
                     <div
@@ -899,7 +899,7 @@ export const VideoStudioView: React.FC<VideoStudioViewProps> = ({ onOpenUpgradeM
                         setPreviewVideo(item);
                         setIsPlayingPreview(true);
                       }}
-                      className="relative aspect-video overflow-hidden bg-slate-950 cursor-pointer"
+                      className="relative aspect-video overflow-hidden bg-slate-100 dark:bg-slate-950 cursor-pointer"
                     >
                       <img
                         src={item.thumbnail}
@@ -946,17 +946,17 @@ export const VideoStudioView: React.FC<VideoStudioViewProps> = ({ onOpenUpgradeM
                     {/* Card Body */}
                     <div className="p-3.5 space-y-2 flex-1 flex flex-col justify-between">
                       <div>
-                        <h4 className="text-xs sm:text-sm font-bold text-white group-hover:text-cyan-300 transition-colors line-clamp-1">
+                        <h4 className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white group-hover:text-cyan-600 dark:group-hover:text-cyan-300 transition-colors line-clamp-1">
                           {item.title}
                         </h4>
-                        <p className="text-[11px] text-slate-400 line-clamp-2 leading-relaxed mt-1">
+                        <p className="text-[11px] text-slate-600 dark:text-slate-400 line-clamp-2 leading-relaxed mt-1">
                           "{item.prompt}"
                         </p>
                       </div>
 
                       {/* Bottom Action Footer */}
-                      <div className="pt-2.5 border-t border-slate-800/80 flex items-center justify-between text-xs gap-1">
-                        <span className="text-[10px] text-slate-500 font-medium truncate">{item.timestamp}</span>
+                      <div className="pt-2.5 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between text-xs gap-1">
+                        <span className="text-[10px] text-slate-400 dark:text-slate-500 font-medium truncate">{item.timestamp}</span>
 
                         <div className="flex items-center gap-1 shrink-0">
                           <button
@@ -964,7 +964,7 @@ export const VideoStudioView: React.FC<VideoStudioViewProps> = ({ onOpenUpgradeM
                               e.stopPropagation();
                               handleRemix(item);
                             }}
-                            className="px-2 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white text-[10px] font-semibold transition-colors"
+                            className="px-2 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white text-[10px] font-semibold transition-colors border border-slate-200 dark:border-transparent"
                             title="Remix prompt directives"
                           >
                             Remix
@@ -975,7 +975,7 @@ export const VideoStudioView: React.FC<VideoStudioViewProps> = ({ onOpenUpgradeM
                               e.stopPropagation();
                               handleExportMP4(item);
                             }}
-                            className="px-2 py-1 rounded-lg bg-cyan-600/20 hover:bg-cyan-600/40 text-cyan-300 border border-cyan-500/30 text-[10px] font-bold flex items-center gap-1 transition-colors"
+                            className="px-2 py-1 rounded-lg bg-cyan-50 hover:bg-cyan-100 dark:bg-cyan-600/20 dark:hover:bg-cyan-600/40 text-cyan-700 dark:text-cyan-300 border border-cyan-200 dark:border-cyan-500/30 text-[10px] font-bold flex items-center gap-1 transition-colors"
                             title="Export MP4 video file"
                           >
                             <Download className="w-3 h-3" />
@@ -987,7 +987,7 @@ export const VideoStudioView: React.FC<VideoStudioViewProps> = ({ onOpenUpgradeM
                               e.stopPropagation();
                               handleDeleteVideo(item.id);
                             }}
-                            className="p-1 rounded-lg text-slate-500 hover:text-rose-400 hover:bg-rose-500/10 transition-colors"
+                            className="p-1 rounded-lg text-slate-400 hover:text-rose-500 hover:bg-rose-50 dark:text-slate-500 dark:hover:text-rose-400 dark:hover:bg-rose-500/10 transition-colors"
                             title="Delete video"
                           >
                             <Trash2 className="w-3.5 h-3.5" />
@@ -1001,13 +1001,13 @@ export const VideoStudioView: React.FC<VideoStudioViewProps> = ({ onOpenUpgradeM
 
               {/* Pagination Controls when total videos exceed 8 */}
               {filteredVideos.length > itemsPerPage && (
-                <div className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4 p-4 rounded-2xl bg-slate-900/60 border border-slate-800 text-xs">
-                  <div className="text-slate-400">
-                    Showing <span className="font-semibold text-white">{(currentPage - 1) * itemsPerPage + 1}</span> to{' '}
-                    <span className="font-semibold text-white">
+                <div className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4 p-4 rounded-2xl bg-white/80 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 text-xs shadow-sm">
+                  <div className="text-slate-500 dark:text-slate-400">
+                    Showing <span className="font-semibold text-slate-800 dark:text-white">{(currentPage - 1) * itemsPerPage + 1}</span> to{' '}
+                    <span className="font-semibold text-slate-800 dark:text-white">
                       {Math.min(currentPage * itemsPerPage, filteredVideos.length)}
                     </span>{' '}
-                    of <span className="font-semibold text-white">{filteredVideos.length}</span> videos
+                    of <span className="font-semibold text-slate-800 dark:text-white">{filteredVideos.length}</span> videos
                   </div>
 
                   <div className="flex items-center gap-2">
@@ -1015,7 +1015,7 @@ export const VideoStudioView: React.FC<VideoStudioViewProps> = ({ onOpenUpgradeM
                       type="button"
                       onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
                       disabled={currentPage === 1}
-                      className="px-3.5 py-1.5 rounded-xl border border-slate-800 bg-slate-900/80 text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-800 disabled:opacity-40 disabled:cursor-not-allowed transition-all flex items-center gap-1.5 shadow-sm"
+                      className="px-3.5 py-1.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/80 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 disabled:opacity-40 disabled:cursor-not-allowed transition-all flex items-center gap-1.5 shadow-sm"
                     >
                       <ChevronLeft className="w-4 h-4" />
                       <span>Previous</span>
@@ -1030,7 +1030,7 @@ export const VideoStudioView: React.FC<VideoStudioViewProps> = ({ onOpenUpgradeM
                           className={`w-7 h-7 rounded-lg text-xs font-bold transition-all ${
                             currentPage === page
                               ? 'bg-cyan-600 text-white shadow-md shadow-cyan-600/30 border border-cyan-500'
-                              : 'text-slate-400 hover:text-white hover:bg-slate-800/80'
+                              : 'text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/80'
                           }`}
                         >
                           {page}
@@ -1038,7 +1038,7 @@ export const VideoStudioView: React.FC<VideoStudioViewProps> = ({ onOpenUpgradeM
                       ))}
                     </div>
 
-                    <span className="text-slate-400 px-1 font-medium">
+                    <span className="text-slate-500 dark:text-slate-400 px-1 font-medium">
                       Page {currentPage} of {totalPages}
                     </span>
 
@@ -1046,7 +1046,7 @@ export const VideoStudioView: React.FC<VideoStudioViewProps> = ({ onOpenUpgradeM
                       type="button"
                       onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
                       disabled={currentPage === totalPages}
-                      className="px-3.5 py-1.5 rounded-xl border border-slate-800 bg-slate-900/80 text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-800 disabled:opacity-40 disabled:cursor-not-allowed transition-all flex items-center gap-1.5 shadow-sm"
+                      className="px-3.5 py-1.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/80 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 disabled:opacity-40 disabled:cursor-not-allowed transition-all flex items-center gap-1.5 shadow-sm"
                     >
                       <span>Next</span>
                       <ChevronRight className="w-4 h-4" />
@@ -1061,31 +1061,31 @@ export const VideoStudioView: React.FC<VideoStudioViewProps> = ({ onOpenUpgradeM
 
       {/* CHOOSE A VIDEO MODEL MODAL */}
       {isModelModalOpen && (
-        <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 animate-in fade-in duration-200">
-          <div className="w-full max-w-3xl rounded-3xl bg-slate-900 border border-slate-800 shadow-2xl overflow-hidden flex flex-col max-h-[85vh]">
+        <div className="fixed inset-0 z-50 bg-slate-900/60 dark:bg-black/80 backdrop-blur-md flex items-center justify-center p-4 animate-in fade-in duration-200">
+          <div className="w-full max-w-3xl rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden flex flex-col max-h-[85vh]">
             {/* Modal Header */}
-            <div className="p-5 border-b border-slate-800 flex items-center justify-between bg-slate-950/60">
+            <div className="p-5 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between bg-slate-50 dark:bg-slate-950/60">
               <div className="flex items-center gap-2.5">
-                <div className="p-2 rounded-xl bg-cyan-500/10 text-cyan-400">
+                <div className="p-2 rounded-xl bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 border border-cyan-500/20">
                   <Film className="w-5 h-5" />
                 </div>
                 <div>
-                  <h3 className="text-lg font-bold text-white">Choose a Video Motion Engine</h3>
-                  <p className="text-xs text-slate-400">
+                  <h3 className="text-lg font-bold text-slate-900 dark:text-white">Choose a Video Motion Engine</h3>
+                  <p className="text-xs text-slate-500 dark:text-slate-400">
                     Select from 6 frontier motion models tailored for cinematic fidelity, physics, and speed.
                   </p>
                 </div>
               </div>
               <button
                 onClick={() => setIsModelModalOpen(false)}
-                className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
+                className="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
 
             {/* Search & Tier Filter Bar */}
-            <div className="p-4 border-b border-slate-800/80 bg-slate-950/40 flex flex-col sm:flex-row gap-3 items-center justify-between">
+            <div className="p-4 border-b border-slate-200 dark:border-slate-800/80 bg-slate-50/70 dark:bg-slate-950/40 flex flex-col sm:flex-row gap-3 items-center justify-between">
               <div className="relative w-full sm:w-72">
                 <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
                 <input
@@ -1093,7 +1093,7 @@ export const VideoStudioView: React.FC<VideoStudioViewProps> = ({ onOpenUpgradeM
                   placeholder="Search engines (e.g. Veo, Sora, Kling)..."
                   value={modelSearch}
                   onChange={(e) => setModelSearch(e.target.value)}
-                  className="w-full pl-9 pr-3 py-2 bg-slate-900 border border-slate-700/80 rounded-xl text-xs text-white placeholder:text-slate-500 focus:outline-none focus:ring-1 focus:ring-cyan-500"
+                  className="w-full pl-9 pr-3 py-2 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700/80 rounded-xl text-xs text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:ring-1 focus:ring-cyan-500"
                 />
               </div>
 
@@ -1106,7 +1106,7 @@ export const VideoStudioView: React.FC<VideoStudioViewProps> = ({ onOpenUpgradeM
                     className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-colors whitespace-nowrap ${
                       modelTierFilter === tier
                         ? 'bg-cyan-600 text-white shadow-sm'
-                        : 'bg-slate-800/60 text-slate-400 hover:text-white'
+                        : 'bg-white dark:bg-slate-800/60 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white border border-slate-200 dark:border-transparent'
                     }`}
                   >
                     {tier}
@@ -1131,42 +1131,42 @@ export const VideoStudioView: React.FC<VideoStudioViewProps> = ({ onOpenUpgradeM
                       }}
                       className={`p-4 rounded-2xl border cursor-pointer transition-all flex flex-col justify-between ${
                         isSelected
-                          ? 'bg-cyan-950/30 border-cyan-500 ring-1 ring-cyan-500/50 shadow-lg shadow-cyan-500/10'
-                          : 'bg-slate-950/70 border-slate-800/80 hover:border-slate-700 hover:bg-slate-950'
+                          ? 'bg-cyan-50/80 dark:bg-cyan-950/30 border-cyan-400 dark:border-cyan-500 ring-1 ring-cyan-400 dark:ring-cyan-500/50 shadow-md dark:shadow-lg dark:shadow-cyan-500/10'
+                          : 'bg-slate-50/70 dark:bg-slate-950/70 border-slate-200 dark:border-slate-800/80 hover:border-slate-300 dark:hover:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-950'
                       }`}
                     >
                       <div className="space-y-2">
                         <div className="flex items-start justify-between gap-2">
                           <div className="flex items-center gap-2.5">
-                            <span className="text-2xl p-2 rounded-xl bg-slate-900 border border-slate-800 shadow-inner">
+                            <span className="text-2xl p-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-inner">
                               {m.avatar || '🎬'}
                             </span>
                             <div>
-                              <h4 className="text-sm font-bold text-white flex items-center gap-1.5">
+                              <h4 className="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-1.5">
                                 <span>{m.name}</span>
                                 {isSelected && (
-                                  <Check className="w-3.5 h-3.5 text-cyan-400 stroke-[3]" />
+                                  <Check className="w-3.5 h-3.5 text-cyan-600 dark:text-cyan-400 stroke-[3]" />
                                 )}
                               </h4>
-                              <p className="text-[11px] text-slate-400 font-medium">{m.provider}</p>
+                              <p className="text-[11px] text-slate-500 dark:text-slate-400 font-medium">{m.provider}</p>
                             </div>
                           </div>
 
-                          <span className="text-[10px] uppercase font-bold px-2 py-0.5 rounded-full bg-slate-800 text-cyan-300 border border-slate-700">
+                          <span className="text-[10px] uppercase font-bold px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-cyan-700 dark:text-cyan-300 border border-slate-200 dark:border-slate-700">
                             {m.badge}
                           </span>
                         </div>
 
-                        <p className="text-xs text-slate-300 leading-relaxed min-h-[36px]">
+                        <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed min-h-[36px]">
                           {m.description}
                         </p>
                       </div>
 
-                      <div className="pt-3 mt-3 border-t border-slate-800/60 flex items-center justify-between text-[11px]">
-                        <span className="text-slate-400">
-                          Speed: <strong className="text-emerald-400">{m.speed || 'Fast'}</strong>
+                      <div className="pt-3 mt-3 border-t border-slate-200 dark:border-slate-800/60 flex items-center justify-between text-[11px]">
+                        <span className="text-slate-500 dark:text-slate-400">
+                          Speed: <strong className="text-emerald-600 dark:text-emerald-400">{m.speed || 'Fast'}</strong>
                         </span>
-                        <span className="text-cyan-400 font-semibold font-mono">
+                        <span className="text-cyan-600 dark:text-cyan-400 font-semibold font-mono">
                           {m.quality || '1080p'}
                         </span>
                       </div>
@@ -1177,11 +1177,11 @@ export const VideoStudioView: React.FC<VideoStudioViewProps> = ({ onOpenUpgradeM
             </div>
 
             {/* Modal Footer */}
-            <div className="p-4 border-t border-slate-800 bg-slate-950/80 flex items-center justify-between text-xs text-slate-400">
+            <div className="p-4 border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950/80 flex items-center justify-between text-xs text-slate-600 dark:text-slate-400">
               <span>All 6 models support 60fps frame synthesis & camera directives.</span>
               <button
                 onClick={() => setIsModelModalOpen(false)}
-                className="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-semibold transition-colors"
+                className="px-4 py-2 rounded-xl bg-slate-200 hover:bg-slate-300 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-800 dark:text-white font-semibold transition-colors"
               >
                 Close
               </button>
@@ -1192,15 +1192,15 @@ export const VideoStudioView: React.FC<VideoStudioViewProps> = ({ onOpenUpgradeM
 
       {/* FULLSCREEN VIDEO PLAYER LIGHTBOX MODAL */}
       {previewVideo && (
-        <div className="fixed inset-0 z-50 bg-black/90 backdrop-blur-xl flex items-center justify-center p-3 sm:p-6 animate-in fade-in duration-200">
-          <div className="w-full max-w-5xl rounded-3xl bg-slate-900 border border-slate-800 shadow-2xl overflow-hidden flex flex-col max-h-[92vh]">
+        <div className="fixed inset-0 z-50 bg-slate-900/80 dark:bg-black/90 backdrop-blur-xl flex items-center justify-center p-3 sm:p-6 animate-in fade-in duration-200">
+          <div className="w-full max-w-5xl rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden flex flex-col max-h-[92vh]">
             {/* Lightbox Header */}
-            <div className="p-4 border-b border-slate-800 flex items-center justify-between bg-slate-950">
+            <div className="p-4 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between bg-slate-50 dark:bg-slate-950">
               <div className="flex items-center gap-2">
-                <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">
+                <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-cyan-50 dark:bg-cyan-500/20 text-cyan-700 dark:text-cyan-300 border border-cyan-200 dark:border-cyan-500/30">
                   {previewVideo.model}
                 </span>
-                <h4 className="text-sm font-bold text-white truncate max-w-md">
+                <h4 className="text-sm font-bold text-slate-900 dark:text-white truncate max-w-md">
                   {previewVideo.title}
                 </h4>
               </div>
@@ -1208,7 +1208,7 @@ export const VideoStudioView: React.FC<VideoStudioViewProps> = ({ onOpenUpgradeM
               <div className="flex items-center gap-2">
                 <button
                   onClick={() => handleExportMP4(previewVideo)}
-                  className="px-3 py-1.5 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white text-xs font-bold flex items-center gap-1.5 transition-colors"
+                  className="px-3 py-1.5 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white text-xs font-bold flex items-center gap-1.5 transition-colors shadow-sm"
                 >
                   <Download className="w-3.5 h-3.5" />
                   <span>Download MP4</span>
@@ -1216,7 +1216,7 @@ export const VideoStudioView: React.FC<VideoStudioViewProps> = ({ onOpenUpgradeM
 
                 <button
                   onClick={() => setPreviewVideo(null)}
-                  className="p-1.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
+                  className="p-1.5 rounded-xl text-slate-400 hover:text-slate-700 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
                 >
                   <X className="w-5 h-5" />
                 </button>
@@ -1278,12 +1278,12 @@ export const VideoStudioView: React.FC<VideoStudioViewProps> = ({ onOpenUpgradeM
             </div>
 
             {/* Video Details Drawer */}
-            <div className="p-4 sm:p-5 bg-slate-950 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="p-4 sm:p-5 bg-slate-50 dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
               <div className="space-y-1 w-full sm:w-auto flex-1">
-                <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
+                <p className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
                   Generation Directives:
                 </p>
-                <p className="text-xs text-slate-200 leading-relaxed font-sans select-text">
+                <p className="text-xs text-slate-800 dark:text-slate-200 leading-relaxed font-sans select-text bg-white dark:bg-slate-900 p-2.5 rounded-xl border border-slate-200 dark:border-slate-800">
                   "{previewVideo.prompt}"
                 </p>
               </div>
@@ -1294,7 +1294,7 @@ export const VideoStudioView: React.FC<VideoStudioViewProps> = ({ onOpenUpgradeM
                     navigator.clipboard.writeText(previewVideo.prompt);
                     showToast('Copied video prompt to clipboard', 'success');
                   }}
-                  className="px-3 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white text-xs font-semibold flex items-center gap-1.5 transition-colors border border-slate-700"
+                  className="px-3 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white text-xs font-semibold flex items-center gap-1.5 transition-colors border border-slate-300 dark:border-slate-700"
                 >
                   <Copy className="w-3.5 h-3.5" />
                   <span>Copy Prompt</span>

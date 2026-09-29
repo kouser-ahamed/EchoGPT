@@ -181,36 +181,36 @@ export const HistoryView: React.FC<HistoryViewProps> = ({ onSelectConversation }
   };
 
   return (
-    <div className="flex-1 flex flex-col h-full overflow-y-auto bg-slate-950 p-3 sm:p-6 lg:p-8 space-y-8 custom-scrollbar">
+    <div className="flex-1 flex flex-col h-full overflow-y-auto bg-[#F8FAFC] dark:bg-slate-950 text-slate-900 dark:text-slate-100 p-3 sm:p-6 lg:p-8 space-y-8 custom-scrollbar">
       {/* Main Container Aligned with Image Studio (max-w-6xl mx-auto w-full) */}
       <div className="max-w-6xl mx-auto w-full space-y-6">
         
         {/* Header Section */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div className="space-y-1">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-300 text-xs font-semibold uppercase tracking-wider">
-              <History className="w-3.5 h-3.5 text-indigo-400" />
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-700 dark:text-indigo-300 text-xs font-semibold uppercase tracking-wider">
+              <History className="w-3.5 h-3.5 text-indigo-600 dark:text-indigo-400" />
               <span>Workspace Archives</span>
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse ml-1" />
-              <span className="text-[10px] text-emerald-400 font-bold">{conversations.length} Sessions Saved</span>
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 dark:bg-emerald-400 animate-pulse ml-1" />
+              <span className="text-[10px] text-emerald-600 dark:text-emerald-400 font-bold">{conversations.length} Sessions Saved</span>
             </div>
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+            <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
               My Chat History & Session Management
             </h1>
-            <p className="text-xs sm:text-sm text-slate-400">
+            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400">
               Browse, search, export, and manage your past AI queries, multi-model outputs, and project transcripts.
             </p>
           </div>
 
           <div className="flex items-center gap-3 self-start sm:self-auto shrink-0">
-            <span className="text-xs text-slate-400 font-mono bg-slate-900/90 px-3.5 py-2 rounded-xl border border-slate-800 shadow-sm">
-              Showing <strong className="text-white">{filtered.length}</strong> of <strong className="text-white">{conversations.length}</strong> records
+            <span className="text-xs text-slate-600 dark:text-slate-400 font-mono bg-white dark:bg-slate-900/90 px-3.5 py-2 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm">
+              Showing <strong className="text-slate-900 dark:text-white">{filtered.length}</strong> of <strong className="text-slate-900 dark:text-white">{conversations.length}</strong> records
             </span>
           </div>
         </div>
 
         {/* Filter and Search Bar */}
-        <div className="relative z-30 p-3.5 sm:p-4 rounded-2xl bg-slate-900/90 border border-slate-800 flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-3 shadow-xl backdrop-blur-xl overflow-visible">
+        <div className="relative z-30 p-3.5 sm:p-4 rounded-2xl bg-white/90 dark:bg-slate-900/90 border border-slate-200/90 dark:border-slate-800 flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-3 shadow-sm dark:shadow-xl backdrop-blur-xl overflow-visible">
           {/* Search Input */}
           <div className="relative flex-1">
             <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
@@ -219,7 +219,7 @@ export const HistoryView: React.FC<HistoryViewProps> = ({ onSelectConversation }
               placeholder="Search conversations by title, prompt keywords, or category..."
               value={search}
               onChange={(e) => handleSearchChange(e.target.value)}
-              className="w-full pl-10 pr-4 py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-xs sm:text-sm text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-inner"
+              className="w-full pl-10 pr-4 py-2.5 bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl text-xs sm:text-sm text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-sm"
             />
           </div>
 
@@ -230,15 +230,15 @@ export const HistoryView: React.FC<HistoryViewProps> = ({ onSelectConversation }
               <button
                 type="button"
                 onClick={() => setIsModelDropdownOpen(!isModelDropdownOpen)}
-                className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-700/80 hover:border-slate-600 text-xs text-white font-semibold flex items-center justify-between gap-2 transition-all shadow-inner group"
+                className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700/80 hover:border-slate-300 dark:hover:border-slate-600 text-xs text-slate-900 dark:text-white font-semibold flex items-center justify-between gap-2 transition-all shadow-sm group"
               >
                 <div className="flex items-center gap-2 truncate">
-                  <Bot className="w-3.5 h-3.5 text-indigo-400 shrink-0" />
-                  <span className="text-slate-400 font-normal">Model:</span>
-                  <span className="truncate font-bold text-white">{selectedModelFilter}</span>
+                  <Bot className="w-3.5 h-3.5 text-indigo-600 dark:text-indigo-400 shrink-0" />
+                  <span className="text-slate-500 dark:text-slate-400 font-normal">Model:</span>
+                  <span className="truncate font-bold text-slate-900 dark:text-white">{selectedModelFilter}</span>
                 </div>
                 <ChevronDown
-                  className={`w-3.5 h-3.5 text-slate-400 group-hover:text-white transition-transform shrink-0 ${
+                  className={`w-3.5 h-3.5 text-slate-400 group-hover:text-slate-700 dark:group-hover:text-white transition-transform shrink-0 ${
                     isModelDropdownOpen ? 'rotate-180' : ''
                   }`}
                 />
@@ -250,10 +250,10 @@ export const HistoryView: React.FC<HistoryViewProps> = ({ onSelectConversation }
                     className="fixed inset-0 z-[998]"
                     onClick={() => setIsModelDropdownOpen(false)}
                   />
-                  <div className="absolute top-full right-0 mt-2 w-full sm:w-64 max-h-64 overflow-y-auto rounded-2xl bg-slate-900 border border-slate-700/60 shadow-2xl p-1.5 z-[999] custom-scrollbar animate-in fade-in">
-                    <div className="px-3 py-1.5 text-[10px] uppercase font-bold text-slate-400 tracking-wider border-b border-slate-800/80 mb-1 flex items-center justify-between">
+                  <div className="absolute top-full right-0 mt-2 w-full sm:w-64 max-h-64 overflow-y-auto rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700/60 shadow-2xl p-1.5 z-[999] custom-scrollbar animate-in fade-in">
+                    <div className="px-3 py-1.5 text-[10px] uppercase font-bold text-slate-500 dark:text-slate-400 tracking-wider border-b border-slate-100 dark:border-slate-800/80 mb-1 flex items-center justify-between">
                       <span>All Platform Models</span>
-                      <Filter className="w-3 h-3 text-indigo-400" />
+                      <Filter className="w-3 h-3 text-indigo-600 dark:text-indigo-400" />
                     </div>
                     {HISTORY_FILTER_MODELS.map((modelName) => {
                       const isSelected = selectedModelFilter === modelName;
@@ -265,7 +265,7 @@ export const HistoryView: React.FC<HistoryViewProps> = ({ onSelectConversation }
                           className={`w-full px-3 py-2 rounded-xl text-xs flex items-center justify-between text-left transition-colors ${
                             isSelected
                               ? 'bg-indigo-600 text-white font-bold shadow-sm'
-                              : 'text-slate-300 hover:text-white hover:bg-slate-800/70 font-medium'
+                              : 'text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/70 font-medium'
                           }`}
                         >
                           <span className="truncate">{modelName}</span>
@@ -288,7 +288,7 @@ export const HistoryView: React.FC<HistoryViewProps> = ({ onSelectConversation }
                   className={`px-3 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-colors border ${
                     selectedCategory === cat
                       ? 'bg-indigo-600 text-white border-indigo-500 shadow-sm'
-                      : 'bg-slate-950 text-slate-400 hover:text-white border-slate-800 hover:border-slate-700'
+                      : 'bg-slate-50 dark:bg-slate-950 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700 shadow-sm'
                   }`}
                 >
                   {cat}
@@ -301,17 +301,17 @@ export const HistoryView: React.FC<HistoryViewProps> = ({ onSelectConversation }
         {/* History Item Cards List */}
         <div ref={listTopRef} className="space-y-3.5 scroll-mt-6">
           {filtered.length === 0 ? (
-            <div className="py-20 text-center rounded-3xl border border-dashed border-slate-800 bg-slate-900/30 space-y-3 backdrop-blur-sm">
-              <div className="w-12 h-12 rounded-2xl bg-slate-950 border border-slate-800 flex items-center justify-center mx-auto text-slate-500">
+            <div className="py-20 text-center rounded-3xl border border-dashed border-slate-300 dark:border-slate-800 bg-white/50 dark:bg-slate-900/30 space-y-3 backdrop-blur-sm">
+              <div className="w-12 h-12 rounded-2xl bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 flex items-center justify-center mx-auto text-slate-400 dark:text-slate-500 shadow-sm">
                 <MessageSquare className="w-6 h-6" />
               </div>
-              <p className="text-sm sm:text-base font-bold text-slate-200">No matching conversations found</p>
+              <p className="text-sm sm:text-base font-bold text-slate-800 dark:text-slate-200">No matching conversations found</p>
               <p className="text-xs text-slate-500 max-w-sm mx-auto">
-                No sessions match model <span className="text-indigo-400 font-semibold">"{selectedModelFilter}"</span> or current search terms. Try clearing filters or selecting another model.
+                No sessions match model <span className="text-indigo-600 dark:text-indigo-400 font-semibold">"{selectedModelFilter}"</span> or current search terms. Try clearing filters or selecting another model.
               </p>
               <button
                 onClick={handleResetFilters}
-                className="mt-2 px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-300 transition-colors"
+                className="mt-2 px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-xs font-semibold text-slate-700 dark:text-slate-300 transition-colors border border-slate-200 dark:border-slate-700/60"
               >
                 Reset All Filters
               </button>
@@ -324,38 +324,38 @@ export const HistoryView: React.FC<HistoryViewProps> = ({ onSelectConversation }
                 <div
                   key={c.id}
                   onClick={() => handleOpenChat(c.id)}
-                  className="w-full p-4 sm:p-5 rounded-2xl bg-slate-900/80 hover:bg-slate-900 border border-slate-800 hover:border-slate-700/80 transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-4 cursor-pointer group shadow-xl backdrop-blur-xl"
+                  className="w-full p-4 sm:p-5 rounded-2xl bg-white/90 dark:bg-slate-900/80 hover:bg-white dark:hover:bg-slate-900 border border-slate-200/90 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700/80 transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-4 cursor-pointer group shadow-sm dark:shadow-xl backdrop-blur-xl"
                 >
                   {/* Left: Icon, Title, and Tags */}
                   <div className="flex items-start gap-3.5 min-w-0 flex-1">
-                    <span className="text-2xl p-2.5 rounded-2xl bg-slate-950 border border-slate-800 shrink-0 shadow-inner group-hover:border-slate-700 transition-colors">
+                    <span className="text-2xl p-2.5 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 shrink-0 shadow-inner group-hover:border-slate-300 dark:group-hover:border-slate-700 transition-colors">
                       {modelInfo.avatar}
                     </span>
 
                     <div className="min-w-0 flex-1">
                       <div className="flex items-center gap-2 flex-wrap">
-                        <h4 className="text-sm sm:text-base font-bold text-white group-hover:text-indigo-300 transition-colors truncate">
+                        <h4 className="text-sm sm:text-base font-bold text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors truncate">
                           {c.title}
                         </h4>
                         {c.pinned && (
-                          <span className="p-0.5 rounded-md bg-amber-400/20 text-amber-300 text-[10px] font-bold px-2 border border-amber-400/30 flex items-center gap-1">
+                          <span className="p-0.5 rounded-md bg-amber-50 dark:bg-amber-400/20 text-amber-700 dark:text-amber-300 text-[10px] font-bold px-2 border border-amber-200 dark:border-amber-400/30 flex items-center gap-1">
                             <Pin className="w-2.5 h-2.5" />
                             <span>Pinned</span>
                           </span>
                         )}
                       </div>
 
-                      <div className="text-xs text-slate-400 mt-1 flex flex-wrap items-center gap-2">
-                        <span className="font-semibold text-slate-300">{modelInfo.name}</span>
-                        <span className="text-slate-600">•</span>
-                        <span className="px-2 py-0.5 rounded-md bg-slate-950 border border-slate-800 text-[11px] text-slate-400">
+                      <div className="text-xs text-slate-500 dark:text-slate-400 mt-1 flex flex-wrap items-center gap-2">
+                        <span className="font-semibold text-slate-700 dark:text-slate-300">{modelInfo.name}</span>
+                        <span className="text-slate-300 dark:text-slate-600">•</span>
+                        <span className="px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-[11px] text-slate-600 dark:text-slate-400">
                           {c.category}
                         </span>
-                        <span className="text-slate-600">•</span>
+                        <span className="text-slate-300 dark:text-slate-600">•</span>
                         <span className="text-slate-500 font-mono text-[11px]">
                           {c.messages.length} message{c.messages.length === 1 ? '' : 's'}
                         </span>
-                        <span className="text-slate-600">•</span>
+                        <span className="text-slate-300 dark:text-slate-600">•</span>
                         <span className="text-[11px] text-slate-500 font-mono">
                           {c.timestamp}
                         </span>
@@ -365,14 +365,14 @@ export const HistoryView: React.FC<HistoryViewProps> = ({ onSelectConversation }
 
                   {/* Right: Actions */}
                   <div
-                    className="flex items-center gap-2 self-end sm:self-auto shrink-0 pt-2 sm:pt-0 border-t sm:border-t-0 border-slate-800/80 w-full sm:w-auto justify-end"
+                    className="flex items-center gap-2 self-end sm:self-auto shrink-0 pt-2 sm:pt-0 border-t sm:border-t-0 border-slate-100 dark:border-slate-800/80 w-full sm:w-auto justify-end"
                     onClick={(e) => e.stopPropagation()}
                   >
                     <button
                       type="button"
                       onClick={() => togglePinConversation(c.id)}
-                      className={`p-2 rounded-xl border border-slate-800 hover:bg-slate-800 transition-colors ${
-                        c.pinned ? 'text-amber-400 bg-amber-400/10' : 'text-slate-400 hover:text-white'
+                      className={`p-2 rounded-xl border border-slate-200 dark:border-slate-800 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors ${
+                        c.pinned ? 'text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-400/10' : 'text-slate-400 hover:text-slate-700 dark:hover:text-white'
                       }`}
                       title={c.pinned ? 'Unpin' : 'Pin to top'}
                     >
@@ -382,7 +382,7 @@ export const HistoryView: React.FC<HistoryViewProps> = ({ onSelectConversation }
                     <button
                       type="button"
                       onClick={() => handleExportOne(c)}
-                      className="p-2 rounded-xl border border-slate-800 text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
+                      className="p-2 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-400 hover:text-slate-700 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
                       title="Export Markdown"
                     >
                       <Download className="w-3.5 h-3.5" />
@@ -391,7 +391,7 @@ export const HistoryView: React.FC<HistoryViewProps> = ({ onSelectConversation }
                     <button
                       type="button"
                       onClick={(e) => handleDeleteConversation(c.id, e)}
-                      className="p-2 rounded-xl border border-slate-800 text-slate-400 hover:text-rose-400 hover:bg-slate-800 transition-colors"
+                      className="p-2 rounded-xl border border-slate-200 dark:border-slate-800 text-slate-400 hover:text-rose-500 hover:bg-rose-50 dark:hover:bg-slate-800 transition-colors"
                       title="Delete conversation"
                     >
                       <Trash2 className="w-3.5 h-3.5" />
@@ -413,13 +413,13 @@ export const HistoryView: React.FC<HistoryViewProps> = ({ onSelectConversation }
 
           {/* History Pagination Bar (Strictly 10 items per page) */}
           {filtered.length > itemsPerPage && (
-            <div className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4 p-4 rounded-2xl bg-slate-900/60 border border-slate-800 text-xs">
-              <div className="text-slate-400">
-                Showing <span className="font-semibold text-white">{(currentPage - 1) * itemsPerPage + 1}</span> to{' '}
-                <span className="font-semibold text-white">
+            <div className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4 p-4 rounded-2xl bg-white/90 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 text-xs shadow-sm">
+              <div className="text-slate-600 dark:text-slate-400">
+                Showing <span className="font-semibold text-slate-900 dark:text-white">{(currentPage - 1) * itemsPerPage + 1}</span> to{' '}
+                <span className="font-semibold text-slate-900 dark:text-white">
                   {Math.min(currentPage * itemsPerPage, filtered.length)}
                 </span>{' '}
-                of <span className="font-semibold text-white">{filtered.length}</span> conversations
+                of <span className="font-semibold text-slate-900 dark:text-white">{filtered.length}</span> conversations
               </div>
 
               <div className="flex items-center gap-2">
@@ -427,7 +427,7 @@ export const HistoryView: React.FC<HistoryViewProps> = ({ onSelectConversation }
                   type="button"
                   onClick={() => handlePageChange(Math.max(1, currentPage - 1))}
                   disabled={currentPage === 1}
-                  className="px-3.5 py-1.5 rounded-xl border border-slate-800 bg-slate-900/80 text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-800 disabled:opacity-40 disabled:cursor-not-allowed transition-all flex items-center gap-1.5 shadow-sm"
+                  className="px-3.5 py-1.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/80 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 disabled:opacity-40 disabled:cursor-not-allowed transition-all flex items-center gap-1.5 shadow-sm"
                 >
                   <ChevronLeft className="w-4 h-4" />
                   <span>Previous</span>
@@ -442,7 +442,7 @@ export const HistoryView: React.FC<HistoryViewProps> = ({ onSelectConversation }
                       className={`w-7 h-7 rounded-lg text-xs font-bold transition-all ${
                         currentPage === page
                           ? 'bg-indigo-600 text-white shadow-md shadow-indigo-600/30 border border-indigo-500'
-                          : 'text-slate-400 hover:text-white hover:bg-slate-800/80'
+                          : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/80'
                       }`}
                     >
                       {page}
@@ -450,7 +450,7 @@ export const HistoryView: React.FC<HistoryViewProps> = ({ onSelectConversation }
                   ))}
                 </div>
 
-                <span className="text-slate-400 px-1 font-medium">
+                <span className="text-slate-500 dark:text-slate-400 px-1 font-medium">
                   Page {currentPage} of {totalPages}
                 </span>
 
@@ -458,7 +458,7 @@ export const HistoryView: React.FC<HistoryViewProps> = ({ onSelectConversation }
                   type="button"
                   onClick={() => handlePageChange(Math.min(totalPages, currentPage + 1))}
                   disabled={currentPage === totalPages}
-                  className="px-3.5 py-1.5 rounded-xl border border-slate-800 bg-slate-900/80 text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-800 disabled:opacity-40 disabled:cursor-not-allowed transition-all flex items-center gap-1.5 shadow-sm"
+                  className="px-3.5 py-1.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/80 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 disabled:opacity-40 disabled:cursor-not-allowed transition-all flex items-center gap-1.5 shadow-sm"
                 >
                   <span>Next</span>
                   <ChevronRight className="w-4 h-4" />

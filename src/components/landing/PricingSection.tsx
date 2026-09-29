@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion, AnimatePresence, type Variants } from 'framer-motion';
 import { Check, ArrowRight, Sparkles, ChevronDown, ChevronUp, Zap, Layers } from 'lucide-react';
 import { useApp } from '../../context/AppContext';
 
@@ -125,6 +126,28 @@ const ADVANCED_MODELS: string[] = [
   'Command A+'
 ];
 
+const containerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1
+    }
+  }
+};
+
+const cardVariants: Variants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+      ease: [0.22, 1, 0.36, 1]
+    }
+  }
+};
+
 export const PricingSection: React.FC = () => {
   const { navigateTo, showToast } = useApp();
   const [showBasicModels, setShowBasicModels] = useState<boolean>(false);
@@ -136,34 +159,43 @@ export const PricingSection: React.FC = () => {
   };
 
   return (
-    <section id="pricing" className="py-20 bg-slate-950/80 border-t border-slate-900 relative">
+    <section id="pricing" className="py-20 bg-slate-50/60 dark:bg-slate-950/80 border-t border-slate-200 dark:border-slate-900 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
 
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto space-y-4 mb-14">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-semibold uppercase tracking-wider">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 text-xs font-semibold uppercase tracking-wider">
             Flexible Subscription Plans
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight">
             Predictable Plans for{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-400 to-cyan-400">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-500 dark:from-emerald-400 dark:via-teal-400 dark:to-cyan-400">
               Every Workflow
             </span>
           </h2>
-          <p className="text-base sm:text-lg text-slate-400">
+          <p className="text-base sm:text-lg text-slate-600 dark:text-slate-400">
             One subscription for all leading AI models. Cancel anytime with a 14-day money-back guarantee.
           </p>
         </div>
 
-        {/* 4-Card Compact Layout */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch mb-14">
+        {/* 4-Card Compact Layout with Stagger & High-Fidelity Physics */}
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.1 }}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 items-stretch mb-14"
+        >
           {LANDING_PLANS.map((plan) => (
-            <div
+            <motion.div
               key={plan.id}
+              variants={cardVariants}
+              whileHover={{ y: -6, scale: 1.015, transition: { duration: 0.25 } }}
+              whileTap={{ scale: 0.98 }}
               className={`relative rounded-3xl p-6 flex flex-col justify-between transition-all duration-300 ${
                 plan.isRecommended
-                  ? 'bg-slate-900 border-2 border-indigo-500 shadow-2xl shadow-indigo-500/15 ring-1 ring-indigo-500/50 scale-100 lg:-translate-y-2'
-                  : 'bg-slate-900/60 border border-slate-800 hover:border-slate-700 shadow-xl'
+                  ? 'bg-white dark:bg-slate-900 border-2 border-indigo-500 shadow-xl shadow-indigo-500/10 dark:shadow-2xl dark:shadow-indigo-500/15 ring-1 ring-indigo-500/50 scale-100 lg:-translate-y-2'
+                  : 'bg-white/95 dark:bg-slate-900/60 border border-slate-200/90 dark:border-slate-800 hover:border-indigo-400/50 dark:hover:border-slate-700 shadow-sm shadow-slate-200/50 dark:shadow-xl'
               }`}
             >
               {/* Badge */}
@@ -172,7 +204,7 @@ export const PricingSection: React.FC = () => {
                   className={`absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 rounded-full text-[11px] font-bold uppercase tracking-wider shadow-md ${
                     plan.isRecommended
                       ? 'bg-gradient-to-r from-indigo-500 to-cyan-500 text-white shadow-indigo-500/30'
-                      : 'bg-emerald-500/20 border border-emerald-500/40 text-emerald-300'
+                      : 'bg-emerald-500/10 dark:bg-emerald-500/20 border border-emerald-500/30 text-emerald-700 dark:text-emerald-300'
                   }`}
                 >
                   {plan.badge}
@@ -182,19 +214,19 @@ export const PricingSection: React.FC = () => {
               <div>
                 {/* Header */}
                 <div className="flex items-center justify-between">
-                  <h3 className="text-lg font-bold text-white">{plan.name}</h3>
+                  <h3 className="text-lg font-bold text-slate-900 dark:text-white">{plan.name}</h3>
                 </div>
 
-                <p className="mt-2 text-xs text-slate-400 leading-relaxed min-h-[36px]">
+                <p className="mt-2 text-xs text-slate-600 dark:text-slate-400 leading-relaxed min-h-[36px]">
                   {plan.description}
                 </p>
 
                 {/* Price */}
                 <div className="mt-5 flex items-baseline gap-1">
-                  <span className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+                  <span className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
                     {plan.price}
                   </span>
-                  <span className="text-xs text-slate-400 font-medium">
+                  <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">
                     {plan.period}
                   </span>
                 </div>
@@ -205,7 +237,7 @@ export const PricingSection: React.FC = () => {
                   className={`mt-5 w-full py-2.5 px-4 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition-all active:scale-95 shadow-md ${
                     plan.isRecommended
                       ? 'bg-gradient-to-r from-indigo-600 via-purple-600 to-cyan-600 hover:brightness-110 text-white shadow-indigo-600/25'
-                      : 'bg-slate-800 hover:bg-slate-700 text-white border border-slate-700'
+                      : 'bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 dark:text-white dark:border-slate-700'
                   }`}
                 >
                   <span>Select Plan</span>
@@ -213,14 +245,14 @@ export const PricingSection: React.FC = () => {
                 </button>
 
                 {/* Features List */}
-                <div className="mt-6 pt-5 border-t border-slate-800/80 space-y-2.5">
-                  <p className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                <div className="mt-6 pt-5 border-t border-slate-100 dark:border-slate-800/80 space-y-2.5">
+                  <p className="text-[10px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
                     Included with plan:
                   </p>
                   <ul className="space-y-2 text-xs">
                     {plan.features.map((feat, idx) => (
-                      <li key={idx} className="flex items-start gap-2 text-slate-300">
-                        <Check className="w-3.5 h-3.5 text-emerald-400 shrink-0 mt-0.5" />
+                      <li key={idx} className="flex items-start gap-2 text-slate-700 dark:text-slate-300">
+                        <Check className="w-3.5 h-3.5 text-emerald-500 dark:text-emerald-400 shrink-0 mt-0.5" />
                         <span>{feat}</span>
                       </li>
                     ))}
@@ -229,116 +261,136 @@ export const PricingSection: React.FC = () => {
               </div>
 
               {/* Bottom Assurance */}
-              <div className="mt-6 pt-3 border-t border-slate-800/60 text-[10px] text-slate-500 text-center">
+              <div className="mt-6 pt-3 border-t border-slate-100 dark:border-slate-800/60 text-[10px] text-slate-500 text-center">
                 14-Day Money-Back Guarantee
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
-        {/* Expandable Model Lists */}
+        {/* Expandable Model Lists with AnimatePresence */}
         <div className="max-w-4xl mx-auto space-y-4">
           <div className="text-center mb-6">
-            <h3 className="text-lg font-bold text-white flex items-center justify-center gap-2">
-              <Sparkles className="w-4 h-4 text-cyan-400" />
+            <h3 className="text-lg font-bold text-slate-900 dark:text-white flex items-center justify-center gap-2">
+              <Sparkles className="w-4 h-4 text-cyan-500 dark:text-cyan-400" />
               <span>Full Model Access Breakdown</span>
             </h3>
-            <p className="text-xs text-slate-400 mt-1">
+            <p className="text-xs text-slate-600 dark:text-slate-400 mt-1">
               All plans include unlimited basic foundation models + 2,000 monthly advance credits for frontier engines.
             </p>
           </div>
 
           {/* Accordion 1: Basic Models */}
-          <div className="rounded-2xl border border-slate-800 bg-slate-900/60 overflow-hidden">
+          <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/60 shadow-sm shadow-slate-200/50 dark:shadow-md overflow-hidden">
             <button
               onClick={() => setShowBasicModels(!showBasicModels)}
-              className="w-full p-4 sm:p-5 flex items-center justify-between text-left hover:bg-slate-800/30 transition-colors"
+              className="w-full p-4 sm:p-5 flex items-center justify-between text-left hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors"
             >
               <div className="flex items-center gap-3">
-                <div className="p-2 rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                <div className="p-2 rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
                   <Zap className="w-4 h-4" />
                 </div>
                 <div>
-                  <h4 className="text-sm font-bold text-white flex items-center gap-2">
+                  <h4 className="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-2">
                     <span>15 Basic Foundation Models</span>
-                    <span className="text-[10px] uppercase font-bold px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                    <span className="text-[10px] uppercase font-bold px-2 py-0.5 rounded-full bg-emerald-500/10 dark:bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 border border-emerald-500/20">
                       Unlimited Free
                     </span>
                   </h4>
-                  <p className="text-xs text-slate-400 mt-0.5">
+                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
                     Zero token caps. Included with every plan and starter tier.
                   </p>
                 </div>
               </div>
 
-              <div className="p-1.5 rounded-lg bg-slate-800 text-slate-400">
+              <div className="p-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400">
                 {showBasicModels ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
               </div>
             </button>
 
-            {showBasicModels && (
-              <div className="px-5 pb-5 pt-2 border-t border-slate-800/80 animate-in fade-in duration-200">
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2 pt-2">
-                  {BASIC_MODELS.map((model, idx) => (
-                    <div
-                      key={idx}
-                      className="px-2.5 py-1.5 rounded-lg bg-slate-950/80 border border-slate-800 text-xs text-slate-300 flex items-center gap-1.5"
-                    >
-                      <Check className="w-3 h-3 text-emerald-400 shrink-0" />
-                      <span className="truncate">{model}</span>
+            <AnimatePresence>
+              {showBasicModels && (
+                <motion.div
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: 'auto', opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={{ type: 'spring', stiffness: 140, damping: 18 }}
+                  className="overflow-hidden"
+                >
+                  <div className="px-5 pb-5 pt-2 border-t border-slate-100 dark:border-slate-800/80">
+                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2 pt-2">
+                      {BASIC_MODELS.map((model, idx) => (
+                        <div
+                          key={idx}
+                          className="px-2.5 py-1.5 rounded-lg bg-slate-50 dark:bg-slate-950/80 border border-slate-200 dark:border-slate-800 text-xs text-slate-700 dark:text-slate-300 flex items-center gap-1.5 shadow-xs"
+                        >
+                          <Check className="w-3 h-3 text-emerald-500 dark:text-emerald-400 shrink-0" />
+                          <span className="truncate">{model}</span>
+                        </div>
+                      ))}
                     </div>
-                  ))}
-                </div>
-              </div>
-            )}
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
 
           {/* Accordion 2: Advanced Models */}
-          <div className="rounded-2xl border border-slate-800 bg-slate-900/60 overflow-hidden">
+          <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/60 shadow-sm shadow-slate-200/50 dark:shadow-md overflow-hidden">
             <button
               onClick={() => setShowAdvancedModels(!showAdvancedModels)}
-              className="w-full p-4 sm:p-5 flex items-center justify-between text-left hover:bg-slate-800/30 transition-colors"
+              className="w-full p-4 sm:p-5 flex items-center justify-between text-left hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors"
             >
               <div className="flex items-center gap-3">
-                <div className="p-2 rounded-xl bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
+                <div className="p-2 rounded-xl bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20">
                   <Layers className="w-4 h-4" />
                 </div>
                 <div>
-                  <h4 className="text-sm font-bold text-white flex items-center gap-2">
+                  <h4 className="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-2">
                     <span>100+ Advanced Frontier Models</span>
-                    <span className="text-[10px] uppercase font-bold px-2 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
+                    <span className="text-[10px] uppercase font-bold px-2 py-0.5 rounded-full bg-indigo-500/10 dark:bg-indigo-500/20 text-indigo-700 dark:text-indigo-300 border border-indigo-500/20">
                       2,000 Credits / mo
                     </span>
                   </h4>
-                  <p className="text-xs text-slate-400 mt-0.5">
+                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
                     Flagship models: DeepSeek V4 Pro, GPT-5.6 Sol, Claude Opus 5.5, Gemini 3.8 Flash, Grok 4.5.
                   </p>
                 </div>
               </div>
 
-              <div className="p-1.5 rounded-lg bg-slate-800 text-slate-400">
+              <div className="p-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400">
                 {showAdvancedModels ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
               </div>
             </button>
 
-            {showAdvancedModels && (
-              <div className="px-5 pb-5 pt-2 border-t border-slate-800/80 animate-in fade-in duration-200">
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 pt-2">
-                  {ADVANCED_MODELS.map((model, idx) => (
-                    <div
-                      key={idx}
-                      className="px-2.5 py-1.5 rounded-lg bg-slate-950/80 border border-slate-800 text-xs text-slate-300 flex items-center gap-1.5"
-                    >
-                      <Sparkles className="w-3 h-3 text-cyan-400 shrink-0" />
-                      <span className="truncate">{model}</span>
+            <AnimatePresence>
+              {showAdvancedModels && (
+                <motion.div
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: 'auto', opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={{ type: 'spring', stiffness: 140, damping: 18 }}
+                  className="overflow-hidden"
+                >
+                  <div className="px-5 pb-5 pt-2 border-t border-slate-100 dark:border-slate-800/80">
+                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 pt-2">
+                      {ADVANCED_MODELS.map((model, idx) => (
+                        <div
+                          key={idx}
+                          className="px-2.5 py-1.5 rounded-lg bg-slate-50 dark:bg-slate-950/80 border border-slate-200 dark:border-slate-800 text-xs text-slate-700 dark:text-slate-300 flex items-center gap-1.5 shadow-xs"
+                        >
+                          <Sparkles className="w-3 h-3 text-cyan-500 dark:text-cyan-400 shrink-0" />
+                          <span className="truncate">{model}</span>
+                        </div>
+                      ))}
                     </div>
-                  ))}
-                </div>
-                <p className="mt-3 text-[11px] text-slate-400 italic text-center">
-                  + Over 80 additional specialized coding, medical, vision, and reasoning models available in Store.
-                </p>
-              </div>
-            )}
+                    <p className="mt-3 text-[11px] text-slate-500 dark:text-slate-400 italic text-center">
+                      + Over 80 additional specialized coding, medical, vision, and reasoning models available in Store.
+                    </p>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
         </div>
 

@@ -92,19 +92,19 @@ export const PromptComposer: React.FC<PromptComposerProps> = () => {
   };
 
   return (
-    <div className="p-3 sm:p-5 border-t border-slate-800 bg-slate-950/90 backdrop-blur-md">
+    <div className="p-3 sm:p-5 border-t border-slate-200 dark:border-slate-800 bg-white/90 dark:bg-slate-950/90 backdrop-blur-md">
       <div className="max-w-4xl mx-auto space-y-2.5">
         {/* Quick Action Pills */}
         <div className="flex items-center gap-1.5 overflow-x-auto pb-1 no-scrollbar">
-          <span className="text-[10px] uppercase font-bold text-slate-400 shrink-0 mr-1 flex items-center gap-1">
-            <Sparkles className="w-3 h-3 text-indigo-400" />
+          <span className="text-[10px] uppercase font-bold text-slate-500 dark:text-slate-400 shrink-0 mr-1 flex items-center gap-1">
+            <Sparkles className="w-3 h-3 text-indigo-600 dark:text-indigo-400" />
             <span>Actions:</span>
           </span>
           {QUICK_ACTIONS.map((action) => (
             <button
               key={action.id}
               onClick={() => handleQuickAction(action)}
-              className="text-xs px-2.5 py-1 rounded-lg bg-slate-900 hover:bg-slate-800 text-slate-300 hover:text-white border border-slate-800 whitespace-nowrap transition-colors flex items-center gap-1.5"
+              className="text-xs px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-slate-900 dark:hover:bg-slate-800 text-slate-700 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white border border-slate-200 dark:border-slate-800 whitespace-nowrap transition-colors flex items-center gap-1.5 shadow-xs"
             >
               <span>{action.shortLabel}</span>
             </button>
@@ -113,13 +113,13 @@ export const PromptComposer: React.FC<PromptComposerProps> = () => {
 
         {/* Attachment preview chip if selected */}
         {attachedFile && (
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-indigo-500/10 border border-indigo-500/30 text-xs text-indigo-300 animate-in fade-in">
-            <FileText className="w-3.5 h-3.5 text-indigo-400" />
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-indigo-50 dark:bg-indigo-500/10 border border-indigo-200 dark:border-indigo-500/30 text-xs text-indigo-700 dark:text-indigo-300 animate-in fade-in">
+            <FileText className="w-3.5 h-3.5 text-indigo-600 dark:text-indigo-400" />
             <span className="font-semibold">{attachedFile.name}</span>
-            <span className="text-[10px] text-slate-400">({attachedFile.size})</span>
+            <span className="text-[10px] text-slate-500 dark:text-slate-400">({attachedFile.size})</span>
             <button
               onClick={() => setAttachedFile(null)}
-              className="ml-1 p-0.5 text-slate-400 hover:text-white"
+              className="ml-1 p-0.5 text-slate-400 hover:text-slate-700 dark:hover:text-white"
             >
               <X className="w-3 h-3" />
             </button>
@@ -127,7 +127,7 @@ export const PromptComposer: React.FC<PromptComposerProps> = () => {
         )}
 
         {/* Main Composer Box */}
-        <div className="relative rounded-2xl bg-slate-900 border border-slate-700/80 focus-within:border-indigo-500 focus-within:ring-2 focus-within:ring-indigo-500/30 transition-all shadow-lg overflow-hidden">
+        <div className="relative rounded-2xl bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700/80 focus-within:border-indigo-500 focus-within:ring-2 focus-within:ring-indigo-500/30 transition-all shadow-sm dark:shadow-lg overflow-hidden">
           {/* Text Area */}
           <textarea
             ref={textareaRef}
@@ -136,18 +136,18 @@ export const PromptComposer: React.FC<PromptComposerProps> = () => {
             onChange={(e) => setInputText(e.target.value)}
             onKeyDown={handleKeyDown}
             placeholder={`Ask ${currentModel.name} anything, paste code, or request a summary...`}
-            className="w-full bg-transparent px-4 pt-3.5 pb-2 text-sm text-white placeholder:text-slate-500 focus:outline-none resize-none leading-relaxed"
+            className="w-full bg-transparent px-4 pt-3.5 pb-2 text-sm text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none resize-none leading-relaxed"
           />
 
           {/* Bottom Composer Controls Toolbar */}
-          <div className="px-3 pb-2.5 pt-1 flex items-center justify-between gap-2 border-t border-slate-800/40">
+          <div className="px-3 pb-2.5 pt-1 flex items-center justify-between gap-2 border-t border-slate-100 dark:border-slate-800/40">
             {/* Left Context Toggles */}
             <div className="flex items-center gap-1.5">
               {/* Attachment Button */}
               <button
                 type="button"
                 onClick={handleSimulateAttachment}
-                className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
+                className="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
                 title="Attach Document / Code"
               >
                 <Paperclip className="w-4 h-4" />
@@ -162,8 +162,8 @@ export const PromptComposer: React.FC<PromptComposerProps> = () => {
                 }}
                 className={`p-1.5 rounded-lg transition-colors flex items-center gap-1 text-xs ${
                   webSearchActive
-                    ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/30'
-                    : 'text-slate-400 hover:text-white hover:bg-slate-800'
+                    ? 'bg-cyan-50 dark:bg-cyan-500/20 text-cyan-700 dark:text-cyan-300 border border-cyan-200 dark:border-cyan-500/30'
+                    : 'text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800'
                 }`}
                 title="Search Live Web"
               >
@@ -180,8 +180,8 @@ export const PromptComposer: React.FC<PromptComposerProps> = () => {
                 }}
                 className={`p-1.5 rounded-lg transition-colors flex items-center gap-1 text-xs ${
                   codeContextActive
-                    ? 'bg-indigo-500/20 text-indigo-300 border border-indigo-500/30'
-                    : 'text-slate-400 hover:text-white hover:bg-slate-800'
+                    ? 'bg-indigo-50 dark:bg-indigo-500/20 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-500/30'
+                    : 'text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800'
                 }`}
                 title="Code Sandbox Mode"
               >
@@ -195,8 +195,8 @@ export const PromptComposer: React.FC<PromptComposerProps> = () => {
                 onClick={handleToggleVoice}
                 className={`p-1.5 rounded-lg transition-colors ${
                   isRecording
-                    ? 'bg-rose-500/20 text-rose-400 animate-pulse border border-rose-500/30'
-                    : 'text-slate-400 hover:text-white hover:bg-slate-800'
+                    ? 'bg-rose-50 dark:bg-rose-500/20 text-rose-600 dark:text-rose-400 animate-pulse border border-rose-200 dark:border-rose-500/30'
+                    : 'text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800'
                 }`}
                 title="Voice Input (Dictation)"
               >
@@ -206,7 +206,7 @@ export const PromptComposer: React.FC<PromptComposerProps> = () => {
 
             {/* Right: Character count + Send button */}
             <div className="flex items-center gap-3">
-              <span className="text-[11px] text-slate-500 font-mono hidden sm:inline-block">
+              <span className="text-[11px] text-slate-400 dark:text-slate-500 font-mono hidden sm:inline-block">
                 {inputText.length} chars
               </span>
 
@@ -228,9 +228,9 @@ export const PromptComposer: React.FC<PromptComposerProps> = () => {
         </div>
 
         {/* Footnote tips */}
-        <div className="flex items-center justify-between text-[11px] text-slate-400 px-1">
-          <span>Engine: <strong className="text-slate-300 font-semibold">{currentModel.name}</strong> • Context: {currentModel.contextWindow}</span>
-          <span className="hidden sm:inline">Use <kbd className="px-1 py-0.5 rounded bg-slate-800 font-mono text-[10px]">Shift + Enter</kbd> for new line</span>
+        <div className="flex items-center justify-between text-[11px] text-slate-500 dark:text-slate-400 px-1">
+          <span>Engine: <strong className="text-slate-700 dark:text-slate-300 font-semibold">{currentModel.name}</strong> • Context: {currentModel.contextWindow}</span>
+          <span className="hidden sm:inline">Use <kbd className="px-1 py-0.5 rounded bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-mono text-[10px]">Shift + Enter</kbd> for new line</span>
         </div>
       </div>
     </div>

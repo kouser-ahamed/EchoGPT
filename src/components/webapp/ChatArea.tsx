@@ -95,11 +95,11 @@ export const ChatArea: React.FC<ChatAreaProps> = () => {
             </div>
 
             <div className="space-y-2 max-w-lg mx-auto">
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-white">
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white">
                 How can EchoGPT assist you today?
               </h2>
-              <p className="text-sm text-slate-400">
-                You are currently chatting with <strong className="text-white">{currentModel.name}</strong>. Choose a template or ask any question.
+              <p className="text-sm text-slate-600 dark:text-slate-400">
+                You are currently chatting with <strong className="text-slate-900 dark:text-white">{currentModel.name}</strong>. Choose a template or ask any question.
               </p>
             </div>
 
@@ -109,18 +109,18 @@ export const ChatArea: React.FC<ChatAreaProps> = () => {
                 <button
                   key={idx}
                   onClick={() => handleStarterPrompt(starter)}
-                  className="p-4 rounded-2xl bg-slate-900/80 hover:bg-slate-800 border border-slate-800 hover:border-slate-700 transition-all text-left group shadow-md"
+                  className="p-4 rounded-2xl bg-white/90 dark:bg-slate-900/80 hover:bg-white dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700 transition-all text-left group shadow-sm hover:shadow-md"
                 >
-                  <div className="flex items-center justify-between text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-1.5">
-                    <span className="text-indigo-400">{starter.category}</span>
-                    <span className="opacity-0 group-hover:opacity-100 transition-opacity text-white flex items-center gap-1">
+                  <div className="flex items-center justify-between text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1.5">
+                    <span className="text-indigo-600 dark:text-indigo-400">{starter.category}</span>
+                    <span className="opacity-0 group-hover:opacity-100 transition-opacity text-slate-900 dark:text-white flex items-center gap-1">
                       <span>Send</span> →
                     </span>
                   </div>
-                  <h4 className="text-xs sm:text-sm font-bold text-white group-hover:text-indigo-300 transition-colors">
+                  <h4 className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors">
                     {starter.title}
                   </h4>
-                  <p className="mt-1 text-xs text-slate-400 line-clamp-2 leading-relaxed">
+                  <p className="mt-1 text-xs text-slate-600 dark:text-slate-400 line-clamp-2 leading-relaxed">
                     {starter.prompt}
                   </p>
                 </button>
@@ -140,7 +140,7 @@ export const ChatArea: React.FC<ChatAreaProps> = () => {
               >
                 {/* Assistant Avatar */}
                 {!isUser && (
-                  <div className={`w-8 h-8 rounded-xl bg-slate-900 flex items-center justify-center text-sm border ${msgModel.borderColor} shrink-0 shadow-sm mt-1`}>
+                  <div className={`w-8 h-8 rounded-xl bg-white dark:bg-slate-900 flex items-center justify-center text-sm border ${msgModel.borderColor} shrink-0 shadow-sm mt-1`}>
                     {msgModel.avatar}
                   </div>
                 )}
@@ -150,17 +150,17 @@ export const ChatArea: React.FC<ChatAreaProps> = () => {
                   className={`max-w-2xl sm:max-w-3xl rounded-2xl p-4 sm:p-5 text-xs sm:text-sm leading-relaxed shadow-md ${
                     isUser
                       ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-tr-sm ml-8'
-                      : 'bg-slate-900 border border-slate-800 text-slate-200 rounded-tl-sm w-full'
+                      : 'bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-800 dark:text-slate-200 rounded-tl-sm w-full'
                   }`}
                 >
                   {/* Top Model Badge for Assistant */}
                   {!isUser && (
-                    <div className="flex items-center justify-between pb-2 mb-2 border-b border-slate-800/80">
+                    <div className="flex items-center justify-between pb-2 mb-2 border-b border-slate-200 dark:border-slate-800/80">
                       <div className="flex items-center gap-2">
-                        <span className="font-bold text-white text-xs">{msg.modelName || msgModel.name}</span>
-                        <span className="text-[10px] text-slate-400">{msgModel.provider}</span>
+                        <span className="font-bold text-slate-900 dark:text-white text-xs">{msg.modelName || msgModel.name}</span>
+                        <span className="text-[10px] text-slate-500 dark:text-slate-400">{msgModel.provider}</span>
                       </div>
-                      <span className="text-[10px] text-slate-500 font-mono">{msg.timestamp}</span>
+                      <span className="text-[10px] text-slate-400 dark:text-slate-500 font-mono">{msg.timestamp}</span>
                     </div>
                   )}
 
@@ -179,22 +179,22 @@ export const ChatArea: React.FC<ChatAreaProps> = () => {
 
                   {/* Assistant Action Bar */}
                   {!isUser && (
-                    <div className="mt-4 pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs text-slate-400">
+                    <div className="mt-4 pt-3 border-t border-slate-200 dark:border-slate-800/80 flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
                       <div className="flex items-center gap-2">
                         {/* Copy */}
                         <button
                           onClick={() => handleCopyMessage(msg.id, msg.content)}
-                          className="p-1 rounded hover:text-white hover:bg-slate-800 transition-colors flex items-center gap-1"
+                          className="p-1 rounded hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors flex items-center gap-1"
                           title="Copy response"
                         >
-                          {copiedMsgId === msg.id ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
+                          {copiedMsgId === msg.id ? <Check className="w-3.5 h-3.5 text-emerald-500 dark:text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
                           <span className="text-[11px] hidden sm:inline">{copiedMsgId === msg.id ? 'Copied' : 'Copy'}</span>
                         </button>
 
                         {/* Regenerate */}
                         <button
                           onClick={handleRegenerate}
-                          className="p-1 rounded hover:text-white hover:bg-slate-800 transition-colors flex items-center gap-1"
+                          className="p-1 rounded hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors flex items-center gap-1"
                           title="Regenerate with active model"
                         >
                           <RotateCcw className="w-3.5 h-3.5" />
@@ -205,7 +205,7 @@ export const ChatArea: React.FC<ChatAreaProps> = () => {
                         <button
                           onClick={() => handleToggleSpeak(msg.id)}
                           className={`p-1 rounded transition-colors flex items-center gap-1 ${
-                            speakingMsgId === msg.id ? 'text-cyan-400 animate-pulse' : 'hover:text-white hover:bg-slate-800'
+                            speakingMsgId === msg.id ? 'text-cyan-600 dark:text-cyan-400 animate-pulse' : 'hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800'
                           }`}
                           title="Read aloud"
                         >
@@ -219,7 +219,7 @@ export const ChatArea: React.FC<ChatAreaProps> = () => {
                         <button
                           onClick={() => handleFeedback(msg.id, 'like')}
                           className={`p-1.5 rounded transition-colors ${
-                            feedback[msg.id] === 'like' ? 'text-emerald-400 bg-emerald-500/10' : 'hover:text-white hover:bg-slate-800'
+                            feedback[msg.id] === 'like' ? 'text-emerald-600 dark:text-emerald-400 bg-emerald-500/10' : 'hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800'
                           }`}
                           title="Helpful response"
                         >
@@ -229,7 +229,7 @@ export const ChatArea: React.FC<ChatAreaProps> = () => {
                         <button
                           onClick={() => handleFeedback(msg.id, 'dislike')}
                           className={`p-1.5 rounded transition-colors ${
-                            feedback[msg.id] === 'dislike' ? 'text-rose-400 bg-rose-500/10' : 'hover:text-white hover:bg-slate-800'
+                            feedback[msg.id] === 'dislike' ? 'text-rose-600 dark:text-rose-400 bg-rose-500/10' : 'hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800'
                           }`}
                           title="Unhelpful response"
                         >
@@ -242,7 +242,7 @@ export const ChatArea: React.FC<ChatAreaProps> = () => {
 
                 {/* User Avatar */}
                 {isUser && (
-                  <div className="w-8 h-8 rounded-xl bg-slate-800 flex items-center justify-center font-bold text-xs text-white shrink-0 mt-1 shadow-sm">
+                  <div className="w-8 h-8 rounded-xl bg-slate-200 dark:bg-slate-800 flex items-center justify-center font-bold text-xs text-slate-700 dark:text-white shrink-0 mt-1 shadow-sm">
                     U
                   </div>
                 )}
@@ -254,17 +254,17 @@ export const ChatArea: React.FC<ChatAreaProps> = () => {
         {/* Real-time Streaming Generation Indicator */}
         {isGenerating && (
           <div className="flex items-start gap-3 sm:gap-4 animate-in fade-in">
-            <div className={`w-8 h-8 rounded-xl bg-slate-900 flex items-center justify-center text-sm border ${currentModel.borderColor} shrink-0 shadow-sm mt-1 animate-pulse`}>
+            <div className={`w-8 h-8 rounded-xl bg-white dark:bg-slate-900 flex items-center justify-center text-sm border ${currentModel.borderColor} shrink-0 shadow-sm mt-1 animate-pulse`}>
               {currentModel.avatar}
             </div>
-            <div className="p-4 rounded-2xl bg-slate-900 border border-slate-800 text-xs sm:text-sm text-slate-300 flex items-center gap-3">
+            <div className="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs sm:text-sm text-slate-700 dark:text-slate-300 flex items-center gap-3 shadow-sm">
               <div className="flex gap-1">
-                <span className="w-2 h-2 rounded-full bg-indigo-400 animate-bounce" style={{ animationDelay: '0ms' }} />
-                <span className="w-2 h-2 rounded-full bg-purple-400 animate-bounce" style={{ animationDelay: '150ms' }} />
-                <span className="w-2 h-2 rounded-full bg-cyan-400 animate-bounce" style={{ animationDelay: '300ms' }} />
+                <span className="w-2 h-2 rounded-full bg-indigo-500 animate-bounce" style={{ animationDelay: '0ms' }} />
+                <span className="w-2 h-2 rounded-full bg-purple-500 animate-bounce" style={{ animationDelay: '150ms' }} />
+                <span className="w-2 h-2 rounded-full bg-cyan-500 animate-bounce" style={{ animationDelay: '300ms' }} />
               </div>
-              <span className="font-medium text-slate-400">
-                EchoGPT is reasoning with <strong className="text-white">{currentModel.name}</strong>...
+              <span className="font-medium text-slate-500 dark:text-slate-400">
+                EchoGPT is reasoning with <strong className="text-slate-800 dark:text-white">{currentModel.name}</strong>...
               </span>
             </div>
           </div>

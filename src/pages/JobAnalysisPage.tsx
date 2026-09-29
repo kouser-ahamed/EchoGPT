@@ -3,7 +3,7 @@ import { JobAnalysisView } from '../components/webapp/views/JobAnalysisView';
 
 export const JobAnalysisPage: React.FC = () => {
   return (
-    <div className="flex-1 flex flex-col h-full overflow-hidden bg-slate-950">
+    <div className="flex-1 flex flex-col h-full overflow-hidden bg-[#F8FAFC] dark:bg-slate-950">
       <JobAnalysisView />
     </div>
   );

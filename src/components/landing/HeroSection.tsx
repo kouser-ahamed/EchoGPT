@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import { useApp } from '../../context/AppContext';
 import { AI_MODELS } from '../../data/models';
 import {
@@ -98,37 +99,57 @@ export const HeroSection: React.FC = () => {
   return (
     <section className="relative pt-12 pb-20 md:pt-20 md:pb-32 overflow-hidden">
       {/* Background Ambient Glows */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-gradient-to-tr from-indigo-600/20 via-purple-600/15 to-cyan-500/15 blur-[120px] pointer-events-none rounded-full" />
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-gradient-to-tr from-indigo-500/15 via-purple-500/10 to-cyan-500/10 dark:from-indigo-600/20 dark:via-purple-600/15 dark:to-cyan-500/15 blur-[120px] pointer-events-none rounded-full" />
       <div className="absolute -top-32 right-10 w-96 h-96 bg-cyan-500/10 blur-[100px] pointer-events-none rounded-full" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Top Badges & Announcement */}
-        <div className="flex flex-col items-center text-center space-y-4">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/90 border border-indigo-500/30 shadow-inner backdrop-blur-md">
+        {/* Top Badges & Announcement with Snappy Spring Reveal */}
+        <motion.div
+          initial={{ opacity: 0, y: -20, scale: 0.95 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ type: 'spring', stiffness: 120, damping: 14 }}
+          className="flex flex-col items-center text-center space-y-4"
+        >
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/90 dark:bg-slate-900/90 border border-slate-200 dark:border-indigo-500/30 shadow-sm shadow-slate-200/50 backdrop-blur-md">
             <span className="flex h-2 w-2 rounded-full bg-cyan-400 animate-pulse" />
-            <span className="text-xs font-semibold text-slate-200">
+            <span className="text-xs font-semibold text-slate-800 dark:text-slate-200">
               EchoGPT 2.4 Ecosystem Redesign
             </span>
-            <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300">
+            <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-indigo-500/10 dark:bg-indigo-500/20 text-indigo-700 dark:text-indigo-300">
               Web + Chrome Extension
             </span>
           </div>
 
-          {/* Main Headline */}
-          <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-white max-w-4xl leading-[1.1]">
+          {/* Main Headline with Spring Dynamics */}
+          <motion.h1
+            initial={{ opacity: 0, y: 25 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ type: 'spring', stiffness: 120, damping: 14, delay: 0.08 }}
+            className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight text-slate-900 dark:text-white max-w-4xl leading-[1.1]"
+          >
             One Unified Workspace.{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-purple-400 to-cyan-400">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-purple-600 to-cyan-500 dark:from-indigo-400 dark:via-purple-400 dark:to-cyan-400">
               Every Frontier AI.
             </span>
-          </h1>
+          </motion.h1>
 
           {/* Subheading */}
-          <p className="text-lg sm:text-xl text-slate-300 max-w-2xl font-normal leading-relaxed">
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ type: 'spring', stiffness: 120, damping: 14, delay: 0.16 }}
+            className="text-lg sm:text-xl text-slate-600 dark:text-slate-300 max-w-2xl font-normal leading-relaxed"
+          >
             Stop juggling $60/month across disconnected tabs. Chat with <strong>GPT-4o, Claude 3.5 Sonnet, Gemini 1.5 Pro</strong>, and <strong>DeepSeek</strong> in one unified web app and Chrome sidebar.
-          </p>
+          </motion.p>
 
           {/* Action CTAs */}
-          <div className="pt-2 flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ type: 'spring', stiffness: 120, damping: 14, delay: 0.22 }}
+            className="pt-2 flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto"
+          >
             <button
               onClick={() => navigateTo('webapp')}
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl font-bold text-sm text-white bg-gradient-to-r from-indigo-600 via-purple-600 to-cyan-600 hover:brightness-110 shadow-lg shadow-indigo-500/25 active:scale-95 transition-all duration-200"
@@ -140,55 +161,60 @@ export const HeroSection: React.FC = () => {
 
             <button
               onClick={() => navigateTo('extension')}
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-semibold text-sm text-slate-200 hover:text-white bg-slate-900/80 hover:bg-slate-800 border border-slate-700/80 backdrop-blur-md active:scale-95 transition-all duration-200"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-semibold text-sm text-slate-800 dark:text-slate-200 hover:text-indigo-600 dark:hover:text-white bg-white dark:bg-slate-900/80 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-700/80 shadow-sm backdrop-blur-md active:scale-95 transition-all duration-200"
             >
-              <ChromeIcon className="w-4 h-4 text-cyan-400" />
+              <ChromeIcon className="w-4 h-4 text-cyan-600 dark:text-cyan-400" />
               <span>Try Chrome Extension Simulator</span>
             </button>
-          </div>
+          </motion.div>
 
           {/* Social Proof & Metrics */}
-          <div className="pt-6 flex flex-wrap items-center justify-center gap-6 sm:gap-10 text-xs text-slate-400">
+          <div className="pt-6 flex flex-wrap items-center justify-center gap-6 sm:gap-10 text-xs text-slate-500 dark:text-slate-400">
             <div className="flex items-center gap-1.5">
               <div className="flex text-amber-400">
                 {[...Array(5)].map((_, i) => (
                   <Star key={i} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
                 ))}
               </div>
-              <span className="font-semibold text-slate-200">5.0 / 5.0 Rating</span>
-              <span className="text-slate-400">on Chrome Web Store</span>
+              <span className="font-semibold text-slate-800 dark:text-slate-200">5.0 / 5.0 Rating</span>
+              <span>on Chrome Web Store</span>
             </div>
 
             <div className="flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-              <span className="font-semibold text-slate-200">45,000+</span>
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+              <span className="font-semibold text-slate-800 dark:text-slate-200">45,000+</span>
               <span>Daily Active AI Queries</span>
             </div>
 
             <div className="flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-cyan-400" />
-              <span className="font-semibold text-slate-200">AppifyDevs</span>
+              <span className="w-1.5 h-1.5 rounded-full bg-cyan-500" />
+              <span className="font-semibold text-slate-800 dark:text-slate-200">AppifyDevs</span>
               <span>Verified Engineering</span>
             </div>
           </div>
-        </div>
+        </motion.div>
 
-        {/* Live Interactive Product Preview Card */}
-        <div className="mt-14 max-w-5xl mx-auto">
-          <div className="relative rounded-2xl border border-slate-800 bg-slate-950/80 shadow-2xl backdrop-blur-xl overflow-hidden ring-1 ring-white/10">
+        {/* Live Interactive Product Preview Card with Perspective Entrance Physics */}
+        <motion.div
+          initial={{ opacity: 0, y: 50, scale: 0.96 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 0.85, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
+          className="mt-14 max-w-5xl mx-auto"
+        >
+          <div className="relative rounded-2xl border border-slate-200/90 dark:border-slate-800 bg-white/95 dark:bg-slate-950/80 shadow-2xl backdrop-blur-xl overflow-hidden ring-1 ring-slate-200/60 dark:ring-white/10">
             {/* Window Top Bar */}
-            <div className="flex items-center justify-between px-4 sm:px-6 py-3 border-b border-slate-800 bg-slate-900/60">
+            <div className="flex items-center justify-between px-4 sm:px-6 py-3 border-b border-slate-200 dark:border-slate-800 bg-slate-50/90 dark:bg-slate-900/60">
               <div className="flex items-center gap-2">
                 <span className="w-3 h-3 rounded-full bg-rose-500/80" />
                 <span className="w-3 h-3 rounded-full bg-amber-500/80" />
                 <span className="w-3 h-3 rounded-full bg-emerald-500/80" />
-                <span className="ml-2 text-xs font-mono text-slate-400 hidden sm:inline-block">
+                <span className="ml-2 text-xs font-mono text-slate-500 dark:text-slate-400 hidden sm:inline-block">
                   echogpt-workspace // active-session
                 </span>
               </div>
 
               {/* Model Switcher Tabs in Mock */}
-              <div className="flex items-center gap-1.5 overflow-x-auto p-0.5 rounded-xl bg-slate-950/60 border border-slate-800 text-xs">
+              <div className="flex items-center gap-1.5 overflow-x-auto p-0.5 rounded-xl bg-slate-100 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 text-xs">
                 {AI_MODELS.slice(0, 4).map((model) => (
                   <button
                     key={model.id}
@@ -196,10 +222,11 @@ export const HeroSection: React.FC = () => {
                       setActivePreviewModel(model.id);
                       setSelectedModelId(model.id);
                     }}
-                    className={`px-2.5 py-1 rounded-lg font-medium transition-all ${activePreviewModel === model.id
+                    className={`px-2.5 py-1 rounded-lg font-medium transition-all ${
+                      activePreviewModel === model.id
                         ? `${model.bgLight} font-semibold shadow-sm border ${model.borderColor}`
-                        : 'text-slate-400 hover:text-slate-200'
-                      }`}
+                        : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200'
+                    }`}
                   >
                     <span className="mr-1.5">{model.avatar}</span>
                     <span>{model.shortName}</span>
@@ -208,23 +235,24 @@ export const HeroSection: React.FC = () => {
               </div>
 
               <div className="flex items-center gap-2">
-                <span className="text-[11px] font-semibold text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20 hidden md:inline-block">
+                <span className="text-[11px] font-semibold text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20 hidden md:inline-block">
                   {currentModelData.speed}
                 </span>
               </div>
             </div>
 
             {/* Prompt Selector Pills */}
-            <div className="px-4 sm:px-6 pt-4 pb-2 border-b border-slate-800/60 flex items-center gap-2 overflow-x-auto bg-slate-900/20">
-              <span className="text-xs font-medium text-slate-400 shrink-0">Sample Tasks:</span>
+            <div className="px-4 sm:px-6 pt-4 pb-2 border-b border-slate-200/80 dark:border-slate-800/60 flex items-center gap-2 overflow-x-auto bg-slate-50/50 dark:bg-slate-900/20">
+              <span className="text-xs font-medium text-slate-500 dark:text-slate-400 shrink-0">Sample Tasks:</span>
               {SAMPLE_PROMPTS.map((item, idx) => (
                 <button
                   key={idx}
                   onClick={() => setActivePromptIndex(idx)}
-                  className={`px-3 py-1 rounded-lg text-xs font-medium transition-all shrink-0 ${activePromptIndex === idx
-                      ? 'bg-indigo-600/30 text-indigo-300 border border-indigo-500/40'
-                      : 'bg-slate-900/60 text-slate-400 hover:text-slate-200 border border-slate-800'
-                    }`}
+                  className={`px-3 py-1 rounded-lg text-xs font-medium transition-all shrink-0 ${
+                    activePromptIndex === idx
+                      ? 'bg-indigo-600/10 text-indigo-700 border border-indigo-500/30 dark:bg-indigo-600/30 dark:text-indigo-300 dark:border-indigo-500/40 font-semibold'
+                      : 'bg-white hover:bg-slate-100 text-slate-600 hover:text-slate-900 border border-slate-200 dark:bg-slate-900/60 dark:text-slate-400 dark:hover:text-slate-200 dark:border-slate-800'
+                  }`}
                 >
                   {item.title}
                 </button>
@@ -245,40 +273,40 @@ export const HeroSection: React.FC = () => {
 
               {/* AI Response */}
               <div className="flex items-start gap-3">
-                <div className={`w-8 h-8 rounded-xl bg-slate-900 flex items-center justify-center text-sm border ${currentModelData.borderColor} shrink-0 shadow-sm`}>
+                <div className={`w-8 h-8 rounded-xl bg-slate-100 dark:bg-slate-900 flex items-center justify-center text-sm border ${currentModelData.borderColor} shrink-0 shadow-sm`}>
                   {currentModelData.avatar}
                 </div>
                 <div className="flex-1 space-y-2">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
-                      <span className="text-xs font-bold text-white">{currentModelData.name}</span>
-                      <span className="text-[10px] text-slate-400">{currentModelData.provider}</span>
-                      <span className="text-[10px] px-1.5 py-0.2 rounded bg-indigo-500/10 text-indigo-400 border border-indigo-500/20">
+                      <span className="text-xs font-bold text-slate-900 dark:text-white">{currentModelData.name}</span>
+                      <span className="text-[10px] text-slate-500 dark:text-slate-400">{currentModelData.provider}</span>
+                      <span className="text-[10px] px-1.5 py-0.2 rounded bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20">
                         {currentModelData.contextWindow}
                       </span>
                     </div>
 
                     <button
                       onClick={handleCopy}
-                      className="flex items-center gap-1 text-[11px] text-slate-400 hover:text-white px-2 py-1 rounded bg-slate-800/60 hover:bg-slate-800 transition-colors"
+                      className="flex items-center gap-1 text-[11px] text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white px-2 py-1 rounded bg-slate-100 hover:bg-slate-200 dark:bg-slate-800/60 dark:hover:bg-slate-800 transition-colors"
                       title="Copy response snippet"
                     >
-                      {copied ? <Check className="w-3 h-3 text-emerald-400" /> : <Copy className="w-3 h-3" />}
+                      {copied ? <Check className="w-3 h-3 text-emerald-500 dark:text-emerald-400" /> : <Copy className="w-3 h-3" />}
                       <span>{copied ? 'Copied' : 'Copy'}</span>
                     </button>
                   </div>
 
-                  <div className="relative p-4 rounded-xl bg-slate-900/90 border border-slate-800 text-xs sm:text-sm text-slate-200 leading-relaxed font-mono whitespace-pre-wrap">
+                  <div className="relative p-4 rounded-xl bg-slate-50 dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 text-xs sm:text-sm text-slate-800 dark:text-slate-200 leading-relaxed font-mono whitespace-pre-wrap">
                     {displayedResponse}
                     {isStreaming && (
-                      <span className="inline-block w-2 h-4 ml-1 bg-cyan-400 animate-pulse align-middle" />
+                      <span className="inline-block w-2 h-4 ml-1 bg-cyan-500 dark:bg-cyan-400 animate-pulse align-middle" />
                     )}
-                    <div className="mt-3 pt-2 border-t border-slate-800/60 flex items-center justify-between text-[11px] text-slate-400 font-sans">
+                    <div className="mt-3 pt-2 border-t border-slate-200 dark:border-slate-800/60 flex items-center justify-between text-[11px] text-slate-500 dark:text-slate-400 font-sans">
                       <span className="flex items-center gap-1.5">
-                        <span className={`w-1.5 h-1.5 rounded-full ${isStreaming ? 'bg-cyan-400 animate-ping' : 'bg-emerald-400'}`} />
+                        <span className={`w-1.5 h-1.5 rounded-full ${isStreaming ? 'bg-cyan-500 animate-ping' : 'bg-emerald-500'}`} />
                         <span>{isStreaming ? 'Real-Time Token Streaming...' : 'Generation Complete'}</span>
                       </span>
-                      <span className="font-mono text-cyan-300">
+                      <span className="font-mono text-cyan-600 dark:text-cyan-300">
                         {tokensCount} tokens • {currentModelData.speed.split(' ')[0]}
                       </span>
                     </div>
@@ -288,9 +316,9 @@ export const HeroSection: React.FC = () => {
             </div>
 
             {/* Simulated Live Input Bar */}
-            <div className="p-3 sm:p-4 border-t border-slate-800 bg-slate-950 flex items-center gap-3">
-              <div className="flex-1 flex items-center gap-3 px-4 py-2.5 rounded-xl bg-slate-900/90 border border-slate-800 text-xs text-slate-400">
-                <Sparkles className="w-4 h-4 text-indigo-400 shrink-0" />
+            <div className="p-3 sm:p-4 border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 flex items-center gap-3">
+              <div className="flex-1 flex items-center gap-3 px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 text-xs text-slate-500 dark:text-slate-400">
+                <Sparkles className="w-4 h-4 text-indigo-500 dark:text-indigo-400 shrink-0" />
                 <span className="truncate">Type a prompt or test multi-model split view...</span>
               </div>
               <button
@@ -302,7 +330,7 @@ export const HeroSection: React.FC = () => {
               </button>
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

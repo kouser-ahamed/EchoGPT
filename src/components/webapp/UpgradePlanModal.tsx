@@ -144,7 +144,7 @@ export const UpgradePlanModal: React.FC<UpgradePlanModalProps> = ({ isOpen, onCl
   return (
     <AnimatePresence>
       <div
-        className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-3 sm:p-4 md:p-6 overflow-y-auto"
+        className="fixed inset-0 bg-slate-900/60 dark:bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-3 sm:p-4 md:p-6 overflow-y-auto"
         onClick={(e) => {
           if (e.target === e.currentTarget) onClose();
         }}
@@ -157,12 +157,12 @@ export const UpgradePlanModal: React.FC<UpgradePlanModalProps> = ({ isOpen, onCl
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.95 }}
           transition={{ duration: 0.2, ease: 'easeOut' }}
-          className="relative w-full max-w-4xl bg-slate-900 border border-slate-800 rounded-3xl shadow-2xl overflow-hidden p-5 sm:p-7 md:p-8 space-y-6 max-h-[92vh] flex flex-col my-auto custom-scrollbar"
+          className="relative w-full max-w-4xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl shadow-2xl overflow-hidden p-5 sm:p-7 md:p-8 space-y-6 max-h-[92vh] flex flex-col my-auto custom-scrollbar"
         >
           {/* Top Right Close Button */}
           <button
             onClick={onClose}
-            className="absolute top-4 right-4 sm:top-5 sm:right-5 p-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-colors z-20"
+            className="absolute top-4 right-4 sm:top-5 sm:right-5 p-2 rounded-xl text-slate-400 hover:text-slate-700 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors z-20"
             aria-label="Close modal"
           >
             <X className="w-5 h-5" />
@@ -172,11 +172,11 @@ export const UpgradePlanModal: React.FC<UpgradePlanModalProps> = ({ isOpen, onCl
           <div className="space-y-1.5 pr-8">
             <h2
               id="upgrade-plan-title"
-              className="text-2xl sm:text-3xl font-extrabold bg-gradient-to-r from-purple-400 via-indigo-300 to-violet-400 bg-clip-text text-transparent tracking-tight"
+              className="text-2xl sm:text-3xl font-extrabold bg-gradient-to-r from-purple-600 via-indigo-600 to-violet-700 dark:from-purple-400 dark:via-indigo-300 dark:to-violet-400 bg-clip-text text-transparent tracking-tight"
             >
               Upgrade your plan
             </h2>
-            <p className="text-xs sm:text-sm text-slate-400 leading-relaxed max-w-2xl">
+            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed max-w-2xl">
               Want to get more out of EchoGPT? Subscribe to one of our professional plans.
             </p>
           </div>
@@ -184,11 +184,11 @@ export const UpgradePlanModal: React.FC<UpgradePlanModalProps> = ({ isOpen, onCl
           {/* 2-Column Content Grid: Left Box & Right Box */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6 items-stretch flex-1 overflow-y-auto pr-0.5 custom-scrollbar">
             {/* Left Box: Unlock all premium features */}
-            <div className="rounded-2xl border border-slate-200 dark:border-slate-800 p-5 bg-slate-950/60 dark:bg-slate-950/80 flex flex-col justify-between space-y-4">
+            <div className="rounded-2xl border border-slate-200 dark:border-slate-800 p-5 bg-slate-50/80 dark:bg-slate-950/80 flex flex-col justify-between space-y-4">
               <div className="space-y-4">
-                <div className="flex items-center gap-2 pb-2 border-b border-slate-800/80">
-                  <Sparkles className="w-4 h-4 text-purple-400" />
-                  <h3 className="text-sm font-bold text-slate-100 tracking-wide">
+                <div className="flex items-center gap-2 pb-2 border-b border-slate-200 dark:border-slate-800/80">
+                  <Sparkles className="w-4 h-4 text-purple-600 dark:text-purple-400" />
+                  <h3 className="text-sm font-bold text-slate-900 dark:text-slate-100 tracking-wide">
                     Unlock all premium features
                   </h3>
                 </div>
@@ -196,7 +196,7 @@ export const UpgradePlanModal: React.FC<UpgradePlanModalProps> = ({ isOpen, onCl
                 <div className="space-y-4 max-h-[360px] overflow-y-auto pr-1.5 custom-scrollbar text-xs">
                   {/* Chat Category */}
                   <div className="space-y-2.5">
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-purple-400/90 font-mono">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-purple-600 dark:text-purple-400/90 font-mono">
                       Chat
                     </span>
                     <div className="space-y-2 pl-0.5">
@@ -204,8 +204,8 @@ export const UpgradePlanModal: React.FC<UpgradePlanModalProps> = ({ isOpen, onCl
                         <div key={item.title} className="flex items-start gap-2.5">
                           <span className="text-base select-none shrink-0 leading-none">{item.icon}</span>
                           <div className="min-w-0">
-                            <span className="font-bold text-slate-200 block text-xs">{item.title}</span>
-                            <span className="text-slate-400 text-[11px] leading-tight block">{item.desc}</span>
+                            <span className="font-bold text-slate-800 dark:text-slate-200 block text-xs">{item.title}</span>
+                            <span className="text-slate-500 dark:text-slate-400 text-[11px] leading-tight block">{item.desc}</span>
                           </div>
                         </div>
                       ))}
@@ -213,8 +213,8 @@ export const UpgradePlanModal: React.FC<UpgradePlanModalProps> = ({ isOpen, onCl
                   </div>
 
                   {/* Content Category */}
-                  <div className="space-y-2.5 pt-2 border-t border-slate-800/60">
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-indigo-400/90 font-mono">
+                  <div className="space-y-2.5 pt-2 border-t border-slate-200 dark:border-slate-800/60">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400/90 font-mono">
                       Content
                     </span>
                     <div className="space-y-2 pl-0.5">
@@ -223,14 +223,14 @@ export const UpgradePlanModal: React.FC<UpgradePlanModalProps> = ({ isOpen, onCl
                           <span className="text-base select-none shrink-0 leading-none">{item.icon}</span>
                           <div className="min-w-0 flex-1">
                             <div className="flex items-center gap-1.5 flex-wrap">
-                              <span className="font-bold text-slate-200 text-xs">{item.title}</span>
+                              <span className="font-bold text-slate-800 dark:text-slate-200 text-xs">{item.title}</span>
                               {item.comingSoon && (
-                                <span className="text-[9px] font-bold px-1.5 py-0.5 rounded bg-amber-500/15 text-amber-300 border border-amber-500/30">
+                                <span className="text-[9px] font-bold px-1.5 py-0.5 rounded bg-amber-500/10 dark:bg-amber-500/15 text-amber-700 dark:text-amber-300 border border-amber-500/20 dark:border-amber-500/30">
                                   Coming Soon
                                 </span>
                               )}
                             </div>
-                            <span className="text-slate-400 text-[11px] leading-tight block">{item.desc}</span>
+                            <span className="text-slate-500 dark:text-slate-400 text-[11px] leading-tight block">{item.desc}</span>
                           </div>
                         </div>
                       ))}
@@ -238,8 +238,8 @@ export const UpgradePlanModal: React.FC<UpgradePlanModalProps> = ({ isOpen, onCl
                   </div>
 
                   {/* Image Category */}
-                  <div className="space-y-2.5 pt-2 border-t border-slate-800/60">
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-pink-400/90 font-mono">
+                  <div className="space-y-2.5 pt-2 border-t border-slate-200 dark:border-slate-800/60">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-pink-600 dark:text-pink-400/90 font-mono">
                       Image
                     </span>
                     <div className="space-y-2 pl-0.5">
@@ -248,14 +248,14 @@ export const UpgradePlanModal: React.FC<UpgradePlanModalProps> = ({ isOpen, onCl
                           <span className="text-base select-none shrink-0 leading-none">{item.icon}</span>
                           <div className="min-w-0 flex-1">
                             <div className="flex items-center gap-1.5 flex-wrap">
-                              <span className="font-bold text-slate-200 text-xs">{item.title}</span>
+                              <span className="font-bold text-slate-800 dark:text-slate-200 text-xs">{item.title}</span>
                               {item.comingSoon && (
-                                <span className="text-[9px] font-bold px-1.5 py-0.5 rounded bg-amber-500/15 text-amber-300 border border-amber-500/30">
+                                <span className="text-[9px] font-bold px-1.5 py-0.5 rounded bg-amber-500/10 dark:bg-amber-500/15 text-amber-700 dark:text-amber-300 border border-amber-500/20 dark:border-amber-500/30">
                                   Coming Soon
                                 </span>
                               )}
                             </div>
-                            <span className="text-slate-400 text-[11px] leading-tight block">{item.desc}</span>
+                            <span className="text-slate-500 dark:text-slate-400 text-[11px] leading-tight block">{item.desc}</span>
                           </div>
                         </div>
                       ))}
@@ -264,17 +264,17 @@ export const UpgradePlanModal: React.FC<UpgradePlanModalProps> = ({ isOpen, onCl
                 </div>
               </div>
 
-              <div className="pt-3 border-t border-slate-800/80 flex items-center gap-2 text-[11px] text-slate-400">
-                <Check className="w-3.5 h-3.5 text-emerald-400 shrink-0 stroke-[3]" />
+              <div className="pt-3 border-t border-slate-200 dark:border-slate-800/80 flex items-center gap-2 text-[11px] text-slate-600 dark:text-slate-400">
+                <Check className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400 shrink-0 stroke-[3]" />
                 <span>Zero rate limits • Priority server bandwidth</span>
               </div>
             </div>
 
             {/* Right Box: Plan Switcher & Pricing Details */}
-            <div className="rounded-2xl border border-slate-200 dark:border-slate-800 p-5 bg-slate-950/60 dark:bg-slate-950/80 flex flex-col justify-between space-y-4">
+            <div className="rounded-2xl border border-slate-200 dark:border-slate-800 p-5 bg-slate-50/80 dark:bg-slate-950/80 flex flex-col justify-between space-y-4">
               <div className="space-y-4">
                 {/* Top Tabs: Monthly, Quarterly, Semi-Annual, Annual */}
-                <div className="grid grid-cols-4 gap-1.5 p-1 bg-slate-900 border border-slate-800 rounded-xl">
+                <div className="grid grid-cols-4 gap-1.5 p-1 bg-slate-200/80 dark:bg-slate-900 border border-slate-300 dark:border-slate-800 rounded-xl">
                   {PLANS.map((plan) => (
                     <button
                       key={plan.id}
@@ -283,7 +283,7 @@ export const UpgradePlanModal: React.FC<UpgradePlanModalProps> = ({ isOpen, onCl
                       className={`py-2 px-1 rounded-lg font-bold text-xs transition-all text-center relative ${
                         selectedTab === plan.id
                           ? 'bg-purple-600 text-white shadow-md shadow-purple-600/30'
-                          : 'text-slate-400 hover:text-white hover:bg-slate-800/50'
+                          : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100 dark:text-slate-400 dark:hover:text-white dark:hover:bg-slate-800/50'
                       }`}
                     >
                       <span>{plan.tabLabel}</span>
@@ -293,21 +293,21 @@ export const UpgradePlanModal: React.FC<UpgradePlanModalProps> = ({ isOpen, onCl
 
                 {/* Model List Inside Selected Plan with Provider Icons */}
                 <div className="space-y-2">
-                  <div className="flex items-center justify-between text-xs text-slate-400">
-                    <span className="font-semibold text-slate-300">Included AI Models</span>
-                    <span className="text-[11px] font-mono text-purple-400 font-bold">9 Frontier Engines</span>
+                  <div className="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
+                    <span className="font-semibold text-slate-700 dark:text-slate-300">Included AI Models</span>
+                    <span className="text-[11px] font-mono text-purple-600 dark:text-purple-400 font-bold">9 Frontier Engines</span>
                   </div>
 
                   <div className="grid grid-cols-3 gap-1.5">
                     {INCLUDED_MODELS.map((model) => (
                       <div
                         key={model.name}
-                        className="p-1.5 rounded-lg bg-slate-900/90 border border-slate-800 flex items-center gap-1.5 overflow-hidden shadow-sm"
+                        className="p-1.5 rounded-lg bg-white dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 flex items-center gap-1.5 overflow-hidden shadow-xs"
                         title={`${model.name} (${model.provider})`}
                       >
                         <span className="text-xs select-none shrink-0">{model.icon}</span>
                         <div className="min-w-0 flex-1 truncate">
-                          <span className="text-[10px] font-semibold text-slate-200 block truncate">
+                          <span className="text-[10px] font-semibold text-slate-800 dark:text-slate-200 block truncate">
                             {model.name}
                           </span>
                         </div>
@@ -317,27 +317,27 @@ export const UpgradePlanModal: React.FC<UpgradePlanModalProps> = ({ isOpen, onCl
                 </div>
 
                 {/* Subtext description */}
-                <p className="text-xs text-slate-400 leading-relaxed bg-slate-900/50 p-2.5 rounded-xl border border-slate-800/60">
+                <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed bg-white dark:bg-slate-900/50 p-2.5 rounded-xl border border-slate-200 dark:border-slate-800/60 shadow-xs">
                   Experience the benefits of Pro membership with unlimited chats {currentPlan.durationText}.
                 </p>
 
                 {/* Plan Highlight & Price Card */}
-                <div className="p-4 rounded-xl bg-gradient-to-r from-purple-950/40 via-indigo-950/30 to-slate-900 border border-purple-500/30 space-y-1">
+                <div className="p-4 rounded-xl bg-purple-50 dark:bg-gradient-to-r dark:from-purple-950/40 dark:via-indigo-950/30 dark:to-slate-900 border border-purple-200 dark:border-purple-500/30 space-y-1 shadow-xs">
                   <div className="flex items-center justify-between">
-                    <span className="text-xs font-bold text-purple-300 uppercase tracking-wide">
+                    <span className="text-xs font-bold text-purple-700 dark:text-purple-300 uppercase tracking-wide">
                       {currentPlan.planName}
                     </span>
                     {currentPlan.badge && (
-                      <span className="text-[10px] font-extrabold px-2 py-0.5 rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/30">
+                      <span className="text-[10px] font-extrabold px-2 py-0.5 rounded-full bg-purple-100 dark:bg-purple-500/20 text-purple-700 dark:text-purple-300 border border-purple-200 dark:border-purple-500/30">
                         {currentPlan.badge}
                       </span>
                     )}
                   </div>
                   <div className="flex items-baseline gap-1.5 pt-1">
-                    <span className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+                    <span className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
                       {currentPlan.price}
                     </span>
-                    <span className="text-xs text-slate-400 font-medium">/{currentPlan.billingPeriod}</span>
+                    <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">/{currentPlan.billingPeriod}</span>
                   </div>
                 </div>
               </div>

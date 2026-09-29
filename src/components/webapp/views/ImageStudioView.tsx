@@ -392,21 +392,21 @@ export const ImageStudioView: React.FC<ImageStudioViewProps> = ({ onOpenUpgradeM
   );
 
   return (
-    <div className="flex-1 flex flex-col h-full overflow-y-auto bg-slate-950 p-3 sm:p-6 lg:p-8 space-y-8 custom-scrollbar">
+    <div className="flex-1 flex flex-col h-full overflow-y-auto bg-[#F8FAFC] dark:bg-slate-950 text-slate-900 dark:text-slate-100 p-3 sm:p-6 lg:p-8 space-y-8 custom-scrollbar">
       {/* Top Banner */}
       <div className="max-w-6xl mx-auto w-full space-y-4">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div className="space-y-1">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-300 text-xs font-semibold uppercase tracking-wider">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-700 dark:text-purple-300 text-xs font-semibold uppercase tracking-wider">
               <Sparkles className="w-3.5 h-3.5" />
               <span>Image Studio Pro</span>
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse ml-1" />
-              <span className="text-[10px] text-emerald-400 font-bold">12 Engines Ready</span>
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse ml-1" />
+              <span className="text-[10px] text-emerald-600 dark:text-emerald-400 font-bold">12 Engines Ready</span>
             </div>
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+            <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
               AI Image Studio
             </h1>
-            <p className="text-xs sm:text-sm text-slate-400">
+            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400">
               Generate photorealistic artwork, marketing assets, and concept mockups with frontier diffusion engines.
             </p>
           </div>
@@ -424,38 +424,38 @@ export const ImageStudioView: React.FC<ImageStudioViewProps> = ({ onOpenUpgradeM
         </div>
 
         {/* Generation Control Card */}
-        <div className="rounded-3xl bg-slate-900/90 border border-slate-800 shadow-2xl p-4 sm:p-6 space-y-5 backdrop-blur-xl relative overflow-hidden">
+        <div className="rounded-3xl bg-white/90 dark:bg-slate-900/90 border border-slate-200/90 dark:border-slate-800 shadow-xl dark:shadow-2xl p-4 sm:p-6 space-y-5 backdrop-blur-xl relative overflow-hidden">
           {/* Subtle Ambient Glow */}
           <div className="absolute -top-24 -right-24 w-96 h-96 bg-purple-600/10 rounded-full blur-3xl pointer-events-none" />
           <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-indigo-600/10 rounded-full blur-3xl pointer-events-none" />
 
           {/* Model Selector Bar (Top of control card) */}
-          <div className="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-slate-800/80">
+          <div className="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-slate-200 dark:border-slate-800/80">
             <div className="flex items-center gap-2.5">
-              <span className="text-xs font-bold uppercase tracking-wider text-slate-400">Active Engine:</span>
+              <span className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Active Engine:</span>
               <button
                 onClick={() => setIsModelModalOpen(true)}
-                className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-950/80 hover:bg-slate-800 border border-slate-700/80 text-white text-xs font-bold transition-all shadow-sm group"
+                className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-950/80 dark:hover:bg-slate-800 border border-slate-300 dark:border-slate-700/80 text-slate-800 dark:text-white text-xs font-bold transition-all shadow-sm group"
                 title="Click to Choose a Model"
               >
                 <span className="text-base">{activeModel.avatar}</span>
-                <span className="font-semibold text-indigo-300 group-hover:text-white transition-colors">
+                <span className="font-semibold text-indigo-600 dark:text-indigo-300 group-hover:text-indigo-800 dark:group-hover:text-white transition-colors">
                   {activeModel.name}
                 </span>
-                <span className="text-[10px] uppercase font-bold px-1.5 py-0.5 rounded bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
+                <span className="text-[10px] uppercase font-bold px-1.5 py-0.5 rounded bg-indigo-50 dark:bg-indigo-500/20 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-500/30">
                   {activeModel.badge}
                 </span>
-                <ChevronDown className="w-3.5 h-3.5 text-slate-400 group-hover:text-white transition-transform" />
+                <ChevronDown className="w-3.5 h-3.5 text-slate-500 dark:text-slate-400 group-hover:text-slate-800 dark:group-hover:text-white transition-transform" />
               </button>
             </div>
 
             <div className="flex items-center gap-2">
-              <span className="text-[11px] text-slate-400 hidden sm:inline">
-                Speed: <span className="text-emerald-400 font-semibold">{activeModel.speed}</span> • Quality: <span className="text-indigo-400 font-semibold">{activeModel.quality}</span>
+              <span className="text-[11px] text-slate-500 dark:text-slate-400 hidden sm:inline">
+                Speed: <span className="text-emerald-600 dark:text-emerald-400 font-semibold">{activeModel.speed}</span> • Quality: <span className="text-indigo-600 dark:text-indigo-400 font-semibold">{activeModel.quality}</span>
               </span>
               <button
                 onClick={() => setIsModelModalOpen(true)}
-                className="text-xs text-indigo-400 hover:text-indigo-300 font-semibold underline underline-offset-4"
+                className="text-xs text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 font-semibold underline underline-offset-4"
               >
                 Browse All Models
               </button>
@@ -465,12 +465,12 @@ export const ImageStudioView: React.FC<ImageStudioViewProps> = ({ onOpenUpgradeM
           {/* Prompt Textarea */}
           <div className="space-y-2">
             <div className="flex items-center justify-between">
-              <label className="text-xs font-bold text-slate-300 uppercase tracking-wider">
+              <label className="text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider">
                 Creative Prompt
               </label>
               <button
                 onClick={handleEnhancePrompt}
-                className="flex items-center gap-1.5 text-xs text-purple-400 hover:text-purple-300 font-semibold transition-colors group"
+                className="flex items-center gap-1.5 text-xs text-purple-600 dark:text-purple-400 hover:text-purple-700 dark:hover:text-purple-300 font-semibold transition-colors group"
                 title="Intelligently enhance prompt with photographic & lighting details"
               >
                 <Wand2 className="w-3.5 h-3.5 group-hover:rotate-12 transition-transform" />
@@ -484,21 +484,21 @@ export const ImageStudioView: React.FC<ImageStudioViewProps> = ({ onOpenUpgradeM
                 onChange={(e) => setPrompt(e.target.value)}
                 rows={3}
                 placeholder="Describe your imagination in detail... (e.g., A futuristic glassmorphic UI terminal floating over a cyberpunk neon skyline, volumetric lighting, ray tracing, 8k)"
-                className="w-full p-4 rounded-2xl bg-slate-950/80 border border-slate-800 text-sm text-slate-100 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-purple-500/50 resize-none transition-all"
+                className="w-full p-4 rounded-2xl bg-slate-50 dark:bg-slate-950/80 border border-slate-300 dark:border-slate-800 text-sm text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-purple-500/40 resize-none transition-all shadow-inner"
               />
-              <div className="absolute right-3 bottom-3 text-[11px] text-slate-500 pointer-events-none">
+              <div className="absolute right-3 bottom-3 text-[11px] text-slate-400 dark:text-slate-500 pointer-events-none">
                 {prompt.length} chars
               </div>
             </div>
 
             {/* Prompt Preset Chips */}
             <div className="flex items-center gap-1.5 overflow-x-auto pb-1 no-scrollbar pt-1">
-              <span className="text-[11px] text-slate-400 whitespace-nowrap mr-1 font-medium">Quick Presets:</span>
+              <span className="text-[11px] text-slate-500 dark:text-slate-400 whitespace-nowrap mr-1 font-medium">Quick Presets:</span>
               {promptPresets.map((preset) => (
                 <button
                   key={preset}
                   onClick={() => setPrompt((prev) => (prev ? `${prev}, ${preset}` : preset))}
-                  className="px-2.5 py-1 rounded-lg bg-slate-950/60 hover:bg-slate-800 border border-slate-800 hover:border-purple-500/40 text-[11px] text-slate-300 hover:text-white whitespace-nowrap transition-all"
+                  className="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-slate-950/60 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 hover:border-purple-400 dark:hover:border-purple-500/40 text-[11px] text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white whitespace-nowrap transition-all shadow-xs"
                 >
                   +{preset}
                 </button>
@@ -507,11 +507,11 @@ export const ImageStudioView: React.FC<ImageStudioViewProps> = ({ onOpenUpgradeM
           </div>
 
           {/* Reference Image Upload Section (Image-to-Image) */}
-          <div className="p-4 rounded-2xl bg-slate-950/60 border border-slate-800/80 space-y-3">
+          <div className="p-4 rounded-2xl bg-slate-50/90 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800/80 space-y-3">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <ImageIcon className="w-4 h-4 text-indigo-400" />
-                <span className="text-xs font-bold text-slate-200">Reference Image (Image-to-Image)</span>
+                <ImageIcon className="w-4 h-4 text-indigo-500 dark:text-indigo-400" />
+                <span className="text-xs font-bold text-slate-800 dark:text-slate-200">Reference Image (Image-to-Image)</span>
                 <span className="text-[10px] text-slate-500 font-medium hidden sm:inline">Optional stylistic or structural guide</span>
               </div>
 
@@ -527,16 +527,16 @@ export const ImageStudioView: React.FC<ImageStudioViewProps> = ({ onOpenUpgradeM
                   />
                   <label
                     htmlFor="reference-image-input"
-                    className="cursor-pointer inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-900 hover:bg-slate-850 border border-slate-700 text-xs font-semibold text-slate-200 hover:text-white transition-all shadow-sm"
+                    className="cursor-pointer inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white hover:bg-slate-100 dark:bg-slate-900 dark:hover:bg-slate-850 border border-slate-300 dark:border-slate-700 text-xs font-semibold text-slate-700 dark:text-slate-200 hover:text-slate-900 dark:hover:text-white transition-all shadow-sm"
                   >
-                    <Upload className="w-3.5 h-3.5 text-indigo-400" />
+                    <Upload className="w-3.5 h-3.5 text-indigo-500 dark:text-indigo-400" />
                     <span>+ Upload reference image</span>
                   </label>
                 </div>
               ) : (
                 <button
                   onClick={handleRemoveReferenceImage}
-                  className="inline-flex items-center gap-1 text-xs text-rose-400 hover:text-rose-300 transition-colors"
+                  className="inline-flex items-center gap-1 text-xs text-rose-500 hover:text-rose-600 dark:text-rose-400 dark:hover:text-rose-300 transition-colors"
                 >
                   <Trash2 className="w-3.5 h-3.5" />
                   <span>Remove Image</span>
@@ -564,8 +564,8 @@ export const ImageStudioView: React.FC<ImageStudioViewProps> = ({ onOpenUpgradeM
 
                 <div className="flex-1 space-y-2">
                   <div className="flex items-center justify-between text-xs">
-                    <span className="text-slate-300 font-medium truncate max-w-xs">{referenceImageName}</span>
-                    <span className="text-indigo-400 font-bold">Image Influence: {referenceStrength}%</span>
+                    <span className="text-slate-700 dark:text-slate-300 font-medium truncate max-w-xs">{referenceImageName}</span>
+                    <span className="text-indigo-600 dark:text-indigo-400 font-bold">Image Influence: {referenceStrength}%</span>
                   </div>
                   <input
                     type="range"
@@ -574,9 +574,9 @@ export const ImageStudioView: React.FC<ImageStudioViewProps> = ({ onOpenUpgradeM
                     step="5"
                     value={referenceStrength}
                     onChange={(e) => setReferenceStrength(Number(e.target.value))}
-                    className="w-full h-1.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-indigo-500"
+                    className="w-full h-1.5 bg-slate-200 dark:bg-slate-800 rounded-lg appearance-none cursor-pointer accent-indigo-500"
                   />
-                  <div className="flex items-center justify-between text-[10px] text-slate-500">
+                  <div className="flex items-center justify-between text-[10px] text-slate-400 dark:text-slate-500">
                     <span>10% (Subtle color guidance)</span>
                     <span>50% (Balanced hybrid)</span>
                     <span>90% (Strict structural match)</span>
@@ -590,8 +590,8 @@ export const ImageStudioView: React.FC<ImageStudioViewProps> = ({ onOpenUpgradeM
           <div className="grid grid-cols-1 md:grid-cols-12 gap-4 items-center">
             {/* Aspect Ratio Pills */}
             <div className="md:col-span-7 space-y-1.5">
-              <label className="text-xs font-bold text-slate-300 uppercase tracking-wider flex items-center gap-1.5">
-                <Sliders className="w-3.5 h-3.5 text-purple-400" />
+              <label className="text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider flex items-center gap-1.5">
+                <Sliders className="w-3.5 h-3.5 text-purple-600 dark:text-purple-400" />
                 <span>Aspect Ratio</span>
               </label>
 
@@ -603,7 +603,7 @@ export const ImageStudioView: React.FC<ImageStudioViewProps> = ({ onOpenUpgradeM
                     className={`py-2 px-1 rounded-xl text-xs font-bold flex flex-col items-center justify-center transition-all ${
                       aspectRatio === ratio.id
                         ? 'bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-md shadow-purple-600/25 border border-purple-400/40'
-                        : 'bg-slate-950/70 text-slate-300 hover:text-white hover:bg-slate-800 border border-slate-800'
+                        : 'bg-slate-100 dark:bg-slate-950/70 text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800'
                     }`}
                   >
                     <span>{ratio.label}</span>
@@ -615,8 +615,8 @@ export const ImageStudioView: React.FC<ImageStudioViewProps> = ({ onOpenUpgradeM
 
             {/* Batch Count Selector */}
             <div className="md:col-span-5 space-y-1.5">
-              <label className="text-xs font-bold text-slate-300 uppercase tracking-wider flex items-center gap-1.5">
-                <Layers className="w-3.5 h-3.5 text-indigo-400" />
+              <label className="text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider flex items-center gap-1.5">
+                <Layers className="w-3.5 h-3.5 text-indigo-500 dark:text-indigo-400" />
                 <span>Batch Count</span>
               </label>
 
@@ -628,7 +628,7 @@ export const ImageStudioView: React.FC<ImageStudioViewProps> = ({ onOpenUpgradeM
                     className={`py-2 px-2 rounded-xl text-xs font-bold transition-all ${
                       batchCount === count
                         ? 'bg-gradient-to-r from-indigo-600 to-cyan-500 text-white shadow-md shadow-indigo-600/25 border border-indigo-400/40'
-                        : 'bg-slate-950/70 text-slate-300 hover:text-white hover:bg-slate-800 border border-slate-800'
+                        : 'bg-slate-100 dark:bg-slate-950/70 text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800'
                     }`}
                   >
                     {count}x
@@ -640,10 +640,10 @@ export const ImageStudioView: React.FC<ImageStudioViewProps> = ({ onOpenUpgradeM
 
           {/* Action Row: Generate Button */}
           <div className="pt-2 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-            <div className="flex items-center gap-2 text-xs text-slate-400">
-              <Sparkles className="w-3.5 h-3.5 text-indigo-400" />
+            <div className="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
+              <Sparkles className="w-3.5 h-3.5 text-indigo-500 dark:text-indigo-400" />
               <span>
-                Engine: <strong className="text-slate-200">{activeModel.name}</strong> • Generating {batchCount} output{batchCount > 1 ? 's' : ''} in {aspectRatio}
+                Engine: <strong className="text-slate-800 dark:text-slate-200">{activeModel.name}</strong> • Generating {batchCount} output{batchCount > 1 ? 's' : ''} in {aspectRatio}
               </span>
             </div>
 
@@ -652,7 +652,7 @@ export const ImageStudioView: React.FC<ImageStudioViewProps> = ({ onOpenUpgradeM
               disabled={isGenerating || !prompt.trim()}
               className={`py-3 px-8 rounded-xl font-bold text-sm flex items-center justify-center gap-2 shadow-lg transition-all ${
                 isGenerating || !prompt.trim()
-                  ? 'bg-slate-800 text-slate-500 cursor-not-allowed border border-slate-700'
+                  ? 'bg-slate-200 text-slate-400 border border-slate-300 dark:bg-slate-800 dark:text-slate-500 dark:border-slate-700 cursor-not-allowed'
                   : 'bg-gradient-to-r from-purple-600 via-indigo-600 to-indigo-700 hover:from-purple-500 hover:to-indigo-600 text-white shadow-indigo-600/30 hover:shadow-indigo-600/50 hover:brightness-110 active:scale-95'
               }`}
             >
@@ -674,17 +674,17 @@ export const ImageStudioView: React.FC<ImageStudioViewProps> = ({ onOpenUpgradeM
 
       {/* Your Creations Gallery */}
       <div className="max-w-6xl mx-auto w-full space-y-4">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-800">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-200 dark:border-slate-800">
           <div className="flex items-center gap-3">
-            <h2 className="text-lg font-bold text-white">Your Creations</h2>
-            <span className="text-xs px-2.5 py-0.5 rounded-full bg-slate-800 text-slate-300 border border-slate-700 font-semibold">
+            <h2 className="text-lg font-bold text-slate-900 dark:text-white">Your Creations</h2>
+            <span className="text-xs px-2.5 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 font-semibold">
               {filteredCreations.length} {filteredCreations.length === 1 ? 'item' : 'items'}
             </span>
           </div>
 
           <div className="flex items-center gap-2 flex-wrap">
             {/* Aspect Ratio Filter Pills */}
-            <div className="flex items-center gap-1 p-1 bg-slate-900/90 border border-slate-800 rounded-xl text-xs">
+            <div className="flex items-center gap-1 p-1 bg-white/90 dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 rounded-xl text-xs shadow-sm">
               {(['ALL', '1:1', '16:9', '9:16', '3:2'] as const).map((ratio) => (
                 <button
                   key={ratio}
@@ -693,7 +693,7 @@ export const ImageStudioView: React.FC<ImageStudioViewProps> = ({ onOpenUpgradeM
                   className={`px-2.5 py-1 rounded-lg font-semibold transition-all ${
                     galleryFilter === ratio
                       ? 'bg-purple-600 text-white shadow-sm'
-                      : 'text-slate-400 hover:text-white'
+                      : 'text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white'
                   }`}
                 >
                   {ratio === 'ALL' ? 'All' : ratio}
@@ -710,7 +710,7 @@ export const ImageStudioView: React.FC<ImageStudioViewProps> = ({ onOpenUpgradeM
                     showToast('Gallery cleared', 'info');
                   }
                 }}
-                className="text-xs text-slate-500 hover:text-rose-400 transition-colors flex items-center gap-1 ml-1 px-2 py-1"
+                className="text-xs text-slate-500 hover:text-rose-500 dark:hover:text-rose-400 transition-colors flex items-center gap-1 ml-1 px-2 py-1"
                 title="Clear all creations"
               >
                 <Trash2 className="w-3.5 h-3.5" />
@@ -722,9 +722,9 @@ export const ImageStudioView: React.FC<ImageStudioViewProps> = ({ onOpenUpgradeM
 
         {/* Gallery Grid or Empty State */}
         {filteredCreations.length === 0 ? (
-          <div className="p-12 text-center rounded-3xl bg-slate-900/40 border border-slate-800/80 space-y-3">
-            <ImageIcon className="w-12 h-12 text-slate-700 mx-auto stroke-1" />
-            <h3 className="text-base font-bold text-slate-300">Your creations - Nothing here yet</h3>
+          <div className="p-12 text-center rounded-3xl bg-white/60 dark:bg-slate-900/40 border border-slate-200 dark:border-slate-800/80 space-y-3 shadow-xs">
+            <ImageIcon className="w-12 h-12 text-slate-400 dark:text-slate-700 mx-auto stroke-1" />
+            <h3 className="text-base font-bold text-slate-800 dark:text-slate-300">Your creations - Nothing here yet</h3>
             <p className="text-xs text-slate-500 max-w-sm mx-auto">
               {galleryFilter !== 'ALL'
                 ? `No artworks found for aspect ratio "${galleryFilter}". Try switching to "All" or create a new batch.`
@@ -733,7 +733,7 @@ export const ImageStudioView: React.FC<ImageStudioViewProps> = ({ onOpenUpgradeM
             {galleryFilter !== 'ALL' ? (
               <button
                 onClick={() => handleGalleryFilter('ALL')}
-                className="mt-2 px-4 py-2 rounded-xl bg-purple-600/20 hover:bg-purple-600/30 border border-purple-500/30 text-xs font-semibold text-purple-300 transition-colors"
+                className="mt-2 px-4 py-2 rounded-xl bg-purple-500/10 hover:bg-purple-500/20 border border-purple-500/30 text-xs font-semibold text-purple-700 dark:text-purple-300 transition-colors"
               >
                 Show All Images
               </button>
@@ -743,7 +743,7 @@ export const ImageStudioView: React.FC<ImageStudioViewProps> = ({ onOpenUpgradeM
                   setPrompt('Cyberpunk glass terminal displaying real-time quantum neural graphs');
                   handleGenerate();
                 }}
-                className="mt-2 px-4 py-2 rounded-xl bg-indigo-600/20 hover:bg-indigo-600/30 border border-indigo-500/30 text-xs font-semibold text-indigo-300 transition-colors"
+                className="mt-2 px-4 py-2 rounded-xl bg-indigo-500/10 hover:bg-indigo-500/20 border border-indigo-500/30 text-xs font-semibold text-indigo-700 dark:text-indigo-300 transition-colors"
               >
                 Try sample prompt
               </button>
@@ -756,10 +756,10 @@ export const ImageStudioView: React.FC<ImageStudioViewProps> = ({ onOpenUpgradeM
                 <div
                   key={item.id}
                   onClick={() => setPreviewCreation(item)}
-                  className="group relative rounded-2xl overflow-hidden bg-slate-900 border border-slate-800 hover:border-purple-500/50 shadow-lg cursor-pointer transition-all duration-300 flex flex-col justify-between"
+                  className="group relative rounded-2xl overflow-hidden bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-purple-400 dark:hover:border-purple-500/50 shadow-sm hover:shadow-md dark:shadow-lg cursor-pointer transition-all duration-300 flex flex-col justify-between"
                 >
                   {/* Image Container */}
-                  <div className="relative aspect-square w-full overflow-hidden bg-slate-950">
+                  <div className="relative aspect-square w-full overflow-hidden bg-slate-100 dark:bg-slate-950">
                     <img
                       src={item.url}
                       alt={item.prompt}
@@ -821,19 +821,19 @@ export const ImageStudioView: React.FC<ImageStudioViewProps> = ({ onOpenUpgradeM
                   </div>
 
                   {/* Footer Strip under image */}
-                  <div className="p-3 bg-slate-900 border-t border-slate-800/80 flex items-center justify-between text-xs">
+                  <div className="p-3 bg-white dark:bg-slate-900 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between text-xs">
                     <div className="truncate pr-2">
-                      <span className="text-[11px] font-semibold text-slate-200 truncate block">
+                      <span className="text-[11px] font-semibold text-slate-800 dark:text-slate-200 truncate block">
                         {item.model}
                       </span>
-                      <span className="text-[10px] text-slate-500">{item.timestamp}</span>
+                      <span className="text-[10px] text-slate-400 dark:text-slate-500">{item.timestamp}</span>
                     </div>
                     <button
                       onClick={(e) => {
                         e.stopPropagation();
                         setPreviewCreation(item);
                       }}
-                      className="p-1.5 rounded-lg hover:bg-slate-800 text-slate-400 hover:text-white transition-colors"
+                      className="p-1.5 rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-400 hover:text-slate-700 dark:hover:text-white transition-colors"
                       title="Inspect Full Resolution"
                     >
                       <Maximize2 className="w-3.5 h-3.5" />
@@ -845,13 +845,13 @@ export const ImageStudioView: React.FC<ImageStudioViewProps> = ({ onOpenUpgradeM
 
             {/* Pagination Controls when total images exceed 8 */}
             {filteredCreations.length > itemsPerPage && (
-              <div className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4 p-4 rounded-2xl bg-slate-900/60 border border-slate-800 text-xs">
-                <div className="text-slate-400">
-                  Showing <span className="font-semibold text-white">{(currentPage - 1) * itemsPerPage + 1}</span> to{' '}
-                  <span className="font-semibold text-white">
+              <div className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4 p-4 rounded-2xl bg-white/80 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 text-xs shadow-sm">
+                <div className="text-slate-500 dark:text-slate-400">
+                  Showing <span className="font-semibold text-slate-800 dark:text-white">{(currentPage - 1) * itemsPerPage + 1}</span> to{' '}
+                  <span className="font-semibold text-slate-800 dark:text-white">
                     {Math.min(currentPage * itemsPerPage, filteredCreations.length)}
                   </span>{' '}
-                  of <span className="font-semibold text-white">{filteredCreations.length}</span> creations
+                  of <span className="font-semibold text-slate-800 dark:text-white">{filteredCreations.length}</span> creations
                 </div>
 
                 <div className="flex items-center gap-2">
@@ -859,7 +859,7 @@ export const ImageStudioView: React.FC<ImageStudioViewProps> = ({ onOpenUpgradeM
                     type="button"
                     onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
                     disabled={currentPage === 1}
-                    className="px-3.5 py-1.5 rounded-xl border border-slate-800 bg-slate-900/80 text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-800 disabled:opacity-40 disabled:cursor-not-allowed transition-all flex items-center gap-1.5 shadow-sm"
+                    className="px-3.5 py-1.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/80 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 disabled:opacity-40 disabled:cursor-not-allowed transition-all flex items-center gap-1.5 shadow-sm"
                   >
                     <ChevronLeft className="w-4 h-4" />
                     <span>Previous</span>
@@ -874,7 +874,7 @@ export const ImageStudioView: React.FC<ImageStudioViewProps> = ({ onOpenUpgradeM
                         className={`w-7 h-7 rounded-lg text-xs font-bold transition-all ${
                           currentPage === page
                             ? 'bg-purple-600 text-white shadow-md shadow-purple-600/30 border border-purple-500'
-                            : 'text-slate-400 hover:text-white hover:bg-slate-800/80'
+                            : 'text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800/80'
                         }`}
                       >
                         {page}
@@ -882,7 +882,7 @@ export const ImageStudioView: React.FC<ImageStudioViewProps> = ({ onOpenUpgradeM
                     ))}
                   </div>
 
-                  <span className="text-slate-400 px-1 font-medium">
+                  <span className="text-slate-500 dark:text-slate-400 px-1 font-medium">
                     Page {currentPage} of {totalPages}
                   </span>
 
@@ -890,7 +890,7 @@ export const ImageStudioView: React.FC<ImageStudioViewProps> = ({ onOpenUpgradeM
                     type="button"
                     onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
                     disabled={currentPage === totalPages}
-                    className="px-3.5 py-1.5 rounded-xl border border-slate-800 bg-slate-900/80 text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-800 disabled:opacity-40 disabled:cursor-not-allowed transition-all flex items-center gap-1.5 shadow-sm"
+                    className="px-3.5 py-1.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/80 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 disabled:opacity-40 disabled:cursor-not-allowed transition-all flex items-center gap-1.5 shadow-sm"
                   >
                     <span>Next</span>
                     <ChevronRight className="w-4 h-4" />
@@ -904,30 +904,30 @@ export const ImageStudioView: React.FC<ImageStudioViewProps> = ({ onOpenUpgradeM
 
       {/* CHOOSE A MODEL MODAL (Exact Categorized Directory) */}
       {isModelModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-in fade-in duration-200">
-          <div className="w-full max-w-3xl rounded-3xl bg-slate-900 border border-slate-800 shadow-2xl overflow-hidden flex flex-col max-h-[85vh]">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 dark:bg-black/80 backdrop-blur-md animate-in fade-in duration-200">
+          <div className="w-full max-w-3xl rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden flex flex-col max-h-[85vh]">
             {/* Modal Header */}
-            <div className="p-5 border-b border-slate-800 flex items-center justify-between gap-4">
+            <div className="p-5 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between gap-4">
               <div>
-                <h3 className="text-lg font-bold text-white flex items-center gap-2">
-                  <Sparkles className="w-5 h-5 text-indigo-400" />
+                <h3 className="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                  <Sparkles className="w-5 h-5 text-indigo-500 dark:text-indigo-400" />
                   <span>Choose a Diffusion Model</span>
                 </h3>
-                <p className="text-xs text-slate-400">
+                <p className="text-xs text-slate-500 dark:text-slate-400">
                   Select from Google, OpenAI, and Frontier image generation checkpoints
                 </p>
               </div>
 
               <button
                 onClick={() => setIsModelModalOpen(false)}
-                className="p-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
+                className="p-2 rounded-xl text-slate-400 hover:text-slate-700 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
 
             {/* Filter Tabs & Search Bar */}
-            <div className="p-4 border-b border-slate-800/80 bg-slate-950/40 space-y-3">
+            <div className="p-4 border-b border-slate-200 dark:border-slate-800/80 bg-slate-50 dark:bg-slate-950/40 space-y-3">
               {/* Search Bar */}
               <div className="relative">
                 <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
@@ -936,12 +936,12 @@ export const ImageStudioView: React.FC<ImageStudioViewProps> = ({ onOpenUpgradeM
                   placeholder="Search models by name, tier, or features..."
                   value={modelSearch}
                   onChange={(e) => setModelSearch(e.target.value)}
-                  className="w-full pl-9 pr-3 py-2 bg-slate-900 border border-slate-800 rounded-xl text-xs text-slate-200 placeholder:text-slate-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+                  className="w-full pl-9 pr-3 py-2 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-800 rounded-xl text-xs text-slate-900 dark:text-slate-200 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
                 />
                 {modelSearch && (
                   <button
                     onClick={() => setModelSearch('')}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700 dark:hover:text-white"
                   >
                     <X className="w-3.5 h-3.5" />
                   </button>
@@ -962,7 +962,7 @@ export const ImageStudioView: React.FC<ImageStudioViewProps> = ({ onOpenUpgradeM
                     className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap ${
                       modelTierFilter === tab.id
                         ? 'bg-indigo-600 text-white shadow-sm'
-                        : 'bg-slate-900 text-slate-400 hover:text-white hover:bg-slate-800'
+                        : 'bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-transparent'
                     }`}
                   >
                     {tab.label}
@@ -974,7 +974,7 @@ export const ImageStudioView: React.FC<ImageStudioViewProps> = ({ onOpenUpgradeM
             {/* Models Scrollable List */}
             <div className="flex-1 overflow-y-auto p-4 space-y-3 custom-scrollbar">
               {filteredModels.length === 0 ? (
-                <div className="py-12 text-center text-slate-400 text-xs">
+                <div className="py-12 text-center text-slate-500 dark:text-slate-400 text-xs">
                   No diffusion models matched your search "{modelSearch}"
                 </div>
               ) : (
@@ -990,33 +990,33 @@ export const ImageStudioView: React.FC<ImageStudioViewProps> = ({ onOpenUpgradeM
                       }}
                       className={`p-3.5 rounded-2xl border cursor-pointer transition-all duration-200 flex items-start justify-between gap-4 group ${
                         isSelected
-                          ? 'bg-indigo-600/15 border-indigo-500/50 shadow-md ring-1 ring-indigo-500/30'
-                          : 'bg-slate-950/60 border-slate-800/80 hover:bg-slate-850 hover:border-slate-700'
+                          ? 'bg-indigo-50/80 dark:bg-indigo-600/15 border-indigo-400 dark:border-indigo-500/50 shadow-md ring-1 ring-indigo-500/30'
+                          : 'bg-slate-50/80 dark:bg-slate-950/60 border-slate-200 dark:border-slate-800/80 hover:bg-slate-100 dark:hover:bg-slate-850 hover:border-slate-300 dark:hover:border-slate-700'
                       }`}
                     >
                       <div className="flex items-start gap-3 truncate">
-                        <div className="w-10 h-10 rounded-xl bg-slate-900 border border-slate-700 flex items-center justify-center text-lg shrink-0 group-hover:scale-105 transition-transform">
+                        <div className="w-10 h-10 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 flex items-center justify-center text-lg shrink-0 group-hover:scale-105 transition-transform shadow-xs">
                           {m.avatar}
                         </div>
                         <div className="truncate">
                           <div className="flex items-center gap-2 flex-wrap">
-                            <span className="font-bold text-sm text-white group-hover:text-indigo-300 transition-colors">
+                            <span className="font-bold text-sm text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors">
                               {m.name}
                             </span>
-                            <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-800 text-slate-300 border border-slate-700">
+                            <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700">
                               {m.provider}
                             </span>
-                            <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-purple-500/20 text-purple-300 border border-purple-500/30">
+                            <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-purple-500/10 dark:bg-purple-500/20 text-purple-700 dark:text-purple-300 border border-purple-500/20 dark:border-purple-500/30">
                               {m.badge}
                             </span>
                           </div>
-                          <p className="text-xs text-slate-400 mt-1 line-clamp-2">
+                          <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 line-clamp-2">
                             {m.description}
                           </p>
                           <div className="flex items-center gap-3 mt-2 text-[10px] text-slate-500">
-                            <span>Speed: <strong className="text-emerald-400">{m.speed}</strong></span>
+                            <span>Speed: <strong className="text-emerald-600 dark:text-emerald-400">{m.speed}</strong></span>
                             <span>•</span>
-                            <span>Fidelity: <strong className="text-indigo-400">{m.quality}</strong></span>
+                            <span>Fidelity: <strong className="text-indigo-600 dark:text-indigo-400">{m.quality}</strong></span>
                           </div>
                         </div>
                       </div>
@@ -1026,7 +1026,7 @@ export const ImageStudioView: React.FC<ImageStudioViewProps> = ({ onOpenUpgradeM
                           className={`w-6 h-6 rounded-full flex items-center justify-center transition-all ${
                             isSelected
                               ? 'bg-indigo-600 text-white shadow-sm'
-                              : 'border border-slate-700 group-hover:border-indigo-400 text-transparent'
+                              : 'border border-slate-300 dark:border-slate-700 group-hover:border-indigo-400 text-transparent'
                           }`}
                         >
                           <Check className="w-3.5 h-3.5 stroke-[3]" />
@@ -1039,11 +1039,11 @@ export const ImageStudioView: React.FC<ImageStudioViewProps> = ({ onOpenUpgradeM
             </div>
 
             {/* Modal Footer */}
-            <div className="p-4 border-t border-slate-800 bg-slate-950/60 flex items-center justify-between text-xs text-slate-400">
-              <span>Selected: <strong className="text-white">{activeModel.name}</strong> ({activeModel.provider})</span>
+            <div className="p-4 border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950/60 flex items-center justify-between text-xs text-slate-600 dark:text-slate-400">
+              <span>Selected: <strong className="text-slate-900 dark:text-white">{activeModel.name}</strong> ({activeModel.provider})</span>
               <button
                 onClick={() => setIsModelModalOpen(false)}
-                className="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-semibold transition-colors"
+                className="px-4 py-2 rounded-xl bg-slate-200 hover:bg-slate-300 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-800 dark:text-white font-semibold transition-colors"
               >
                 Close
               </button>
@@ -1054,17 +1054,17 @@ export const ImageStudioView: React.FC<ImageStudioViewProps> = ({ onOpenUpgradeM
 
       {/* FULL-RESOLUTION PREVIEW MODAL */}
       {previewCreation && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-xl animate-in fade-in duration-200">
-          <div className="w-full max-w-4xl rounded-3xl bg-slate-900 border border-slate-800 shadow-2xl overflow-hidden flex flex-col max-h-[92vh]">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/70 dark:bg-black/90 backdrop-blur-xl animate-in fade-in duration-200">
+          <div className="w-full max-w-4xl rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden flex flex-col max-h-[92vh]">
             {/* Header */}
-            <div className="p-4 border-b border-slate-800 flex items-center justify-between gap-3">
+            <div className="p-4 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between gap-3">
               <div className="flex items-center gap-2 truncate">
-                <span className="text-xs font-bold text-white truncate">{previewCreation.model}</span>
-                <span className="text-[10px] px-2 py-0.5 rounded bg-indigo-500/20 text-indigo-300 font-semibold border border-indigo-500/30">
+                <span className="text-xs font-bold text-slate-900 dark:text-white truncate">{previewCreation.model}</span>
+                <span className="text-[10px] px-2 py-0.5 rounded bg-indigo-50 dark:bg-indigo-500/20 text-indigo-700 dark:text-indigo-300 font-semibold border border-indigo-200 dark:border-indigo-500/30">
                   {previewCreation.aspectRatio}
                 </span>
                 {previewCreation.hasReference && (
-                  <span className="text-[10px] px-2 py-0.5 rounded bg-purple-500/20 text-purple-300 font-semibold border border-purple-500/30">
+                  <span className="text-[10px] px-2 py-0.5 rounded bg-purple-50 dark:bg-purple-500/20 text-purple-700 dark:text-purple-300 font-semibold border border-purple-200 dark:border-purple-500/30">
                     Ref Strength {previewCreation.referenceStrength}
                   </span>
                 )}
@@ -1073,7 +1073,7 @@ export const ImageStudioView: React.FC<ImageStudioViewProps> = ({ onOpenUpgradeM
               <div className="flex items-center gap-2">
                 <button
                   onClick={() => handleCopyPrompt(previewCreation.prompt)}
-                  className="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-200 hover:text-white flex items-center gap-1.5 transition-colors"
+                  className="px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-xs font-semibold text-slate-700 hover:text-slate-900 dark:text-slate-200 dark:hover:text-white flex items-center gap-1.5 transition-colors border border-slate-200 dark:border-transparent"
                 >
                   <Copy className="w-3.5 h-3.5" />
                   <span className="hidden sm:inline">Copy Prompt</span>
@@ -1087,7 +1087,7 @@ export const ImageStudioView: React.FC<ImageStudioViewProps> = ({ onOpenUpgradeM
                 </button>
                 <button
                   onClick={() => setPreviewCreation(null)}
-                  className="p-1.5 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
+                  className="p-1.5 rounded-xl text-slate-400 hover:text-slate-700 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
                 >
                   <X className="w-5 h-5" />
                 </button>
@@ -1095,29 +1095,29 @@ export const ImageStudioView: React.FC<ImageStudioViewProps> = ({ onOpenUpgradeM
             </div>
 
             {/* Image Stage */}
-            <div className="flex-1 overflow-auto p-4 flex items-center justify-center bg-slate-950/80">
+            <div className="flex-1 overflow-auto p-4 flex items-center justify-center bg-slate-100 dark:bg-slate-950/80">
               <img
                 src={previewCreation.url}
                 alt={previewCreation.prompt}
-                className="max-h-[60vh] w-auto max-w-full rounded-2xl object-contain shadow-2xl border border-slate-800"
+                className="max-h-[60vh] w-auto max-w-full rounded-2xl object-contain shadow-2xl border border-slate-200 dark:border-slate-800"
               />
             </div>
 
             {/* Prompt & Metadata Details Footer */}
-            <div className="p-4 border-t border-slate-800 bg-slate-950/60 space-y-2.5">
+            <div className="p-4 border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950/60 space-y-2.5">
               <div className="space-y-1">
-                <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Generation Prompt</span>
-                <p className="text-xs text-slate-200 leading-relaxed font-mono select-all">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Generation Prompt</span>
+                <p className="text-xs text-slate-800 dark:text-slate-200 leading-relaxed font-mono select-all bg-white dark:bg-slate-900 p-2.5 rounded-xl border border-slate-200 dark:border-slate-800">
                   "{previewCreation.prompt}"
                 </p>
               </div>
 
-              <div className="flex flex-wrap items-center justify-between gap-3 pt-2 border-t border-slate-800/80 text-xs text-slate-400">
+              <div className="flex flex-wrap items-center justify-between gap-3 pt-2 border-t border-slate-200 dark:border-slate-800/80 text-xs text-slate-500 dark:text-slate-400">
                 <span>Created {previewCreation.timestamp} via {previewCreation.provider || 'EchoGPT Diffusion Engine'}</span>
                 
                 <button
                   onClick={() => handleRemix(previewCreation)}
-                  className="text-xs text-indigo-400 hover:text-indigo-300 font-semibold flex items-center gap-1.5 transition-colors"
+                  className="text-xs text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 font-semibold flex items-center gap-1.5 transition-colors"
                 >
                   <RotateCcw className="w-3.5 h-3.5" />
                   <span>Remix in Studio</span>

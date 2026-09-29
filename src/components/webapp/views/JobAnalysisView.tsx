@@ -369,23 +369,23 @@ ${analysisResult.recommendedInterviewPrep.map((q, i) => `${i + 1}. ${q}`).join('
   };
 
   return (
-    <div className="flex-1 flex flex-col h-full overflow-y-auto bg-slate-950 p-3 sm:p-6 lg:p-8 space-y-8 custom-scrollbar relative">
+    <div className="flex-1 flex flex-col h-full overflow-y-auto bg-[#F8FAFC] dark:bg-slate-950 text-slate-900 dark:text-slate-100 p-3 sm:p-6 lg:p-8 space-y-8 custom-scrollbar relative">
       {/* Main Container Aligned with Image Studio (max-w-6xl mx-auto w-full) */}
       <div className="max-w-6xl mx-auto w-full space-y-6">
         
         {/* Header Section */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div className="space-y-1">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-300 text-xs font-semibold uppercase tracking-wider">
-              <Briefcase className="w-3.5 h-3.5 text-emerald-400" />
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-200 dark:border-emerald-500/20 text-emerald-700 dark:text-emerald-300 text-xs font-semibold uppercase tracking-wider">
+              <Briefcase className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
               <span>Career & ATS Optimization</span>
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse ml-1" />
-              <span className="text-[10px] text-emerald-400 font-bold">Resume Studio</span>
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 dark:bg-emerald-400 animate-pulse ml-1" />
+              <span className="text-[10px] text-emerald-600 dark:text-emerald-400 font-bold">Resume Studio</span>
             </div>
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+            <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
               AI Job Analysis & Resume Studio
             </h1>
-            <p className="text-xs sm:text-sm text-slate-400">
+            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400">
               Analyze job descriptions, optimize ATS keyword matching, and craft tailored application materials in seconds.
             </p>
           </div>
@@ -394,11 +394,11 @@ ${analysisResult.recommendedInterviewPrep.map((q, i) => `${i + 1}. ${q}`).join('
           <div className="flex items-center gap-2.5">
             <button
               onClick={() => setIsHistoryOpen(true)}
-              className="px-4 py-2 rounded-xl bg-slate-900 border border-slate-800 hover:border-slate-700 text-xs sm:text-sm font-semibold text-slate-300 hover:text-white flex items-center gap-2 transition-all shadow-sm group"
+              className="px-4 py-2 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700 text-xs sm:text-sm font-semibold text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white flex items-center gap-2 transition-all shadow-sm group"
             >
-              <History className="w-4 h-4 text-emerald-400 group-hover:rotate-[-20deg] transition-transform" />
+              <History className="w-4 h-4 text-emerald-600 dark:text-emerald-400 group-hover:rotate-[-20deg] transition-transform" />
               <span>Job Analysis History</span>
-              <span className="px-1.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 text-[10px] font-mono font-bold">
+              <span className="px-1.5 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 text-[10px] font-mono font-bold">
                 {historyList.length}
               </span>
             </button>
@@ -416,10 +416,10 @@ ${analysisResult.recommendedInterviewPrep.map((q, i) => `${i + 1}. ${q}`).join('
                 key={card.id}
                 type="button"
                 onClick={() => handleCardClick(card.id)}
-                className={`p-4 sm:p-5 rounded-2xl border text-left transition-all duration-200 shadow-xl group flex flex-col justify-between space-y-3 backdrop-blur-xl hover:-translate-y-0.5 ${
+                className={`p-4 sm:p-5 rounded-2xl border text-left transition-all duration-200 shadow-sm dark:shadow-xl group flex flex-col justify-between space-y-3 backdrop-blur-xl hover:-translate-y-0.5 ${
                   isActive
-                    ? 'bg-slate-900 border-emerald-500/60 ring-1 ring-emerald-500/30'
-                    : 'bg-slate-900/80 hover:bg-slate-900 border-slate-800 hover:border-slate-700/80'
+                    ? 'bg-white dark:bg-slate-900 border-emerald-600 dark:border-emerald-500/60 ring-1 ring-emerald-500/30 shadow-md'
+                    : 'bg-white/90 dark:bg-slate-900/80 hover:bg-white dark:hover:bg-slate-900 border-slate-200/90 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700/80'
                 }`}
               >
                 <div className="space-y-2.5">
@@ -429,22 +429,22 @@ ${analysisResult.recommendedInterviewPrep.map((q, i) => `${i + 1}. ${q}`).join('
                     >
                       <Icon className="w-4 h-4" />
                     </div>
-                    <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-slate-950 text-emerald-400 border border-slate-800">
+                    <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-950 text-emerald-700 dark:text-emerald-400 border border-slate-200 dark:border-slate-800">
                       {card.badge}
                     </span>
                   </div>
 
                   <div>
-                    <h3 className="text-sm font-bold text-white group-hover:text-emerald-300 transition-colors">
+                    <h3 className="text-sm font-bold text-slate-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-300 transition-colors">
                       {card.title}
                     </h3>
-                    <p className="mt-1 text-xs text-slate-400 leading-relaxed min-h-[34px]">
+                    <p className="mt-1 text-xs text-slate-600 dark:text-slate-400 leading-relaxed min-h-[34px]">
                       {card.desc}
                     </p>
                   </div>
                 </div>
 
-                <div className="pt-2.5 border-t border-slate-800/80 flex items-center justify-between text-xs text-emerald-400 font-semibold group-hover:text-emerald-300 transition-colors">
+                <div className="pt-2.5 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between text-xs text-emerald-600 dark:text-emerald-400 font-semibold group-hover:text-emerald-700 dark:group-hover:text-emerald-300 transition-colors">
                   <span>Run Check</span>
                   <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                 </div>
@@ -454,43 +454,43 @@ ${analysisResult.recommendedInterviewPrep.map((q, i) => `${i + 1}. ${q}`).join('
         </div>
 
         {/* Input Form Panel (Stretching cleanly across the same container width) */}
-        <div className="rounded-2xl bg-slate-900/90 border border-slate-800 p-5 sm:p-7 space-y-5 shadow-2xl backdrop-blur-xl">
+        <div className="rounded-2xl bg-white/90 dark:bg-slate-900/90 border border-slate-200/90 dark:border-slate-800 p-5 sm:p-7 space-y-5 shadow-sm dark:shadow-2xl backdrop-blur-xl">
           
           {/* Header of Form Panel */}
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-800">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-200 dark:border-slate-800">
             <div>
-              <h2 className="text-base font-bold text-white flex items-center gap-2">
+              <h2 className="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
                 <span>Application Alignment Parameters</span>
-                <span className="text-[10px] px-2 py-0.5 rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
+                <span className="text-[10px] px-2 py-0.5 rounded-full bg-indigo-50 dark:bg-indigo-500/20 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-500/30">
                   Target Inputs
                 </span>
               </h2>
-              <p className="text-xs text-slate-400">
+              <p className="text-xs text-slate-600 dark:text-slate-400">
                 Provide your targeted role specifications and resume bullets for deep ATS scanning.
               </p>
             </div>
 
             {/* Quick Sample Fillers */}
             <div className="flex items-center gap-1.5 flex-wrap">
-              <span className="text-[11px] text-slate-400 font-medium mr-1">Load Demo:</span>
+              <span className="text-[11px] text-slate-500 dark:text-slate-400 font-medium mr-1">Load Demo:</span>
               <button
                 type="button"
                 onClick={() => handleLoadSample('frontend')}
-                className="px-2.5 py-1 rounded-lg bg-slate-800/80 hover:bg-slate-800 text-[11px] font-semibold text-slate-300 hover:text-white transition-colors border border-slate-700/60"
+                className="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-slate-800/80 dark:hover:bg-slate-800 text-[11px] font-semibold text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors border border-slate-200 dark:border-slate-700/60 shadow-sm"
               >
                 Frontend
               </button>
               <button
                 type="button"
                 onClick={() => handleLoadSample('ai')}
-                className="px-2.5 py-1 rounded-lg bg-slate-800/80 hover:bg-slate-800 text-[11px] font-semibold text-slate-300 hover:text-white transition-colors border border-slate-700/60"
+                className="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-slate-800/80 dark:hover:bg-slate-800 text-[11px] font-semibold text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors border border-slate-200 dark:border-slate-700/60 shadow-sm"
               >
                 AI Platform
               </button>
               <button
                 type="button"
                 onClick={() => handleLoadSample('fullstack')}
-                className="px-2.5 py-1 rounded-lg bg-slate-800/80 hover:bg-slate-800 text-[11px] font-semibold text-slate-300 hover:text-white transition-colors border border-slate-700/60"
+                className="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-slate-800/80 dark:hover:bg-slate-800 text-[11px] font-semibold text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors border border-slate-200 dark:border-slate-700/60 shadow-sm"
               >
                 Full-Stack
               </button>
@@ -500,8 +500,8 @@ ${analysisResult.recommendedInterviewPrep.map((q, i) => `${i + 1}. ${q}`).join('
           {/* Row 1: Target Job Title & Target Company */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="space-y-1.5">
-              <label className="text-xs font-semibold text-slate-300 flex items-center gap-1.5">
-                <Briefcase className="w-3.5 h-3.5 text-emerald-400" />
+              <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
+                <Briefcase className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
                 <span>Target Job Title</span>
               </label>
               <input
@@ -509,13 +509,13 @@ ${analysisResult.recommendedInterviewPrep.map((q, i) => `${i + 1}. ${q}`).join('
                 value={jobTitle}
                 onChange={(e) => setJobTitle(e.target.value)}
                 placeholder="e.g. Senior Frontend Engineer"
-                className="w-full bg-slate-950 border border-slate-700/80 rounded-xl px-4 py-2.5 text-xs sm:text-sm text-white placeholder:text-slate-600 focus:outline-none focus:ring-2 focus:ring-emerald-500 shadow-inner"
+                className="w-full bg-white dark:bg-slate-950 border border-slate-300 dark:border-slate-700/80 rounded-xl px-4 py-2.5 text-xs sm:text-sm text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-600 focus:outline-none focus:ring-2 focus:ring-emerald-500 shadow-sm"
               />
             </div>
 
             <div className="space-y-1.5">
-              <label className="text-xs font-semibold text-slate-300 flex items-center gap-1.5">
-                <Building className="w-3.5 h-3.5 text-indigo-400" />
+              <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
+                <Building className="w-3.5 h-3.5 text-indigo-600 dark:text-indigo-400" />
                 <span>Target Company / Organization</span>
               </label>
               <input
@@ -523,7 +523,7 @@ ${analysisResult.recommendedInterviewPrep.map((q, i) => `${i + 1}. ${q}`).join('
                 value={company}
                 onChange={(e) => setCompany(e.target.value)}
                 placeholder="e.g. Stripe, OpenAI, Vercel"
-                className="w-full bg-slate-950 border border-slate-700/80 rounded-xl px-4 py-2.5 text-xs sm:text-sm text-white placeholder:text-slate-600 focus:outline-none focus:ring-2 focus:ring-emerald-500 shadow-inner"
+                className="w-full bg-white dark:bg-slate-950 border border-slate-300 dark:border-slate-700/80 rounded-xl px-4 py-2.5 text-xs sm:text-sm text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-600 focus:outline-none focus:ring-2 focus:ring-emerald-500 shadow-sm"
               />
             </div>
           </div>
@@ -532,8 +532,8 @@ ${analysisResult.recommendedInterviewPrep.map((q, i) => `${i + 1}. ${q}`).join('
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="space-y-1.5">
               <div className="flex items-center justify-between">
-                <label className="text-xs font-semibold text-slate-300 flex items-center gap-1.5">
-                  <FileSearch className="w-3.5 h-3.5 text-teal-400" />
+                <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
+                  <FileSearch className="w-3.5 h-3.5 text-teal-600 dark:text-teal-400" />
                   <span>Paste Job Description</span>
                 </label>
                 <span className="text-[10px] text-slate-500 font-mono">{jobDescription.length} chars</span>
@@ -543,14 +543,14 @@ ${analysisResult.recommendedInterviewPrep.map((q, i) => `${i + 1}. ${q}`).join('
                 value={jobDescription}
                 onChange={(e) => setJobDescription(e.target.value)}
                 placeholder="Paste key qualifications, tech stack requirements, and responsibilities from the job listing..."
-                className="w-full bg-slate-950 border border-slate-700/80 rounded-xl p-3.5 text-xs text-white placeholder:text-slate-600 focus:outline-none focus:ring-2 focus:ring-emerald-500 resize-none leading-relaxed shadow-inner"
+                className="w-full bg-white dark:bg-slate-950 border border-slate-300 dark:border-slate-700/80 rounded-xl p-3.5 text-xs text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-600 focus:outline-none focus:ring-2 focus:ring-emerald-500 resize-none leading-relaxed shadow-sm"
               />
             </div>
 
             <div className="space-y-1.5">
               <div className="flex items-center justify-between">
-                <label className="text-xs font-semibold text-slate-300 flex items-center gap-1.5">
-                  <FileText className="w-3.5 h-3.5 text-purple-400" />
+                <label className="text-xs font-semibold text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
+                  <FileText className="w-3.5 h-3.5 text-purple-600 dark:text-purple-400" />
                   <span>Paste Current Resume / Profile</span>
                 </label>
                 <span className="text-[10px] text-slate-500 font-mono">{resumeSnippet.length} chars</span>
@@ -560,18 +560,18 @@ ${analysisResult.recommendedInterviewPrep.map((q, i) => `${i + 1}. ${q}`).join('
                 value={resumeSnippet}
                 onChange={(e) => setResumeSnippet(e.target.value)}
                 placeholder="Paste your current experience bullet points, accomplishments, technical skills, or LinkedIn bio..."
-                className="w-full bg-slate-950 border border-slate-700/80 rounded-xl p-3.5 text-xs text-white placeholder:text-slate-600 focus:outline-none focus:ring-2 focus:ring-emerald-500 resize-none leading-relaxed shadow-inner"
+                className="w-full bg-white dark:bg-slate-950 border border-slate-300 dark:border-slate-700/80 rounded-xl p-3.5 text-xs text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-600 focus:outline-none focus:ring-2 focus:ring-emerald-500 resize-none leading-relaxed shadow-sm"
               />
             </div>
           </div>
 
           {/* Form Action Controls */}
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-3 border-t border-slate-800">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-3 border-t border-slate-200 dark:border-slate-800">
             <div className="flex items-center gap-2">
               <button
                 type="button"
                 onClick={handleResetForm}
-                className="px-3 py-2 rounded-xl bg-slate-800/80 hover:bg-slate-800 text-xs font-semibold text-slate-400 hover:text-white transition-colors flex items-center gap-1.5"
+                className="px-3 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800/80 dark:hover:bg-slate-800 text-xs font-semibold text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors flex items-center gap-1.5 border border-slate-200 dark:border-slate-700/60 shadow-sm"
               >
                 <RotateCcw className="w-3.5 h-3.5" />
                 <span>Reset</span>
@@ -601,37 +601,37 @@ ${analysisResult.recommendedInterviewPrep.map((q, i) => `${i + 1}. ${q}`).join('
 
         {/* Results Panel */}
         {analysisResult && (
-          <div className="rounded-2xl bg-slate-900/90 border border-slate-800 p-5 sm:p-7 space-y-6 shadow-2xl backdrop-blur-xl animate-in fade-in">
+          <div className="rounded-2xl bg-white/90 dark:bg-slate-900/90 border border-slate-200/90 dark:border-slate-800 p-5 sm:p-7 space-y-6 shadow-sm dark:shadow-2xl backdrop-blur-xl animate-in fade-in">
             
             {/* Top Metrics Row */}
-            <div className="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-slate-800">
+            <div className="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-slate-200 dark:border-slate-800">
               <div className="flex items-center gap-4">
-                <div className="p-3 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 shadow-md">
+                <div className="p-3 rounded-2xl bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-200 dark:border-emerald-500/30 text-emerald-600 dark:text-emerald-400 shadow-sm">
                   <Target className="w-6 h-6" />
                 </div>
                 <div>
-                  <span className="text-xs font-semibold text-slate-400 block">Overall Alignment Score</span>
+                  <span className="text-xs font-semibold text-slate-500 dark:text-slate-400 block">Overall Alignment Score</span>
                   <div className="flex items-baseline gap-2">
-                    <span className="text-3xl font-extrabold text-white tracking-tight">
+                    <span className="text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
                       {analysisResult.matchScore}
                     </span>
-                    <span className="text-xs font-semibold text-emerald-400">Match Accuracy</span>
+                    <span className="text-xs font-semibold text-emerald-600 dark:text-emerald-400">Match Accuracy</span>
                   </div>
                 </div>
               </div>
 
               <div className="flex items-center gap-2.5 flex-wrap">
-                <div className="px-3.5 py-1.5 rounded-xl bg-slate-950 border border-slate-800 text-xs shadow-inner">
-                  <span className="text-slate-400 mr-2">ATS Readability:</span>
-                  <span className="font-bold text-emerald-400">{analysisResult.atsRating}</span>
+                <div className="px-3.5 py-1.5 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-xs shadow-inner">
+                  <span className="text-slate-500 dark:text-slate-400 mr-2">ATS Readability:</span>
+                  <span className="font-bold text-emerald-600 dark:text-emerald-400">{analysisResult.atsRating}</span>
                 </div>
 
                 <button
                   type="button"
                   onClick={handleExportMarkdown}
-                  className="px-3.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-white flex items-center gap-1.5 transition-colors border border-slate-700/60"
+                  className="px-3.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-xs font-semibold text-slate-700 hover:text-slate-900 dark:text-white flex items-center gap-1.5 transition-colors border border-slate-200 dark:border-slate-700/60 shadow-sm"
                 >
-                  <Download className="w-3.5 h-3.5 text-indigo-400" />
+                  <Download className="w-3.5 h-3.5 text-indigo-600 dark:text-indigo-400" />
                   <span>Export Report</span>
                 </button>
               </div>
@@ -639,30 +639,30 @@ ${analysisResult.recommendedInterviewPrep.map((q, i) => `${i + 1}. ${q}`).join('
 
             {/* Strengths & Improvements 2-Column Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className="p-4 sm:p-5 rounded-xl bg-slate-950/70 border border-slate-800/80 space-y-3 shadow-inner">
-                <h4 className="text-xs font-bold text-emerald-400 uppercase tracking-wider flex items-center gap-1.5">
+              <div className="p-4 sm:p-5 rounded-xl bg-slate-50 dark:bg-slate-950/70 border border-slate-200 dark:border-slate-800/80 space-y-3 shadow-inner">
+                <h4 className="text-xs font-bold text-emerald-700 dark:text-emerald-400 uppercase tracking-wider flex items-center gap-1.5">
                   <CheckCircle2 className="w-4 h-4" />
                   <span>Key Match Strengths</span>
                 </h4>
-                <ul className="space-y-2 text-xs text-slate-300">
+                <ul className="space-y-2 text-xs text-slate-700 dark:text-slate-300">
                   {analysisResult.keyStrengths.map((s, idx) => (
                     <li key={idx} className="flex items-start gap-2.5 leading-relaxed">
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 mt-1.5 shrink-0" />
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 dark:bg-emerald-400 mt-1.5 shrink-0" />
                       <span>{s}</span>
                     </li>
                   ))}
                 </ul>
               </div>
 
-              <div className="p-4 sm:p-5 rounded-xl bg-slate-950/70 border border-slate-800/80 space-y-3 shadow-inner">
-                <h4 className="text-xs font-bold text-amber-400 uppercase tracking-wider flex items-center gap-1.5">
+              <div className="p-4 sm:p-5 rounded-xl bg-slate-50 dark:bg-slate-950/70 border border-slate-200 dark:border-slate-800/80 space-y-3 shadow-inner">
+                <h4 className="text-xs font-bold text-amber-700 dark:text-amber-400 uppercase tracking-wider flex items-center gap-1.5">
                   <AlertTriangle className="w-4 h-4" />
                   <span>Recommended Enhancements</span>
                 </h4>
-                <ul className="space-y-2 text-xs text-slate-300">
+                <ul className="space-y-2 text-xs text-slate-700 dark:text-slate-300">
                   {analysisResult.suggestedImprovements.map((s, idx) => (
                     <li key={idx} className="flex items-start gap-2.5 leading-relaxed">
-                      <span className="w-1.5 h-1.5 rounded-full bg-amber-400 mt-1.5 shrink-0" />
+                      <span className="w-1.5 h-1.5 rounded-full bg-amber-500 dark:bg-amber-400 mt-1.5 shrink-0" />
                       <span>{s}</span>
                     </li>
                   ))}
@@ -673,19 +673,19 @@ ${analysisResult.recommendedInterviewPrep.map((q, i) => `${i + 1}. ${q}`).join('
             {/* Tailored Professional Summary Box */}
             <div className="space-y-2.5">
               <div className="flex items-center justify-between">
-                <h4 className="text-xs font-bold uppercase tracking-wider text-slate-300 flex items-center gap-2">
-                  <Sparkles className="w-3.5 h-3.5 text-indigo-400" />
+                <h4 className="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 flex items-center gap-2">
+                  <Sparkles className="w-3.5 h-3.5 text-indigo-600 dark:text-indigo-400" />
                   <span>Tailored Professional Headline & Summary</span>
                 </h4>
                 <button
                   type="button"
                   onClick={handleCopySummary}
-                  className="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-xs text-indigo-300 hover:text-white flex items-center gap-1.5 transition-colors"
+                  className="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-xs text-indigo-700 dark:text-indigo-300 hover:text-indigo-900 dark:hover:text-white flex items-center gap-1.5 transition-colors border border-slate-200 dark:border-slate-700/60 shadow-sm"
                 >
                   {copiedSummary ? (
                     <>
-                      <Check className="w-3.5 h-3.5 text-emerald-400" />
-                      <span className="text-emerald-400 font-semibold">Copied</span>
+                      <Check className="w-3.5 h-3.5 text-emerald-600 dark:text-emerald-400" />
+                      <span className="text-emerald-600 dark:text-emerald-400 font-semibold">Copied</span>
                     </>
                   ) : (
                     <>
@@ -696,24 +696,24 @@ ${analysisResult.recommendedInterviewPrep.map((q, i) => `${i + 1}. ${q}`).join('
                 </button>
               </div>
 
-              <div className="p-4 rounded-xl bg-slate-950 border border-slate-800 text-xs sm:text-sm text-slate-200 leading-relaxed font-sans shadow-inner">
+              <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-xs sm:text-sm text-slate-800 dark:text-slate-200 leading-relaxed font-sans shadow-inner">
                 {analysisResult.tailoredSummary}
               </div>
             </div>
 
             {/* Recommended Interview Questions */}
             <div className="space-y-3">
-              <h4 className="text-xs font-bold uppercase tracking-wider text-slate-300 flex items-center gap-2">
-                <HelpCircle className="w-3.5 h-3.5 text-purple-400" />
+              <h4 className="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 flex items-center gap-2">
+                <HelpCircle className="w-3.5 h-3.5 text-purple-600 dark:text-purple-400" />
                 <span>Top Architectural Interview Questions for this Role</span>
               </h4>
               <div className="space-y-2.5">
                 {analysisResult.recommendedInterviewPrep.map((q, idx) => (
                   <div
                     key={idx}
-                    className="p-3.5 rounded-xl bg-slate-950/80 border border-slate-800 text-xs sm:text-sm text-slate-300 flex items-start gap-3 shadow-inner"
+                    className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-950/80 border border-slate-200 dark:border-slate-800 text-xs sm:text-sm text-slate-800 dark:text-slate-300 flex items-start gap-3 shadow-inner"
                   >
-                    <span className="w-5 h-5 rounded-full bg-slate-800 text-indigo-300 flex items-center justify-center font-bold text-[10px] shrink-0 mt-0.5">
+                    <span className="w-5 h-5 rounded-full bg-white dark:bg-slate-800 text-indigo-600 dark:text-indigo-300 border border-slate-200 dark:border-slate-700 flex items-center justify-center font-bold text-[10px] shrink-0 mt-0.5 shadow-sm">
                       {idx + 1}
                     </span>
                     <span className="leading-relaxed">{q}</span>
@@ -730,23 +730,23 @@ ${analysisResult.recommendedInterviewPrep.map((q, i) => `${i + 1}. ${q}`).join('
         <div className="fixed inset-0 z-50 overflow-hidden animate-in fade-in duration-200">
           {/* Backdrop */}
           <div
-            className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+            className="absolute inset-0 bg-black/50 dark:bg-black/60 backdrop-blur-sm"
             onClick={() => setIsHistoryOpen(false)}
           />
 
           {/* Drawer Container */}
           <div className="fixed inset-y-0 right-0 max-w-full flex pl-10">
-            <div className="w-screen max-w-md bg-slate-900 border-l border-slate-800 shadow-2xl flex flex-col justify-between overflow-hidden">
+            <div className="w-screen max-w-md bg-white dark:bg-slate-900 border-l border-slate-200 dark:border-slate-800 shadow-2xl flex flex-col justify-between overflow-hidden">
               
               {/* Drawer Header */}
-              <div className="p-5 border-b border-slate-800 flex items-center justify-between">
+              <div className="p-5 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
                 <div className="flex items-center gap-2.5">
-                  <div className="p-2 rounded-xl bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                  <div className="p-2 rounded-xl bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-500/20">
                     <History className="w-5 h-5" />
                   </div>
                   <div>
-                    <h3 className="text-sm font-bold text-white">Job Analysis History</h3>
-                    <p className="text-[11px] text-slate-400">
+                    <h3 className="text-sm font-bold text-slate-900 dark:text-white">Job Analysis History</h3>
+                    <p className="text-[11px] text-slate-500 dark:text-slate-400">
                       {historyList.length} saved career dossiers
                     </p>
                   </div>
@@ -755,7 +755,7 @@ ${analysisResult.recommendedInterviewPrep.map((q, i) => `${i + 1}. ${q}`).join('
                 <button
                   type="button"
                   onClick={() => setIsHistoryOpen(false)}
-                  className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
+                  className="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
                 >
                   <X className="w-4 h-4" />
                 </button>
@@ -765,8 +765,8 @@ ${analysisResult.recommendedInterviewPrep.map((q, i) => `${i + 1}. ${q}`).join('
               <div className="flex-1 overflow-y-auto p-4 space-y-3 custom-scrollbar">
                 {historyList.length === 0 ? (
                   <div className="py-16 text-center space-y-2">
-                    <Briefcase className="w-8 h-8 text-slate-600 mx-auto" />
-                    <p className="text-sm font-semibold text-slate-400">No past analyses saved</p>
+                    <Briefcase className="w-8 h-8 text-slate-400 dark:text-slate-600 mx-auto" />
+                    <p className="text-sm font-semibold text-slate-600 dark:text-slate-400">No past analyses saved</p>
                     <p className="text-xs text-slate-500">Run an analysis to save career dossiers</p>
                   </div>
                 ) : (
@@ -774,33 +774,33 @@ ${analysisResult.recommendedInterviewPrep.map((q, i) => `${i + 1}. ${q}`).join('
                     <div
                       key={item.id}
                       onClick={() => handleRestoreHistory(item)}
-                      className="p-4 rounded-xl bg-slate-950/70 hover:bg-slate-950 border border-slate-800/80 hover:border-emerald-500/40 cursor-pointer transition-all space-y-2.5 group shadow-md"
+                      className="p-4 rounded-xl bg-slate-50 dark:bg-slate-950/70 hover:bg-white dark:hover:bg-slate-950 border border-slate-200 dark:border-slate-800/80 hover:border-emerald-500/40 cursor-pointer transition-all space-y-2.5 group shadow-sm"
                     >
                       <div className="flex items-start justify-between gap-2">
                         <div>
-                          <h4 className="text-xs font-bold text-white group-hover:text-emerald-300 transition-colors">
+                          <h4 className="text-xs font-bold text-slate-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-300 transition-colors">
                             {item.jobTitle}
                           </h4>
-                          <p className="text-[11px] text-slate-400">{item.company}</p>
+                          <p className="text-[11px] text-slate-500 dark:text-slate-400">{item.company}</p>
                         </div>
 
                         <div className="flex items-center gap-1.5">
-                          <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                          <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-500/20">
                             {item.result.matchScore}
                           </span>
                           <button
                             type="button"
                             onClick={(e) => handleDeleteHistory(item.id, e)}
-                            className="p-1 rounded-lg text-slate-500 hover:text-rose-400 hover:bg-slate-800 transition-colors"
+                            className="p-1 rounded-lg text-slate-400 hover:text-rose-500 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
                           >
                             <Trash2 className="w-3.5 h-3.5" />
                           </button>
                         </div>
                       </div>
 
-                      <div className="flex items-center justify-between text-[11px] text-slate-500 pt-2 border-t border-slate-800/60">
+                      <div className="flex items-center justify-between text-[11px] text-slate-500 pt-2 border-t border-slate-200 dark:border-slate-800/60">
                         <span>{item.date}</span>
-                        <span className="text-emerald-400 font-medium flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
+                        <span className="text-emerald-600 dark:text-emerald-400 font-medium flex items-center gap-1 group-hover:translate-x-0.5 transition-transform">
                           <span>Restore</span>
                           <ChevronRight className="w-3.5 h-3.5" />
                         </span>
@@ -811,12 +811,12 @@ ${analysisResult.recommendedInterviewPrep.map((q, i) => `${i + 1}. ${q}`).join('
               </div>
 
               {/* Drawer Footer */}
-              <div className="p-4 border-t border-slate-800 flex items-center justify-between text-xs text-slate-400 bg-slate-950/50">
+              <div className="p-4 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between text-xs text-slate-500 dark:text-slate-400 bg-slate-50 dark:bg-slate-950/50">
                 <span>Click any record to reload analysis</span>
                 <button
                   type="button"
                   onClick={() => setIsHistoryOpen(false)}
-                  className="px-3.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-white font-semibold transition-colors"
+                  className="px-3.5 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 hover:text-slate-900 dark:text-white font-semibold transition-colors border border-slate-200 dark:border-slate-700/60 shadow-sm"
                 >
                   Close
                 </button>
