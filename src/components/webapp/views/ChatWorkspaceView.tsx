@@ -19,7 +19,10 @@ import {
   X,
   FileText,
   Loader2,
-  ChevronDown
+  ChevronDown,
+  Zap,
+  Trash2,
+  AlertTriangle
 } from 'lucide-react';
 
 interface ChatWorkspaceViewProps {
@@ -45,7 +48,8 @@ export const ChatWorkspaceView: React.FC<ChatWorkspaceViewProps> = ({
     selectedModelId,
     showToast,
     pendingPrompt,
-    setPendingPrompt
+    setPendingPrompt,
+    clearCurrentMessages
   } = useApp();
 
   const [inputText, setInputText] = useState<string>('');
@@ -239,6 +243,48 @@ export const ChatWorkspaceView: React.FC<ChatWorkspaceViewProps> = ({
 
   return (
     <div className="flex-1 flex flex-col h-full overflow-hidden bg-slate-950 relative">
+      {/* Top Workspace Header Bar: Selected Model Pill, Token Speed Counter, Live Status, Clear Chat */}
+      <div className="px-4 py-2.5 sm:px-6 border-b border-slate-800/80 bg-slate-900/60 backdrop-blur-md flex items-center justify-between text-xs shrink-0 z-10">
+        <div className="flex items-center gap-2 sm:gap-2.5">
+          <button
+            onClick={onOpenModelSelector}
+            className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-800/90 hover:bg-slate-800 border border-slate-700/60 hover:border-slate-600 text-white font-medium transition-all group shadow-sm"
+            title="Switch Model"
+          >
+            <span className="text-sm">{currentModel.avatar}</span>
+            <span className="font-semibold text-slate-100">{currentModel.name}</span>
+            <span className="px-1.5 py-0.5 rounded text-[10px] bg-cyan-500/10 text-cyan-300 border border-cyan-500/20 font-bold hidden sm:inline">
+              {currentModel.badge}
+            </span>
+            <ChevronDown className="w-3.5 h-3.5 text-slate-400 group-hover:text-white transition-colors" />
+          </button>
+
+          <div className="hidden md:flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-slate-850/60 border border-slate-800 text-slate-400 text-[11px] font-mono">
+            <Zap className="w-3 h-3 text-amber-400 shrink-0" />
+            <span>Speed:</span>
+            <span className="text-slate-200 font-semibold">{currentModel.speed}</span>
+          </div>
+
+          <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-[11px]">
+            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0" />
+            <span className="font-medium">Live AI Online</span>
+          </div>
+        </div>
+
+        <div className="flex items-center gap-2">
+          {messages.length > 0 && (
+            <button
+              onClick={clearCurrentMessages}
+              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-slate-400 hover:text-rose-300 hover:bg-rose-500/10 border border-transparent hover:border-rose-500/20 transition-all text-xs"
+              title="Clear current conversation messages"
+            >
+              <Trash2 className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline">Clear Chat</span>
+            </button>
+          )}
+        </div>
+      </div>
+
       {/* Messages / Welcome Container */}
       <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-6">
         <div className="max-w-4xl mx-auto space-y-6">
@@ -351,9 +397,40 @@ export const ChatWorkspaceView: React.FC<ChatWorkspaceViewProps> = ({
                         <p className="whitespace-pre-wrap">{msg.content}</p>
                       ) : (
                         <div className="relative">
-                          <MarkdownRenderer content={msg.content} />
-                          {isStreamingThisMsg && (
-                            <span className="inline-block w-2 h-4 ml-1 align-middle bg-cyan-400 animate-pulse rounded-sm" />
+                          {msg.content ? (
+                            <>
+                              <MarkdownRenderer content={msg.content} />
+                              {isStreamingThisMsg && (
+                                <span className="inline-block w-2 h-4 ml-1 align-middle bg-cyan-400 animate-pulse rounded-sm" />
+                              )}
+                            </>
+                          ) : (
+                            /* Streaming placeholder while awaiting tokens */
+                            <div className="flex items-center gap-2.5 py-1 text-slate-400 text-xs">
+                              <div className="flex gap-1">
+                                <span className="w-2 h-2 rounded-full bg-cyan-400 animate-bounce" style={{ animationDelay: '0ms' }} />
+                                <span className="w-2 h-2 rounded-full bg-indigo-400 animate-bounce" style={{ animationDelay: '150ms' }} />
+                                <span className="w-2 h-2 rounded-full bg-purple-400 animate-bounce" style={{ animationDelay: '300ms' }} />
+                              </div>
+                              <span className="italic text-slate-400">{msg.modelName || currentModel.name} is formulating real AI response...</span>
+                            </div>
+                          )}
+
+                          {/* Error Badge - only shown if explicitly triggered and empty */}
+                          {msg.error && (!msg.content || msg.content.trim() === '') && (
+                            <div className="mt-3 p-3 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-300 text-xs flex items-center justify-between gap-3 animate-in fade-in">
+                              <div className="flex items-center gap-2">
+                                <AlertTriangle className="w-4 h-4 text-rose-400 shrink-0" />
+                                <span>Please enter a prompt to begin.</span>
+                              </div>
+                              <button
+                                onClick={() => handleRetry(idx)}
+                                className="px-3 py-1 rounded-lg bg-rose-500/20 hover:bg-rose-500/30 text-rose-200 border border-rose-500/30 font-semibold flex items-center gap-1.5 transition-colors shrink-0"
+                              >
+                                <RotateCcw className="w-3.5 h-3.5" />
+                                <span>Retry</span>
+                              </button>
+                            </div>
                           )}
                         </div>
                       )}

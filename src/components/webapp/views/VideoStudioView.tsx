@@ -13,6 +13,8 @@ import {
   X,
   Sliders,
   ChevronDown,
+  ChevronLeft,
+  ChevronRight,
   Search,
   Copy,
   Trash2,
@@ -91,6 +93,126 @@ const INITIAL_VIDEOS: CreatedVideo[] = [
     hasReference: false,
     thumbnail: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=1200&auto=format&fit=crop&q=80',
     timestamp: '2 days ago'
+  },
+  {
+    id: 'vid-demo-5',
+    title: 'Orbital Station Solar Flare',
+    prompt: 'Cinematic slow orbital sweep of an intricate glass and titanium space station orbiting Jupiter with solar flares in background',
+    model: 'Sora Pro',
+    provider: 'OpenAI',
+    aspectRatio: '16:9',
+    duration: '8s',
+    resolution: '4K Ultra HD',
+    fps: '60fps',
+    motionStrength: 55,
+    hasReference: false,
+    thumbnail: 'https://images.unsplash.com/photo-1506703719100-a0f3a48c0f86?w=1200&auto=format&fit=crop&q=80',
+    timestamp: '3 days ago'
+  },
+  {
+    id: 'vid-demo-6',
+    title: 'Holographic Fluid Particle Flow',
+    prompt: 'Iridescent liquid simulation flowing through glowing fiber-optic grids, vertical neon aesthetic, ultra crisp motion blur',
+    model: 'Kling 2.0 Master',
+    provider: 'Kuaishou AI',
+    aspectRatio: '9:16',
+    duration: '6s',
+    resolution: '1080p 60fps',
+    fps: '60fps',
+    motionStrength: 78,
+    hasReference: false,
+    thumbnail: 'https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?w=1200&auto=format&fit=crop&q=80',
+    timestamp: '4 days ago'
+  },
+  {
+    id: 'vid-demo-7',
+    title: 'Glacial Cavern FPV Drone Descent',
+    prompt: 'Fast FPV drone diving through an icy glacial crevasse with shimmering blue crystal ice and sunlight shafts piercing the mist',
+    model: 'Runway Gen-3 Alpha',
+    provider: 'Runway ML',
+    aspectRatio: '16:9',
+    duration: '6s',
+    resolution: '4K Ultra HD',
+    fps: '60fps',
+    motionStrength: 90,
+    hasReference: false,
+    thumbnail: 'https://images.unsplash.com/photo-1517411032315-54ef2cb783bb?w=1200&auto=format&fit=crop&q=80',
+    timestamp: '5 days ago'
+  },
+  {
+    id: 'vid-demo-8',
+    title: 'Microscopic Nanotech Core Assembly',
+    prompt: 'Nanobots assembling an intricate hexagonal crystalline quantum processor, macro cinematic depth of field, golden electrical sparks',
+    model: 'Luma Dream Machine 2',
+    provider: 'Luma AI',
+    aspectRatio: '1:1',
+    duration: '8s',
+    resolution: '1080p 60fps',
+    fps: '60fps',
+    motionStrength: 60,
+    hasReference: false,
+    thumbnail: 'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=1200&auto=format&fit=crop&q=80',
+    timestamp: '6 days ago'
+  },
+  {
+    id: 'vid-demo-9',
+    title: 'Bioluminescent Canopy Canopy Glide',
+    prompt: 'Slow glide through an ancient twilight forest with neon fungi, glowing pollen floating like stars, hyper-realistic physics',
+    model: 'Veo 3.1 Fast',
+    provider: 'Google DeepMind',
+    aspectRatio: '16:9',
+    duration: '6s',
+    resolution: '1080p 60fps',
+    fps: '60fps',
+    motionStrength: 50,
+    hasReference: false,
+    thumbnail: 'https://images.unsplash.com/photo-1511447333015-45b65e60f6d5?w=1200&auto=format&fit=crop&q=80',
+    timestamp: '1 week ago'
+  },
+  {
+    id: 'vid-demo-10',
+    title: 'Cybernetic Humanoid Eye Lens Focus',
+    prompt: 'Extreme macro zoom into an artificial bionic iris revealing micro-aperture blades spinning, laser alignment, and HUD reflections',
+    model: 'Sora v2 Turbo',
+    provider: 'OpenAI',
+    aspectRatio: '9:16',
+    duration: '8s',
+    resolution: '4K Ultra HD',
+    fps: '60fps',
+    motionStrength: 68,
+    hasReference: false,
+    thumbnail: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=1200&auto=format&fit=crop&q=80',
+    timestamp: '1 week ago'
+  },
+  {
+    id: 'vid-demo-11',
+    title: 'Atmospheric Re-entry Plasma Burn',
+    prompt: 'Space capsule entering upper atmosphere surrounded by glowing fiery hypersonic plasma sheath, high dynamic range cinematic shot',
+    model: 'Runway Gen-3 Alpha',
+    provider: 'Runway ML',
+    aspectRatio: '16:9',
+    duration: '6s',
+    resolution: '1080p 60fps',
+    fps: '60fps',
+    motionStrength: 82,
+    hasReference: false,
+    thumbnail: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1200&auto=format&fit=crop&q=80',
+    timestamp: '2 weeks ago'
+  },
+  {
+    id: 'vid-demo-12',
+    title: 'Prismatic Laser Wave Matrix',
+    prompt: 'Geometric optical prisms breaking lasers into sweeping volumetric chromatic waves, rhythmically pulsing, sleek dark studio',
+    model: 'Kling 2.0 Master',
+    provider: 'Kuaishou AI',
+    aspectRatio: '1:1',
+    duration: '8s',
+    resolution: '1080p 60fps',
+    fps: '60fps',
+    motionStrength: 65,
+    hasReference: false,
+    thumbnail: 'https://images.unsplash.com/photo-1541701494587-cb58502866ab?w=1200&auto=format&fit=crop&q=80',
+    timestamp: '2 weeks ago'
   }
 ];
 
@@ -137,7 +259,12 @@ export const VideoStudioView: React.FC<VideoStudioViewProps> = ({ onOpenUpgradeM
         const saved = localStorage.getItem(STORAGE_KEY);
         if (saved) {
           const parsed = JSON.parse(saved);
-          if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+          if (Array.isArray(parsed) && parsed.length >= INITIAL_VIDEOS.length) return parsed;
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            const existingIds = new Set(parsed.map((p: CreatedVideo) => p.id));
+            const missing = INITIAL_VIDEOS.filter((v) => !existingIds.has(v.id));
+            return [...parsed, ...missing];
+          }
         }
       } catch (e) {
         console.error('Failed to load video creations from localStorage', e);
@@ -145,6 +272,11 @@ export const VideoStudioView: React.FC<VideoStudioViewProps> = ({ onOpenUpgradeM
     }
     return INITIAL_VIDEOS;
   });
+
+  // Pagination & Filtering state
+  const itemsPerPage = 8;
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [galleryFilter, setGalleryFilter] = useState<string>('ALL');
 
   // Sync videos to LocalStorage
   useEffect(() => {
@@ -278,6 +410,7 @@ export const VideoStudioView: React.FC<VideoStudioViewProps> = ({ onOpenUpgradeM
     };
 
     setVideos((prev) => [newVideo, ...prev]);
+    setCurrentPage(1);
     setIsGenerating(false);
 
     try {
@@ -287,6 +420,11 @@ export const VideoStudioView: React.FC<VideoStudioViewProps> = ({ onOpenUpgradeM
     }
 
     showToast(`Rendered ${newVideo.duration} motion clip with ${activeModel.name}!`, 'success');
+  };
+
+  const handleGalleryFilter = (filter: string) => {
+    setGalleryFilter(filter);
+    setCurrentPage(1);
   };
 
   const handleExportMP4 = (video: CreatedVideo) => {
@@ -305,7 +443,7 @@ export const VideoStudioView: React.FC<VideoStudioViewProps> = ({ onOpenUpgradeM
     if (['16:9', '9:16', '1:1', 'auto'].includes(video.aspectRatio)) {
       setAspectRatio(video.aspectRatio as VideoAspectRatio);
     }
-    const matchedModel = VIDEO_STUDIO_MODELS.find(m => m.name === video.model);
+    const matchedModel = VIDEO_STUDIO_MODELS.find((m) => m.name === video.model);
     if (matchedModel) setSelectedModelId(matchedModel.id);
     setPreviewVideo(null);
     showToast('Video directives loaded into Studio composer!', 'success');
@@ -313,7 +451,14 @@ export const VideoStudioView: React.FC<VideoStudioViewProps> = ({ onOpenUpgradeM
   };
 
   const handleDeleteVideo = (id: string) => {
-    setVideos((prev) => prev.filter((v) => v.id !== id));
+    setVideos((prev) => {
+      const updated = prev.filter((v) => v.id !== id);
+      const remainingTotal = Math.max(1, Math.ceil(updated.length / itemsPerPage));
+      if (currentPage > remainingTotal) {
+        setCurrentPage(remainingTotal);
+      }
+      return updated;
+    });
     if (previewVideo?.id === id) setPreviewVideo(null);
     showToast('Video removed from library', 'info');
   };
@@ -327,6 +472,18 @@ export const VideoStudioView: React.FC<VideoStudioViewProps> = ({ onOpenUpgradeM
     const matchesTier = modelTierFilter === 'ALL' || m.tier === modelTierFilter;
     return matchesSearch && matchesTier;
   });
+
+  // Filtered and paginated videos for gallery
+  const filteredVideos = videos.filter((item) => {
+    if (galleryFilter === 'ALL') return true;
+    return item.aspectRatio === galleryFilter;
+  });
+
+  const totalPages = Math.max(1, Math.ceil(filteredVideos.length / itemsPerPage));
+  const paginatedVideos = filteredVideos.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
 
   return (
     <div className="flex-1 flex flex-col h-full overflow-y-auto bg-slate-950 p-3 sm:p-6 lg:p-8 space-y-8 custom-scrollbar">
@@ -661,15 +818,15 @@ export const VideoStudioView: React.FC<VideoStudioViewProps> = ({ onOpenUpgradeM
           </div>
         </div>
 
-        {/* Generated Videos Gallery (Responsive Grid matching Image Studio) */}
+        {/* Generated Videos Gallery (Responsive 4-column Grid matching Image Studio) */}
         <div className="space-y-4 pt-4">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-2 border-b border-slate-800/80">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-800/80">
             <div>
               <h3 className="text-lg font-bold text-white flex items-center gap-2">
                 <Video className="w-5 h-5 text-cyan-400" />
                 <span>Generated Videos</span>
                 <span className="text-xs px-2 py-0.5 rounded-full bg-slate-800 text-cyan-300 border border-slate-700 font-mono">
-                  {videos.length}
+                  {filteredVideos.length} {filteredVideos.length === 1 ? 'item' : 'items'}
                 </span>
               </h3>
               <p className="text-xs text-slate-400">
@@ -677,10 +834,30 @@ export const VideoStudioView: React.FC<VideoStudioViewProps> = ({ onOpenUpgradeM
               </p>
             </div>
 
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 flex-wrap">
+              {/* Aspect Ratio Filter Tabs */}
+              <div className="flex items-center gap-1 p-1 bg-slate-900/90 border border-slate-800 rounded-xl text-xs">
+                {(['ALL', '16:9', '9:16', '1:1'] as const).map((ratio) => (
+                  <button
+                    key={ratio}
+                    type="button"
+                    onClick={() => handleGalleryFilter(ratio)}
+                    className={`px-2.5 py-1 rounded-lg font-semibold transition-all ${
+                      galleryFilter === ratio
+                        ? 'bg-cyan-600 text-white shadow-sm'
+                        : 'text-slate-400 hover:text-white'
+                    }`}
+                  >
+                    {ratio === 'ALL' ? 'All' : ratio}
+                  </button>
+                ))}
+              </div>
+
               <button
                 onClick={() => {
                   setVideos(INITIAL_VIDEOS);
+                  setCurrentPage(1);
+                  setGalleryFilter('ALL');
                   showToast('Restored demo video creations', 'info');
                 }}
                 className="text-xs text-slate-400 hover:text-white px-2.5 py-1.5 rounded-lg bg-slate-900 border border-slate-800 flex items-center gap-1.5 transition-colors"
@@ -692,118 +869,193 @@ export const VideoStudioView: React.FC<VideoStudioViewProps> = ({ onOpenUpgradeM
             </div>
           </div>
 
-          {/* Cards Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {videos.map((item) => (
-              <div
-                key={item.id}
-                className="group relative rounded-2xl bg-slate-900/90 border border-slate-800 hover:border-cyan-500/50 overflow-hidden shadow-xl hover:shadow-2xl hover:shadow-cyan-500/10 transition-all duration-300 flex flex-col justify-between"
+          {/* Cards Grid or Empty State */}
+          {filteredVideos.length === 0 ? (
+            <div className="p-12 text-center rounded-3xl bg-slate-900/40 border border-slate-800/80 space-y-3">
+              <Film className="w-12 h-12 text-slate-700 mx-auto stroke-1" />
+              <h3 className="text-base font-bold text-slate-300">No videos match filter</h3>
+              <p className="text-xs text-slate-500 max-w-sm mx-auto">
+                No generated clips found for aspect ratio "{galleryFilter}". Switch to "All" or generate a new motion clip above.
+              </p>
+              <button
+                onClick={() => handleGalleryFilter('ALL')}
+                className="mt-2 px-4 py-2 rounded-xl bg-cyan-600/20 hover:bg-cyan-600/30 border border-cyan-500/30 text-xs font-semibold text-cyan-300 transition-colors"
               >
-                {/* Visual Video Poster / Player Container */}
-                <div
-                  onClick={() => {
-                    setPreviewVideo(item);
-                    setIsPlayingPreview(true);
-                  }}
-                  className="relative aspect-video overflow-hidden bg-slate-950 cursor-pointer"
-                >
-                  <img
-                    src={item.thumbnail}
-                    alt={item.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
+                Show All Videos
+              </button>
+            </div>
+          ) : (
+            <>
+              {/* 4-Column Grid on Desktop */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+                {paginatedVideos.map((item) => (
+                  <div
+                    key={item.id}
+                    className="group relative rounded-2xl bg-slate-900/90 border border-slate-800 hover:border-cyan-500/50 overflow-hidden shadow-xl hover:shadow-2xl hover:shadow-cyan-500/10 transition-all duration-300 flex flex-col justify-between"
+                  >
+                    {/* Visual Video Poster / Player Container */}
+                    <div
+                      onClick={() => {
+                        setPreviewVideo(item);
+                        setIsPlayingPreview(true);
+                      }}
+                      className="relative aspect-video overflow-hidden bg-slate-950 cursor-pointer"
+                    >
+                      <img
+                        src={item.thumbnail}
+                        alt={item.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
 
-                  {/* Play Overlay */}
-                  <div className="absolute inset-0 bg-slate-950/40 group-hover:bg-slate-950/20 flex items-center justify-center transition-colors">
-                    <div className="w-12 h-12 rounded-full bg-cyan-500/90 group-hover:bg-cyan-400 text-slate-950 flex items-center justify-center shadow-lg group-hover:scale-110 active:scale-95 transition-all">
-                      <Play className="w-5 h-5 fill-slate-950 ml-0.5" />
+                      {/* Play Overlay */}
+                      <div className="absolute inset-0 bg-slate-950/40 group-hover:bg-slate-950/20 flex items-center justify-center transition-colors">
+                        <div className="w-10 h-10 rounded-full bg-cyan-500/90 group-hover:bg-cyan-400 text-slate-950 flex items-center justify-center shadow-lg group-hover:scale-110 active:scale-95 transition-all">
+                          <Play className="w-4 h-4 fill-slate-950 ml-0.5" />
+                        </div>
+                      </div>
+
+                      {/* Top Badges */}
+                      <div className="absolute top-2 left-2 flex items-center gap-1 max-w-[70%]">
+                        <span className="text-[9px] font-bold px-1.5 py-0.5 rounded bg-black/80 text-cyan-300 backdrop-blur-md border border-white/10 truncate max-w-[95px]">
+                          {item.model}
+                        </span>
+                        <span className="text-[9px] font-bold px-1 py-0.5 rounded bg-black/80 text-slate-200 backdrop-blur-md border border-white/10">
+                          {item.aspectRatio}
+                        </span>
+                      </div>
+
+                      <div className="absolute top-2 right-2 flex items-center gap-1">
+                        <span className="text-[9px] font-mono px-1.5 py-0.5 rounded bg-black/80 text-emerald-400 backdrop-blur-md border border-white/10 font-bold">
+                          {item.resolution?.split(' ')[0] || '1080p'}
+                        </span>
+                      </div>
+
+                      {/* Bottom Duration & Motion indicator */}
+                      <div className="absolute bottom-2 right-2 flex items-center gap-1">
+                        {item.motionStrength && (
+                          <span className="text-[9px] font-mono px-1 py-0.5 rounded bg-black/80 text-cyan-300 backdrop-blur-md border border-white/10">
+                            ⚡{item.motionStrength}
+                          </span>
+                        )}
+                        <span className="text-[9px] font-mono px-1.5 py-0.5 rounded bg-black/80 text-white backdrop-blur-md font-bold">
+                          {item.duration}
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Card Body */}
+                    <div className="p-3.5 space-y-2 flex-1 flex flex-col justify-between">
+                      <div>
+                        <h4 className="text-xs sm:text-sm font-bold text-white group-hover:text-cyan-300 transition-colors line-clamp-1">
+                          {item.title}
+                        </h4>
+                        <p className="text-[11px] text-slate-400 line-clamp-2 leading-relaxed mt-1">
+                          "{item.prompt}"
+                        </p>
+                      </div>
+
+                      {/* Bottom Action Footer */}
+                      <div className="pt-2.5 border-t border-slate-800/80 flex items-center justify-between text-xs gap-1">
+                        <span className="text-[10px] text-slate-500 font-medium truncate">{item.timestamp}</span>
+
+                        <div className="flex items-center gap-1 shrink-0">
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleRemix(item);
+                            }}
+                            className="px-2 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white text-[10px] font-semibold transition-colors"
+                            title="Remix prompt directives"
+                          >
+                            Remix
+                          </button>
+
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleExportMP4(item);
+                            }}
+                            className="px-2 py-1 rounded-lg bg-cyan-600/20 hover:bg-cyan-600/40 text-cyan-300 border border-cyan-500/30 text-[10px] font-bold flex items-center gap-1 transition-colors"
+                            title="Export MP4 video file"
+                          >
+                            <Download className="w-3 h-3" />
+                            <span>MP4</span>
+                          </button>
+
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleDeleteVideo(item.id);
+                            }}
+                            className="p-1 rounded-lg text-slate-500 hover:text-rose-400 hover:bg-rose-500/10 transition-colors"
+                            title="Delete video"
+                          >
+                            <Trash2 className="w-3.5 h-3.5" />
+                          </button>
+                        </div>
+                      </div>
                     </div>
                   </div>
-
-                  {/* Top Badges */}
-                  <div className="absolute top-2.5 left-2.5 flex items-center gap-1.5">
-                    <span className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-black/75 text-cyan-300 backdrop-blur-md border border-white/10">
-                      {item.model}
-                    </span>
-                    <span className="text-[10px] font-bold px-1.5 py-0.5 rounded-md bg-black/75 text-slate-200 backdrop-blur-md border border-white/10">
-                      {item.aspectRatio}
-                    </span>
-                  </div>
-
-                  <div className="absolute top-2.5 right-2.5 flex items-center gap-1.5">
-                    <span className="text-[10px] font-mono px-2 py-0.5 rounded-md bg-black/75 text-emerald-400 backdrop-blur-md border border-white/10 font-bold">
-                      {item.resolution || '1080p'}
-                    </span>
-                  </div>
-
-                  {/* Bottom Duration & Motion indicator */}
-                  <div className="absolute bottom-2.5 right-2.5 flex items-center gap-1.5">
-                    {item.motionStrength && (
-                      <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-black/75 text-cyan-300 backdrop-blur-md border border-white/10">
-                        ⚡ {item.motionStrength}
-                      </span>
-                    )}
-                    <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-black/75 text-white backdrop-blur-md font-bold">
-                      {item.duration}
-                    </span>
-                  </div>
-                </div>
-
-                {/* Card Body */}
-                <div className="p-4 space-y-2.5 flex-1 flex flex-col justify-between">
-                  <div>
-                    <h4 className="text-sm font-bold text-white group-hover:text-cyan-300 transition-colors line-clamp-1">
-                      {item.title}
-                    </h4>
-                    <p className="text-xs text-slate-400 line-clamp-2 leading-relaxed mt-1">
-                      "{item.prompt}"
-                    </p>
-                  </div>
-
-                  {/* Bottom Action Footer */}
-                  <div className="pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs">
-                    <span className="text-[11px] text-slate-500 font-medium">{item.timestamp}</span>
-
-                    <div className="flex items-center gap-1.5">
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleRemix(item);
-                        }}
-                        className="px-2 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white text-[11px] font-semibold transition-colors"
-                        title="Remix prompt and directives"
-                      >
-                        Remix
-                      </button>
-
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleExportMP4(item);
-                        }}
-                        className="px-2.5 py-1 rounded-lg bg-cyan-600/20 hover:bg-cyan-600/40 text-cyan-300 border border-cyan-500/30 text-[11px] font-bold flex items-center gap-1 transition-colors"
-                        title="Export MP4 video file"
-                      >
-                        <Download className="w-3 h-3" />
-                        <span>Export MP4</span>
-                      </button>
-
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleDeleteVideo(item.id);
-                        }}
-                        className="p-1 rounded-lg text-slate-500 hover:text-rose-400 hover:bg-rose-500/10 transition-colors"
-                        title="Delete video"
-                      >
-                        <Trash2 className="w-3.5 h-3.5" />
-                      </button>
-                    </div>
-                  </div>
-                </div>
+                ))}
               </div>
-            ))}
-          </div>
+
+              {/* Pagination Controls when total videos exceed 8 */}
+              {filteredVideos.length > itemsPerPage && (
+                <div className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4 p-4 rounded-2xl bg-slate-900/60 border border-slate-800 text-xs">
+                  <div className="text-slate-400">
+                    Showing <span className="font-semibold text-white">{(currentPage - 1) * itemsPerPage + 1}</span> to{' '}
+                    <span className="font-semibold text-white">
+                      {Math.min(currentPage * itemsPerPage, filteredVideos.length)}
+                    </span>{' '}
+                    of <span className="font-semibold text-white">{filteredVideos.length}</span> videos
+                  </div>
+
+                  <div className="flex items-center gap-2">
+                    <button
+                      type="button"
+                      onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+                      disabled={currentPage === 1}
+                      className="px-3.5 py-1.5 rounded-xl border border-slate-800 bg-slate-900/80 text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-800 disabled:opacity-40 disabled:cursor-not-allowed transition-all flex items-center gap-1.5 shadow-sm"
+                    >
+                      <ChevronLeft className="w-4 h-4" />
+                      <span>Previous</span>
+                    </button>
+
+                    <div className="flex items-center gap-1 px-1">
+                      {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                        <button
+                          key={page}
+                          type="button"
+                          onClick={() => setCurrentPage(page)}
+                          className={`w-7 h-7 rounded-lg text-xs font-bold transition-all ${
+                            currentPage === page
+                              ? 'bg-cyan-600 text-white shadow-md shadow-cyan-600/30 border border-cyan-500'
+                              : 'text-slate-400 hover:text-white hover:bg-slate-800/80'
+                          }`}
+                        >
+                          {page}
+                        </button>
+                      ))}
+                    </div>
+
+                    <span className="text-slate-400 px-1 font-medium">
+                      Page {currentPage} of {totalPages}
+                    </span>
+
+                    <button
+                      type="button"
+                      onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
+                      disabled={currentPage === totalPages}
+                      className="px-3.5 py-1.5 rounded-xl border border-slate-800 bg-slate-900/80 text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-800 disabled:opacity-40 disabled:cursor-not-allowed transition-all flex items-center gap-1.5 shadow-sm"
+                    >
+                      <span>Next</span>
+                      <ChevronRight className="w-4 h-4" />
+                    </button>
+                  </div>
+                </div>
+              )}
+            </>
+          )}
         </div>
       </div>
 

@@ -19,6 +19,8 @@ import {
   Trash2,
   Search,
   ChevronDown,
+  ChevronLeft,
+  ChevronRight,
   RotateCcw
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
@@ -66,6 +68,86 @@ const INITIAL_CREATIONS: CreatedImage[] = [
     provider: 'Black Forest Labs',
     hasReference: false,
     timestamp: '2 days ago'
+  },
+  {
+    id: 'img-demo-5',
+    prompt: 'Ethereal crystal sanctuary nestled inside a misty alpine glacier cavern, iridescent reflections, ambient soft glows',
+    url: 'https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?w=1200&auto=format&fit=crop&q=80',
+    aspectRatio: '1:1',
+    model: 'Imagen 3 Pro',
+    provider: 'Google',
+    hasReference: false,
+    timestamp: '3 days ago'
+  },
+  {
+    id: 'img-demo-6',
+    prompt: 'Cyberpunk neon street ramen bar in rain with holographic kanji signs, reflections on wet asphalt, cinematic teal and orange',
+    url: 'https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=1200&auto=format&fit=crop&q=80',
+    aspectRatio: '16:9',
+    model: 'DALL-E 3 HD',
+    provider: 'OpenAI',
+    hasReference: false,
+    timestamp: '4 days ago'
+  },
+  {
+    id: 'img-demo-7',
+    prompt: 'Macro photography of an emerald mechanical beetle with gold watchmaker gears, luxury studio lighting, depth of field',
+    url: 'https://images.unsplash.com/photo-1550684848-fac1c5b4e853?w=1200&auto=format&fit=crop&q=80',
+    aspectRatio: '1:1',
+    model: 'Midjourney v6.1',
+    provider: 'Midjourney',
+    hasReference: false,
+    timestamp: '5 days ago'
+  },
+  {
+    id: 'img-demo-8',
+    prompt: 'Minimalist Scandinavian architectural pavilion floating above serene mirror lake at sunrise, foggy morning atmosphere',
+    url: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?w=1200&auto=format&fit=crop&q=80',
+    aspectRatio: '3:2',
+    model: 'FLUX.1 Dev',
+    provider: 'Black Forest Labs',
+    hasReference: false,
+    timestamp: '6 days ago'
+  },
+  {
+    id: 'img-demo-9',
+    prompt: 'Solarpunk eco-friendly high-rise towers covered with hanging vertical gardens and aerial tramways, bright sunny sky',
+    url: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1200&auto=format&fit=crop&q=80',
+    aspectRatio: '9:16',
+    model: 'Nano Banana 2 Lite',
+    provider: 'Google',
+    hasReference: false,
+    timestamp: '1 week ago'
+  },
+  {
+    id: 'img-demo-10',
+    prompt: 'Futuristic holographic interface HUD floating in obsidian darkroom with golden optical fibers, cybernetic core',
+    url: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=1200&auto=format&fit=crop&q=80',
+    aspectRatio: '16:9',
+    model: 'GPT Image 2',
+    provider: 'OpenAI',
+    hasReference: false,
+    timestamp: '1 week ago'
+  },
+  {
+    id: 'img-demo-11',
+    prompt: 'Ancient mystical overgrown observatory on a cliff overlooking cosmic nebula stars, matte painting, hyper-detailed',
+    url: 'https://images.unsplash.com/photo-1506703719100-a0f3a48c0f86?w=1200&auto=format&fit=crop&q=80',
+    aspectRatio: '16:9',
+    model: 'Imagen 3 Fast',
+    provider: 'Google',
+    hasReference: false,
+    timestamp: '2 weeks ago'
+  },
+  {
+    id: 'img-demo-12',
+    prompt: 'Abstract geometric glass prisms dispersing spectrum rainbow beams across velvet darkness, raytraced caustics',
+    url: 'https://images.unsplash.com/photo-1541701494587-cb58502866ab?w=1200&auto=format&fit=crop&q=80',
+    aspectRatio: '1:1',
+    model: 'Midjourney v6.1',
+    provider: 'Midjourney',
+    hasReference: false,
+    timestamp: '2 weeks ago'
   }
 ];
 
@@ -106,7 +188,12 @@ export const ImageStudioView: React.FC<ImageStudioViewProps> = ({ onOpenUpgradeM
         const saved = localStorage.getItem(STORAGE_KEY);
         if (saved) {
           const parsed = JSON.parse(saved);
-          if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+          if (Array.isArray(parsed) && parsed.length >= INITIAL_CREATIONS.length) return parsed;
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            const existingIds = new Set(parsed.map((p: CreatedImage) => p.id));
+            const missing = INITIAL_CREATIONS.filter((c) => !existingIds.has(c.id));
+            return [...parsed, ...missing];
+          }
         }
       } catch (e) {
         console.error('Failed to load image creations from localStorage', e);
@@ -114,6 +201,11 @@ export const ImageStudioView: React.FC<ImageStudioViewProps> = ({ onOpenUpgradeM
     }
     return INITIAL_CREATIONS;
   });
+
+  // Pagination & Filtering state
+  const itemsPerPage = 8;
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [galleryFilter, setGalleryFilter] = useState<string>('ALL');
 
   // Sync creations to LocalStorage
   useEffect(() => {
@@ -221,6 +313,7 @@ export const ImageStudioView: React.FC<ImageStudioViewProps> = ({ onOpenUpgradeM
     }));
 
     setCreations((prev) => [...newItems, ...prev]);
+    setCurrentPage(1);
     setIsGenerating(false);
 
     try {
@@ -232,6 +325,11 @@ export const ImageStudioView: React.FC<ImageStudioViewProps> = ({ onOpenUpgradeM
     showToast(`Generated ${batchCount}x image${batchCount > 1 ? 's' : ''} using ${activeModel.name}!`, 'success');
   };
 
+  const handleGalleryFilter = (filter: string) => {
+    setGalleryFilter(filter);
+    setCurrentPage(1);
+  };
+
   const handleCopyPrompt = (text: string) => {
     navigator.clipboard.writeText(text);
     showToast('Prompt copied to clipboard!', 'info');
@@ -239,7 +337,14 @@ export const ImageStudioView: React.FC<ImageStudioViewProps> = ({ onOpenUpgradeM
 
   const handleDeleteCreation = (id: string, e?: React.MouseEvent) => {
     e?.stopPropagation();
-    setCreations((prev) => prev.filter((c) => c.id !== id));
+    setCreations((prev) => {
+      const updated = prev.filter((c) => c.id !== id);
+      const remainingTotal = Math.max(1, Math.ceil(updated.length / itemsPerPage));
+      if (currentPage > remainingTotal) {
+        setCurrentPage(remainingTotal);
+      }
+      return updated;
+    });
     if (previewCreation?.id === id) setPreviewCreation(null);
     showToast('Image removed from gallery', 'info');
   };
@@ -273,6 +378,18 @@ export const ImageStudioView: React.FC<ImageStudioViewProps> = ({ onOpenUpgradeM
     const matchesTier = modelTierFilter === 'ALL' || m.tier === modelTierFilter;
     return matchesSearch && matchesTier;
   });
+
+  // Filtered and paginated creations for gallery
+  const filteredCreations = creations.filter((item) => {
+    if (galleryFilter === 'ALL') return true;
+    return item.aspectRatio === galleryFilter;
+  });
+
+  const totalPages = Math.max(1, Math.ceil(filteredCreations.length / itemsPerPage));
+  const paginatedCreations = filteredCreations.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
 
   return (
     <div className="flex-1 flex flex-col h-full overflow-y-auto bg-slate-950 p-3 sm:p-6 lg:p-8 space-y-8 custom-scrollbar">
@@ -557,140 +674,231 @@ export const ImageStudioView: React.FC<ImageStudioViewProps> = ({ onOpenUpgradeM
 
       {/* Your Creations Gallery */}
       <div className="max-w-6xl mx-auto w-full space-y-4">
-        <div className="flex items-center justify-between pb-2 border-b border-slate-800">
-          <div className="flex items-center gap-2">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-800">
+          <div className="flex items-center gap-3">
             <h2 className="text-lg font-bold text-white">Your Creations</h2>
-            <span className="text-xs px-2 py-0.5 rounded-full bg-slate-800 text-slate-300 border border-slate-700 font-semibold">
-              {creations.length} items
+            <span className="text-xs px-2.5 py-0.5 rounded-full bg-slate-800 text-slate-300 border border-slate-700 font-semibold">
+              {filteredCreations.length} {filteredCreations.length === 1 ? 'item' : 'items'}
             </span>
           </div>
 
-          {creations.length > 0 && (
-            <button
-              onClick={() => {
-                if (window.confirm('Clear all generated creations from your local gallery?')) {
-                  setCreations([]);
-                  showToast('Gallery cleared', 'info');
-                }
-              }}
-              className="text-xs text-slate-500 hover:text-rose-400 transition-colors flex items-center gap-1"
-            >
-              <Trash2 className="w-3.5 h-3.5" />
-              <span>Clear History</span>
-            </button>
-          )}
+          <div className="flex items-center gap-2 flex-wrap">
+            {/* Aspect Ratio Filter Pills */}
+            <div className="flex items-center gap-1 p-1 bg-slate-900/90 border border-slate-800 rounded-xl text-xs">
+              {(['ALL', '1:1', '16:9', '9:16', '3:2'] as const).map((ratio) => (
+                <button
+                  key={ratio}
+                  type="button"
+                  onClick={() => handleGalleryFilter(ratio)}
+                  className={`px-2.5 py-1 rounded-lg font-semibold transition-all ${
+                    galleryFilter === ratio
+                      ? 'bg-purple-600 text-white shadow-sm'
+                      : 'text-slate-400 hover:text-white'
+                  }`}
+                >
+                  {ratio === 'ALL' ? 'All' : ratio}
+                </button>
+              ))}
+            </div>
+
+            {creations.length > 0 && (
+              <button
+                onClick={() => {
+                  if (window.confirm('Clear all generated creations from your local gallery?')) {
+                    setCreations([]);
+                    setCurrentPage(1);
+                    showToast('Gallery cleared', 'info');
+                  }
+                }}
+                className="text-xs text-slate-500 hover:text-rose-400 transition-colors flex items-center gap-1 ml-1 px-2 py-1"
+                title="Clear all creations"
+              >
+                <Trash2 className="w-3.5 h-3.5" />
+                <span>Clear</span>
+              </button>
+            )}
+          </div>
         </div>
 
         {/* Gallery Grid or Empty State */}
-        {creations.length === 0 ? (
+        {filteredCreations.length === 0 ? (
           <div className="p-12 text-center rounded-3xl bg-slate-900/40 border border-slate-800/80 space-y-3">
             <ImageIcon className="w-12 h-12 text-slate-700 mx-auto stroke-1" />
             <h3 className="text-base font-bold text-slate-300">Your creations - Nothing here yet</h3>
             <p className="text-xs text-slate-500 max-w-sm mx-auto">
-              Type a prompt above and click "Generate" to create high-fidelity artworks with Google, OpenAI, and Frontier diffusion models.
+              {galleryFilter !== 'ALL'
+                ? `No artworks found for aspect ratio "${galleryFilter}". Try switching to "All" or create a new batch.`
+                : 'Type a prompt above and click "Generate" to create high-fidelity artworks with Google, OpenAI, and Frontier diffusion models.'}
             </p>
-            <button
-              onClick={() => {
-                setPrompt('Cyberpunk glass terminal displaying real-time quantum neural graphs');
-                handleGenerate();
-              }}
-              className="mt-2 px-4 py-2 rounded-xl bg-indigo-600/20 hover:bg-indigo-600/30 border border-indigo-500/30 text-xs font-semibold text-indigo-300 transition-colors"
-            >
-              Try sample prompt
-            </button>
+            {galleryFilter !== 'ALL' ? (
+              <button
+                onClick={() => handleGalleryFilter('ALL')}
+                className="mt-2 px-4 py-2 rounded-xl bg-purple-600/20 hover:bg-purple-600/30 border border-purple-500/30 text-xs font-semibold text-purple-300 transition-colors"
+              >
+                Show All Images
+              </button>
+            ) : (
+              <button
+                onClick={() => {
+                  setPrompt('Cyberpunk glass terminal displaying real-time quantum neural graphs');
+                  handleGenerate();
+                }}
+                className="mt-2 px-4 py-2 rounded-xl bg-indigo-600/20 hover:bg-indigo-600/30 border border-indigo-500/30 text-xs font-semibold text-indigo-300 transition-colors"
+              >
+                Try sample prompt
+              </button>
+            )}
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-            {creations.map((item) => (
-              <div
-                key={item.id}
-                onClick={() => setPreviewCreation(item)}
-                className="group relative rounded-2xl overflow-hidden bg-slate-900 border border-slate-800 hover:border-purple-500/50 shadow-lg cursor-pointer transition-all duration-300 flex flex-col justify-between"
-              >
-                {/* Image Container */}
-                <div className="relative aspect-square w-full overflow-hidden bg-slate-950">
-                  <img
-                    src={item.url}
-                    alt={item.prompt}
-                    loading="lazy"
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
+          <>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+              {paginatedCreations.map((item) => (
+                <div
+                  key={item.id}
+                  onClick={() => setPreviewCreation(item)}
+                  className="group relative rounded-2xl overflow-hidden bg-slate-900 border border-slate-800 hover:border-purple-500/50 shadow-lg cursor-pointer transition-all duration-300 flex flex-col justify-between"
+                >
+                  {/* Image Container */}
+                  <div className="relative aspect-square w-full overflow-hidden bg-slate-950">
+                    <img
+                      src={item.url}
+                      alt={item.prompt}
+                      loading="lazy"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
 
-                  {/* Top Badges */}
-                  <div className="absolute top-2 left-2 flex items-center gap-1.5">
-                    <span className="px-2 py-0.5 rounded-md bg-black/70 backdrop-blur-md text-[10px] font-bold text-white border border-white/10 uppercase">
-                      {item.aspectRatio}
-                    </span>
-                    {item.hasReference && (
-                      <span className="px-1.5 py-0.5 rounded-md bg-indigo-500/80 backdrop-blur-md text-[10px] font-bold text-white">
-                        Img2Img
+                    {/* Top Badges */}
+                    <div className="absolute top-2 left-2 flex items-center gap-1.5">
+                      <span className="px-2 py-0.5 rounded-md bg-black/70 backdrop-blur-md text-[10px] font-bold text-white border border-white/10 uppercase">
+                        {item.aspectRatio}
                       </span>
-                    )}
-                  </div>
-
-                  {/* Hover Action Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-3 flex flex-col justify-between">
-                    <div className="flex items-center justify-end gap-1">
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleCopyPrompt(item.prompt);
-                        }}
-                        className="p-1.5 rounded-lg bg-black/60 hover:bg-black/90 text-white transition-colors"
-                        title="Copy Prompt"
-                      >
-                        <Copy className="w-3.5 h-3.5" />
-                      </button>
-                      <button
-                        onClick={(e) => handleDownload(item, e)}
-                        className="p-1.5 rounded-lg bg-black/60 hover:bg-black/90 text-white transition-colors"
-                        title="Download High-Res"
-                      >
-                        <Download className="w-3.5 h-3.5" />
-                      </button>
-                      <button
-                        onClick={(e) => handleDeleteCreation(item.id, e)}
-                        className="p-1.5 rounded-lg bg-black/60 hover:bg-rose-600 text-white transition-colors"
-                        title="Delete"
-                      >
-                        <Trash2 className="w-3.5 h-3.5" />
-                      </button>
+                      {item.hasReference && (
+                        <span className="px-1.5 py-0.5 rounded-md bg-indigo-500/80 backdrop-blur-md text-[10px] font-bold text-white">
+                          Img2Img
+                        </span>
+                      )}
                     </div>
 
-                    <div className="space-y-1">
-                      <p className="text-xs text-white line-clamp-2 font-medium">
-                        "{item.prompt}"
-                      </p>
-                      <div className="flex items-center justify-between text-[10px] text-slate-300">
-                        <span className="truncate">{item.model}</span>
-                        <span>{item.timestamp}</span>
+                    {/* Hover Action Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-3 flex flex-col justify-between">
+                      <div className="flex items-center justify-end gap-1">
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleCopyPrompt(item.prompt);
+                          }}
+                          className="p-1.5 rounded-lg bg-black/60 hover:bg-black/90 text-white transition-colors"
+                          title="Copy Prompt"
+                        >
+                          <Copy className="w-3.5 h-3.5" />
+                        </button>
+                        <button
+                          onClick={(e) => handleDownload(item, e)}
+                          className="p-1.5 rounded-lg bg-black/60 hover:bg-black/90 text-white transition-colors"
+                          title="Download High-Res"
+                        >
+                          <Download className="w-3.5 h-3.5" />
+                        </button>
+                        <button
+                          onClick={(e) => handleDeleteCreation(item.id, e)}
+                          className="p-1.5 rounded-lg bg-black/60 hover:bg-rose-600 text-white transition-colors"
+                          title="Delete"
+                        >
+                          <Trash2 className="w-3.5 h-3.5" />
+                        </button>
+                      </div>
+
+                      <div className="space-y-1">
+                        <p className="text-xs text-white line-clamp-2 font-medium">
+                          "{item.prompt}"
+                        </p>
+                        <div className="flex items-center justify-between text-[10px] text-slate-300">
+                          <span className="truncate">{item.model}</span>
+                          <span>{item.timestamp}</span>
+                        </div>
                       </div>
                     </div>
                   </div>
+
+                  {/* Footer Strip under image */}
+                  <div className="p-3 bg-slate-900 border-t border-slate-800/80 flex items-center justify-between text-xs">
+                    <div className="truncate pr-2">
+                      <span className="text-[11px] font-semibold text-slate-200 truncate block">
+                        {item.model}
+                      </span>
+                      <span className="text-[10px] text-slate-500">{item.timestamp}</span>
+                    </div>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setPreviewCreation(item);
+                      }}
+                      className="p-1.5 rounded-lg hover:bg-slate-800 text-slate-400 hover:text-white transition-colors"
+                      title="Inspect Full Resolution"
+                    >
+                      <Maximize2 className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Pagination Controls when total images exceed 8 */}
+            {filteredCreations.length > itemsPerPage && (
+              <div className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4 p-4 rounded-2xl bg-slate-900/60 border border-slate-800 text-xs">
+                <div className="text-slate-400">
+                  Showing <span className="font-semibold text-white">{(currentPage - 1) * itemsPerPage + 1}</span> to{' '}
+                  <span className="font-semibold text-white">
+                    {Math.min(currentPage * itemsPerPage, filteredCreations.length)}
+                  </span>{' '}
+                  of <span className="font-semibold text-white">{filteredCreations.length}</span> creations
                 </div>
 
-                {/* Footer Strip under image */}
-                <div className="p-3 bg-slate-900 border-t border-slate-800/80 flex items-center justify-between text-xs">
-                  <div className="truncate pr-2">
-                    <span className="text-[11px] font-semibold text-slate-200 truncate block">
-                      {item.model}
-                    </span>
-                    <span className="text-[10px] text-slate-500">{item.timestamp}</span>
-                  </div>
+                <div className="flex items-center gap-2">
                   <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setPreviewCreation(item);
-                    }}
-                    className="p-1.5 rounded-lg hover:bg-slate-800 text-slate-400 hover:text-white transition-colors"
-                    title="Inspect Full Resolution"
+                    type="button"
+                    onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+                    disabled={currentPage === 1}
+                    className="px-3.5 py-1.5 rounded-xl border border-slate-800 bg-slate-900/80 text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-800 disabled:opacity-40 disabled:cursor-not-allowed transition-all flex items-center gap-1.5 shadow-sm"
                   >
-                    <Maximize2 className="w-3.5 h-3.5" />
+                    <ChevronLeft className="w-4 h-4" />
+                    <span>Previous</span>
+                  </button>
+
+                  <div className="flex items-center gap-1 px-1">
+                    {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                      <button
+                        key={page}
+                        type="button"
+                        onClick={() => setCurrentPage(page)}
+                        className={`w-7 h-7 rounded-lg text-xs font-bold transition-all ${
+                          currentPage === page
+                            ? 'bg-purple-600 text-white shadow-md shadow-purple-600/30 border border-purple-500'
+                            : 'text-slate-400 hover:text-white hover:bg-slate-800/80'
+                        }`}
+                      >
+                        {page}
+                      </button>
+                    ))}
+                  </div>
+
+                  <span className="text-slate-400 px-1 font-medium">
+                    Page {currentPage} of {totalPages}
+                  </span>
+
+                  <button
+                    type="button"
+                    onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
+                    disabled={currentPage === totalPages}
+                    className="px-3.5 py-1.5 rounded-xl border border-slate-800 bg-slate-900/80 text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-800 disabled:opacity-40 disabled:cursor-not-allowed transition-all flex items-center gap-1.5 shadow-sm"
+                  >
+                    <span>Next</span>
+                    <ChevronRight className="w-4 h-4" />
                   </button>
                 </div>
               </div>
-            ))}
-          </div>
+            )}
+          </>
         )}
       </div>
 

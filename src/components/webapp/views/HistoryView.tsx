@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useApp } from '../../../context/AppContext';
 import { AI_MODELS, STORE_MODELS } from '../../../data/models';
 import { Conversation } from '../../../@types';
@@ -11,6 +11,8 @@ import {
   Pin,
   ArrowRight,
   ChevronDown,
+  ChevronLeft,
+  ChevronRight,
   Check,
   Bot,
   Filter
@@ -39,6 +41,40 @@ export const HistoryView: React.FC<HistoryViewProps> = ({ onSelectConversation }
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const [selectedModelFilter, setSelectedModelFilter] = useState<string>('All');
   const [isModelDropdownOpen, setIsModelDropdownOpen] = useState<boolean>(false);
+
+  // Pagination state: strictly 10 history items per page
+  const itemsPerPage = 10;
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const listTopRef = useRef<HTMLDivElement>(null);
+
+  // Event handlers to reset page 1 whenever user searches or changes filters
+  const handleSearchChange = (value: string) => {
+    setSearch(value);
+    setCurrentPage(1);
+  };
+
+  const handleCategoryChange = (cat: string) => {
+    setSelectedCategory(cat);
+    setCurrentPage(1);
+  };
+
+  const handleModelFilterChange = (model: string) => {
+    setSelectedModelFilter(model);
+    setIsModelDropdownOpen(false);
+    setCurrentPage(1);
+  };
+
+  const handleResetFilters = () => {
+    setSearch('');
+    setSelectedCategory('All');
+    setSelectedModelFilter('All');
+    setCurrentPage(1);
+  };
+
+  const handlePageChange = (newPage: number) => {
+    setCurrentPage(newPage);
+    listTopRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
 
   // Helper to extract display metadata for any model identifier
   const getModelInfo = (modelId: string) => {
@@ -105,11 +141,27 @@ export const HistoryView: React.FC<HistoryViewProps> = ({ onSelectConversation }
     return matchesSearch && matchesCategory && matchesModel;
   });
 
+  const totalPages = Math.max(1, Math.ceil(filtered.length / itemsPerPage));
+  const paginatedConversations = filtered.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
+
   const handleOpenChat = (id: string) => {
     setActiveConversationId(id);
     setActiveView('chat');
     if (onSelectConversation) onSelectConversation(id);
     showToast('Loaded conversation session', 'info');
+  };
+
+  const handleDeleteConversation = (id: string, e?: React.MouseEvent) => {
+    e?.stopPropagation();
+    deleteConversation(id);
+    const remainingCount = filtered.length - 1;
+    const newTotal = Math.max(1, Math.ceil(remainingCount / itemsPerPage));
+    if (currentPage > newTotal) {
+      setCurrentPage(newTotal);
+    }
   };
 
   const handleExportOne = (conv: Conversation) => {
@@ -166,7 +218,7 @@ export const HistoryView: React.FC<HistoryViewProps> = ({ onSelectConversation }
               type="text"
               placeholder="Search conversations by title, prompt keywords, or category..."
               value={search}
-              onChange={(e) => setSearch(e.target.value)}
+              onChange={(e) => handleSearchChange(e.target.value)}
               className="w-full pl-10 pr-4 py-2.5 bg-slate-950 border border-slate-800 rounded-xl text-xs sm:text-sm text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 shadow-inner"
             />
           </div>
@@ -209,10 +261,7 @@ export const HistoryView: React.FC<HistoryViewProps> = ({ onSelectConversation }
                         <button
                           key={modelName}
                           type="button"
-                          onClick={() => {
-                            setSelectedModelFilter(modelName);
-                            setIsModelDropdownOpen(false);
-                          }}
+                          onClick={() => handleModelFilterChange(modelName)}
                           className={`w-full px-3 py-2 rounded-xl text-xs flex items-center justify-between text-left transition-colors ${
                             isSelected
                               ? 'bg-indigo-600 text-white font-bold shadow-sm'
@@ -235,7 +284,7 @@ export const HistoryView: React.FC<HistoryViewProps> = ({ onSelectConversation }
                 <button
                   key={cat}
                   type="button"
-                  onClick={() => setSelectedCategory(cat)}
+                  onClick={() => handleCategoryChange(cat)}
                   className={`px-3 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-colors border ${
                     selectedCategory === cat
                       ? 'bg-indigo-600 text-white border-indigo-500 shadow-sm'
@@ -250,7 +299,7 @@ export const HistoryView: React.FC<HistoryViewProps> = ({ onSelectConversation }
         </div>
 
         {/* History Item Cards List */}
-        <div className="space-y-3.5">
+        <div ref={listTopRef} className="space-y-3.5 scroll-mt-6">
           {filtered.length === 0 ? (
             <div className="py-20 text-center rounded-3xl border border-dashed border-slate-800 bg-slate-900/30 space-y-3 backdrop-blur-sm">
               <div className="w-12 h-12 rounded-2xl bg-slate-950 border border-slate-800 flex items-center justify-center mx-auto text-slate-500">
@@ -261,18 +310,14 @@ export const HistoryView: React.FC<HistoryViewProps> = ({ onSelectConversation }
                 No sessions match model <span className="text-indigo-400 font-semibold">"{selectedModelFilter}"</span> or current search terms. Try clearing filters or selecting another model.
               </p>
               <button
-                onClick={() => {
-                  setSearch('');
-                  setSelectedCategory('All');
-                  setSelectedModelFilter('All');
-                }}
+                onClick={handleResetFilters}
                 className="mt-2 px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-semibold text-slate-300 transition-colors"
               >
                 Reset All Filters
               </button>
             </div>
           ) : (
-            filtered.map((c) => {
+            paginatedConversations.map((c) => {
               const modelInfo = getModelInfo(c.modelId);
 
               return (
@@ -345,7 +390,7 @@ export const HistoryView: React.FC<HistoryViewProps> = ({ onSelectConversation }
 
                     <button
                       type="button"
-                      onClick={() => deleteConversation(c.id)}
+                      onClick={(e) => handleDeleteConversation(c.id, e)}
                       className="p-2 rounded-xl border border-slate-800 text-slate-400 hover:text-rose-400 hover:bg-slate-800 transition-colors"
                       title="Delete conversation"
                     >
@@ -364,6 +409,62 @@ export const HistoryView: React.FC<HistoryViewProps> = ({ onSelectConversation }
                 </div>
               );
             })
+          )}
+
+          {/* History Pagination Bar (Strictly 10 items per page) */}
+          {filtered.length > itemsPerPage && (
+            <div className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-4 p-4 rounded-2xl bg-slate-900/60 border border-slate-800 text-xs">
+              <div className="text-slate-400">
+                Showing <span className="font-semibold text-white">{(currentPage - 1) * itemsPerPage + 1}</span> to{' '}
+                <span className="font-semibold text-white">
+                  {Math.min(currentPage * itemsPerPage, filtered.length)}
+                </span>{' '}
+                of <span className="font-semibold text-white">{filtered.length}</span> conversations
+              </div>
+
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => handlePageChange(Math.max(1, currentPage - 1))}
+                  disabled={currentPage === 1}
+                  className="px-3.5 py-1.5 rounded-xl border border-slate-800 bg-slate-900/80 text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-800 disabled:opacity-40 disabled:cursor-not-allowed transition-all flex items-center gap-1.5 shadow-sm"
+                >
+                  <ChevronLeft className="w-4 h-4" />
+                  <span>Previous</span>
+                </button>
+
+                <div className="flex items-center gap-1 px-1">
+                  {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                    <button
+                      key={page}
+                      type="button"
+                      onClick={() => handlePageChange(page)}
+                      className={`w-7 h-7 rounded-lg text-xs font-bold transition-all ${
+                        currentPage === page
+                          ? 'bg-indigo-600 text-white shadow-md shadow-indigo-600/30 border border-indigo-500'
+                          : 'text-slate-400 hover:text-white hover:bg-slate-800/80'
+                      }`}
+                    >
+                      {page}
+                    </button>
+                  ))}
+                </div>
+
+                <span className="text-slate-400 px-1 font-medium">
+                  Page {currentPage} of {totalPages}
+                </span>
+
+                <button
+                  type="button"
+                  onClick={() => handlePageChange(Math.min(totalPages, currentPage + 1))}
+                  disabled={currentPage === totalPages}
+                  className="px-3.5 py-1.5 rounded-xl border border-slate-800 bg-slate-900/80 text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-800 disabled:opacity-40 disabled:cursor-not-allowed transition-all flex items-center gap-1.5 shadow-sm"
+                >
+                  <span>Next</span>
+                  <ChevronRight className="w-4 h-4" />
+                </button>
+              </div>
+            </div>
           )}
         </div>
       </div>

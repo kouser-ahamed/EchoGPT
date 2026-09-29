@@ -80,10 +80,12 @@ export interface ChatMessage {
   id: string;
   role: 'user' | 'assistant' | 'system';
   content: string;
+  text?: string;
   modelId?: string;
   modelName?: string;
   timestamp: string;
   attachment?: MessageAttachment | null;
+  error?: boolean;
 }
 
 export interface Conversation {

@@ -266,5 +266,126 @@ Sum of degrees is $2E \\leq 6V - 12 < 6V$. Hence $\\exists v$ with $\\deg(v) \\l
         content: `Subject: 420% MoM ARR / EchoGPT seed round\n\nHighlighting $34k MRR and 45k+ active extension installs.`
       }
     ]
+  },
+  {
+    id: 'conv-11',
+    title: 'PostgreSQL Vector Search & HNSW Index Tuning',
+    category: 'Engineering',
+    dateGroup: 'Older',
+    timestamp: '3 weeks ago',
+    pinned: false,
+    modelId: 'deepseek-v4-pro',
+    messages: [
+      {
+        id: 'msg-11-1',
+        role: 'user',
+        content: 'How do m and ef_construction parameters impact recall vs memory in pgvector HNSW indexing?',
+        timestamp: '3 weeks ago'
+      },
+      {
+        id: 'msg-11-2',
+        role: 'assistant',
+        modelId: 'deepseek-v4-pro',
+        timestamp: '3 weeks ago',
+        content: 'Higher `ef_construction` enhances graph construction accuracy and recall at the expense of build latency.'
+      }
+    ]
+  },
+  {
+    id: 'conv-12',
+    title: 'Growth Marketing Strategy for Developer Tools',
+    category: 'Marketing',
+    dateGroup: 'Older',
+    timestamp: '1 month ago',
+    pinned: false,
+    modelId: 'gpt-4o',
+    messages: [
+      {
+        id: 'msg-12-1',
+        role: 'user',
+        content: 'What are the top 3 developer acquisition channels for zero-budget open-source tools?',
+        timestamp: '1 month ago'
+      },
+      {
+        id: 'msg-12-2',
+        role: 'assistant',
+        modelId: 'gpt-4o',
+        timestamp: '1 month ago',
+        content: '1. Launch on GitHub Trending & Hacker News Show HN\n2. Documentation-first SEO for exact error stack traces\n3. High-signal interactive interactive demos.'
+      }
+    ]
+  },
+  {
+    id: 'conv-13',
+    title: 'Model Context Protocol (MCP) Remote Auth Specs',
+    category: 'Research',
+    dateGroup: 'Older',
+    timestamp: '1 month ago',
+    pinned: false,
+    modelId: 'nemotron-3-ultra',
+    messages: [
+      {
+        id: 'msg-13-1',
+        role: 'user',
+        content: 'Explain OAuth2 bearer token delegation when proxying MCP servers through cloud gateways.',
+        timestamp: '1 month ago'
+      },
+      {
+        id: 'msg-13-2',
+        role: 'assistant',
+        modelId: 'nemotron-3-ultra',
+        timestamp: '1 month ago',
+        content: 'OAuth2 access tokens should be passed in the `Authorization: Bearer <token>` header of the JSON-RPC HTTP transport layer.'
+      }
+    ]
+  },
+  {
+    id: 'conv-14',
+    title: 'Executive Summary: Frontier LLM Benchmarks 2026',
+    category: 'Analysis',
+    dateGroup: 'Older',
+    timestamp: '1 month ago',
+    pinned: false,
+    modelId: 'claude-3-5-sonnet',
+    messages: [
+      {
+        id: 'msg-14-1',
+        role: 'user',
+        content: 'Compare token throughput and reasoning capability between Claude 3.5 Sonnet and DeepSeek V4.',
+        timestamp: '1 month ago'
+      },
+      {
+        id: 'msg-14-2',
+        role: 'assistant',
+        modelId: 'claude-3-5-sonnet',
+        timestamp: '1 month ago',
+        content: 'DeepSeek V4 dominates algorithmic math and coding competitive tests, while Claude 3.5 Sonnet leads in complex system architecture design.'
+      }
+    ]
+  },
+  {
+    id: 'conv-15',
+    title: 'Tailwind CSS v4 Oxide Engine Performance Review',
+    category: 'Engineering',
+    dateGroup: 'Older',
+    timestamp: '2 months ago',
+    pinned: false,
+    modelId: 'gemini-1-5-pro',
+    messages: [
+      {
+        id: 'msg-15-1',
+        role: 'user',
+        content: 'Why does Tailwind v4 no longer require tailwind.config.js and postcss.config.js?',
+        timestamp: '2 months ago'
+      },
+      {
+        id: 'msg-15-2',
+        role: 'assistant',
+        modelId: 'gemini-1-5-pro',
+        timestamp: '2 months ago',
+        content: 'Tailwind v4 is built on the Rust Oxide engine with pure CSS-first configuration via `@theme` directives, achieving sub-millisecond builds.'
+      }
+    ]
   }
 ];
+

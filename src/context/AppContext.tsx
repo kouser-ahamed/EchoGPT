@@ -10,7 +10,8 @@ import {
 } from '../@types';
 import { AI_MODELS, DEFAULT_MODEL_ID } from '../data/models';
 import { INITIAL_CONVERSATIONS } from '../data/conversations';
-import { generateRealisticAIResponse, splitIntoStreamChunks } from '../services/aiService';
+import { generateRealisticAIResponse } from '../services/aiService';
+import { generateRealAiResponse, generateSmartContextResponse } from '../services/aiChatService';
 
 export interface CompareResultModel {
   model: AIModel;
@@ -145,7 +146,13 @@ export function AppProvider({ children }: { children: ReactNode }) {
       const saved = localStorage.getItem('echogpt-conversations');
       if (saved) {
         try {
-          return JSON.parse(saved) as Conversation[];
+          const parsed = JSON.parse(saved) as Conversation[];
+          if (Array.isArray(parsed) && parsed.length >= INITIAL_CONVERSATIONS.length) return parsed;
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            const existingIds = new Set(parsed.map(c => c.id));
+            const missing = INITIAL_CONVERSATIONS.filter(c => !existingIds.has(c.id));
+            return [...parsed, ...missing];
+          }
         } catch (e) {
           console.error('Failed to parse saved conversations', e);
         }
@@ -307,18 +314,9 @@ export function AppProvider({ children }: { children: ReactNode }) {
 
     const assistantId = 'msg-a-' + Date.now();
     const targetConversation = conversations.find((c) => c.id === activeConversationId);
+    const chatHistory = targetConversation ? [...targetConversation.messages, userMsg] : [userMsg];
 
-    // Generate dynamic context-aware response based on intent and model
-    const generatedResponse = generateRealisticAIResponse({
-      model: targetModel,
-      userPrompt: userText,
-      conversationHistory: targetConversation ? [...targetConversation.messages, userMsg] : [userMsg]
-    });
-
-    // Realistic TTFT (Time to First Token) pause
-    await new Promise((resolve) => setTimeout(resolve, 380));
-
-    // Append initial assistant message
+    // Append initial assistant placeholder for live response streaming
     const assistantMsg: ChatMessage = {
       id: assistantId,
       role: 'assistant',
@@ -340,35 +338,55 @@ export function AppProvider({ children }: { children: ReactNode }) {
       })
     );
 
-    // Realistic streaming token simulation
-    const chunks = splitIntoStreamChunks(generatedResponse);
-    const chunkDelay = Math.max(12, Math.min(28, Math.floor(950 / chunks.length)));
-    let currentContent = '';
-
-    for (let i = 0; i < chunks.length; i++) {
-      currentContent += chunks[i];
-      const updatedText = currentContent;
-
+    try {
+      // Call live Pollinations AI API with real streaming token cadence
+      await generateRealAiResponse(
+        userText,
+        chatHistory,
+        targetModel.id,
+        {
+          onChunk: (_chunk, accumulated) => {
+            setConversations((prev) =>
+              prev.map((c) => {
+                if (c.id === activeConversationId) {
+                  return {
+                    ...c,
+                    messages: c.messages.map((m) =>
+                      m.id === assistantId ? { ...m, content: accumulated, error: false } : m
+                    )
+                  };
+                }
+                return c;
+              })
+            );
+          }
+        }
+      );
+    } catch (error) {
+      console.warn('[EchoGPT] Handled gracefully with smart context fallback:', error);
+      const fallbackText = generateSmartContextResponse(userText, targetModel.name);
       setConversations((prev) =>
         prev.map((c) => {
           if (c.id === activeConversationId) {
             return {
               ...c,
               messages: c.messages.map((m) =>
-                m.id === assistantId ? { ...m, content: updatedText } : m
+                m.id === assistantId
+                  ? {
+                      ...m,
+                      error: false,
+                      content: fallbackText
+                    }
+                  : m
               )
             };
           }
           return c;
         })
       );
-
-      // Natural conversational cadence with slight pauses at punctuation
-      const hasPauseChar = /[.!?:\n]/.test(chunks[i]);
-      await new Promise((resolve) => setTimeout(resolve, hasPauseChar ? chunkDelay + 14 : chunkDelay));
+    } finally {
+      setIsGenerating(false);
     }
-
-    setIsGenerating(false);
   };
 
   // Compare mode message sender
@@ -387,33 +405,52 @@ export function AppProvider({ children }: { children: ReactNode }) {
       modelB: { model: modelB, response: '' },
     });
 
-    await new Promise((resolve) => setTimeout(resolve, 550));
+    try {
+      const [resA, resB] = await Promise.all([
+        generateRealAiResponse(promptText, [], modelA.id),
+        generateRealAiResponse(promptText, [], modelB.id)
+      ]);
 
-    const responseA = generateRealisticAIResponse({
-      model: modelA,
-      userPrompt: promptText,
-    });
-
-    const responseB = generateRealisticAIResponse({
-      model: modelB,
-      userPrompt: promptText,
-    });
-
-    setCompareResults({
-      prompt: promptText,
-      loading: false,
-      modelA: {
+      setCompareResults({
+        prompt: promptText,
+        loading: false,
+        modelA: {
+          model: modelA,
+          response: resA
+        },
+        modelB: {
+          model: modelB,
+          response: resB
+        }
+      });
+    } catch {
+      // Offline fallback: use model-specific knowledge engine
+      const responseA = generateRealisticAIResponse({
         model: modelA,
-        response: responseA
-      },
-      modelB: {
-        model: modelB,
-        response: responseB
-      }
-    });
+        userPrompt: promptText,
+      });
 
-    setIsGenerating(false);
-    showToast('Dual model comparison complete!', 'success');
+      const responseB = generateRealisticAIResponse({
+        model: modelB,
+        userPrompt: promptText,
+      });
+
+      setCompareResults({
+        prompt: promptText,
+        loading: false,
+        modelA: {
+          model: modelA,
+          response: responseA
+        },
+        modelB: {
+          model: modelB,
+          response: responseB
+        }
+      });
+    } finally {
+      setIsGenerating(false);
+      showToast('Dual model comparison complete!', 'success');
+    }
   };
 
   return (
