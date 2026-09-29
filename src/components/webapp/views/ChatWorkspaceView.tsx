@@ -87,6 +87,15 @@ export const ChatWorkspaceView: React.FC<ChatWorkspaceViewProps> = ({
     }
   }, [pendingPrompt, setPendingPrompt]);
 
+  // Cleanup speech synthesis on unmount
+  useEffect(() => {
+    return () => {
+      if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+      }
+    };
+  }, []);
+
   const starterCards: StarterCard[] = [
     {
       title: 'Unlock Your Creative Flow',
@@ -147,14 +156,56 @@ export const ChatWorkspaceView: React.FC<ChatWorkspaceViewProps> = ({
     showToast(type === 'like' ? 'Thank you for your feedback!' : 'Feedback noted', 'info');
   };
 
-  const handleToggleSpeak = (id: string) => {
-    if (speakingMsgId === id) {
-      setSpeakingMsgId(null);
-      showToast('Speech playback paused', 'info');
+  const handleRetry = (msgIndex: number) => {
+    if (isGenerating) return;
+    const priorUserMsg = messages
+      .slice(0, msgIndex)
+      .reverse()
+      .find((m) => m.role === 'user');
+
+    if (priorUserMsg) {
+      sendMessage(priorUserMsg.content, priorUserMsg.attachment);
+      showToast('Regenerating response...', 'info');
     } else {
+      sendMessage('Please provide a more detailed breakdown.');
+    }
+  };
+
+  const handleToggleSpeak = (id: string, text: string) => {
+    if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+      if (speakingMsgId === id) {
+        window.speechSynthesis.cancel();
+        setSpeakingMsgId(null);
+        showToast('Speech playback paused', 'info');
+        return;
+      }
+
+      window.speechSynthesis.cancel();
       setSpeakingMsgId(id);
       showToast('Reading aloud with neural voice...', 'info');
-      setTimeout(() => setSpeakingMsgId(null), 5000);
+
+      // Strip markdown syntax for natural voice synthesis
+      const cleanText = text
+        .replace(/```[\s\S]*?```/g, 'Code block omitted.')
+        .replace(/`([^`]+)`/g, '$1')
+        .replace(/[#*_~>[\]]/g, '')
+        .replace(/\(http[^)]+\)/g, '')
+        .replace(/\n+/g, ' ');
+
+      const utterance = new SpeechSynthesisUtterance(cleanText);
+      utterance.rate = 1.0;
+      utterance.onend = () => setSpeakingMsgId(null);
+      utterance.onerror = () => setSpeakingMsgId(null);
+      window.speechSynthesis.speak(utterance);
+    } else {
+      if (speakingMsgId === id) {
+        setSpeakingMsgId(null);
+        showToast('Speech playback paused', 'info');
+      } else {
+        setSpeakingMsgId(id);
+        showToast('Reading aloud with neural voice...', 'info');
+        setTimeout(() => setSpeakingMsgId(null), 4000);
+      }
     }
   };
 
@@ -255,9 +306,10 @@ export const ChatWorkspaceView: React.FC<ChatWorkspaceViewProps> = ({
             </div>
           ) : (
             /* Conversational Stream */
-            messages.map((msg) => {
+            messages.map((msg, idx) => {
               const isUser = msg.role === 'user';
               const msgModel = AI_MODELS.find((m) => m.id === msg.modelId) || currentModel;
+              const isStreamingThisMsg = isGenerating && !isUser && idx === messages.length - 1;
 
               return (
                 <div
@@ -295,10 +347,19 @@ export const ChatWorkspaceView: React.FC<ChatWorkspaceViewProps> = ({
                     )}
 
                     <div>
-                      {isUser ? <p className="whitespace-pre-wrap">{msg.content}</p> : <MarkdownRenderer content={msg.content} />}
+                      {isUser ? (
+                        <p className="whitespace-pre-wrap">{msg.content}</p>
+                      ) : (
+                        <div className="relative">
+                          <MarkdownRenderer content={msg.content} />
+                          {isStreamingThisMsg && (
+                            <span className="inline-block w-2 h-4 ml-1 align-middle bg-cyan-400 animate-pulse rounded-sm" />
+                          )}
+                        </div>
+                      )}
                     </div>
 
-                    {!isUser && (
+                    {!isUser && !isStreamingThisMsg && (
                       <div className="mt-4 pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs text-slate-400">
                         <div className="flex items-center gap-2">
                           <button
@@ -311,7 +372,7 @@ export const ChatWorkspaceView: React.FC<ChatWorkspaceViewProps> = ({
                           </button>
 
                           <button
-                            onClick={() => sendMessage(msg.content)}
+                            onClick={() => handleRetry(idx)}
                             className="p-1 rounded hover:text-white hover:bg-slate-800 transition-colors flex items-center gap-1"
                             title="Regenerate response"
                           >
@@ -320,7 +381,7 @@ export const ChatWorkspaceView: React.FC<ChatWorkspaceViewProps> = ({
                           </button>
 
                           <button
-                            onClick={() => handleToggleSpeak(msg.id)}
+                            onClick={() => handleToggleSpeak(msg.id, msg.content)}
                             className={`p-1 rounded transition-colors flex items-center gap-1 ${
                               speakingMsgId === msg.id ? 'text-cyan-400 animate-pulse' : 'hover:text-white hover:bg-slate-800'
                             }`}
@@ -363,8 +424,8 @@ export const ChatWorkspaceView: React.FC<ChatWorkspaceViewProps> = ({
             })
           )}
 
-          {/* Generating Indicator */}
-          {isGenerating && (
+          {/* Generating Indicator (shown while waiting for first token) */}
+          {isGenerating && (!messages.length || messages[messages.length - 1].role === 'user') && (
             <div className="flex items-start gap-3 sm:gap-4 animate-in fade-in">
               <div className={`w-8 h-8 rounded-xl bg-slate-900 flex items-center justify-center text-sm border ${currentModel.borderColor} shrink-0 shadow-sm mt-1 animate-pulse`}>
                 {currentModel.avatar}

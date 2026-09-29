@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { AI_MODELS } from '../../../data/models';
 import { useApp } from '../../../context/AppContext';
 import { MarkdownRenderer } from '../../common/MarkdownRenderer';
+import { generateRealisticAIResponse } from '../../../services/aiService';
 import {
   Columns2,
   Play,
@@ -130,27 +131,14 @@ Analysis for rapid iteration velocity:
 
     await new Promise((resolve) => setTimeout(resolve, 850));
 
-    // Update responses for all selected models with clean formatted markdown
+    // Update responses for all selected models with dynamic realistic responses
     const updated: Record<string, string> = {};
     selectedModelIds.forEach((id) => {
       const model = AI_MODELS.find(m => m.id === id) || AI_MODELS[0];
-      
-      updated[id] = `### ${model.name} Evaluation
-
-Evaluating: *"${promptText}"*
-
-| Analysis Vector | Assessment | Recommendation |
-| :--- | :--- | :--- |
-| **Primary Strength** | ${model.strengths[0]} | Leverage for core domain synthesis |
-| **Execution Speed** | ${model.speed} | Optimal for real-time interaction |
-| **Reasoning Score** | ${model.reasoningScore} benchmark | High confidence output validation |
-
-#### Strategic Synthesis
-1. **Core Recommendation**: Align the implementation with established architecture patterns, avoiding premature complexity.
-2. **Risk Mitigation**: Instrument distributed tracing and token budget telemetry early.
-3. **Execution Directive**: ${model.sampleResponse.slice(0, 180)}...
-
-> **Executive Summary**: Prioritize velocity and maintain clean module boundaries to preserve future scalability.`;
+      updated[id] = generateRealisticAIResponse({
+        model,
+        userPrompt: promptText,
+      });
     });
 
     setResponses(updated);

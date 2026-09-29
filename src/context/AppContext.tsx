@@ -10,6 +10,7 @@ import {
 } from '../@types';
 import { AI_MODELS, DEFAULT_MODEL_ID } from '../data/models';
 import { INITIAL_CONVERSATIONS } from '../data/conversations';
+import { generateRealisticAIResponse, splitIntoStreamChunks } from '../services/aiService';
 
 export interface CompareResultModel {
   model: AIModel;
@@ -305,28 +306,25 @@ export function AppProvider({ children }: { children: ReactNode }) {
     setIsGenerating(true);
 
     const assistantId = 'msg-a-' + Date.now();
-    let generatedResponse = '';
-    const lower = userText.toLowerCase();
+    const targetConversation = conversations.find((c) => c.id === activeConversationId);
 
-    if (lower.includes('summarize') || lower.includes('summary')) {
-      generatedResponse = `### Executive Summary (${targetModel.name})\n\nHere are the synthesized key points:\n\n1. **Core Thesis**: The content highlights significant architectural evolution toward unified, low-latency AI workflows.\n2. **Primary Value Driver**: Consolidating multiple frontier models directly reduces fragmented subscription overhead by up to 80%.\n3. **Actionable Recommendation**: Prioritize unified interface tooling and native browser sidepanels (like EchoGPT) for zero-latency productivity gains.`;
-    } else if (lower.includes('code') || lower.includes('function') || lower.includes('react') || lower.includes('typescript')) {
-      generatedResponse = `### Implementation Solution with ${targetModel.name}\n\nHere is an optimized, modern TypeScript implementation:\n\n\`\`\`typescript\n// High performance solution tailored for ${targetModel.name}\nexport async function executeOptimizedTask<T>(\n  taskPayload: T,\n  options = { retries: 3, timeoutMs: 4000 }\n): Promise<{ success: boolean; data: T }> {\n  console.log('[EchoGPT Agent] Processing payload with ${targetModel.name}...');\n  \n  // Simulated asynchronous boundary execution\n  await new Promise((resolve) => setTimeout(resolve, 300));\n  \n  return {\n    success: true,\n    data: taskPayload\n  };\n}\n\`\`\`\n\n> **Performance Tip**: When deploying to production, wrap this in a memoized callback or server action to ensure zero redundant re-renders.`;
-    } else if (lower.includes('explain') || lower.includes('why')) {
-      generatedResponse = `### Concept Breakdown by ${targetModel.name}\n\nTo understand this clearly, consider three distinct layers:\n\n1. **Fundamental Principle**: At its core, the mechanism decouples user interaction from upstream latency, streaming incremental tokens via HTTP chunking.\n2. **Underlying Architecture**: Context windows allow retention of extensive conversational histories without losing semantic precision.\n3. **Practical Application**: You can utilize this pattern directly in production applications for real-time responsiveness.`;
-    } else {
-      generatedResponse = `**Response from ${targetModel.name}**\n\nI have analyzed your query:\n\n> "${userText}"\n\n### Detailed Analysis\n- **Quality Assessment**: High consistency across standard evaluation benchmarks.\n- **Direct Answer**: EchoGPT provides seamless multi-model routing, allowing you to compare my response against Claude 3.5 Sonnet, Gemini 1.5 Pro, or DeepSeek-R1 at any point.\n- **Next Steps**: You can ask for a code refactoring, request a bulleted summary, or switch into **Split View** to verify this output side-by-side with another model.`;
-    }
+    // Generate dynamic context-aware response based on intent and model
+    const generatedResponse = generateRealisticAIResponse({
+      model: targetModel,
+      userPrompt: userText,
+      conversationHistory: targetConversation ? [...targetConversation.messages, userMsg] : [userMsg]
+    });
 
-    // Fast simulated typing stream for smooth UX
-    await new Promise((resolve) => setTimeout(resolve, 450));
+    // Realistic TTFT (Time to First Token) pause
+    await new Promise((resolve) => setTimeout(resolve, 380));
 
+    // Append initial assistant message
     const assistantMsg: ChatMessage = {
       id: assistantId,
       role: 'assistant',
       modelId: targetModel.id,
       modelName: targetModel.name,
-      content: generatedResponse,
+      content: '',
       timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
     };
 
@@ -341,6 +339,34 @@ export function AppProvider({ children }: { children: ReactNode }) {
         return c;
       })
     );
+
+    // Realistic streaming token simulation
+    const chunks = splitIntoStreamChunks(generatedResponse);
+    const chunkDelay = Math.max(12, Math.min(28, Math.floor(950 / chunks.length)));
+    let currentContent = '';
+
+    for (let i = 0; i < chunks.length; i++) {
+      currentContent += chunks[i];
+      const updatedText = currentContent;
+
+      setConversations((prev) =>
+        prev.map((c) => {
+          if (c.id === activeConversationId) {
+            return {
+              ...c,
+              messages: c.messages.map((m) =>
+                m.id === assistantId ? { ...m, content: updatedText } : m
+              )
+            };
+          }
+          return c;
+        })
+      );
+
+      // Natural conversational cadence with slight pauses at punctuation
+      const hasPauseChar = /[.!?:\n]/.test(chunks[i]);
+      await new Promise((resolve) => setTimeout(resolve, hasPauseChar ? chunkDelay + 14 : chunkDelay));
+    }
 
     setIsGenerating(false);
   };
@@ -361,18 +387,28 @@ export function AppProvider({ children }: { children: ReactNode }) {
       modelB: { model: modelB, response: '' },
     });
 
-    await new Promise((resolve) => setTimeout(resolve, 600));
+    await new Promise((resolve) => setTimeout(resolve, 550));
+
+    const responseA = generateRealisticAIResponse({
+      model: modelA,
+      userPrompt: promptText,
+    });
+
+    const responseB = generateRealisticAIResponse({
+      model: modelB,
+      userPrompt: promptText,
+    });
 
     setCompareResults({
       prompt: promptText,
       loading: false,
       modelA: {
         model: modelA,
-        response: `### Perspective from ${modelA.name}\n\nAnalyzing: *"${promptText}"*\n\n1. **Direct Approach**: Focuses on immediate resolution and high-throughput execution.\n2. **Synthesis**: Emphasizes concise, structured key points without unnecessary fluff.\n3. **Recommendation**: Ideal for high-speed workflows and direct programmatic output.`
+        response: responseA
       },
       modelB: {
         model: modelB,
-        response: `### Perspective from ${modelB.name}\n\nAnalyzing: *"${promptText}"*\n\n1. **Nuanced Architecture**: Deep dives into potential edge-cases and structural prerequisites.\n2. **Contextual Reasoning**: Highlights trade-offs between computational overhead and maintainability.\n3. **Recommendation**: Best suited for formal reviews, security audits, and multi-turn iterative design.`
+        response: responseB
       }
     });
 
