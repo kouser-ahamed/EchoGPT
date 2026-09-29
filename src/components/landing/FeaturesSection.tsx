@@ -83,7 +83,7 @@ export const FeaturesSection: React.FC = () => {
               variants={cardVariants}
               whileHover={{ y: -6, scale: 1.015, transition: { duration: 0.25 } }}
               whileTap={{ scale: 0.98 }}
-              className="group relative p-6 sm:p-8 rounded-2xl bg-white/90 dark:bg-slate-900/60 border border-slate-200/90 dark:border-slate-800/80 hover:border-indigo-400/60 dark:hover:border-slate-700/80 shadow-sm shadow-slate-200/50 dark:shadow-lg transition-all duration-300 backdrop-blur-md flex flex-col justify-between"
+              className="group relative p-6 sm:p-8 rounded-2xl bg-white/90 dark:bg-slate-900/60 border border-slate-200/90 dark:border-slate-800/80 hover:border-indigo-400/60 dark:hover:border-slate-700/80 shadow-sm shadow-slate-200/50 dark:shadow-none transition-all duration-300 backdrop-blur-md flex flex-col justify-between"
             >
               {/* Subtle card top glow */}
               <div className="absolute top-0 inset-x-8 h-px bg-gradient-to-r from-transparent via-indigo-500/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />

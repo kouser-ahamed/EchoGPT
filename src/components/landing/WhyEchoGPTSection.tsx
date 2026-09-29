@@ -78,7 +78,7 @@ export const WhyEchoGPTSection: React.FC = () => {
               key={idx}
               whileHover={{ y: -6, scale: 1.015, transition: { duration: 0.25 } }}
               whileTap={{ scale: 0.98 }}
-              className="p-6 rounded-2xl bg-white/90 dark:bg-slate-900/60 border border-slate-200/90 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700/80 shadow-sm shadow-slate-200/50 dark:shadow-lg flex flex-col justify-between group transition-colors"
+              className="p-6 rounded-2xl bg-white/90 dark:bg-slate-900/60 border border-slate-200/90 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700/80 shadow-sm shadow-slate-200/50 dark:shadow-none flex flex-col justify-between group transition-colors"
             >
               <div>
                 <div className={`w-10 h-10 rounded-xl flex items-center justify-center border ${diff.accent} mb-4 shadow-sm group-hover:scale-105 transition-transform`}>
@@ -99,7 +99,7 @@ export const WhyEchoGPTSection: React.FC = () => {
         </div>
 
         {/* Comparison Table */}
-        <div className="max-w-5xl mx-auto overflow-hidden rounded-2xl border border-slate-200 dark:border-slate-800 bg-white/90 dark:bg-slate-900/60 backdrop-blur-xl shadow-xl shadow-slate-200/50 dark:shadow-2xl">
+        <div className="max-w-5xl mx-auto overflow-hidden rounded-2xl border border-slate-200 dark:border-slate-800 bg-white/90 dark:bg-slate-900/60 backdrop-blur-xl shadow-xl shadow-slate-200/50 dark:shadow-none">
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse text-xs sm:text-sm">
               <thead>

@@ -112,7 +112,7 @@ export const ModelsSection: React.FC = () => {
               variants={cardVariants}
               whileHover={{ y: -6, scale: 1.015, transition: { duration: 0.25 } }}
               whileTap={{ scale: 0.98 }}
-              className={`relative rounded-2xl bg-white/95 dark:bg-slate-900/70 border border-slate-200/90 dark:border-slate-800 p-6 flex flex-col justify-between hover:border-indigo-400/60 dark:hover:border-slate-700 transition-all duration-300 shadow-sm shadow-slate-200/50 dark:shadow-xl group backdrop-blur-sm`}
+              className={`relative rounded-2xl bg-white/95 dark:bg-slate-900/70 border border-slate-200/90 dark:border-slate-800 p-6 flex flex-col justify-between hover:border-indigo-400/60 dark:hover:border-slate-700 transition-all duration-300 shadow-sm shadow-slate-200/50 dark:shadow-none group backdrop-blur-sm`}
             >
               <div>
                 {/* Header: Avatar, Name, Provider, Badge */}

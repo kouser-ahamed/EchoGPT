@@ -99,7 +99,7 @@ export const ExtensionSpotlightSection: React.FC = () => {
 
           {/* Right Visual: Mock Browser Window with Docked Sidebar */}
           <div className="lg:col-span-6">
-            <div className="relative rounded-2xl bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 shadow-xl dark:shadow-2xl overflow-hidden ring-1 ring-black/5 dark:ring-white/10">
+            <div className="relative rounded-2xl bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 shadow-xl dark:shadow-none overflow-hidden ring-1 ring-black/5 dark:ring-white/10">
 
               {/* Chrome Browser Frame Bar */}
               <div className="p-3 bg-slate-100 dark:bg-slate-900/90 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between gap-3">

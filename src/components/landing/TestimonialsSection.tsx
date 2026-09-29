@@ -28,7 +28,7 @@ export const TestimonialsSection: React.FC = () => {
           {TESTIMONIALS.map((t) => (
             <div
               key={t.id}
-              className="rounded-2xl p-6 sm:p-7 bg-white/90 dark:bg-slate-900/60 border border-slate-200/90 dark:border-slate-800 flex flex-col justify-between hover:border-slate-300 dark:hover:border-slate-700 transition-colors shadow-sm shadow-slate-200/50 dark:shadow-lg"
+              className="rounded-2xl p-6 sm:p-7 bg-white/90 dark:bg-slate-900/60 border border-slate-200/90 dark:border-slate-800 flex flex-col justify-between hover:border-slate-300 dark:hover:border-slate-700 transition-colors shadow-sm shadow-slate-200/50 dark:shadow-none"
             >
               <div className="space-y-4">
                 {/* Rating & Quote icon */}

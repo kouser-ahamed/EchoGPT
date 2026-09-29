@@ -194,8 +194,8 @@ export const PricingSection: React.FC = () => {
               whileTap={{ scale: 0.98 }}
               className={`relative rounded-3xl p-6 flex flex-col justify-between transition-all duration-300 ${
                 plan.isRecommended
-                  ? 'bg-white dark:bg-slate-900 border-2 border-indigo-500 shadow-xl shadow-indigo-500/10 dark:shadow-2xl dark:shadow-indigo-500/15 ring-1 ring-indigo-500/50 scale-100 lg:-translate-y-2'
-                  : 'bg-white/95 dark:bg-slate-900/60 border border-slate-200/90 dark:border-slate-800 hover:border-indigo-400/50 dark:hover:border-slate-700 shadow-sm shadow-slate-200/50 dark:shadow-xl'
+                  ? 'bg-white dark:bg-slate-900 border-2 border-indigo-500 shadow-xl shadow-indigo-500/10 dark:shadow-none ring-1 ring-indigo-500/50 scale-100 lg:-translate-y-2'
+                  : 'bg-white/95 dark:bg-slate-900/60 border border-slate-200/90 dark:border-slate-800 hover:border-indigo-400/50 dark:hover:border-slate-700 shadow-sm shadow-slate-200/50 dark:shadow-none'
               }`}
             >
               {/* Badge */}
@@ -281,7 +281,7 @@ export const PricingSection: React.FC = () => {
           </div>
 
           {/* Accordion 1: Basic Models */}
-          <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/60 shadow-sm shadow-slate-200/50 dark:shadow-md overflow-hidden">
+          <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/60 shadow-sm shadow-slate-200/50 dark:shadow-none overflow-hidden">
             <button
               onClick={() => setShowBasicModels(!showBasicModels)}
               className="w-full p-4 sm:p-5 flex items-center justify-between text-left hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors"
@@ -336,7 +336,7 @@ export const PricingSection: React.FC = () => {
           </div>
 
           {/* Accordion 2: Advanced Models */}
-          <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/60 shadow-sm shadow-slate-200/50 dark:shadow-md overflow-hidden">
+          <div className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/60 shadow-sm shadow-slate-200/50 dark:shadow-none overflow-hidden">
             <button
               onClick={() => setShowAdvancedModels(!showAdvancedModels)}
               className="w-full p-4 sm:p-5 flex items-center justify-between text-left hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors"

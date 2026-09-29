@@ -12,7 +12,7 @@ export const CTASection: React.FC = () => {
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-gradient-to-r from-indigo-600/15 via-purple-600/15 to-cyan-500/15 dark:from-indigo-600/25 dark:via-purple-600/20 dark:to-cyan-500/20 blur-[120px] pointer-events-none rounded-full" />
 
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="relative rounded-3xl p-8 sm:p-14 bg-gradient-to-b from-white to-slate-100/90 dark:from-slate-900/90 dark:to-slate-950 border border-slate-200 dark:border-slate-800 shadow-xl dark:shadow-2xl backdrop-blur-xl text-center space-y-6 ring-1 ring-black/5 dark:ring-white/10">
+        <div className="relative rounded-3xl p-8 sm:p-14 bg-gradient-to-b from-white to-slate-100/90 dark:from-slate-900/90 dark:to-slate-950 border border-slate-200 dark:border-slate-800 shadow-xl dark:shadow-none backdrop-blur-xl text-center space-y-6 ring-1 ring-black/5 dark:ring-white/10">
 
           <div className="inline-flex items-center justify-center p-3 rounded-2xl bg-gradient-to-tr from-indigo-600 to-cyan-500 text-white shadow-lg shadow-indigo-500/20">
             <Sparkles className="w-6 h-6" />

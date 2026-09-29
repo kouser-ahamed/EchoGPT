@@ -101,7 +101,7 @@ Comparing **CSR vs. SSR** through latency and developer ergonomical lenses:
         </div>
 
         {/* Playground Container */}
-        <div className="max-w-5xl mx-auto rounded-2xl bg-white/95 dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 shadow-xl shadow-slate-200/50 dark:shadow-2xl overflow-hidden backdrop-blur-xl">
+        <div className="max-w-5xl mx-auto rounded-2xl bg-white/95 dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 shadow-xl shadow-slate-200/50 dark:shadow-none overflow-hidden backdrop-blur-xl">
 
           {/* Controls Bar */}
           <div className="p-4 sm:p-6 border-b border-slate-200 dark:border-slate-800/80 bg-slate-50/70 dark:bg-slate-950/60 space-y-4">
