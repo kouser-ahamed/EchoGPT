@@ -157,7 +157,7 @@ export const UpgradePlanModal: React.FC<UpgradePlanModalProps> = ({ isOpen, onCl
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.95 }}
           transition={{ duration: 0.2, ease: 'easeOut' }}
-          className="relative w-full max-w-4xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl shadow-2xl overflow-hidden p-5 sm:p-7 md:p-8 space-y-6 max-h-[92vh] flex flex-col my-auto custom-scrollbar"
+          className="relative w-full max-w-4xl bg-white dark:bg-[#0E131F] border border-slate-200 dark:border-slate-800 text-slate-900 dark:text-slate-100 rounded-3xl shadow-2xl overflow-hidden p-5 sm:p-7 md:p-8 space-y-6 max-h-[92vh] flex flex-col my-auto custom-scrollbar"
         >
           {/* Top Right Close Button */}
           <button
@@ -322,22 +322,22 @@ export const UpgradePlanModal: React.FC<UpgradePlanModalProps> = ({ isOpen, onCl
                 </p>
 
                 {/* Plan Highlight & Price Card */}
-                <div className="p-4 rounded-xl bg-purple-50 dark:bg-gradient-to-r dark:from-purple-950/40 dark:via-indigo-950/30 dark:to-slate-900 border border-purple-200 dark:border-purple-500/30 space-y-1 shadow-xs">
+                <div className="p-4 rounded-xl bg-violet-50 dark:bg-violet-950/40 border border-violet-200 dark:border-violet-500/30 text-violet-900 dark:text-white shadow-xs dark:shadow-inner space-y-1">
                   <div className="flex items-center justify-between">
-                    <span className="text-xs font-bold text-purple-700 dark:text-purple-300 uppercase tracking-wide">
+                    <span className="text-xs font-bold text-violet-700 dark:text-violet-300 uppercase tracking-wide">
                       {currentPlan.planName}
                     </span>
                     {currentPlan.badge && (
-                      <span className="text-[10px] font-extrabold px-2 py-0.5 rounded-full bg-purple-100 dark:bg-purple-500/20 text-purple-700 dark:text-purple-300 border border-purple-200 dark:border-purple-500/30">
+                      <span className="text-[10px] font-extrabold px-2 py-0.5 rounded-full bg-violet-100 dark:bg-violet-500/20 text-violet-700 dark:text-violet-300 border border-violet-200 dark:border-violet-500/30">
                         {currentPlan.badge}
                       </span>
                     )}
                   </div>
                   <div className="flex items-baseline gap-1.5 pt-1">
-                    <span className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+                    <span className="text-2xl sm:text-3xl font-bold text-violet-950 dark:text-white tracking-tight">
                       {currentPlan.price}
                     </span>
-                    <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">/{currentPlan.billingPeriod}</span>
+                    <span className="text-xs text-violet-700/80 dark:text-slate-400 font-medium">/{currentPlan.billingPeriod}</span>
                   </div>
                 </div>
               </div>

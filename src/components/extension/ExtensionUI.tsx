@@ -118,46 +118,48 @@ export const ExtensionUI: React.FC<ExtensionUIProps> = ({
       id: 'h-3',
       title: 'Draft Client Scope Proposal Email',
       modelId: 'gpt-4o',
-      time: 'Yesterday',
-      group: 'Yesterday',
-      snippet: 'Professional proposal response outlining multi-model AI milestones.'
+      time: '5h ago',
+      group: 'Today',
+      snippet: 'Proposed milestones and deliverables for enterprise AI deployment.'
     },
     {
       id: 'h-4',
-      title: 'Analyze CAN-bus protocol anomalies',
-      modelId: 'nemotron-3-ultra',
-      time: '4d ago',
+      title: 'Debug Next.js 15 Streaming SSR Issue',
+      modelId: 'deepseek-v4-pro',
+      time: 'Yesterday',
+      group: 'Yesterday',
+      snippet: 'Suspense boundary resolution and edge runtime compatibility.'
+    },
+    {
+      id: 'h-5',
+      title: 'Analyze Competitor Pricing Tiers',
+      modelId: 'glm-5',
+      time: '3d ago',
       group: 'Previous 7 Days',
-      snippet: 'Bit-stuffing error injection simulation and bus-off recovery.'
+      snippet: 'Matrix breakdown of token costs across OpenAI, Anthropic, and Google.'
     }
   ]);
 
-  const frontierPills = [
-    { id: 'deepseek-v4-pro', name: 'DeepSeek V4', speed: '12ms', score: '99.4%' },
-    { id: 'claude-3-5-sonnet', name: 'Claude 3.5 Sonnet', speed: '48ms', score: '98.9%' },
-    { id: 'gpt-4o', name: 'GPT-4o', speed: '35ms', score: '96.5%' },
-    { id: 'nemotron-3-ultra', name: 'Nemotron', speed: '22ms', score: '97.8%' }
-  ];
-
   const currentModel = AI_MODELS.find((m) => m.id === selectedModelId) || AI_MODELS[0];
 
-  // Auto scroll messages to bottom
+  const frontierPills = [
+    { id: 'deepseek-v4-pro', name: 'DeepSeek V4', speed: '12ms' },
+    { id: 'claude-3-5-sonnet', name: 'Claude 3.5 Sonnet', speed: '18ms' },
+    { id: 'gpt-4o', name: 'GPT-4o', speed: '15ms' }
+  ];
+
+  // Auto-scroll messages
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages, isGenerating]);
 
-  // Auto-resize textarea
   const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setInputText(e.target.value);
-    if (textareaRef.current) {
-      textareaRef.current.style.height = 'auto';
-      textareaRef.current.style.height = `${Math.min(textareaRef.current.scrollHeight, 120)}px`;
-    }
   };
 
-  const handleSend = async (customPrompt?: string) => {
-    const textToSend = customPrompt || inputText;
-    if (!textToSend.trim() || isGenerating) return;
+  const handleSend = (overrideText?: string) => {
+    const textToSend = overrideText || inputText;
+    if (!textToSend.trim() && !attachedFileName) return;
 
     const userMessage: ExtensionMessage = {
       id: 'msg-' + Date.now(),
@@ -167,16 +169,17 @@ export const ExtensionUI: React.FC<ExtensionUIProps> = ({
     };
 
     setMessages((prev) => [...prev, userMessage]);
-    setInputText('');
+    if (!overrideText) setInputText('');
     setAttachedFileName(null);
-    if (textareaRef.current) {
-      textareaRef.current.style.height = 'auto';
-    }
     setIsGenerating(true);
 
-    // Simulate smart dynamic AI output
-    await new Promise((resolve) => setTimeout(resolve, 600));
+    // Dynamic simulated response based on user input / context
+    setTimeout(() => {
+      finishSimulatedResponse(textToSend);
+    }, 1200);
+  };
 
+  const finishSimulatedResponse = (textToSend: string) => {
     let responseContent = '';
     const lower = textToSend.toLowerCase();
 
@@ -255,7 +258,7 @@ export const ExtensionUI: React.FC<ExtensionUIProps> = ({
 
   return (
     <div
-      className={`flex flex-col bg-slate-950 text-slate-100 border border-slate-800 shadow-2xl overflow-hidden font-sans select-none ring-1 ring-white/10 ${
+      className={`flex flex-col bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden font-sans select-none ring-1 ring-slate-200/80 dark:ring-white/10 ${
         mode === 'popup'
           ? 'w-[380px] h-[580px] rounded-2xl'
           : 'w-full max-w-[420px] h-full rounded-2xl'
@@ -271,12 +274,12 @@ export const ExtensionUI: React.FC<ExtensionUIProps> = ({
       />
 
       {/* Top Drag-Bar Container */}
-      <div className="pt-2 pb-1 bg-slate-950 flex justify-center items-center cursor-grab active:cursor-grabbing border-b border-slate-900/60">
-        <div className="w-10 h-1 rounded-full bg-slate-700/80 hover:bg-slate-600 transition-colors" />
+      <div className="pt-2 pb-1 bg-slate-50 dark:bg-slate-950 flex justify-center items-center cursor-grab active:cursor-grabbing border-b border-slate-200 dark:border-slate-900/60">
+        <div className="w-10 h-1 rounded-full bg-slate-300 dark:bg-slate-700/80 hover:bg-slate-400 dark:hover:bg-slate-600 transition-colors" />
       </div>
 
       {/* Main Extension Header */}
-      <div className="px-3.5 py-2.5 bg-slate-900/90 border-b border-slate-800 flex items-center justify-between gap-2 shrink-0">
+      <div className="px-3.5 py-2.5 bg-slate-50/90 dark:bg-slate-900/90 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between gap-2 shrink-0">
         {/* Brand & Version */}
         <div className="flex items-center gap-2">
           <div className="flex items-center justify-center w-7 h-7 rounded-lg bg-gradient-to-tr from-indigo-600 via-purple-600 to-cyan-500 shadow-sm shrink-0">
@@ -284,12 +287,12 @@ export const ExtensionUI: React.FC<ExtensionUIProps> = ({
           </div>
           <div>
             <div className="flex items-center gap-1.5">
-              <span className="font-extrabold text-xs text-white tracking-tight">EchoGPT</span>
-              <span className="text-[9px] font-bold uppercase px-1.5 py-0.2 rounded bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
+              <span className="font-extrabold text-xs text-slate-900 dark:text-white tracking-tight">EchoGPT</span>
+              <span className="text-[9px] font-bold uppercase px-1.5 py-0.2 rounded bg-indigo-50 dark:bg-indigo-500/20 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-500/30">
                 v2.4
               </span>
             </div>
-            <p className="text-[10px] text-slate-400 font-mono leading-none mt-0.5">
+            <p className="text-[10px] text-slate-500 dark:text-slate-400 font-mono leading-none mt-0.5">
               Sidepanel Active
             </p>
           </div>
@@ -305,8 +308,8 @@ export const ExtensionUI: React.FC<ExtensionUIProps> = ({
             title={isPinned ? 'Pinned to active tab' : 'Pin to browser'}
             className={`p-1.5 rounded-lg text-xs transition-colors ${
               isPinned
-                ? 'bg-indigo-500/20 text-cyan-400 border border-indigo-500/40'
-                : 'text-slate-400 hover:text-white hover:bg-slate-800'
+                ? 'bg-indigo-50 dark:bg-indigo-500/20 text-indigo-700 dark:text-cyan-400 border border-indigo-200 dark:border-indigo-500/40'
+                : 'text-slate-400 hover:text-slate-700 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-slate-800'
             }`}
           >
             <Pin className="w-3.5 h-3.5" />
@@ -318,7 +321,7 @@ export const ExtensionUI: React.FC<ExtensionUIProps> = ({
               navigateTo('webapp');
             }}
             title="Expand to Full Workspace"
-            className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
+            className="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors"
           >
             <Maximize2 className="w-3.5 h-3.5" />
           </button>
@@ -327,7 +330,7 @@ export const ExtensionUI: React.FC<ExtensionUIProps> = ({
             <button
               onClick={onClose}
               title="Close Extension"
-              className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
+              className="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors"
             >
               <X className="w-3.5 h-3.5" />
             </button>
@@ -336,7 +339,7 @@ export const ExtensionUI: React.FC<ExtensionUIProps> = ({
       </div>
 
       {/* Model Quick-Switch Pills Bar */}
-      <div className="px-3 py-2 bg-slate-950/95 border-b border-slate-800/80 flex items-center justify-between gap-1 overflow-x-auto">
+      <div className="px-3 py-2 bg-slate-50 dark:bg-slate-950/95 border-b border-slate-200 dark:border-slate-800/80 flex items-center justify-between gap-1 overflow-x-auto">
         <div className="flex items-center gap-1 overflow-x-auto pb-0.5 scrollbar-none">
           {frontierPills.map((m) => {
             const isSelected = selectedModelId === m.id;
@@ -347,7 +350,7 @@ export const ExtensionUI: React.FC<ExtensionUIProps> = ({
                 className={`px-2 py-1 rounded-md text-[10px] font-semibold whitespace-nowrap transition-all flex items-center gap-1 shrink-0 ${
                   isSelected
                     ? 'bg-indigo-600 text-white shadow-sm ring-1 ring-indigo-400/50'
-                    : 'bg-slate-900/80 text-slate-400 hover:text-slate-200 border border-slate-800'
+                    : 'bg-white hover:bg-slate-100 dark:bg-slate-900/80 text-slate-600 dark:text-slate-400 dark:hover:text-slate-200 border border-slate-200 dark:border-slate-800'
                 }`}
               >
                 <span>{m.name}</span>
@@ -362,7 +365,7 @@ export const ExtensionUI: React.FC<ExtensionUIProps> = ({
           value={selectedModelId}
           onChange={(e) => setSelectedModelId(e.target.value)}
           aria-label="Select AI Model"
-          className="bg-slate-900 border border-slate-800 rounded-md text-[10px] text-slate-300 px-1 py-1 font-mono focus:outline-none shrink-0"
+          className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-md text-[10px] text-slate-700 dark:text-slate-300 px-1 py-1 font-mono focus:outline-none shrink-0"
         >
           {AI_MODELS.map((model) => (
             <option key={model.id} value={model.id}>
@@ -373,13 +376,13 @@ export const ExtensionUI: React.FC<ExtensionUIProps> = ({
       </div>
 
       {/* Top Navigation Tabs: Chat, Quick Actions, History, Settings */}
-      <div className="px-2 pt-1.5 pb-1.5 bg-slate-900/60 border-b border-slate-800 flex items-center justify-around text-xs shrink-0">
+      <div className="px-2 pt-1.5 pb-1.5 bg-slate-100/80 dark:bg-slate-900/60 border-b border-slate-200 dark:border-slate-800 flex items-center justify-around text-xs shrink-0">
         <button
           onClick={() => setActiveTab('chat')}
           className={`flex-1 py-1.5 rounded-lg font-semibold flex items-center justify-center gap-1.5 transition-colors text-xs ${
             activeTab === 'chat'
               ? 'bg-indigo-600 text-white shadow-sm'
-              : 'text-slate-400 hover:text-white hover:bg-slate-800'
+              : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200/60 dark:hover:bg-slate-800'
           }`}
         >
           <MessageSquare className="w-3.5 h-3.5" />
@@ -391,10 +394,10 @@ export const ExtensionUI: React.FC<ExtensionUIProps> = ({
           className={`flex-1 py-1.5 rounded-lg font-semibold flex items-center justify-center gap-1.5 transition-colors text-xs ${
             activeTab === 'actions'
               ? 'bg-indigo-600 text-white shadow-sm'
-              : 'text-slate-400 hover:text-white hover:bg-slate-800'
+              : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200/60 dark:hover:bg-slate-800'
           }`}
         >
-          <Zap className="w-3.5 h-3.5 text-amber-400" />
+          <Zap className="w-3.5 h-3.5 text-amber-500 dark:text-amber-400" />
           <span>Quick Actions</span>
         </button>
 
@@ -403,7 +406,7 @@ export const ExtensionUI: React.FC<ExtensionUIProps> = ({
           className={`flex-1 py-1.5 rounded-lg font-semibold flex items-center justify-center gap-1.5 transition-colors text-xs ${
             activeTab === 'history'
               ? 'bg-indigo-600 text-white shadow-sm'
-              : 'text-slate-400 hover:text-white hover:bg-slate-800'
+              : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200/60 dark:hover:bg-slate-800'
           }`}
         >
           <History className="w-3.5 h-3.5" />
@@ -415,7 +418,7 @@ export const ExtensionUI: React.FC<ExtensionUIProps> = ({
           className={`flex-1 py-1.5 rounded-lg font-semibold flex items-center justify-center gap-1.5 transition-colors text-xs ${
             activeTab === 'settings'
               ? 'bg-indigo-600 text-white shadow-sm'
-              : 'text-slate-400 hover:text-white hover:bg-slate-800'
+              : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200/60 dark:hover:bg-slate-800'
           }`}
         >
           <Sliders className="w-3.5 h-3.5" />
@@ -430,46 +433,46 @@ export const ExtensionUI: React.FC<ExtensionUIProps> = ({
         {activeTab === 'chat' && (
           <div className="flex-1 flex flex-col justify-between overflow-hidden">
             {/* Quick 1-Click Preset Pills Hub */}
-            <div className="p-2 border-b border-slate-800/80 bg-slate-950/80 flex items-center gap-1.5 overflow-x-auto scrollbar-none">
+            <div className="p-2 border-b border-slate-200 dark:border-slate-800/80 bg-slate-50 dark:bg-slate-950/80 flex items-center gap-1.5 overflow-x-auto scrollbar-none">
               <button
                 onClick={() => handleTriggerPreset('summarize')}
                 disabled={isGenerating}
-                className="py-1 px-2.5 rounded-lg bg-indigo-500/10 hover:bg-indigo-500/20 border border-indigo-500/30 text-indigo-300 text-[10px] font-semibold flex items-center gap-1 whitespace-nowrap transition-colors shrink-0"
+                className="py-1 px-2.5 rounded-lg bg-indigo-50 hover:bg-indigo-100 dark:bg-indigo-500/10 dark:hover:bg-indigo-500/20 border border-indigo-200 dark:border-indigo-500/30 text-indigo-700 dark:text-indigo-300 text-[10px] font-semibold flex items-center gap-1 whitespace-nowrap transition-colors shrink-0 shadow-xs"
               >
-                <FileText className="w-3 h-3 text-cyan-400" />
+                <FileText className="w-3 h-3 text-cyan-600 dark:text-cyan-400" />
                 <span>Summarize Page</span>
               </button>
 
               <button
                 onClick={() => handleTriggerPreset('code')}
                 disabled={isGenerating}
-                className="py-1 px-2.5 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-300 text-[10px] font-semibold flex items-center gap-1 whitespace-nowrap transition-colors shrink-0"
+                className="py-1 px-2.5 rounded-lg bg-white hover:bg-slate-100 dark:bg-slate-900 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 text-[10px] font-semibold flex items-center gap-1 whitespace-nowrap transition-colors shrink-0 shadow-xs"
               >
-                <Code className="w-3 h-3 text-emerald-400" />
+                <Code className="w-3 h-3 text-emerald-600 dark:text-emerald-400" />
                 <span>Explain Code</span>
               </button>
 
               <button
                 onClick={() => handleTriggerPreset('email')}
                 disabled={isGenerating}
-                className="py-1 px-2.5 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-300 text-[10px] font-semibold flex items-center gap-1 whitespace-nowrap transition-colors shrink-0"
+                className="py-1 px-2.5 rounded-lg bg-white hover:bg-slate-100 dark:bg-slate-900 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 text-[10px] font-semibold flex items-center gap-1 whitespace-nowrap transition-colors shrink-0 shadow-xs"
               >
-                <Mail className="w-3 h-3 text-amber-400" />
+                <Mail className="w-3 h-3 text-amber-600 dark:text-amber-400" />
                 <span>Draft Reply</span>
               </button>
 
               <button
                 onClick={() => handleTriggerPreset('actions')}
                 disabled={isGenerating}
-                className="py-1 px-2.5 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-800 text-slate-300 text-[10px] font-semibold flex items-center gap-1 whitespace-nowrap transition-colors shrink-0"
+                className="py-1 px-2.5 rounded-lg bg-white hover:bg-slate-100 dark:bg-slate-900 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 text-[10px] font-semibold flex items-center gap-1 whitespace-nowrap transition-colors shrink-0 shadow-xs"
               >
-                <CheckSquare className="w-3 h-3 text-purple-400" />
+                <CheckSquare className="w-3 h-3 text-purple-600 dark:text-purple-400" />
                 <span>Extract Actions</span>
               </button>
             </div>
 
             {/* Chat Message Stream */}
-            <div className="flex-1 overflow-y-auto p-3 space-y-3 text-xs">
+            <div className="flex-1 overflow-y-auto p-3 space-y-3 text-xs bg-slate-50/50 dark:bg-transparent">
               {messages.map((m, idx) => {
                 const isUser = m.role === 'user';
                 return (
@@ -478,25 +481,25 @@ export const ExtensionUI: React.FC<ExtensionUIProps> = ({
                     className={`flex flex-col ${isUser ? 'items-end' : 'items-start'}`}
                   >
                     <div
-                      className={`max-w-[92%] rounded-xl p-3 leading-relaxed shadow-sm ${
+                      className={`max-w-[92%] rounded-xl p-3 leading-relaxed shadow-xs ${
                         isUser
-                          ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-tr-none'
-                          : 'bg-slate-900 border border-slate-800 text-slate-200 rounded-tl-none'
+                          ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-tr-none shadow-sm'
+                          : 'bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-800 dark:text-slate-200 rounded-tl-none'
                       }`}
                     >
                       {!isUser && (
-                        <div className="flex items-center justify-between pb-1.5 mb-1.5 border-b border-slate-800/80 text-[10px] text-slate-400">
-                          <span className="font-bold text-white flex items-center gap-1">
-                            <Sparkles className="w-3 h-3 text-indigo-400" />
+                        <div className="flex items-center justify-between pb-1.5 mb-1.5 border-b border-slate-100 dark:border-slate-800/80 text-[10px] text-slate-500 dark:text-slate-400">
+                          <span className="font-bold text-slate-900 dark:text-white flex items-center gap-1">
+                            <Sparkles className="w-3 h-3 text-indigo-600 dark:text-indigo-400" />
                             <span>{m.modelName || currentModel.name}</span>
                           </span>
                           <button
                             onClick={() => handleCopy(idx, m.content)}
-                            className="hover:text-white flex items-center gap-1 text-[10px] transition-colors"
+                            className="hover:text-slate-900 dark:hover:text-white flex items-center gap-1 text-[10px] transition-colors"
                             title="Copy response"
                           >
                             {copiedIndex === idx ? (
-                              <Check className="w-3 h-3 text-emerald-400" />
+                              <Check className="w-3 h-3 text-emerald-600 dark:text-emerald-400" />
                             ) : (
                               <Copy className="w-3 h-3" />
                             )}
@@ -504,16 +507,16 @@ export const ExtensionUI: React.FC<ExtensionUIProps> = ({
                           </button>
                         </div>
                       )}
-                      <div className="whitespace-pre-wrap font-sans text-xs">{m.content}</div>
+                      <div className="whitespace-pre-wrap font-sans text-xs leading-relaxed">{m.content}</div>
                     </div>
-                    <span className="text-[9px] text-slate-500 mt-1 px-1">{m.timestamp}</span>
+                    <span className="text-[9px] text-slate-400 dark:text-slate-500 mt-1 px-1">{m.timestamp}</span>
                   </div>
                 );
               })}
 
               {isGenerating && (
-                <div className="p-3 rounded-xl bg-slate-900 border border-slate-800 text-slate-300 text-xs flex items-center gap-2.5 animate-pulse">
-                  <div className="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-ping" />
+                <div className="p-3 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 text-xs flex items-center gap-2.5 animate-pulse shadow-xs">
+                  <div className="w-2.5 h-2.5 rounded-full bg-cyan-500 animate-ping" />
                   <span className="font-mono text-[11px]">
                     {currentModel.name} is streaming tokens...
                   </span>
@@ -523,15 +526,15 @@ export const ExtensionUI: React.FC<ExtensionUIProps> = ({
             </div>
 
             {/* Prompt Input Experience: Expanding Textarea, File Attach, Web Search, Hotkey Hints */}
-            <div className="p-2.5 border-t border-slate-800 bg-slate-900/95 space-y-1.5">
+            <div className="p-2.5 border-t border-slate-200 dark:border-slate-800 bg-white/95 dark:bg-slate-900/95 space-y-1.5">
               {/* Attached file chip */}
               {attachedFileName && (
-                <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 text-[10px]">
-                  <Paperclip className="w-3 h-3" />
+                <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-indigo-50 dark:bg-indigo-500/20 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-500/30 text-[10px]">
+                  <Paperclip className="w-3 h-3 text-indigo-600 dark:text-indigo-400" />
                   <span className="truncate max-w-[200px]">{attachedFileName}</span>
                   <button
                     onClick={() => setAttachedFileName(null)}
-                    className="hover:text-rose-400"
+                    className="hover:text-rose-600 dark:hover:text-rose-400"
                     title="Remove file"
                   >
                     <X className="w-3 h-3" />
@@ -540,7 +543,7 @@ export const ExtensionUI: React.FC<ExtensionUIProps> = ({
               )}
 
               {/* Textarea container */}
-              <div className="relative rounded-xl border border-slate-700 bg-slate-950 focus-within:border-indigo-500 focus-within:ring-1 focus-within:ring-indigo-500 transition-all p-2">
+              <div className="relative rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50/70 dark:bg-slate-950 focus-within:border-indigo-500 focus-within:ring-1 focus-within:ring-indigo-500 transition-all p-2 shadow-xs">
                 <textarea
                   ref={textareaRef}
                   value={inputText}
@@ -553,16 +556,16 @@ export const ExtensionUI: React.FC<ExtensionUIProps> = ({
                   }}
                   rows={1}
                   placeholder={`Ask ${currentModel.shortName} about this page or prompt...`}
-                  className="w-full bg-transparent resize-none text-xs text-white placeholder:text-slate-500 focus:outline-none max-h-[120px] leading-relaxed"
+                  className="w-full bg-transparent resize-none text-xs text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none max-h-[120px] leading-relaxed"
                 />
 
                 {/* Input Toolbar: File attach, Web search toggle, Token counter, Send */}
-                <div className="flex items-center justify-between pt-1.5 border-t border-slate-800/60 mt-1">
+                <div className="flex items-center justify-between pt-1.5 border-t border-slate-200/80 dark:border-slate-800/60 mt-1">
                   <div className="flex items-center gap-1">
                     <button
                       type="button"
                       onClick={handleAttachFileClick}
-                      className="p-1 rounded text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
+                      className="p-1 rounded text-slate-400 hover:text-slate-700 dark:hover:text-white hover:bg-slate-200/60 dark:hover:bg-slate-800 transition-colors"
                       title="Attach file or screenshot"
                     >
                       <Paperclip className="w-3.5 h-3.5" />
@@ -579,8 +582,8 @@ export const ExtensionUI: React.FC<ExtensionUIProps> = ({
                       }}
                       className={`px-1.5 py-0.5 rounded text-[10px] font-medium flex items-center gap-1 transition-colors ${
                         isWebSearchActive
-                          ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/40'
-                          : 'text-slate-400 hover:text-slate-200'
+                          ? 'bg-cyan-50 dark:bg-cyan-500/20 text-cyan-700 dark:text-cyan-300 border border-cyan-200 dark:border-cyan-500/40'
+                          : 'text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-200'
                       }`}
                       title="Toggle live web search synthesis"
                     >
@@ -590,7 +593,7 @@ export const ExtensionUI: React.FC<ExtensionUIProps> = ({
                   </div>
 
                   <div className="flex items-center gap-2">
-                    <span className="text-[10px] text-slate-500 font-mono">
+                    <span className="text-[10px] text-slate-500 dark:text-slate-500 font-mono">
                       ~{estimatedTokens} tok
                     </span>
 
@@ -609,7 +612,7 @@ export const ExtensionUI: React.FC<ExtensionUIProps> = ({
               {/* Hotkey hint line */}
               <div className="flex items-center justify-between text-[10px] text-slate-500 px-1 font-mono">
                 <span>Enter ↵ send • Shift+Enter newline</span>
-                <span className="text-indigo-400">Alt+E sidebar</span>
+                <span className="text-indigo-600 dark:text-indigo-400">Alt+E sidebar</span>
               </div>
             </div>
           </div>
@@ -617,12 +620,12 @@ export const ExtensionUI: React.FC<ExtensionUIProps> = ({
 
         {/* TAB 2: QUICK ACTIONS HUB */}
         {activeTab === 'actions' && (
-          <div className="p-3.5 space-y-3 overflow-y-auto">
-            <div className="pb-1 border-b border-slate-800">
-              <h3 className="text-xs font-bold text-white uppercase tracking-wider">
+          <div className="p-3.5 space-y-3 overflow-y-auto bg-slate-50/50 dark:bg-transparent">
+            <div className="pb-1 border-b border-slate-200 dark:border-slate-800">
+              <h3 className="text-xs font-bold text-slate-900 dark:text-white uppercase tracking-wider">
                 1-Click Preset Actions
               </h3>
-              <p className="text-[11px] text-slate-400">
+              <p className="text-[11px] text-slate-500 dark:text-slate-400">
                 Trigger context-aware automation on your active browser tab.
               </p>
             </div>
@@ -630,19 +633,19 @@ export const ExtensionUI: React.FC<ExtensionUIProps> = ({
             <div className="space-y-2.5 pt-1">
               <button
                 onClick={() => handleTriggerPreset('summarize')}
-                className="w-full p-3 rounded-xl bg-slate-900/90 hover:bg-slate-850 border border-slate-800 hover:border-indigo-500/40 flex items-start gap-3 text-left transition-all group"
+                className="w-full p-3 rounded-xl bg-white hover:bg-slate-50 dark:bg-slate-900/90 dark:hover:bg-slate-850 border border-slate-200 dark:border-slate-800 hover:border-indigo-400 dark:hover:border-indigo-500/40 flex items-start gap-3 text-left transition-all group shadow-xs"
               >
-                <div className="p-2 rounded-lg bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 shrink-0 group-hover:scale-105 transition-transform">
+                <div className="p-2 rounded-lg bg-cyan-50 dark:bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 border border-cyan-200 dark:border-cyan-500/20 shrink-0 group-hover:scale-105 transition-transform">
                   <FileText className="w-4 h-4" />
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center justify-between">
-                    <p className="text-xs font-bold text-white group-hover:text-indigo-300 transition-colors">
+                    <p className="text-xs font-bold text-slate-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-300 transition-colors">
                       Summarize Page Content
                     </p>
-                    <ArrowRight className="w-3.5 h-3.5 text-slate-500 group-hover:translate-x-0.5 transition-transform" />
+                    <ArrowRight className="w-3.5 h-3.5 text-slate-400 group-hover:translate-x-0.5 transition-transform" />
                   </div>
-                  <p className="text-[11px] text-slate-400 mt-0.5 leading-relaxed">
+                  <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5 leading-relaxed">
                     Extracts 3 concise bullets and verified metrics from the current tab.
                   </p>
                 </div>
@@ -650,19 +653,19 @@ export const ExtensionUI: React.FC<ExtensionUIProps> = ({
 
               <button
                 onClick={() => handleTriggerPreset('code')}
-                className="w-full p-3 rounded-xl bg-slate-900/90 hover:bg-slate-850 border border-slate-800 hover:border-emerald-500/40 flex items-start gap-3 text-left transition-all group"
+                className="w-full p-3 rounded-xl bg-white hover:bg-slate-50 dark:bg-slate-900/90 dark:hover:bg-slate-850 border border-slate-200 dark:border-slate-800 hover:border-emerald-400 dark:hover:border-emerald-500/40 flex items-start gap-3 text-left transition-all group shadow-xs"
               >
-                <div className="p-2 rounded-lg bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 shrink-0 group-hover:scale-105 transition-transform">
+                <div className="p-2 rounded-lg bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-500/20 shrink-0 group-hover:scale-105 transition-transform">
                   <Code className="w-4 h-4" />
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center justify-between">
-                    <p className="text-xs font-bold text-white group-hover:text-emerald-300 transition-colors">
+                    <p className="text-xs font-bold text-slate-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-300 transition-colors">
                       Explain Code Selection
                     </p>
-                    <ArrowRight className="w-3.5 h-3.5 text-slate-500 group-hover:translate-x-0.5 transition-transform" />
+                    <ArrowRight className="w-3.5 h-3.5 text-slate-400 group-hover:translate-x-0.5 transition-transform" />
                   </div>
-                  <p className="text-[11px] text-slate-400 mt-0.5 leading-relaxed">
+                  <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5 leading-relaxed">
                     Decodes syntax, analyzes time complexity, and flags potential edge cases.
                   </p>
                 </div>
@@ -670,19 +673,19 @@ export const ExtensionUI: React.FC<ExtensionUIProps> = ({
 
               <button
                 onClick={() => handleTriggerPreset('email')}
-                className="w-full p-3 rounded-xl bg-slate-900/90 hover:bg-slate-850 border border-slate-800 hover:border-amber-500/40 flex items-start gap-3 text-left transition-all group"
+                className="w-full p-3 rounded-xl bg-white hover:bg-slate-50 dark:bg-slate-900/90 dark:hover:bg-slate-850 border border-slate-200 dark:border-slate-800 hover:border-amber-400 dark:hover:border-amber-500/40 flex items-start gap-3 text-left transition-all group shadow-xs"
               >
-                <div className="p-2 rounded-lg bg-amber-500/10 text-amber-400 border border-amber-500/20 shrink-0 group-hover:scale-105 transition-transform">
+                <div className="p-2 rounded-lg bg-amber-50 dark:bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-200 dark:border-amber-500/20 shrink-0 group-hover:scale-105 transition-transform">
                   <Mail className="w-4 h-4" />
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center justify-between">
-                    <p className="text-xs font-bold text-white group-hover:text-amber-300 transition-colors">
+                    <p className="text-xs font-bold text-slate-900 dark:text-white group-hover:text-amber-600 dark:group-hover:text-amber-300 transition-colors">
                       Draft Email Reply
                     </p>
-                    <ArrowRight className="w-3.5 h-3.5 text-slate-500 group-hover:translate-x-0.5 transition-transform" />
+                    <ArrowRight className="w-3.5 h-3.5 text-slate-400 group-hover:translate-x-0.5 transition-transform" />
                   </div>
-                  <p className="text-[11px] text-slate-400 mt-0.5 leading-relaxed">
+                  <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5 leading-relaxed">
                     Composes a refined professional response tailored to the active message thread.
                   </p>
                 </div>
@@ -690,19 +693,19 @@ export const ExtensionUI: React.FC<ExtensionUIProps> = ({
 
               <button
                 onClick={() => handleTriggerPreset('actions')}
-                className="w-full p-3 rounded-xl bg-slate-900/90 hover:bg-slate-850 border border-slate-800 hover:border-purple-500/40 flex items-start gap-3 text-left transition-all group"
+                className="w-full p-3 rounded-xl bg-white hover:bg-slate-50 dark:bg-slate-900/90 dark:hover:bg-slate-850 border border-slate-200 dark:border-slate-800 hover:border-purple-400 dark:hover:border-purple-500/40 flex items-start gap-3 text-left transition-all group shadow-xs"
               >
-                <div className="p-2 rounded-lg bg-purple-500/10 text-purple-400 border border-purple-500/20 shrink-0 group-hover:scale-105 transition-transform">
+                <div className="p-2 rounded-lg bg-purple-50 dark:bg-purple-500/10 text-purple-600 dark:text-purple-400 border border-purple-200 dark:border-purple-500/20 shrink-0 group-hover:scale-105 transition-transform">
                   <CheckSquare className="w-4 h-4" />
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center justify-between">
-                    <p className="text-xs font-bold text-white group-hover:text-purple-300 transition-colors">
+                    <p className="text-xs font-bold text-slate-900 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-300 transition-colors">
                       Extract Action Items
                     </p>
-                    <ArrowRight className="w-3.5 h-3.5 text-slate-500 group-hover:translate-x-0.5 transition-transform" />
+                    <ArrowRight className="w-3.5 h-3.5 text-slate-400 group-hover:translate-x-0.5 transition-transform" />
                   </div>
-                  <p className="text-[11px] text-slate-400 mt-0.5 leading-relaxed">
+                  <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5 leading-relaxed">
                     Parses meeting notes, PR descriptions, and tickets into actionable task checklists.
                   </p>
                 </div>
@@ -713,7 +716,7 @@ export const ExtensionUI: React.FC<ExtensionUIProps> = ({
 
         {/* TAB 3: CONVERSATION HISTORY */}
         {activeTab === 'history' && (
-          <div className="p-3.5 space-y-3 overflow-y-auto">
+          <div className="p-3.5 space-y-3 overflow-y-auto bg-slate-50/50 dark:bg-transparent">
             {/* Search Bar */}
             <div className="relative">
               <Search className="w-3.5 h-3.5 text-slate-400 absolute left-2.5 top-1/2 -translate-y-1/2" />
@@ -722,7 +725,7 @@ export const ExtensionUI: React.FC<ExtensionUIProps> = ({
                 placeholder="Search past sidebar conversations..."
                 value={historySearch}
                 onChange={(e) => setHistorySearch(e.target.value)}
-                className="w-full pl-8 pr-3 py-1.5 bg-slate-900 border border-slate-800 rounded-lg text-xs text-white placeholder:text-slate-500 focus:outline-none focus:border-indigo-500"
+                className="w-full pl-8 pr-3 py-1.5 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg text-xs text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:border-indigo-500 shadow-xs"
               />
             </div>
 
@@ -739,24 +742,24 @@ export const ExtensionUI: React.FC<ExtensionUIProps> = ({
 
               return (
                 <div key={groupName} className="space-y-1.5 pt-1">
-                  <div className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-slate-400 px-1">
-                    <Clock className="w-3 h-3 text-cyan-400" />
+                  <div className="flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 px-1">
+                    <Clock className="w-3 h-3 text-cyan-600 dark:text-cyan-400" />
                     <span>{groupName}</span>
                   </div>
 
                   {items.map((item) => (
                     <div
                       key={item.id}
-                      className="p-2.5 rounded-xl bg-slate-900/60 hover:bg-slate-900 border border-slate-800/80 hover:border-slate-700 transition-colors text-xs flex flex-col justify-between gap-1 group"
+                      className="p-2.5 rounded-xl bg-white hover:bg-slate-50 dark:bg-slate-900/60 dark:hover:bg-slate-900 border border-slate-200 dark:border-slate-800/80 hover:border-slate-300 dark:hover:border-slate-700 transition-colors text-xs flex flex-col justify-between gap-1 group shadow-xs"
                     >
                       <div className="flex items-center justify-between">
-                        <span className="font-semibold text-white truncate max-w-[240px]">
+                        <span className="font-semibold text-slate-900 dark:text-white truncate max-w-[240px]">
                           {item.title}
                         </span>
                         <div className="flex items-center gap-1 shrink-0">
                           <button
                             onClick={() => handleResumeHistory(item)}
-                            className="px-2 py-0.5 rounded bg-indigo-500/20 hover:bg-indigo-500/30 text-indigo-300 text-[10px] font-semibold flex items-center gap-1 transition-colors"
+                            className="px-2 py-0.5 rounded bg-indigo-50 hover:bg-indigo-100 dark:bg-indigo-500/20 dark:hover:bg-indigo-500/30 text-indigo-700 dark:text-indigo-300 text-[10px] font-semibold flex items-center gap-1 transition-colors border border-indigo-200 dark:border-indigo-500/30"
                             title="Resume session in chat"
                           >
                             <RotateCcw className="w-2.5 h-2.5" />
@@ -764,15 +767,15 @@ export const ExtensionUI: React.FC<ExtensionUIProps> = ({
                           </button>
                           <button
                             onClick={() => handleDeleteHistory(item.id)}
-                            className="p-1 text-slate-500 hover:text-rose-400 transition-colors"
+                            className="p-1 text-slate-400 hover:text-rose-600 dark:hover:text-rose-400 transition-colors"
                             title="Delete session"
                           >
                             <Trash2 className="w-3 h-3" />
                           </button>
                         </div>
                       </div>
-                      <p className="text-[10px] text-slate-400 truncate">{item.snippet}</p>
-                      <div className="flex items-center justify-between text-[9px] text-slate-500 pt-1 border-t border-slate-800/40">
+                      <p className="text-[10px] text-slate-500 dark:text-slate-400 truncate">{item.snippet}</p>
+                      <div className="flex items-center justify-between text-[9px] text-slate-400 dark:text-slate-500 pt-1 border-t border-slate-100 dark:border-slate-800/40">
                         <span>{item.modelId}</span>
                         <span>{item.time}</span>
                       </div>
@@ -786,17 +789,17 @@ export const ExtensionUI: React.FC<ExtensionUIProps> = ({
 
         {/* TAB 4: SETTINGS & SHORTCUTS PANEL */}
         {activeTab === 'settings' && (
-          <div className="p-3.5 space-y-4 text-xs overflow-y-auto">
+          <div className="p-3.5 space-y-4 text-xs overflow-y-auto bg-slate-50/50 dark:bg-transparent">
             <div>
-              <p className="font-bold text-white text-xs">Extension Preferences</p>
-              <p className="text-[11px] text-slate-400">Configure keybindings, models, and privacy.</p>
+              <p className="font-bold text-slate-900 dark:text-white text-xs">Extension Preferences</p>
+              <p className="text-[11px] text-slate-500 dark:text-slate-400">Configure keybindings, models, and privacy.</p>
             </div>
 
             {/* Keybindings Config */}
-            <div className="p-3 rounded-xl bg-slate-900 border border-slate-800 space-y-2">
-              <span className="font-bold text-slate-200 block text-xs">Keyboard Shortcuts</span>
+            <div className="p-3 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-2 shadow-xs">
+              <span className="font-bold text-slate-800 dark:text-slate-200 block text-xs">Keyboard Shortcuts</span>
               <div className="flex items-center justify-between pt-1">
-                <span className="text-slate-400">Toggle Sidebar</span>
+                <span className="text-slate-500 dark:text-slate-400">Toggle Sidebar</span>
                 <button
                   type="button"
                   onClick={() => {
@@ -812,21 +815,21 @@ export const ExtensionUI: React.FC<ExtensionUIProps> = ({
                   className="flex items-center gap-1 hover:opacity-80 transition-opacity"
                   title="Click to cycle shortcut"
                 >
-                  <kbd className="px-2 py-0.5 rounded bg-slate-950 border border-slate-700 font-mono text-cyan-300 text-[10px] cursor-pointer">
+                  <kbd className="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 font-mono text-cyan-700 dark:text-cyan-300 text-[10px] cursor-pointer shadow-xs">
                     {shortcutKey}
                   </kbd>
-                  <span className="text-[10px] text-slate-500">(Click to switch)</span>
+                  <span className="text-[10px] text-slate-400 dark:text-slate-500">(Click to switch)</span>
                 </button>
               </div>
             </div>
 
             {/* Default Model Selector */}
-            <div className="p-3 rounded-xl bg-slate-900 border border-slate-800 space-y-2">
-              <span className="font-bold text-slate-200 block text-xs">Default Model Engine</span>
+            <div className="p-3 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-2 shadow-xs">
+              <span className="font-bold text-slate-800 dark:text-slate-200 block text-xs">Default Model Engine</span>
               <select
                 value={selectedModelId}
                 onChange={(e) => setSelectedModelId(e.target.value)}
-                className="w-full bg-slate-950 border border-slate-700 rounded-lg p-2 text-xs text-white focus:outline-none"
+                className="w-full bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-700 rounded-lg p-2 text-xs text-slate-900 dark:text-white focus:outline-none"
               >
                 {AI_MODELS.slice(0, 10).map((m) => (
                   <option key={m.id} value={m.id}>
@@ -837,10 +840,10 @@ export const ExtensionUI: React.FC<ExtensionUIProps> = ({
             </div>
 
             {/* Temperature Slider */}
-            <div className="p-3 rounded-xl bg-slate-900 border border-slate-800 space-y-2">
+            <div className="p-3 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-2 shadow-xs">
               <div className="flex items-center justify-between">
-                <span className="font-bold text-slate-200 text-xs">Creativity (Temperature)</span>
-                <span className="font-mono text-cyan-300 text-[11px]">{temperature.toFixed(2)}</span>
+                <span className="font-bold text-slate-800 dark:text-slate-200 text-xs">Creativity (Temperature)</span>
+                <span className="font-mono text-cyan-600 dark:text-cyan-300 text-[11px] font-semibold">{temperature.toFixed(2)}</span>
               </div>
               <input
                 type="range"
@@ -851,7 +854,7 @@ export const ExtensionUI: React.FC<ExtensionUIProps> = ({
                 onChange={(e) => setTemperature(parseFloat(e.target.value))}
                 className="w-full accent-indigo-500 cursor-pointer"
               />
-              <div className="flex items-center justify-between text-[10px] text-slate-500">
+              <div className="flex items-center justify-between text-[10px] text-slate-400 dark:text-slate-500">
                 <span>0.0 (Precise / Code)</span>
                 <span>1.0 (Creative)</span>
               </div>
@@ -859,10 +862,10 @@ export const ExtensionUI: React.FC<ExtensionUIProps> = ({
 
             {/* Privacy & Automation Toggles */}
             <div className="space-y-2">
-              <div className="p-3 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-between">
+              <div className="p-3 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-center justify-between shadow-xs">
                 <div>
-                  <p className="font-semibold text-white text-xs">Read Active Tab Context</p>
-                  <p className="text-[10px] text-slate-400">Allows instant summarization & explain</p>
+                  <p className="font-semibold text-slate-900 dark:text-white text-xs">Read Active Tab Context</p>
+                  <p className="text-[10px] text-slate-500 dark:text-slate-400">Allows instant summarization & explain</p>
                 </div>
                 <input
                   type="checkbox"
@@ -872,10 +875,10 @@ export const ExtensionUI: React.FC<ExtensionUIProps> = ({
                 />
               </div>
 
-              <div className="p-3 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-between">
+              <div className="p-3 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-center justify-between shadow-xs">
                 <div>
-                  <p className="font-semibold text-white text-xs">Real-Time Token Streaming</p>
-                  <p className="text-[10px] text-slate-400">Stream words as generated</p>
+                  <p className="font-semibold text-slate-900 dark:text-white text-xs">Real-Time Token Streaming</p>
+                  <p className="text-[10px] text-slate-500 dark:text-slate-400">Stream words as generated</p>
                 </div>
                 <input
                   type="checkbox"
@@ -887,8 +890,8 @@ export const ExtensionUI: React.FC<ExtensionUIProps> = ({
             </div>
 
             {/* Enterprise Zero-Retention Card */}
-            <div className="p-3 rounded-xl bg-emerald-950/20 border border-emerald-800/40 text-[11px] text-slate-300 space-y-1">
-              <div className="flex items-center gap-1.5 font-bold text-emerald-400">
+            <div className="p-3 rounded-xl bg-emerald-50 dark:bg-emerald-950/20 border border-emerald-200 dark:border-emerald-800/40 text-[11px] text-slate-700 dark:text-slate-300 space-y-1 shadow-xs">
+              <div className="flex items-center gap-1.5 font-bold text-emerald-700 dark:text-emerald-400">
                 <Shield className="w-3.5 h-3.5" />
                 <span>Zero-Retention Policy</span>
               </div>
@@ -900,12 +903,12 @@ export const ExtensionUI: React.FC<ExtensionUIProps> = ({
       </div>
 
       {/* Extension Footer status */}
-      <div className="px-3 py-2 bg-slate-950 border-t border-slate-800/80 flex items-center justify-between text-[10px] text-slate-500 shrink-0">
+      <div className="px-3 py-2 bg-slate-50 dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800/80 flex items-center justify-between text-[10px] text-slate-500 shrink-0">
         <span className="flex items-center gap-1.5">
-          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-          <span>Connected to EchoGPT Engine</span>
+          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+          <span className="text-slate-600 dark:text-slate-400">Connected to EchoGPT Engine</span>
         </span>
-        <span className="font-mono">Manifest V3 • Alt+E</span>
+        <span className="font-mono text-slate-500">Manifest V3 • Alt+E</span>
       </div>
     </div>
   );
@@ -914,3 +917,4 @@ export const ExtensionUI: React.FC<ExtensionUIProps> = ({
 // Re-export alias for simulator/view naming compatibility
 export const ExtensionSimulator = ExtensionUI;
 export const ExtensionView = ExtensionUI;
+export default ExtensionUI;
