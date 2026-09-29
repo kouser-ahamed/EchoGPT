@@ -10,9 +10,19 @@
 [![Framer Motion](https://img.shields.io/badge/Framer_Motion-13.4-FF0055?style=flat-square&logo=framer&logoColor=white)](https://motion.dev)
 [![Vite](https://img.shields.io/badge/Vite-8.3-646CFF?style=flat-square&logo=vite&logoColor=white)](https://vite.dev)
 [![License: MIT](https://img.shields.io/badge/License-MIT-10B981?style=flat-square)](./LICENSE)
-[![Live Demo](https://img.shields.io/badge/Live_Demo-echogpt.live-22D3EE?style=flat-square&logo=googlechrome&logoColor=black)](https://echogpt.live/)
 
 </div>
+
+---
+
+[![Live Demo](https://img.shields.io/badge/Live_Demo-Vercel-success?style=for-the-badge&logo=vercel)](https://echo-gpt-theta.vercel.app)
+[![GitHub Repo](https://img.shields.io/badge/GitHub-Repository-181717?style=for-the-badge&logo=github)](https://github.com/kouser-ahamed/EchoGPT)
+[![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)](https://github.com/kouser-ahamed/EchoGPT)
+
+| Resource | Link |
+| :--- | :--- |
+| 🚀 **Live Demo Platform** | [https://echo-gpt-theta.vercel.app](https://echo-gpt-theta.vercel.app) |
+| 💻 **Source Code Repository** | [https://github.com/kouser-ahamed/EchoGPT](https://github.com/kouser-ahamed/EchoGPT) |
 
 ---
 
@@ -29,6 +39,7 @@
 - [Contributing](#-contributing)
 - [License](#-license)
 - [Credits](#-credits)
+- [Project Links](#-project-links)
 
 ---
 
@@ -111,6 +122,8 @@ git clone https://github.com/kouser-ahamed/EchoGPT.git
 cd EchoGPT
 ```
 
+> Already have a checkout? The canonical source lives at [github.com/kouser-ahamed/EchoGPT](https://github.com/kouser-ahamed/EchoGPT) — fork it there to contribute.
+
 ### 2. Install dependencies
 
 ```bash
@@ -142,6 +155,8 @@ npm run dev
 ```
 
 Open the URL printed by Vite (default <http://localhost:5173>).
+
+> Running it locally is optional — the deployed build is already live at [echo-gpt-theta.vercel.app](https://echo-gpt-theta.vercel.app).
 
 ### 5. Verify a production build
 
@@ -289,7 +304,18 @@ SOFTWARE.
 
 - **Created by** [Kouser Ahamed](https://github.com/kouser-ahamed) — <kouserahamed.cse.diu@gmail.com>
 - Built for the **AppifyDevs** Frontend Software Engineering Internship evaluation.
-- Design reference and inspiration: the official **EchoGPT** platform at [echogpt.live](https://echogpt.live/).
+- Design reference and inspiration: the EchoGPT platform at [echogpt.live](https://echogpt.live/).
+
+---
+
+## 🔗 Project Links
+
+| Resource | Link |
+| :--- | :--- |
+| 🚀 **Live Demo Platform** | [https://echo-gpt-theta.vercel.app](https://echo-gpt-theta.vercel.app) |
+| 💻 **Source Code Repository** | [https://github.com/kouser-ahamed/EchoGPT](https://github.com/kouser-ahamed/EchoGPT) |
+| 🐛 **Report an Issue** | [github.com/kouser-ahamed/EchoGPT/issues](https://github.com/kouser-ahamed/EchoGPT/issues) |
+| ⭐ **Star the Project** | [github.com/kouser-ahamed/EchoGPT](https://github.com/kouser-ahamed/EchoGPT/stargazers) |
 
 <p align="center">
   <em>Made with React, TypeScript, and an unreasonable number of model tabs.</em>
