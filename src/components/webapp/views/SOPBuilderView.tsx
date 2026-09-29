@@ -408,7 +408,7 @@ ${formData.additionalInfo ? `### V. Supplemental Context & Personal Resilience\n
         </div>
 
         {/* Wizard Step Progress Indicator */}
-        <div className="grid grid-cols-4 gap-2 pt-1">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-1">
           {[
             { step: 1 as const, label: '1. Template' },
             { step: 2 as const, label: '2. Destination' },

@@ -186,7 +186,7 @@ Analysis for rapid iteration velocity:
           </div>
 
           {/* Model Tag Pills Selector */}
-          <div className="flex items-center gap-1.5 overflow-x-auto pb-1 no-scrollbar">
+          <div className="flex items-center gap-1.5 overflow-x-auto pb-1 no-scrollbar momentum-scroll">
             <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 shrink-0 mr-1">
               Active Models ({selectedModelIds.length}/3):
             </span>
@@ -246,7 +246,7 @@ Analysis for rapid iteration velocity:
           </div>
 
           {/* Quick Preset Prompts */}
-          <div className="flex items-center gap-1.5 overflow-x-auto pb-1 no-scrollbar pt-0.5">
+          <div className="flex items-center gap-1.5 overflow-x-auto pb-1 no-scrollbar momentum-scroll pt-0.5">
             <span className="text-[11px] text-slate-500 dark:text-slate-400 whitespace-nowrap mr-1 font-medium">Quick Prompts:</span>
             {comparePresets.map((preset, pIdx) => (
               <button

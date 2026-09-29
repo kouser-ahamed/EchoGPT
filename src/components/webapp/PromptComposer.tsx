@@ -95,7 +95,7 @@ export const PromptComposer: React.FC<PromptComposerProps> = () => {
     <div className="p-3 sm:p-5 border-t border-slate-200 dark:border-slate-800 bg-white/90 dark:bg-slate-950/90 backdrop-blur-md">
       <div className="max-w-4xl mx-auto space-y-2.5">
         {/* Quick Action Pills */}
-        <div className="flex items-center gap-1.5 overflow-x-auto pb-1 no-scrollbar">
+        <div className="flex items-center gap-1.5 overflow-x-auto pb-1 no-scrollbar momentum-scroll">
           <span className="text-[10px] uppercase font-bold text-slate-500 dark:text-slate-400 shrink-0 mr-1 flex items-center gap-1">
             <Sparkles className="w-3 h-3 text-indigo-600 dark:text-indigo-400" />
             <span>Actions:</span>

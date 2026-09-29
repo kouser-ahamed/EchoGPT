@@ -199,12 +199,12 @@ export const HeroSection: React.FC = () => {
           initial={{ opacity: 0, y: 50, scale: 0.96 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.85, delay: 0.25, ease: [0.22, 1, 0.36, 1] }}
-          className="mt-14 max-w-5xl mx-auto"
+          className="mt-14 w-full max-w-4xl mx-auto px-2 sm:px-4 md:px-0 min-w-0"
         >
-          <div className="relative rounded-2xl border border-slate-200/90 dark:border-slate-800 bg-white/95 dark:bg-slate-950/80 shadow-2xl backdrop-blur-xl overflow-hidden ring-1 ring-slate-200/60 dark:ring-white/10">
+          <div className="relative w-full min-w-0 rounded-2xl border border-slate-200/90 dark:border-slate-800 bg-white/95 dark:bg-slate-950/80 shadow-2xl backdrop-blur-xl overflow-hidden ring-1 ring-slate-200/60 dark:ring-white/10">
             {/* Window Top Bar */}
-            <div className="flex items-center justify-between px-4 sm:px-6 py-3 border-b border-slate-200 dark:border-slate-800 bg-slate-50/90 dark:bg-slate-900/60">
-              <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 justify-between px-4 sm:px-6 py-3 border-b border-slate-200 dark:border-slate-800 bg-slate-50/90 dark:bg-slate-900/60">
+              <div className="flex items-center gap-2 shrink-0">
                 <span className="w-3 h-3 rounded-full bg-rose-500/80" />
                 <span className="w-3 h-3 rounded-full bg-amber-500/80" />
                 <span className="w-3 h-3 rounded-full bg-emerald-500/80" />
@@ -214,7 +214,7 @@ export const HeroSection: React.FC = () => {
               </div>
 
               {/* Model Switcher Tabs in Mock */}
-              <div className="flex items-center gap-1.5 overflow-x-auto p-0.5 rounded-xl bg-slate-100 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 text-xs">
+              <div className="flex min-w-0 flex-1 items-center gap-1.5 overflow-x-auto no-scrollbar momentum-scroll p-0.5 rounded-xl bg-slate-100 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 text-xs">
                 {AI_MODELS.slice(0, 4).map((model) => (
                   <button
                     key={model.id}
@@ -222,7 +222,7 @@ export const HeroSection: React.FC = () => {
                       setActivePreviewModel(model.id);
                       setSelectedModelId(model.id);
                     }}
-                    className={`px-2.5 py-1 rounded-lg font-medium transition-all ${
+                    className={`px-2.5 py-1 rounded-lg font-medium transition-all shrink-0 whitespace-nowrap ${
                       activePreviewModel === model.id
                         ? `${model.bgLight} font-semibold shadow-sm border ${model.borderColor}`
                         : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200'
@@ -234,7 +234,7 @@ export const HeroSection: React.FC = () => {
                 ))}
               </div>
 
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 shrink-0">
                 <span className="text-[11px] font-semibold text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20 hidden md:inline-block">
                   {currentModelData.speed}
                 </span>
@@ -242,7 +242,7 @@ export const HeroSection: React.FC = () => {
             </div>
 
             {/* Prompt Selector Pills */}
-            <div className="px-4 sm:px-6 pt-4 pb-2 border-b border-slate-200/80 dark:border-slate-800/60 flex items-center gap-2 overflow-x-auto bg-slate-50/50 dark:bg-slate-900/20">
+            <div className="px-4 sm:px-6 pt-4 pb-2 border-b border-slate-200/80 dark:border-slate-800/60 flex items-center gap-2 overflow-x-auto no-scrollbar momentum-scroll bg-slate-50/50 dark:bg-slate-900/20">
               <span className="text-xs font-medium text-slate-500 dark:text-slate-400 shrink-0">Sample Tasks:</span>
               {SAMPLE_PROMPTS.map((item, idx) => (
                 <button
@@ -260,10 +260,10 @@ export const HeroSection: React.FC = () => {
             </div>
 
             {/* Simulated Chat Dialogue */}
-            <div className="p-4 sm:p-6 space-y-4 max-h-[380px] overflow-y-auto">
+            <div className="p-4 sm:p-6 space-y-4 max-h-[380px] overflow-y-auto overflow-x-hidden momentum-scroll">
               {/* User Message */}
               <div className="flex items-start justify-end gap-3">
-                <div className="max-w-lg p-3.5 rounded-2xl rounded-tr-sm bg-gradient-to-r from-indigo-600 to-purple-600 text-white text-xs sm:text-sm font-medium shadow-md">
+                <div className="max-w-[85%] sm:max-w-lg p-3.5 rounded-2xl rounded-tr-sm bg-gradient-to-r from-indigo-600 to-purple-600 text-white text-xs sm:text-sm font-medium shadow-md break-words">
                   {SAMPLE_PROMPTS[activePromptIndex].prompt}
                 </div>
                 <div className="w-7 h-7 rounded-full bg-slate-700 flex items-center justify-center text-xs font-bold text-white shrink-0">
@@ -276,19 +276,19 @@ export const HeroSection: React.FC = () => {
                 <div className={`w-8 h-8 rounded-xl bg-slate-100 dark:bg-slate-900 flex items-center justify-center text-sm border ${currentModelData.borderColor} shrink-0 shadow-sm`}>
                   {currentModelData.avatar}
                 </div>
-                <div className="flex-1 space-y-2">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <span className="text-xs font-bold text-slate-900 dark:text-white">{currentModelData.name}</span>
-                      <span className="text-[10px] text-slate-500 dark:text-slate-400">{currentModelData.provider}</span>
-                      <span className="text-[10px] px-1.5 py-0.2 rounded bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20">
+                <div className="flex-1 min-w-0 space-y-2">
+                  <div className="flex flex-wrap items-center justify-between gap-2">
+                    <div className="flex min-w-0 flex-wrap items-center gap-2">
+                      <span className="text-xs font-bold text-slate-900 dark:text-white truncate">{currentModelData.name}</span>
+                      <span className="text-[10px] text-slate-500 dark:text-slate-400 shrink-0">{currentModelData.provider}</span>
+                      <span className="text-[10px] px-1.5 py-0.2 rounded bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 border border-indigo-500/20 shrink-0">
                         {currentModelData.contextWindow}
                       </span>
                     </div>
 
                     <button
                       onClick={handleCopy}
-                      className="flex items-center gap-1 text-[11px] text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white px-2 py-1 rounded bg-slate-100 hover:bg-slate-200 dark:bg-slate-800/60 dark:hover:bg-slate-800 transition-colors"
+                      className="flex items-center gap-1 text-[11px] text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white px-2 py-1 rounded bg-slate-100 hover:bg-slate-200 dark:bg-slate-800/60 dark:hover:bg-slate-800 transition-colors shrink-0"
                       title="Copy response snippet"
                     >
                       {copied ? <Check className="w-3 h-3 text-emerald-500 dark:text-emerald-400" /> : <Copy className="w-3 h-3" />}
@@ -296,17 +296,17 @@ export const HeroSection: React.FC = () => {
                     </button>
                   </div>
 
-                  <div className="relative p-4 rounded-xl bg-slate-50 dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 text-xs sm:text-sm text-slate-800 dark:text-slate-200 leading-relaxed font-mono whitespace-pre-wrap">
+                  <div className="relative p-4 rounded-xl bg-slate-50 dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 text-xs sm:text-sm text-slate-800 dark:text-slate-200 leading-relaxed font-mono whitespace-pre-wrap wrap-anywhere overflow-x-auto">
                     {displayedResponse}
                     {isStreaming && (
                       <span className="inline-block w-2 h-4 ml-1 bg-cyan-500 dark:bg-cyan-400 animate-pulse align-middle" />
                     )}
-                    <div className="mt-3 pt-2 border-t border-slate-200 dark:border-slate-800/60 flex items-center justify-between text-[11px] text-slate-500 dark:text-slate-400 font-sans">
-                      <span className="flex items-center gap-1.5">
-                        <span className={`w-1.5 h-1.5 rounded-full ${isStreaming ? 'bg-cyan-500 animate-ping' : 'bg-emerald-500'}`} />
-                        <span>{isStreaming ? 'Real-Time Token Streaming...' : 'Generation Complete'}</span>
+                    <div className="mt-3 pt-2 border-t border-slate-200 dark:border-slate-800/60 flex flex-wrap items-center justify-between gap-2 text-[11px] text-slate-500 dark:text-slate-400 font-sans">
+                      <span className="flex items-center gap-1.5 min-w-0">
+                        <span className={`w-1.5 h-1.5 rounded-full shrink-0 ${isStreaming ? 'bg-cyan-500 animate-ping' : 'bg-emerald-500'}`} />
+                        <span className="truncate">{isStreaming ? 'Real-Time Token Streaming...' : 'Generation Complete'}</span>
                       </span>
-                      <span className="font-mono text-cyan-600 dark:text-cyan-300">
+                      <span className="font-mono text-cyan-600 dark:text-cyan-300 shrink-0">
                         {tokensCount} tokens • {currentModelData.speed.split(' ')[0]}
                       </span>
                     </div>
@@ -317,7 +317,7 @@ export const HeroSection: React.FC = () => {
 
             {/* Simulated Live Input Bar */}
             <div className="p-3 sm:p-4 border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 flex items-center gap-3">
-              <div className="flex-1 flex items-center gap-3 px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 text-xs text-slate-500 dark:text-slate-400">
+              <div className="flex-1 min-w-0 flex items-center gap-3 px-4 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 text-xs text-slate-500 dark:text-slate-400">
                 <Sparkles className="w-4 h-4 text-indigo-500 dark:text-indigo-400 shrink-0" />
                 <span className="truncate">Type a prompt or test multi-model split view...</span>
               </div>

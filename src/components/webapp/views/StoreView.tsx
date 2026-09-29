@@ -133,7 +133,7 @@ export const StoreView: React.FC<StoreViewProps> = ({ onSelectModel }) => {
           </div>
 
           {/* Filter Tags */}
-          <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5">
+          <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar momentum-scroll py-0.5">
             {tags.map((t) => (
               <button
                 key={t}

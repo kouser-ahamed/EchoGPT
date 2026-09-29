@@ -106,16 +106,17 @@ Comparing **CSR vs. SSR** through latency and developer ergonomical lenses:
           {/* Controls Bar */}
           <div className="p-4 sm:p-6 border-b border-slate-200 dark:border-slate-800/80 bg-slate-50/70 dark:bg-slate-950/60 space-y-4">
 
-            {/* Model Selectors */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
+            {/* Model Selectors — stack until lg so 768px tablets get a full-width
+                form instead of two compressed half-width dropdowns. */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 w-full">
+              <div className="min-w-0">
                 <label className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 block mb-1.5">
                   Model A (Left Stream)
                 </label>
                 <select
                   value={modelAId}
                   onChange={(e) => setModelAId(e.target.value)}
-                  className="w-full bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-xl px-3 py-2 text-sm text-slate-900 dark:text-white font-medium focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+                  className="w-full min-w-0 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-xl px-3 py-2.5 text-sm text-slate-900 dark:text-white font-medium focus:ring-2 focus:ring-indigo-500 focus:outline-none"
                 >
                   {AI_MODELS.map((m) => (
                     <option key={m.id} value={m.id}>
@@ -125,14 +126,14 @@ Comparing **CSR vs. SSR** through latency and developer ergonomical lenses:
                 </select>
               </div>
 
-              <div>
+              <div className="min-w-0">
                 <label className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 block mb-1.5">
                   Model B (Right Stream)
                 </label>
                 <select
                   value={modelBId}
                   onChange={(e) => setModelBId(e.target.value)}
-                  className="w-full bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-xl px-3 py-2 text-sm text-slate-900 dark:text-white font-medium focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+                  className="w-full min-w-0 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-xl px-3 py-2.5 text-sm text-slate-900 dark:text-white font-medium focus:ring-2 focus:ring-indigo-500 focus:outline-none"
                 >
                   {AI_MODELS.map((m) => (
                     <option key={m.id} value={m.id}>
@@ -143,14 +144,14 @@ Comparing **CSR vs. SSR** through latency and developer ergonomical lenses:
               </div>
             </div>
 
-            {/* Prompt Selector Pills */}
-            <div className="flex items-center gap-2 overflow-x-auto pt-1">
+            {/* Prompt Selector Pills — swipeable strip */}
+            <div className="flex items-center gap-2 overflow-x-auto no-scrollbar momentum-scroll w-full py-1">
               <span className="text-xs font-semibold text-slate-500 dark:text-slate-400 shrink-0">Preset:</span>
               {presetPrompts.map((p, idx) => (
                 <button
                   key={idx}
                   onClick={() => setCustomPrompt(p.text)}
-                  className="text-xs px-3 py-1.5 rounded-lg bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 font-medium whitespace-nowrap transition-colors border border-slate-200 dark:border-slate-700/60 shadow-xs"
+                  className="shrink-0 text-xs px-3 py-1.5 rounded-lg bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 font-medium whitespace-nowrap transition-colors border border-slate-200 dark:border-slate-700/60 shadow-xs"
                 >
                   {p.title}
                 </button>
@@ -164,12 +165,12 @@ Comparing **CSR vs. SSR** through latency and developer ergonomical lenses:
                 value={customPrompt}
                 onChange={(e) => setCustomPrompt(e.target.value)}
                 placeholder="Enter prompt to evaluate across both models..."
-                className="flex-1 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-xl px-4 py-2.5 text-xs sm:text-sm text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-amber-500"
+                className="w-full min-w-0 sm:flex-1 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-xl px-4 py-2.5 text-xs sm:text-sm text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-amber-500"
               />
               <button
                 onClick={handleRunComparison}
                 disabled={isRunning}
-                className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-orange-600 hover:brightness-110 text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-lg shadow-amber-500/20 active:scale-95 transition-all shrink-0 disabled:opacity-50"
+                className="w-full sm:w-auto min-h-[44px] px-6 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-orange-600 hover:brightness-110 text-white font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-lg shadow-amber-500/20 active:scale-95 transition-all shrink-0 disabled:opacity-50"
               >
                 {isRunning ? (
                   <span className="flex items-center gap-2">
@@ -187,24 +188,25 @@ Comparing **CSR vs. SSR** through latency and developer ergonomical lenses:
 
           </div>
 
-          {/* Dual Stream Split View */}
-          <div className="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-slate-200 dark:divide-slate-800 bg-slate-50/40 dark:bg-slate-950/40 min-h-[300px]">
+          {/* Dual Stream Split View — side-by-side only from lg (1024px) up;
+              below that the streams stack vertically so neither is compressed. */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-0 lg:divide-x divide-slate-200 dark:divide-slate-800 bg-slate-50/40 dark:bg-slate-950/40 min-h-[300px]">
 
             {/* Column A */}
-            <div className="p-5 space-y-3 flex flex-col justify-between">
+            <div className="p-4 sm:p-5 space-y-3 flex flex-col justify-between min-w-0">
               <div>
-                <div className="flex items-center justify-between pb-3 border-b border-slate-200 dark:border-slate-800">
-                  <div className="flex items-center gap-2">
-                    <span className="text-xl">{modelA.avatar}</span>
+                <div className="flex items-center justify-between gap-2 pb-3 border-b border-slate-200 dark:border-slate-800">
+                  <div className="flex items-center gap-2 min-w-0">
+                    <span className="text-xl shrink-0">{modelA.avatar}</span>
                     <div>
-                      <h4 className="text-sm font-bold text-slate-900 dark:text-white">{modelA.name}</h4>
-                      <p className="text-[11px] text-slate-500 dark:text-slate-400">{modelA.provider}</p>
+                      <h4 className="text-sm font-bold text-slate-900 dark:text-white truncate">{modelA.name}</h4>
+                      <p className="text-[11px] text-slate-500 dark:text-slate-400 truncate">{modelA.provider}</p>
                     </div>
                   </div>
 
                   <button
                     onClick={() => copyResponse('a', responseA)}
-                    className="text-xs text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white flex items-center gap-1 p-1 rounded bg-slate-100 dark:bg-slate-800/60"
+                    className="text-xs text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white flex items-center gap-1 p-1 rounded bg-slate-100 dark:bg-slate-800/60 shrink-0"
                   >
                     {copiedCol === 'a' ? <Check className="w-3.5 h-3.5 text-emerald-500 dark:text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
                     <span>{copiedCol === 'a' ? 'Copied' : 'Copy'}</span>
@@ -224,27 +226,27 @@ Comparing **CSR vs. SSR** through latency and developer ergonomical lenses:
                 </div>
               </div>
 
-              <div className="pt-3 border-t border-slate-200 dark:border-slate-800/60 flex items-center justify-between text-[11px] text-slate-500 dark:text-slate-400">
+              <div className="pt-3 border-t border-slate-200 dark:border-slate-800/60 flex flex-wrap items-center justify-between gap-2 text-[11px] text-slate-500 dark:text-slate-400">
                 <span>Speed: {modelA.speed.split(' ')[0]}</span>
                 <span className="text-emerald-600 dark:text-emerald-400 font-mono">Completed in 380ms</span>
               </div>
             </div>
 
             {/* Column B */}
-            <div className="p-5 space-y-3 flex flex-col justify-between">
+            <div className="p-4 sm:p-5 space-y-3 flex flex-col justify-between min-w-0">
               <div>
-                <div className="flex items-center justify-between pb-3 border-b border-slate-200 dark:border-slate-800">
-                  <div className="flex items-center gap-2">
-                    <span className="text-xl">{modelB.avatar}</span>
+                <div className="flex items-center justify-between gap-2 pb-3 border-b border-slate-200 dark:border-slate-800">
+                  <div className="flex items-center gap-2 min-w-0">
+                    <span className="text-xl shrink-0">{modelB.avatar}</span>
                     <div>
-                      <h4 className="text-sm font-bold text-slate-900 dark:text-white">{modelB.name}</h4>
-                      <p className="text-[11px] text-slate-500 dark:text-slate-400">{modelB.provider}</p>
+                      <h4 className="text-sm font-bold text-slate-900 dark:text-white truncate">{modelB.name}</h4>
+                      <p className="text-[11px] text-slate-500 dark:text-slate-400 truncate">{modelB.provider}</p>
                     </div>
                   </div>
 
                   <button
                     onClick={() => copyResponse('b', responseB)}
-                    className="text-xs text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white flex items-center gap-1 p-1 rounded bg-slate-100 dark:bg-slate-800/60"
+                    className="text-xs text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white flex items-center gap-1 p-1 rounded bg-slate-100 dark:bg-slate-800/60 shrink-0"
                   >
                     {copiedCol === 'b' ? <Check className="w-3.5 h-3.5 text-emerald-500 dark:text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
                     <span>{copiedCol === 'b' ? 'Copied' : 'Copy'}</span>
@@ -264,7 +266,7 @@ Comparing **CSR vs. SSR** through latency and developer ergonomical lenses:
                 </div>
               </div>
 
-              <div className="pt-3 border-t border-slate-200 dark:border-slate-800/60 flex items-center justify-between text-[11px] text-slate-500 dark:text-slate-400">
+              <div className="pt-3 border-t border-slate-200 dark:border-slate-800/60 flex flex-wrap items-center justify-between gap-2 text-[11px] text-slate-500 dark:text-slate-400">
                 <span>Speed: {modelB.speed.split(' ')[0]}</span>
                 <span className="text-emerald-600 dark:text-emerald-400 font-mono">Completed in 410ms</span>
               </div>
@@ -279,7 +281,7 @@ Comparing **CSR vs. SSR** through latency and developer ergonomical lenses:
             </span>
             <button
               onClick={handleOpenInApp}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white hover:bg-slate-50 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-800 dark:text-white text-xs font-bold transition-all border border-slate-200 dark:border-slate-700 shadow-sm"
+              className="inline-flex w-full sm:w-auto min-h-[44px] items-center justify-center gap-2 px-4 py-2 rounded-xl bg-white hover:bg-slate-50 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-800 dark:text-white text-xs font-bold transition-all border border-slate-200 dark:border-slate-700 shadow-sm"
             >
               <Bot className="w-3.5 h-3.5 text-indigo-500 dark:text-indigo-400" />
               <span>Open Split-View in Web App</span>

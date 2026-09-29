@@ -9,10 +9,19 @@
   body {
     font-family: var(--font-sans);
     overflow-x: hidden;
+    max-width: 100%;
   }
 
   html {
     -webkit-text-size-adjust: 100%;
+    max-width: 100%;
+  }
+
+  /* #root must never be a source of document-level horizontal scroll.
+     max-width (not width:100%) so it can still shrink below its content. */
+  #root {
+    max-width: 100%;
+    min-height: 100vh;
   }
 
   img,

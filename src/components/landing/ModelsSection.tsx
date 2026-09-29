@@ -79,13 +79,15 @@ export const ModelsSection: React.FC = () => {
           </p>
         </div>
 
-        {/* Filter Tabs */}
-        <div className="flex items-center justify-center gap-2 mb-12 overflow-x-auto pb-2">
+        {/* Filter Tabs — swipeable strip on mobile, centered row from sm up.
+            justify-start on mobile avoids the centered-overflow trap where the
+            leading pills become unreachable by scrolling. */}
+        <div className="flex items-center justify-start sm:justify-center gap-2 mb-12 mt-2 w-full -mx-1 px-1 py-2 overflow-x-auto no-scrollbar momentum-scroll">
           {categories.map((cat) => (
             <button
               key={cat}
               onClick={() => setSelectedCategory(cat)}
-              className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all whitespace-nowrap ${
+              className={`shrink-0 whitespace-nowrap px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-semibold transition-all ${
                 selectedCategory === cat
                   ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white shadow-md shadow-indigo-600/25'
                   : 'bg-white text-slate-700 hover:text-slate-900 hover:bg-slate-100 border border-slate-200 dark:bg-slate-900 dark:text-slate-400 dark:hover:text-white dark:hover:bg-slate-800 dark:border-slate-800'
@@ -102,7 +104,7 @@ export const ModelsSection: React.FC = () => {
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.1 }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 w-full"
         >
           {displayedModels.map((model) => (
             <motion.div
@@ -190,10 +192,10 @@ export const ModelsSection: React.FC = () => {
               <div className="mt-6 pt-4 border-t border-slate-100 dark:border-slate-800/80 flex items-center gap-3">
                 <button
                   onClick={() => handleLaunchModel(model.id)}
-                  className="flex-1 flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold transition-all shadow-md active:scale-95 group/btn"
+                  className="w-full flex-1 min-h-[44px] flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold transition-all shadow-md active:scale-95 group/btn"
                 >
                   <Bot className="w-3.5 h-3.5 text-indigo-200 group-hover/btn:scale-110 transition-transform" />
-                  <span>Start Chatting with {model.shortName}</span>
+                  <span className="truncate">Start Chatting with {model.shortName}</span>
                 </button>
               </div>
 
@@ -205,7 +207,7 @@ export const ModelsSection: React.FC = () => {
         <div className="mt-12 flex justify-center">
           <button
             onClick={handleExploreStore}
-            className="group relative inline-flex items-center gap-3 px-8 py-4 rounded-2xl bg-white hover:bg-slate-50 dark:bg-gradient-to-r dark:from-slate-900 dark:via-indigo-950/80 dark:to-slate-900 border border-slate-300 dark:border-indigo-500/40 hover:border-indigo-400 text-slate-900 dark:text-white font-bold text-sm sm:text-base shadow-lg shadow-slate-200/50 dark:shadow-xl dark:shadow-indigo-950/60 hover:shadow-indigo-500/20 hover:scale-[1.02] active:scale-98 transition-all duration-200"
+            className="group relative inline-flex w-full sm:w-auto min-h-[44px] items-center justify-center gap-3 px-6 sm:px-8 py-4 rounded-2xl bg-white hover:bg-slate-50 dark:bg-gradient-to-r dark:from-slate-900 dark:via-indigo-950/80 dark:to-slate-900 border border-slate-300 dark:border-indigo-500/40 hover:border-indigo-400 text-slate-900 dark:text-white font-bold text-sm sm:text-base shadow-lg shadow-slate-200/50 dark:shadow-xl dark:shadow-indigo-950/60 hover:shadow-indigo-500/20 hover:scale-[1.02] active:scale-98 transition-all duration-200"
           >
             <Sparkles className="w-4 h-4 text-indigo-600 dark:text-indigo-400 group-hover:rotate-12 transition-transform" />
             <span>Explore All 100+ Models in Store &amp; Models Hub</span>

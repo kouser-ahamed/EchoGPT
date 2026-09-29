@@ -205,7 +205,7 @@ export const SplitCompareView: React.FC = () => {
       <div className="p-4 border-t border-slate-200 dark:border-slate-800 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md">
         <div className="max-w-4xl mx-auto space-y-2">
           {/* Quick presets */}
-          <div className="flex items-center gap-2 overflow-x-auto pb-1 no-scrollbar">
+          <div className="flex items-center gap-2 overflow-x-auto pb-1 no-scrollbar momentum-scroll">
             <span className="text-[10px] font-bold uppercase text-slate-500 dark:text-slate-400 shrink-0">Presets:</span>
             <button
               onClick={() => handlePreset('Explain React 19 Actions vs traditional React Hook Form handling.')}

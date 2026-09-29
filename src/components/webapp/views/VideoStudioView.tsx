@@ -586,7 +586,7 @@ export const VideoStudioView: React.FC<VideoStudioViewProps> = ({ onOpenUpgradeM
             </div>
 
             {/* Prompt Preset Chips */}
-            <div className="flex items-center gap-1.5 overflow-x-auto pb-1 no-scrollbar pt-1">
+            <div className="flex items-center gap-1.5 overflow-x-auto pb-1 no-scrollbar momentum-scroll pt-1">
               <span className="text-[11px] text-slate-500 dark:text-slate-400 whitespace-nowrap mr-1 font-medium">Quick Presets:</span>
               {videoPresets.map((preset) => (
                 <button
@@ -725,7 +725,7 @@ export const VideoStudioView: React.FC<VideoStudioViewProps> = ({ onOpenUpgradeM
               <label className="text-xs font-bold text-slate-700 dark:text-slate-400 uppercase tracking-wider block">
                 Camera Aspect Ratio
               </label>
-              <div className="grid grid-cols-4 gap-1.5 p-1 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-1.5 p-1 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800">
                 {aspectRatios.map((ratio) => (
                   <button
                     key={ratio.id}
@@ -772,7 +772,7 @@ export const VideoStudioView: React.FC<VideoStudioViewProps> = ({ onOpenUpgradeM
                   </button>
                 </div>
               </div>
-              <div className="grid grid-cols-4 gap-1 p-1 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-center">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-1 p-1 rounded-2xl bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 text-center">
                 {['4s', '6s', '8s', '12s'].map((d) => (
                   <button
                     key={d}

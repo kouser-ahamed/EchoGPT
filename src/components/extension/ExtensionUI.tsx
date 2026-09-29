@@ -260,7 +260,7 @@ export const ExtensionUI: React.FC<ExtensionUIProps> = ({
     <div
       className={`flex flex-col bg-white dark:bg-slate-950 text-slate-900 dark:text-slate-100 border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden font-sans select-none ring-1 ring-slate-200/80 dark:ring-white/10 ${
         mode === 'popup'
-          ? 'w-[380px] h-[580px] rounded-2xl'
+          ? 'w-[380px] max-w-full h-[580px] rounded-2xl'
           : 'w-full max-w-[420px] h-full rounded-2xl'
       }`}
     >

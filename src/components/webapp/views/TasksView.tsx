@@ -132,7 +132,7 @@ export const TasksView: React.FC<TasksViewProps> = ({ onSelectTask }) => {
         </div>
 
         {/* Category Tabs */}
-        <div className="flex items-center gap-2 border-b border-slate-200 dark:border-slate-800 pb-3 overflow-x-auto no-scrollbar">
+        <div className="flex items-center gap-2 border-b border-slate-200 dark:border-slate-800 pb-3 overflow-x-auto no-scrollbar momentum-scroll">
           {TASK_CATEGORIES.map((cat) => {
             const count = AI_TASKS.filter((t) => t.category === cat).length;
             const isSelected = selectedCat === cat;

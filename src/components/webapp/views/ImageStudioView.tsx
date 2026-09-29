@@ -492,7 +492,7 @@ export const ImageStudioView: React.FC<ImageStudioViewProps> = ({ onOpenUpgradeM
             </div>
 
             {/* Prompt Preset Chips */}
-            <div className="flex items-center gap-1.5 overflow-x-auto pb-1 no-scrollbar pt-1">
+            <div className="flex items-center gap-1.5 overflow-x-auto pb-1 no-scrollbar momentum-scroll pt-1">
               <span className="text-[11px] text-slate-500 dark:text-slate-400 whitespace-nowrap mr-1 font-medium">Quick Presets:</span>
               {promptPresets.map((preset) => (
                 <button
@@ -595,7 +595,7 @@ export const ImageStudioView: React.FC<ImageStudioViewProps> = ({ onOpenUpgradeM
                 <span>Aspect Ratio</span>
               </label>
 
-              <div className="grid grid-cols-6 gap-1.5">
+              <div className="grid grid-cols-3 sm:grid-cols-6 gap-1.5">
                 {aspectRatios.map((ratio) => (
                   <button
                     key={ratio.id}
@@ -620,7 +620,7 @@ export const ImageStudioView: React.FC<ImageStudioViewProps> = ({ onOpenUpgradeM
                 <span>Batch Count</span>
               </label>
 
-              <div className="grid grid-cols-4 gap-2">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                 {[1, 2, 3, 4].map((count) => (
                   <button
                     key={count}
@@ -949,7 +949,7 @@ export const ImageStudioView: React.FC<ImageStudioViewProps> = ({ onOpenUpgradeM
               </div>
 
               {/* Tier Filter Tabs */}
-              <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar">
+              <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar momentum-scroll">
                 {[
                   { id: 'ALL', label: 'All Engines (12)' },
                   { id: 'GOOGLE', label: 'Google Tier (4)' },
