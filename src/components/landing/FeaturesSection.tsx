@@ -3,7 +3,8 @@ import { CORE_FEATURES } from '../../data/features';
 import {
   Layers,
   Columns2,
-  FileText,
+  Brain,
+  Cpu,
   Sparkles,
   ShieldCheck,
   CheckCircle2,
@@ -19,7 +20,8 @@ export const FeaturesSection: React.FC = () => {
     Layers: <Layers className="w-6 h-6" />,
     Chrome: <ChromeIcon className="w-6 h-6" />,
     Columns2: <Columns2 className="w-6 h-6" />,
-    FileText: <FileText className="w-6 h-6" />,
+    Brain: <Brain className="w-6 h-6" />,
+    Cpu: <Cpu className="w-6 h-6" />,
     Sparkles: <Sparkles className="w-6 h-6" />,
     ShieldCheck: <ShieldCheck className="w-6 h-6" />
   };

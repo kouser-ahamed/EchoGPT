@@ -1,10 +1,54 @@
 import React from 'react';
 import { COMPARISON_MATRIX } from '../../data/features';
-import { Check, X, Sparkles, ArrowRight } from 'lucide-react';
+import {
+  Check,
+  X,
+  Sparkles,
+  ArrowRight,
+  Layers,
+  TrendingDown,
+  ShieldCheck,
+  PanelRight
+} from 'lucide-react';
 import { useApp } from '../../context/AppContext';
 
 export const WhyEchoGPTSection: React.FC = () => {
   const { navigateTo } = useApp();
+
+  const differentiators = [
+    {
+      title: 'Zero Tab Juggling',
+      subtitle: 'One Unified Window',
+      description:
+        'Consolidate OpenAI, Anthropic, DeepSeek, and Google into a single active workspace. Never lose prompt context across 10 disjointed browser tabs again.',
+      icon: <Layers className="w-5 h-5 text-indigo-400" />,
+      accent: 'border-indigo-500/30 bg-indigo-500/10'
+    },
+    {
+      title: 'API Cost Optimization',
+      subtitle: 'Save $500+/Year Per Seat',
+      description:
+        'Drop three separate $20/month accounts. EchoGPT provides all frontier models under a single predictable plan starting at $9.99/month with zero token markup.',
+      icon: <TrendingDown className="w-5 h-5 text-emerald-400" />,
+      accent: 'border-emerald-500/30 bg-emerald-500/10'
+    },
+    {
+      title: 'Privacy-First Architecture',
+      subtitle: 'Zero Data Retention',
+      description:
+        'Your code, confidential documents, and proprietary engineering prompts are never used to train public AI models. Full GDPR and SOC2 compliance ready.',
+      icon: <ShieldCheck className="w-5 h-5 text-purple-400" />,
+      accent: 'border-purple-500/30 bg-purple-500/10'
+    },
+    {
+      title: 'Instant Sidepanel Access',
+      subtitle: 'Chrome Manifest V3',
+      description:
+        'Press Alt+E anywhere on the web to slide out your multi-model AI assistant. Summarize documentation, explain code snippets, and draft emails in real-time.',
+      icon: <PanelRight className="w-5 h-5 text-cyan-400" />,
+      accent: 'border-cyan-500/30 bg-cyan-500/10'
+    }
+  ];
 
   return (
     <section className="py-20 bg-slate-950 border-t border-slate-900 relative">
@@ -16,7 +60,7 @@ export const WhyEchoGPTSection: React.FC = () => {
             Value Architecture
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
-            Why Teams Switch to{' '}
+            Why Teams Choose{' '}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-indigo-400 to-cyan-400">
               EchoGPT
             </span>
@@ -24,6 +68,31 @@ export const WhyEchoGPTSection: React.FC = () => {
           <p className="text-base sm:text-lg text-slate-400">
             Compare the unified EchoGPT ecosystem against juggling multiple siloed AI subscriptions.
           </p>
+        </div>
+
+        {/* 4 Differentiator Blocks */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+          {differentiators.map((diff, idx) => (
+            <div
+              key={idx}
+              className="p-6 rounded-2xl bg-slate-900/60 border border-slate-800 hover:border-slate-700/80 transition-all duration-300 shadow-lg flex flex-col justify-between group hover:-translate-y-1"
+            >
+              <div>
+                <div className={`w-10 h-10 rounded-xl flex items-center justify-center border ${diff.accent} mb-4 shadow-sm group-hover:scale-105 transition-transform`}>
+                  {diff.icon}
+                </div>
+                <div className="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">
+                  {diff.subtitle}
+                </div>
+                <h3 className="text-lg font-bold text-white group-hover:text-indigo-200 transition-colors">
+                  {diff.title}
+                </h3>
+                <p className="mt-2 text-xs sm:text-sm text-slate-400 leading-relaxed">
+                  {diff.description}
+                </p>
+              </div>
+            </div>
+          ))}
         </div>
 
         {/* Comparison Table */}

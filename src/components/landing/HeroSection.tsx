@@ -12,17 +12,11 @@ import {
 } from 'lucide-react';
 import { ChromeIcon } from '../common/Icons';
 
-export const HeroSection: React.FC = () => {
-  const { navigateTo, setSelectedModelId } = useApp();
-  const [activePreviewModel, setActivePreviewModel] = useState<string>('gpt-4o');
-  const [activePromptIndex, setActivePromptIndex] = useState<number>(0);
-  const [copied, setCopied] = useState<boolean>(false);
-
-  const samplePrompts = [
-    {
-      title: 'React 19 Server Actions',
-      prompt: 'Write a React 19 Server Action with optimistic UI update and error boundary fallback.',
-      response: `\`\`\`tsx
+const SAMPLE_PROMPTS = [
+  {
+    title: 'React 19 Server Actions',
+    prompt: 'Write a React 19 Server Action with optimistic UI update and error boundary fallback.',
+    response: `\`\`\`tsx
 'use server';
 import { revalidatePath } from 'next/cache';
 
@@ -35,28 +29,68 @@ export async function submitEchoPrompt(prevState: any, formData: FormData) {
   return { success: true };
 }
 \`\`\``
-    },
-    {
-      title: 'Webpage Summarization',
-      prompt: 'Summarize the active Chrome tab article into 3 actionable bullets with key metrics.',
-      response: `• **Performance**: Multi-model routing reduced average latency by 42% (down to 180ms).
+  },
+  {
+    title: 'Webpage Summarization',
+    prompt: 'Summarize the active Chrome tab article into 3 actionable bullets with key metrics.',
+    response: `• **Performance**: Multi-model routing reduced average latency by 42% (down to 180ms).
 • **Cost Efficiency**: Consolidated subscriptions generated an average savings of $576/year per seat.
 • **Browser Integration**: Chrome Side Panel API integration eliminated context switching across 89% of user sessions.`
-    },
-    {
-      title: 'Deep Logic Proof',
-      prompt: 'Prove step-by-step why the square root of 2 is irrational.',
-      response: `Assume $\\sqrt{2} = \\frac{a}{b}$ where $\\gcd(a, b) = 1$.
+  },
+  {
+    title: 'Deep Logic Proof',
+    prompt: 'Prove step-by-step why the square root of 2 is irrational.',
+    response: `Assume $\\sqrt{2} = \\frac{a}{b}$ where $\\gcd(a, b) = 1$.
 1. $2 = \\frac{a^2}{b^2} \\implies a^2 = 2b^2$, so $a^2$ is even $\\implies a = 2k$.
 2. Substituting gives $4k^2 = 2b^2 \\implies b^2 = 2k^2$, so $b$ is also even.
 3. This contradicts $\\gcd(a, b) = 1$. Hence, $\\sqrt{2}$ is irrational. $\\blacksquare$`
-    }
-  ];
+  }
+];
+
+export const HeroSection: React.FC = () => {
+  const { navigateTo, setSelectedModelId } = useApp();
+  const [activePreviewModel, setActivePreviewModel] = useState<string>('gpt-4o');
+  const [activePromptIndex, setActivePromptIndex] = useState<number>(0);
+  const [copied, setCopied] = useState<boolean>(false);
+  const [displayedResponse, setDisplayedResponse] = useState<string>(SAMPLE_PROMPTS[0].response);
+  const [isStreaming, setIsStreaming] = useState<boolean>(false);
+  const [tokensCount, setTokensCount] = useState<number>(Math.round(SAMPLE_PROMPTS[0].response.length / 4));
 
   const currentModelData = AI_MODELS.find((m) => m.id === activePreviewModel) || AI_MODELS[0];
 
+  // Real-time token generation stream effect
+  React.useEffect(() => {
+    const fullText = SAMPLE_PROMPTS[activePromptIndex].response;
+    let currentIdx = 0;
+    const chunkSize = 14;
+
+    const timeout = setTimeout(() => {
+      setIsStreaming(true);
+      setDisplayedResponse('');
+      setTokensCount(0);
+    }, 0);
+
+    const interval = setInterval(() => {
+      currentIdx += chunkSize;
+      if (currentIdx >= fullText.length) {
+        setDisplayedResponse(fullText);
+        setTokensCount(Math.round(fullText.length / 4));
+        setIsStreaming(false);
+        clearInterval(interval);
+      } else {
+        setDisplayedResponse(fullText.slice(0, currentIdx));
+        setTokensCount(Math.round(currentIdx / 4));
+      }
+    }, 25);
+
+    return () => {
+      clearTimeout(timeout);
+      clearInterval(interval);
+    };
+  }, [activePromptIndex, activePreviewModel]);
+
   const handleCopy = () => {
-    navigator.clipboard.writeText(samplePrompts[activePromptIndex].response);
+    navigator.clipboard.writeText(SAMPLE_PROMPTS[activePromptIndex].response);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
@@ -183,7 +217,7 @@ export async function submitEchoPrompt(prevState: any, formData: FormData) {
             {/* Prompt Selector Pills */}
             <div className="px-4 sm:px-6 pt-4 pb-2 border-b border-slate-800/60 flex items-center gap-2 overflow-x-auto bg-slate-900/20">
               <span className="text-xs font-medium text-slate-400 shrink-0">Sample Tasks:</span>
-              {samplePrompts.map((item, idx) => (
+              {SAMPLE_PROMPTS.map((item, idx) => (
                 <button
                   key={idx}
                   onClick={() => setActivePromptIndex(idx)}
@@ -202,7 +236,7 @@ export async function submitEchoPrompt(prevState: any, formData: FormData) {
               {/* User Message */}
               <div className="flex items-start justify-end gap-3">
                 <div className="max-w-lg p-3.5 rounded-2xl rounded-tr-sm bg-gradient-to-r from-indigo-600 to-purple-600 text-white text-xs sm:text-sm font-medium shadow-md">
-                  {samplePrompts[activePromptIndex].prompt}
+                  {SAMPLE_PROMPTS[activePromptIndex].prompt}
                 </div>
                 <div className="w-7 h-7 rounded-full bg-slate-700 flex items-center justify-center text-xs font-bold text-white shrink-0">
                   U
@@ -234,8 +268,20 @@ export async function submitEchoPrompt(prevState: any, formData: FormData) {
                     </button>
                   </div>
 
-                  <div className="p-4 rounded-xl bg-slate-900/90 border border-slate-800 text-xs sm:text-sm text-slate-200 leading-relaxed font-mono whitespace-pre-wrap">
-                    {samplePrompts[activePromptIndex].response}
+                  <div className="relative p-4 rounded-xl bg-slate-900/90 border border-slate-800 text-xs sm:text-sm text-slate-200 leading-relaxed font-mono whitespace-pre-wrap">
+                    {displayedResponse}
+                    {isStreaming && (
+                      <span className="inline-block w-2 h-4 ml-1 bg-cyan-400 animate-pulse align-middle" />
+                    )}
+                    <div className="mt-3 pt-2 border-t border-slate-800/60 flex items-center justify-between text-[11px] text-slate-400 font-sans">
+                      <span className="flex items-center gap-1.5">
+                        <span className={`w-1.5 h-1.5 rounded-full ${isStreaming ? 'bg-cyan-400 animate-ping' : 'bg-emerald-400'}`} />
+                        <span>{isStreaming ? 'Real-Time Token Streaming...' : 'Generation Complete'}</span>
+                      </span>
+                      <span className="font-mono text-cyan-300">
+                        {tokensCount} tokens • {currentModelData.speed.split(' ')[0]}
+                      </span>
+                    </div>
                   </div>
                 </div>
               </div>

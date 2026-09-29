@@ -20,63 +20,63 @@ export interface ComparisonRow {
 export const CORE_FEATURES: CoreFeature[] = [
   {
     id: 'multi-model',
-    title: 'Frontier Multi-Model Workspace',
-    tag: 'Core Engine',
-    description: 'Switch instantly between GPT-4o, Claude 3.5 Sonnet, Gemini 1.5 Pro, Llama 3.3, and DeepSeek-R1 without jumping between disjointed tabs and billing portals.',
+    title: 'Multi-Model Routing',
+    tag: 'Core Orchestrator',
+    description: 'Intelligently route every prompt to the best-performing frontier AI—GPT-4o, Claude 3.5 Sonnet, DeepSeek V4, or Gemini—without managing fragmented subscriptions.',
     highlight: '6+ State-of-the-Art LLMs in One Account',
     icon: 'Layers',
     gradient: 'from-indigo-500 to-purple-600',
-    stats: '1 Login • 6 LLMs'
-  },
-  {
-    id: 'chrome-sidebar',
-    title: 'Chrome Extension Sidepanel',
-    tag: 'Browser Native',
-    description: 'Dock EchoGPT alongside your active browser tab via Manifest V3 Sidepanel API. Summarize web pages, explain documentation, or draft emails with simple keyboard shortcuts.',
-    highlight: 'Instant Hotkey: Ctrl+Shift+E / ⌘+Shift+E',
-    icon: 'Chrome',
-    gradient: 'from-cyan-500 to-blue-600',
-    stats: '5.0★ Chrome Web Store'
+    stats: '1 Login • 6+ Frontier Engines'
   },
   {
     id: 'split-compare',
-    title: 'Real-Time Model Comparison',
-    tag: 'Productivity Superpower',
-    description: 'Send one prompt to two different models simultaneously. Compare outputs side-by-side to verify accuracy, benchmark coding solutions, and identify optimal answers.',
+    title: 'Side-by-Side Dual AI Comparison',
+    tag: 'Dual Verification',
+    description: 'Broadcast one prompt to two different models simultaneously. Compare outputs side-by-side to catch hallucinations, verify code logic, and pick the best response.',
     highlight: 'Dual Stream Evaluation',
     icon: 'Columns2',
     gradient: 'from-amber-500 to-orange-600',
     stats: '2x Verification Speed'
   },
   {
-    id: 'page-context',
-    title: 'Contextual Web Intelligence',
-    tag: 'Smart Reading',
-    description: 'Highlight any text or let EchoGPT automatically ingest the current webpage article or documentation. Get precise explanations and bulleted executive takeaways in seconds.',
-    highlight: 'Zero Copy-Pasting Required',
-    icon: 'FileText',
-    gradient: 'from-emerald-500 to-teal-600',
-    stats: 'One-Click Page Summary'
+    id: 'context-memory',
+    title: 'Continuous Context Memory',
+    tag: 'Context Retention',
+    description: 'Maintain deep conversational memory across multi-turn workflows. Switch models mid-chat without losing token history, system instructions, or code references.',
+    highlight: '1M+ Unified Token Memory Window',
+    icon: 'Brain',
+    gradient: 'from-purple-500 to-pink-600',
+    stats: '100% Context Retention'
   },
   {
-    id: 'prompt-library',
-    title: 'Curated Prompt Blueprints',
-    tag: 'Workflow Automation',
-    description: 'Access built-in one-click actions: Rewrite, Explain Code, Translate, Summarize, and Tone Polisher. Save your own custom team prompts with variable interpolations.',
-    highlight: '50+ High-Yield Engineering Blueprints',
-    icon: 'Sparkles',
-    gradient: 'from-rose-500 to-pink-600',
-    stats: '1-Click Shortcuts'
+    id: 'mcp-tools',
+    title: 'Tool Integration (MCP)',
+    tag: 'Model Context Protocol',
+    description: 'Plug frontier models directly into databases, GitHub repos, Slack channels, and live REST APIs via the open Model Context Protocol (MCP) standard.',
+    highlight: 'Secure Local & Remote MCP Endpoints',
+    icon: 'Cpu',
+    gradient: 'from-emerald-500 to-teal-600',
+    stats: 'Instant API & DB Connectors'
+  },
+  {
+    id: 'chrome-sidebar',
+    title: 'Instant Sidepanel Access',
+    tag: 'Browser Native',
+    description: 'Dock EchoGPT alongside any web tab via Chrome Manifest V3 Sidepanel API. Summarize web pages, explain documentation, and draft emails with Alt+E.',
+    highlight: 'Instant Hotkey: Alt+E / Ctrl+Shift+E',
+    icon: 'Chrome',
+    gradient: 'from-cyan-500 to-blue-600',
+    stats: '5.0★ Chrome Web Store'
   },
   {
     id: 'privacy-security',
-    title: 'Zero-Retention Privacy by Default',
+    title: 'Privacy-First Architecture',
     tag: 'Enterprise Grade',
-    description: 'We never train public models on your confidential prompts or codebase context. Complete local storage control, encrypted transit, and optional API key bring-your-own mode.',
-    highlight: 'GDPR & SOC2 Ready Infrastructure',
+    description: 'We never train public models on your proprietary prompts or codebase. Enjoy encrypted transit (TLS 1.3), local storage sovereignty, and BYOK support.',
+    highlight: 'Zero-Retention Model Training Guarantee',
     icon: 'ShieldCheck',
     gradient: 'from-violet-500 to-indigo-600',
-    stats: 'End-to-End HTTPS'
+    stats: 'Zero Data Retention'
   }
 ];
 

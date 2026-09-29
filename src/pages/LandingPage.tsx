@@ -20,8 +20,8 @@ export const LandingPage: React.FC = () => {
       <ExtensionSpotlightSection />
       <WhyEchoGPTSection />
       <PricingSection />
-      <FAQSection />
       <TestimonialsSection />
+      <FAQSection />
       <CTASection />
     </div>
   );

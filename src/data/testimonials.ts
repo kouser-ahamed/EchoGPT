@@ -12,28 +12,28 @@ export const TESTIMONIALS: Testimonial[] = [
   {
     id: 'test-1',
     author: 'Elena Rostova',
-    role: 'Staff Frontend Engineer at Vercel ecosystem',
+    role: 'Staff AI Engineer, Next-Gen Frontend Systems',
     avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80',
     initials: 'ER',
     rating: 5,
-    quote: 'The split-view comparison alone saves our engineering team hours every week. We test Claude 3.5 against GPT-4o for complex TypeScript refactors right from the browser sidebar.'
+    quote: 'The dual-AI split view comparison alone saves our engineering team 6+ hours every week. We test Claude 3.5 Sonnet against DeepSeek V4 Pro on TypeScript refactoring tasks simultaneously without leaving our code editor or browser.'
   },
   {
     id: 'test-2',
-    author: 'Marcus Vance',
-    role: 'Principal AI Researcher & Tech Lead',
+    author: 'David Park',
+    role: 'Founder & CEO at SynthAI Labs',
     avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80',
-    initials: 'MV',
+    initials: 'DP',
     rating: 5,
-    quote: 'Having the Chrome Side Panel open with `Ctrl+Shift+E` while reviewing arXiv preprints and GitHub documentation completely eliminates context switching. Best AI extension on Chrome Web Store.'
+    quote: 'We cut our monthly AI software bill from $600/month across disjointed seat licenses down to EchoGPT. Zero tab juggling, unified billing, and instant sidepanel access increased our developer shipping cadence by 35%.'
   },
   {
     id: 'test-3',
-    author: 'Sarah Chen',
-    role: 'Product Manager at FinTech Scaleup',
+    author: 'Priya Sharma',
+    role: 'CS Graduate Student & AI Researcher at Stanford',
     avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&auto=format&fit=crop&q=80',
-    initials: 'SC',
+    initials: 'PS',
     rating: 5,
-    quote: 'I dropped three separate subscriptions ($60/mo) for EchoGPT at $9.99/mo. The multi-model flexibility gives me the best AI for writing, coding, and document analysis in one clean interface.'
+    quote: 'As a student reviewing 20+ dense arXiv preprints a day, pressing Alt+E to summarize methodologies and extract LaTeX proofs right in Chrome without context switching is an absolute game changer.'
   }
 ];

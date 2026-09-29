@@ -1,7 +1,7 @@
 import React from 'react';
 import { useApp } from '../../context/AppContext';
 import { Sparkles, ShieldCheck, Heart, Bot, ArrowUpRight } from 'lucide-react';
-import { ChromeIcon } from './Icons';
+import { ChromeIcon, GithubIcon, DiscordIcon, TwitterIcon } from './Icons';
 
 export const Footer: React.FC = () => {
   const { navigateTo } = useApp();
@@ -11,6 +11,7 @@ export const Footer: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
         {/* Top Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-12 pb-12 border-b border-slate-800/80">
+          
           {/* Brand Col */}
           <div className="lg:col-span-2 space-y-4">
             <div className="flex items-center gap-2.5">
@@ -20,17 +21,19 @@ export const Footer: React.FC = () => {
               <span className="text-xl font-bold tracking-tight text-white">
                 Echo<span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-cyan-400">GPT</span>
               </span>
+              <span className="text-[10px] font-extrabold uppercase px-1.5 py-0.5 rounded bg-gradient-to-r from-indigo-500/20 to-purple-500/20 text-indigo-300 border border-indigo-500/30">
+                PRO
+              </span>
             </div>
-            // Description
 
             <p className="text-sm text-slate-400 max-w-sm leading-relaxed">
-              The unified multi-AI workspace and Chrome extension sidebar by <strong>AppifyDevs</strong>. Chat with GPT-4o, Claude 3.5 Sonnet, Gemini 1.5 Pro, and DeepSeek in one frictionless workflow.
+              The unified multi-AI workspace and Chrome extension sidebar by <strong>AppifyDevs</strong>. Chat with GPT-4o, Claude 3.5 Sonnet, DeepSeek V4, and Gemini in one frictionless workflow.
             </p>
 
             {/* System Status Pill */}
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-950/60 border border-emerald-800/50 text-emerald-400 text-xs font-medium">
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              <span>All 6 AI Model Clusters Operational (99.98% Uptime)</span>
+              <span>All AI Model Clusters Operational (99.98% Uptime)</span>
             </div>
 
             {/* Privacy Promise */}
@@ -50,7 +53,7 @@ export const Footer: React.FC = () => {
                   className="hover:text-white transition-colors flex items-center gap-1 group text-left"
                 >
                   <Bot className="w-3.5 h-3.5 text-indigo-400" />
-                  <span>Web App Workspace</span>
+                  <span>Launch Workspace</span>
                   <ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
                 </button>
               </li>
@@ -60,7 +63,7 @@ export const Footer: React.FC = () => {
                   className="hover:text-white transition-colors flex items-center gap-1 group text-left"
                 >
                   <ChromeIcon className="w-3.5 h-3.5 text-cyan-400" />
-                  <span>Chrome Extension Sidebar</span>
+                  <span>Chrome Extension Simulator</span>
                   <ArrowUpRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
                 </button>
               </li>
@@ -69,12 +72,12 @@ export const Footer: React.FC = () => {
                   onClick={() => {
                     navigateTo('landing');
                     setTimeout(() => {
-                      document.getElementById('compare')?.scrollIntoView({ behavior: 'smooth' });
+                      document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' });
                     }, 100);
                   }}
                   className="hover:text-white transition-colors text-left"
                 >
-                  Side-by-Side Model Compare
+                  Features & Architecture
                 </button>
               </li>
               <li>
@@ -87,51 +90,81 @@ export const Footer: React.FC = () => {
                   }}
                   className="hover:text-white transition-colors text-left"
                 >
-                  AI Model Benchmarks
+                  AI Models Showcase
                 </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => {
+                    navigateTo('landing');
+                    setTimeout(() => {
+                      document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' });
+                    }, 100);
+                  }}
+                  className="hover:text-white transition-colors text-left"
+                >
+                  Pricing & Plans
+                </button>
+              </li>
+            </ul>
+          </div>
+
+          {/* Community Links */}
+          <div className="space-y-3">
+            <p className="text-xs font-semibold uppercase tracking-wider text-slate-200">Community</p>
+            <ul className="space-y-2 text-sm">
+              <li>
+                <a
+                  href="https://discord.gg/echogpt"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="hover:text-white transition-colors flex items-center gap-2"
+                >
+                  <DiscordIcon className="w-4 h-4 text-indigo-400" />
+                  <span>Discord Community</span>
+                  <ArrowUpRight className="w-3 h-3 text-slate-500" />
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://github.com/appifydevs/echogpt"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="hover:text-white transition-colors flex items-center gap-2"
+                >
+                  <GithubIcon className="w-4 h-4 text-slate-300" />
+                  <span>GitHub Repository</span>
+                  <ArrowUpRight className="w-3 h-3 text-slate-500" />
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://x.com/echogpt_ai"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="hover:text-white transition-colors flex items-center gap-2"
+                >
+                  <TwitterIcon className="w-4 h-4 text-cyan-400" />
+                  <span>Twitter / X (@echogpt_ai)</span>
+                  <ArrowUpRight className="w-3 h-3 text-slate-500" />
+                </a>
               </li>
               <li>
                 <a
                   href="https://chromewebstore.google.com/detail/echogpt-multi-ai-chat-sid/negimdcamohmoheiifgecbjgjepkcfhj"
                   target="_blank"
                   rel="noreferrer"
-                  className="hover:text-white transition-colors flex items-center gap-1 text-left"
+                  className="hover:text-white transition-colors flex items-center gap-2"
                 >
-                  <span>Chrome Web Store Listing</span>
+                  <ChromeIcon className="w-4 h-4 text-amber-400" />
+                  <span>Chrome Web Store</span>
                   <ArrowUpRight className="w-3 h-3 text-slate-500" />
                 </a>
               </li>
             </ul>
           </div>
 
-          {/* Supported Models */}
-          <div className="space-y-3">
-            <p className="text-xs font-semibold uppercase tracking-wider text-slate-200">Supported AI</p>
-            <ul className="space-y-2 text-sm">
-              <li className="flex items-center gap-1.5 hover:text-white transition-colors cursor-pointer">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-                <span>OpenAI GPT-4o</span>
-              </li>
-              <li className="flex items-center gap-1.5 hover:text-white transition-colors cursor-pointer">
-                <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
-                <span>Claude 3.5 Sonnet</span>
-              </li>
-              <li className="flex items-center gap-1.5 hover:text-white transition-colors cursor-pointer">
-                <span className="w-1.5 h-1.5 rounded-full bg-blue-400" />
-                <span>Gemini 1.5 Pro (2M)</span>
-              </li>
-              <li className="flex items-center gap-1.5 hover:text-white transition-colors cursor-pointer">
-                <span className="w-1.5 h-1.5 rounded-full bg-cyan-400" />
-                <span>DeepSeek-R1 CoT</span>
-              </li>
-              <li className="flex items-center gap-1.5 hover:text-white transition-colors cursor-pointer">
-                <span className="w-1.5 h-1.5 rounded-full bg-purple-400" />
-                <span>Meta Llama 3.3 70B</span>
-              </li>
-            </ul>
-          </div>
-
-          {/* Company & Devs */}
+          {/* AppifyDevs & Legal */}
           <div className="space-y-3">
             <p className="text-xs font-semibold uppercase tracking-wider text-slate-200">AppifyDevs</p>
             <ul className="space-y-2 text-sm">
@@ -174,32 +207,35 @@ export const Footer: React.FC = () => {
               </li>
             </ul>
           </div>
+
         </div>
 
         {/* Bottom Bar */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400">
           <div className="flex items-center gap-2">
-            <span>© {new Date().getFullYear()} EchoGPT by AppifyDevs. Redesigned with</span>
+            <span>© {new Date().getFullYear()} EchoGPT by AppifyDevs. All rights reserved. Built with</span>
             <Heart className="w-3.5 h-3.5 text-rose-500 fill-rose-500" />
             <span>for Frontend Engineering Excellence.</span>
           </div>
 
           <div className="flex items-center gap-6">
             <button
-              onClick={() => navigateTo('landing')}
+              onClick={() => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
               className="hover:text-white transition-colors"
             >
               Back to Top
             </button>
             <button
               onClick={() => navigateTo('webapp')}
-              className="hover:text-white transition-colors text-indigo-400"
+              className="hover:text-white transition-colors text-indigo-400 font-medium"
             >
               Open Web App
             </button>
             <button
               onClick={() => navigateTo('extension')}
-              className="hover:text-white transition-colors text-cyan-400"
+              className="hover:text-white transition-colors text-cyan-400 font-medium"
             >
               Chrome Extension Concept
             </button>
